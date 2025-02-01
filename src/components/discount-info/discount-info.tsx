@@ -1,0 +1,52 @@
+import { Grid2, Typography } from '@mui/material'
+
+import { getStoreColor } from '@/helpers/getStoreColor'
+import { TPriceHistory } from '@/types/price-history.types'
+
+import { GlassCard } from '../ui/cards/glass-card'
+
+type TProps = {
+  discount: TPriceHistory
+}
+
+const DiscountInfo = ({ discount }: TProps) => {
+  const storeColor = getStoreColor(discount.meta?.type || discount.store.name)
+
+  return (
+    <GlassCard style={{ borderRadius: 10, background: 'var(--bg-main)' }}>
+      <Grid2
+        container
+        alignItems="center"
+        minWidth="100%"
+        padding={1}
+        justifyContent="space-between"
+      >
+        <Typography
+          color="text.primary"
+          variant="body2"
+          padding={0.3}
+          fontWeight="bold"
+          sx={{ background: storeColor, borderRadius: 0.8 }}
+        >
+          -{discount.discountPercentage}%
+        </Typography>
+        <Grid2 container gap={1}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ textDecoration: 'line-through' }}
+          >
+            {discount.region.currencySymbol}
+            {discount.initialPrice}
+          </Typography>
+          <Typography variant="body2" color="text.primary">
+            {discount.region.currencySymbol}
+            {discount.discountedPrice}
+          </Typography>
+        </Grid2>
+      </Grid2>
+    </GlassCard>
+  )
+}
+
+export { DiscountInfo }

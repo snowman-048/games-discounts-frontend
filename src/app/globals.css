@@ -1,21 +1,37 @@
 html {
+  --text-primary: #ddd;
+  --text-secondary: #aaa;
+
   --bg-dark: #171717;
-  --bg-main: #222;
-  --bg-medium: #333;
+  --bg-main: #1f1f1f;
+  --bg-medium: #2c2c2c;
+  --bg-labels: #2c2c2c;
+
+  --accent: #eacb47;
 }
 
-html,
 body {
+  min-width: 100vw;
   max-width: 100vw;
+  min-height: 100vh;
+  background: var(--bg-main);
   overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
+  position: relative;
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-width: 100vw;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
 }
 
 * {

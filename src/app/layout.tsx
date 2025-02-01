@@ -1,8 +1,11 @@
-import { Box, ThemeProvider } from '@mui/material'
+import { Suspense } from 'react'
+
+import { ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { CookiesProvider } from 'next-client-cookies/server'
 import { Roboto } from 'next/font/google'
 
+import { BackgroundHandler } from '@/components/background-handler'
 import { theme } from '@/theme'
 
 import './globals.css'
@@ -25,16 +28,10 @@ const RootLayout = async ({
         <AppRouterCacheProvider>
           <CookiesProvider>
             <ThemeProvider theme={theme} defaultMode="dark">
-              <Box
-                sx={{
-                  minHeight: '100vh',
-                  minWidth: '100vw',
-                  borderRadius: 0,
-                  bgcolor: 'background.default',
-                }}
-              >
-                {children}
-              </Box>
+              <Suspense>
+                <BackgroundHandler />
+              </Suspense>
+              <div id="root">{children}</div>
             </ThemeProvider>
           </CookiesProvider>
         </AppRouterCacheProvider>

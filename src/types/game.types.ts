@@ -1,22 +1,11 @@
+import { TPriceHistory } from './price-history.types'
+
 type TGameLink = {
   id: number
   url: string
   gameId: number
   storeId: number
   regionId: number
-}
-
-type TPriceHistory = {
-  id: number
-  meta?: any
-  gameId: number
-  storeId: number
-  regionId: number
-  discountEnds: string
-  initialPrice: number
-  discountStarts: string
-  discountedPrice: number
-  discountPercentage: number
 }
 
 type TGame = {

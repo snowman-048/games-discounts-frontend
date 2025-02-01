@@ -1,0 +1,30 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-y: clip;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  width: 1200px;
+
+  &.initialized {
+    opacity: 1;
+  }
+
+  > p {
+    text-align: center;
+    font-weight: bold;
+    white-space: nowrap;
+    color: var(--bg-labels);
+    user-select: none;
+    letter-spacing: 2px;
+  }
+}
