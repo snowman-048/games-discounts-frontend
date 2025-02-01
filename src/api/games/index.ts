@@ -6,9 +6,8 @@ import { api } from '..'
 
 const BASE_URL = 'games'
 
-const getGamesList = (
-  params: TPagination & TSorting & { regionId: number | string; storeIds?: string[] },
-) => api.get<[TGame[], number]>(`${BASE_URL}/${createQueryString(params)}`)
+const getGamesList = (params: TPagination & TSorting & { storeIds?: string[] }) =>
+  api.get<[TGame[], number]>(`${BASE_URL}/${createQueryString(params)}`)
 
 // const getGameById = async (id: number) => {
 //   const regionId = store.getState().app.selectedRegionId

@@ -26,18 +26,19 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
   let totalGames = 0
 
   try {
+    const { sort, ...rest } = query
     const storeIds =
       query['storeIds[]'] &&
       (Array.isArray(query['storeIds[]']) ? query['storeIds[]'] : [query['storeIds[]']])
+
     const { data } = await getGamesList({
-      ...getGamesSorting(query.sort),
+      ...getGamesSorting(sort),
+      ...rest,
       page,
       limit: LIST_SIZE,
-      regionId: 24,
       storeIds,
     })
     games = data[0]
-
     totalGames = data[1]
   } catch (err) {
     console.log('Games fetch error', (err as any).message)
