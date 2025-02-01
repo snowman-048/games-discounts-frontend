@@ -40,7 +40,7 @@ const BackgroundHandler = () => {
       while (widthLeft > 0) {
         const pattern = patternSet[Math.floor(Math.random() * patternSet.length)]
         const patternLength = pattern.length
-        widthLeft -= patternLength * (FONT_SIZE / 1.5)
+        widthLeft -= patternLength * (FONT_SIZE / 1.2)
         if (takeChance(COLORIZE_CHANCE)) {
           text += `<span style="color: var(--accent); opacity: ${getRandomIntInRange(10, 70) / 100}">${pattern} </span>`
         } else {

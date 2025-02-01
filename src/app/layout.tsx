@@ -1,11 +1,11 @@
-import { Suspense } from 'react'
-
 import { ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { CookiesProvider } from 'next-client-cookies/server'
 import { Roboto } from 'next/font/google'
 
 import { BackgroundHandler } from '@/components/background-handler'
+import { Header } from '@/components/header'
+import { Container } from '@/components/ui/container'
 import { theme } from '@/theme'
 
 import './globals.css'
@@ -28,10 +28,11 @@ const RootLayout = async ({
         <AppRouterCacheProvider>
           <CookiesProvider>
             <ThemeProvider theme={theme} defaultMode="dark">
-              <Suspense>
-                <BackgroundHandler />
-              </Suspense>
-              <div id="root">{children}</div>
+              <BackgroundHandler />
+              <div id="root">
+                <Header />
+                <Container>{children}</Container>
+              </div>
             </ThemeProvider>
           </CookiesProvider>
         </AppRouterCacheProvider>
