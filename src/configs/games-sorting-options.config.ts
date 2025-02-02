@@ -10,6 +10,14 @@ const gamesSortingOptions: TOption<EGameSorting>[] = [
     title: 'Finishing discounts',
     value: EGameSorting.FINISHING,
   },
+  {
+    title: 'A-Z',
+    value: EGameSorting.AZ,
+  },
+  {
+    title: 'Z-A',
+    value: EGameSorting.ZA,
+  },
 ]
 
 export { gamesSortingOptions }

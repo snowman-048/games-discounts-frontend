@@ -11,6 +11,14 @@ const MAPPER: Record<EGameSorting, TSorting> = {
     sortField: 'discountEnds',
     sortDirection: 'asc',
   },
+  [EGameSorting.AZ]: {
+    sortField: 'title',
+    sortDirection: 'asc',
+  },
+  [EGameSorting.ZA]: {
+    sortField: 'title',
+    sortDirection: 'desc',
+  },
 }
 
 const getGamesSorting = (sorting = EGameSorting.NEWEST) => {
