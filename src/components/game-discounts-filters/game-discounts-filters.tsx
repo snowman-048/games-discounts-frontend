@@ -2,7 +2,15 @@
 
 import { useEffect, useMemo, useState } from 'react'
 
-import { FormControl, Grid2, InputLabel, MenuItem, Select } from '@mui/material'
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid2,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material'
 
 import { getStores } from '@/api/stores'
 import { gamesSortingOptions } from '@/configs/games-sorting-options.config'
@@ -20,6 +28,7 @@ const GameDiscountsFilters = () => {
   const navigate = useCustomNavigate()
 
   const defaultStores = useMemo(() => stores.map((item) => `${item.id}`), [stores])
+  const onlySelectedStores = searchParams.onlySelectedStores === 'true'
 
   useEffect(() => {
     ;(async () => {
@@ -64,6 +73,15 @@ const GameDiscountsFilters = () => {
             fullWidth
             value={(searchParams.storeIds || defaultStores) as string[]}
             disabled={!stores.length}
+          />
+
+          <FormControlLabel
+            control={<Checkbox checked={onlySelectedStores} />}
+            label="Overlaps"
+            value={onlySelectedStores}
+            onChange={(_, value) =>
+              navigate({ query: { onlySelectedStores: value }, replace: true })
+            }
           />
         </Grid2>
       </GlassCard>

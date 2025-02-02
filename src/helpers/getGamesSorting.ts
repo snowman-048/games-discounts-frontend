@@ -11,6 +11,10 @@ const MAPPER: Record<EGameSorting, TSorting> = {
     sortField: 'discountEnds',
     sortDirection: 'asc',
   },
+  [EGameSorting.BIGGEST_DISCOUNTS]: {
+    sortField: 'discountPercentage',
+    sortDirection: 'desc',
+  },
   [EGameSorting.AZ]: {
     sortField: 'title',
     sortDirection: 'asc',

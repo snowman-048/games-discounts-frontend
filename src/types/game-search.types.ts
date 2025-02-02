@@ -6,6 +6,7 @@ type TGameSearchParams = {
   psnR?: string
   xboxR?: string
   nintendoR?: string
+  onlySelectedStores?: boolean
 }
 
 export type { TGameSearchParams }

@@ -26,6 +26,8 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
       query['storeIds[]'] &&
       (Array.isArray(query['storeIds[]']) ? query['storeIds[]'] : [query['storeIds[]']])
 
+    delete rest['storeIds[]']
+
     const { data } = await getGamesList({
       ...getGamesSorting(sort),
       ...rest,

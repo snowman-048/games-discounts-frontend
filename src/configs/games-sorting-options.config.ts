@@ -11,6 +11,10 @@ const gamesSortingOptions: TOption<EGameSorting>[] = [
     value: EGameSorting.FINISHING,
   },
   {
+    title: 'Biggest discounts',
+    value: EGameSorting.BIGGEST_DISCOUNTS,
+  },
+  {
     title: 'A-Z',
     value: EGameSorting.AZ,
   },
