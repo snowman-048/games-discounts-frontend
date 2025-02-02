@@ -1,3 +1,5 @@
+import { TStore } from './store.types'
+
 type TRegion = {
   id: number
   country: string
@@ -6,4 +8,8 @@ type TRegion = {
   key: string
 }
 
-export type { TRegion }
+type TRegionWithStores = TRegion & {
+  regionStores: { regionId: number; storeId: number; store: TStore }[]
+}
+
+export type { TRegion, TRegionWithStores }

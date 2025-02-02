@@ -1,6 +1,6 @@
-type TOption = {
+type TOption<T extends any> = {
   title: string
-  value: any
+  value: T
 }
 
 export type { TOption }
