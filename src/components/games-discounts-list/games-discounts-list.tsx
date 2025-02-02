@@ -45,7 +45,7 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
   }
 
   return (
-    <Grid2 container flexDirection="column" alignItems="center" gap={5}>
+    <Grid2 container flexDirection="column" alignItems="center" gap={5} paddingBottom={3}>
       <Grid2 display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={4}>
         {games.map((game) => (
           <GameDiscountCard game={game} key={game.id} />

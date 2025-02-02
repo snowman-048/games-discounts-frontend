@@ -1,52 +1,32 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { FormControl, Grid2, InputLabel, MenuItem, Select } from '@mui/material'
-import { usePathname, useRouter } from 'next/navigation'
 
 import { getStores } from '@/api/stores'
-import { EGameSorting } from '@/enums/game-sorting.enum'
-import { createQueryString } from '@/helpers/createQueryString'
+import { gamesSortingOptions } from '@/configs/games-sorting-options.config'
+import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useGetAllSearchParams } from '@/hooks/useGetAllSearchParams'
-import { TOption } from '@/types/option.types'
 import { TStore } from '@/types/store.types'
 
 import { GlassCard } from '../ui/cards/glass-card'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
 
-const sortingOptions: TOption[] = [
-  {
-    title: 'Newest discounts',
-    value: EGameSorting.NEWEST,
-  },
-  {
-    title: 'Finishing discounts',
-    value: EGameSorting.FINISHING,
-  },
-]
-
 const GameDiscountsFilters = () => {
   const [stores, setStores] = useState<TStore[]>([])
 
-  const pathname = usePathname()
-  const router = useRouter()
   const searchParams = useGetAllSearchParams()
+  const navigate = useCustomNavigate()
 
-  const sort = searchParams.sort || sortingOptions[0].value
-  const storeIds = searchParams.storeIds || []
+  const defaultStores = useMemo(() => stores.map((item) => `${item.id}`), [stores])
 
-  // TODO: Move to Redux
   useEffect(() => {
     ;(async () => {
       const { data } = await getStores()
       setStores(data)
     })()
   }, [])
-
-  const onChange = (newValue: Record<string, any>) => {
-    router.replace(`${pathname}${createQueryString({ ...searchParams, ...newValue })}`)
-  }
 
   return (
     <Grid2 container width="100%">
@@ -58,12 +38,12 @@ const GameDiscountsFilters = () => {
               label="Sort by"
               onChange={(e) => {
                 const value = e.target.value
-                onChange({ sort: value })
+                navigate({ query: { sort: value }, replace: true })
               }}
               size="small"
-              value={sort}
+              value={searchParams.sort || gamesSortingOptions[0].value}
             >
-              {sortingOptions.map((item) => (
+              {gamesSortingOptions.map((item) => (
                 <MenuItem key={item.value} value={item.value}>
                   {item.title}
                 </MenuItem>
@@ -78,11 +58,11 @@ const GameDiscountsFilters = () => {
               value: `${store.id}`,
             }))}
             onChange={(value) => {
-              onChange({ storeIds: value })
+              navigate({ query: { storeIds: value }, replace: true })
             }}
             size="small"
             fullWidth
-            value={storeIds as string[]}
+            value={(searchParams.storeIds || defaultStores) as string[]}
             disabled={!stores.length}
           />
         </Grid2>

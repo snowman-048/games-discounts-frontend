@@ -1,7 +1,8 @@
 'use client'
 
 import { Pagination as MUIPagination } from '@mui/material'
-import { redirect } from 'next/navigation'
+
+import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 
 type TProps = {
   count: number
@@ -10,11 +11,13 @@ type TProps = {
 }
 
 const Pagination = ({ count, page, path }: TProps) => {
+  const navigate = useCustomNavigate()
+
   return (
     <MUIPagination
       count={count}
       page={+page}
-      onChange={(_, value) => redirect(`/${path}/${value}`)}
+      onChange={(_, value) => navigate({ path: `/${path}/${value}`, replace: true })}
     />
   )
 }
