@@ -4,19 +4,14 @@ import { GameDiscountsFilters } from '@/components/game-discounts-filters'
 import { GamesDiscountsList } from '@/components/games-discounts-list'
 import { Container } from '@/components/ui/container'
 import { EAppRoute } from '@/enums/app-route.enum'
-import { EGameSorting } from '@/enums/game-sorting.enum'
+import { TGameSearchParams } from '@/types/game-search.types'
 
 const Discounts = async ({
   params,
   searchParams,
 }: {
   params: Promise<{ page: string }>
-  searchParams: Promise<{
-    p?: string
-    region?: string
-    sort?: EGameSorting
-    'storeIds[]': string[]
-  }>
+  searchParams: Promise<TGameSearchParams>
 }) => {
   const { page } = await params
   const query = await searchParams

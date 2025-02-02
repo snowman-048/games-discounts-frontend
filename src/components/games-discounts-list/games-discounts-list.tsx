@@ -1,24 +1,19 @@
 import { Grid2 } from '@mui/material'
 
 import { getGamesList } from '@/api/games'
-import { EGameSorting } from '@/enums/game-sorting.enum'
 import { getGamesSorting } from '@/helpers/getGamesSorting'
+import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
 import { GameDiscountCard } from '../game-discount-card'
 import { Pagination } from '../pagination'
 
-const LIST_SIZE = 24
+const LIST_SIZE = 25
 
 type TProps = {
   page: number
   paginationPath: string
-  query: {
-    p?: string
-    region?: string
-    sort?: EGameSorting
-    'storeIds[]': string[]
-  }
+  query: TGameSearchParams
 }
 
 const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
@@ -46,7 +41,7 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
 
   return (
     <Grid2 container flexDirection="column" alignItems="center" gap={5} paddingBottom={3}>
-      <Grid2 display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={4}>
+      <Grid2 display="grid" gridTemplateColumns="repeat(5, 1fr)" gap={2.5}>
         {games.map((game) => (
           <GameDiscountCard game={game} key={game.id} />
         ))}
