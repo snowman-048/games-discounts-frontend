@@ -14,6 +14,7 @@ import {
 
 import { getStores } from '@/api/stores'
 import { gamesSortingOptions } from '@/configs/games-sorting-options.config'
+import { EAppRoute } from '@/enums/app-route.enum'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useGetAllSearchParams } from '@/hooks/useGetAllSearchParams'
 import { TStore } from '@/types/store.types'
@@ -29,6 +30,11 @@ const GameDiscountsFilters = () => {
 
   const defaultStores = useMemo(() => stores.map((item) => `${item.id}`), [stores])
   const onlySelectedStores = searchParams.onlySelectedStores === 'true'
+
+  const handleFilterChange = (newFilter: Record<string, any>) => {
+    // TODO: Handle different routes if needed
+    navigate({ path: `/${EAppRoute.ACTIVE_DISCOUNTS}/1`, query: newFilter, replace: true })
+  }
 
   useEffect(() => {
     ;(async () => {
@@ -47,7 +53,7 @@ const GameDiscountsFilters = () => {
               label="Sort by"
               onChange={(e) => {
                 const value = e.target.value
-                navigate({ query: { sort: value }, replace: true })
+                handleFilterChange({ sort: value })
               }}
               size="small"
               value={searchParams.sort || gamesSortingOptions[0].value}
@@ -67,7 +73,7 @@ const GameDiscountsFilters = () => {
               value: `${store.id}`,
             }))}
             onChange={(value) => {
-              navigate({ query: { storeIds: value }, replace: true })
+              handleFilterChange({ storeIds: value })
             }}
             size="small"
             fullWidth
@@ -79,9 +85,7 @@ const GameDiscountsFilters = () => {
             control={<Checkbox checked={onlySelectedStores} />}
             label="Overlaps"
             value={onlySelectedStores}
-            onChange={(_, value) =>
-              navigate({ query: { onlySelectedStores: value }, replace: true })
-            }
+            onChange={(_, value) => handleFilterChange({ onlySelectedStores: value })}
           />
         </Grid2>
       </GlassCard>
