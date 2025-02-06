@@ -1,0 +1,24 @@
+.section {
+  padding: 24px;
+  overflow: visible;
+}
+
+.mainInfoContainer {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.imageWrapper {
+  position: absolute;
+  z-index: 2;
+  left: 24px;
+  top: -100px;
+}
+
+.typeContainer {
+  display: flex;
+  justify-content: center;
+  padding: 8px 32px;
+  width: fit-content;
+}

@@ -16,7 +16,7 @@ const Container = ({ children, ...rest }: TProps) => {
       flex={1}
       minHeight="100%"
       width="100%"
-      maxWidth="1200px"
+      maxWidth="1400px"
       margin="0 auto"
       {...rest}
     >
