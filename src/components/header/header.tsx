@@ -44,9 +44,10 @@ const Header = () => {
             borderTopRightRadius: 0,
             borderTopLeftRadius: 0,
             marginTop: -1,
+            justifyContent: 'center',
           }}
         >
-          <Container flexDirection="row" alignItems="center" justifyContent="space-between">
+          <Container flexDirection="row" justifyContent="space-between">
             <Logo />
 
             <div>

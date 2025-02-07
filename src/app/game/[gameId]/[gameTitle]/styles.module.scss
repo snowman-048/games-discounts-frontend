@@ -22,3 +22,9 @@
   padding: 8px 32px;
   width: fit-content;
 }
+
+.priceSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}

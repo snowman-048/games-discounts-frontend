@@ -1,16 +1,18 @@
-import { Divider, DividerProps, Typography } from '@mui/material'
+import { Divider, DividerProps, SxProps, Theme, Typography } from '@mui/material'
 
 type TProps = DividerProps & {
   title: string
+  sx?: SxProps<Theme>
 }
 
-const SectionTitle = ({ title, ...rest }: TProps) => {
+const SectionTitle = ({ title, sx, ...rest }: TProps) => {
   return (
     <Divider
       sx={{
         '::before': { background: 'var(--accent)' },
         '::after': { background: 'var(--accent)' },
         width: '100%',
+        ...sx,
       }}
       {...rest}
     >

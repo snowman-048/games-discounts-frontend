@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { getGameById } from '@/api/games'
 import { NoDataLabel } from '@/components/no-data-label'
 import { PlatformIcon } from '@/components/platform-icon'
+import { PriceInfoItem } from '@/components/price-info-item'
 import { PricesChart } from '@/components/prices-chart'
 import { TLineConfig } from '@/components/prices-chart/libs/types/line-config.types'
 import { SectionTitle } from '@/components/section-title'
@@ -31,6 +32,9 @@ type TProps = {
   searchParams: Promise<TGameSearchParams>
 }
 
+const PRICE_ITEM_HEIGHT = 300
+const PRICE_ITEM_WIDTH = 800
+
 const GameInfo = async ({ params, searchParams }: TProps) => {
   const { gameId } = await params
   const query = await searchParams
@@ -50,8 +54,8 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
   }
 
   return (
-    <Container paddingTop={15} paddingBottom={5} gap={4}>
-      <Box sx={{ position: 'relative' }}>
+    <Container gap={5} paddingTop={15} paddingBottom={5}>
+      <Box sx={{ position: 'relative', width: '100%' }}>
         <Stack spacing={2} className={styles.imageWrapper}>
           <GlassCard
             style={{
@@ -145,9 +149,15 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
         </GlassCard>
       </Box>
 
-      <GlassCard className={styles.section}>
-        <Stack spacing={3} width="100%" alignItems="center">
-          <SectionTitle title="Prices" />
+      <Grid2
+        width="100%"
+        container
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="nowrap"
+      >
+        <GlassCard className={cn(styles.section, styles.priceSection)}>
+          <SectionTitle title="Price history" />
           {game.gameStore?.map((gameStore) => {
             const storePriceHistory = game.priceHistory.filter(
               (item) => item.storeId === gameStore.store.id,
@@ -163,15 +173,18 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                   }
                   return acc
                 },
-                { commonDiscounts: [] as TPriceHistory[], psPlusDiscounts: [] as TPriceHistory[] },
-              )
-              lines.push(
                 {
+                  commonDiscounts: [] as TPriceHistory[],
+                  psPlusDiscounts: [] as TPriceHistory[],
+                },
+              )
+              if (psPlusDiscounts.length) {
+                lines.push({
                   priceHistory: psPlusDiscounts,
                   lineColor: getStoreColor(EPriceHistoryMetaType.PS_PLUS),
-                },
-                { priceHistory: commonDiscounts, lineColor: getStoreColor(EStore.PSN) },
-              )
+                })
+              }
+              lines.push({ priceHistory: commonDiscounts, lineColor: getStoreColor(EStore.PSN) })
             } else {
               lines.push({
                 lineColor: getStoreColor(gameStore.store.name),
@@ -179,10 +192,33 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
               })
             }
 
-            return <PricesChart game={game} key={gameStore.store.id} lines={lines} />
+            return (
+              <div style={{ height: PRICE_ITEM_HEIGHT, width: PRICE_ITEM_WIDTH }}>
+                <PricesChart
+                  game={game}
+                  key={gameStore.store.id}
+                  lines={lines}
+                  height={PRICE_ITEM_HEIGHT}
+                  width={PRICE_ITEM_WIDTH}
+                />
+              </div>
+            )
           })}
-        </Stack>
-      </GlassCard>
+        </GlassCard>
+
+        <Grid2 flex={1} className={cn(styles.section, styles.priceSection)}>
+          <SectionTitle title="Price info" sx={{ opacity: 0 }} />
+          {game.gameStore?.map((gameStore) => {
+            return (
+              <PriceInfoItem
+                priceHistory={game.priceHistory}
+                store={gameStore.store.name}
+                height={PRICE_ITEM_HEIGHT}
+              />
+            )
+          })}
+        </Grid2>
+      </Grid2>
 
       <GlassCard className={styles.section}>
         <Stack spacing={3} width="100%">
@@ -193,8 +229,9 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 <Carousel
                   loop
                   align="center"
-                  slides={game.images.map((img) => (
+                  slides={game.images.map((img, index) => (
                     <Image
+                      key={index}
                       src={img}
                       alt={game.title}
                       width={0}
