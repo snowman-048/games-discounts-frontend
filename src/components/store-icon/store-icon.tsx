@@ -2,6 +2,7 @@ import { Grid2, Typography } from '@mui/material'
 import Link from 'next/link'
 
 import { storeColor } from '@/configs/store-color.config'
+import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
 
 import NintendoIcon from '../../../public/assets/svg/nintendo.svg'
@@ -9,14 +10,24 @@ import PsIcon from '../../../public/assets/svg/ps.svg'
 import XboxIcon from '../../../public/assets/svg/xbox-store.svg'
 
 type TProps = {
-  store: EStore
+  store: EStore | EPriceHistoryMetaType
   link?: string
+  withLabel?: boolean
 }
 
 const STORE_TO_ICON_MAP = {
   [EStore.PSN]: {
     icon: PsIcon,
     color: storeColor[EStore.PSN],
+  },
+  // TODO: Set PS PLUS icon
+  [EPriceHistoryMetaType.PS_PLUS]: {
+    icon: () => (
+      <Typography color={storeColor[EPriceHistoryMetaType.PS_PLUS]} fontWeight="bold">
+        PS+
+      </Typography>
+    ),
+    color: 'transparent',
   },
   [EStore.NINTENDO]: {
     icon: NintendoIcon,
@@ -30,11 +41,12 @@ const STORE_TO_ICON_MAP = {
 
 const STORE_TO_STORE_NAME = {
   [EStore.PSN]: 'PlayStation',
+  [EPriceHistoryMetaType.PS_PLUS]: 'PS+',
   [EStore.NINTENDO]: 'Nintendo',
   [EStore.XBOX]: 'Xbox',
 }
 
-const StoreIcon = ({ store, link }: TProps) => {
+const StoreIcon = ({ store, link, withLabel = true }: TProps) => {
   const config = STORE_TO_ICON_MAP[store]
 
   const renderItem = () => (
@@ -45,7 +57,7 @@ const StoreIcon = ({ store, link }: TProps) => {
       sx={{ background: config.color, padding: '4px 12px', borderRadius: 1.5 }}
     >
       <config.icon width={24} height={24} fill="#fff" />
-      <Typography fontWeight="bold">{STORE_TO_STORE_NAME[store]}</Typography>
+      {withLabel && <Typography fontWeight="bold">{STORE_TO_STORE_NAME[store]}</Typography>}
     </Grid2>
   )
 

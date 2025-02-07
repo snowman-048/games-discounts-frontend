@@ -8,15 +8,21 @@ import Image from 'next/image'
 import { getGameById } from '@/api/games'
 import { NoDataLabel } from '@/components/no-data-label'
 import { PlatformIcon } from '@/components/platform-icon'
+import { PricesChart } from '@/components/prices-chart'
+import { TLineConfig } from '@/components/prices-chart/libs/types/line-config.types'
 import { SectionTitle } from '@/components/section-title'
 import { StoreIcon } from '@/components/store-icon'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Carousel } from '@/components/ui/carousel'
 import { Container } from '@/components/ui/container'
 import { InfoItem } from '@/components/ui/info-item'
+import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
+import { EStore } from '@/enums/store.enum'
+import { getStoreColor } from '@/helpers/getStoreColor'
 import { makeFirstLetterUpper } from '@/helpers/makeFirstLetterUpper'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
+import { TPriceHistory } from '@/types/price-history.types'
 
 import styles from './styles.module.scss'
 
@@ -138,6 +144,45 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           </Stack>
         </GlassCard>
       </Box>
+
+      <GlassCard className={styles.section}>
+        <Stack spacing={3} width="100%" alignItems="center">
+          <SectionTitle title="Prices" />
+          {game.gameStore?.map((gameStore) => {
+            const storePriceHistory = game.priceHistory.filter(
+              (item) => item.storeId === gameStore.store.id,
+            )
+            const lines: TLineConfig[] = []
+            if (gameStore.store.name === EStore.PSN) {
+              const { commonDiscounts, psPlusDiscounts } = storePriceHistory.reduce(
+                (acc, item) => {
+                  if (item.meta?.type === EPriceHistoryMetaType.PS_PLUS) {
+                    acc.psPlusDiscounts.push(item)
+                  } else {
+                    acc.commonDiscounts.push(item)
+                  }
+                  return acc
+                },
+                { commonDiscounts: [] as TPriceHistory[], psPlusDiscounts: [] as TPriceHistory[] },
+              )
+              lines.push(
+                {
+                  priceHistory: psPlusDiscounts,
+                  lineColor: getStoreColor(EPriceHistoryMetaType.PS_PLUS),
+                },
+                { priceHistory: commonDiscounts, lineColor: getStoreColor(EStore.PSN) },
+              )
+            } else {
+              lines.push({
+                lineColor: getStoreColor(gameStore.store.name),
+                priceHistory: storePriceHistory,
+              })
+            }
+
+            return <PricesChart game={game} key={gameStore.store.id} lines={lines} />
+          })}
+        </Stack>
+      </GlassCard>
 
       <GlassCard className={styles.section}>
         <Stack spacing={3} width="100%">

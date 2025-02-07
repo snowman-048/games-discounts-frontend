@@ -10,6 +10,7 @@ const SectionTitle = ({ title, ...rest }: TProps) => {
       sx={{
         '::before': { background: 'var(--accent)' },
         '::after': { background: 'var(--accent)' },
+        width: '100%',
       }}
       {...rest}
     >
