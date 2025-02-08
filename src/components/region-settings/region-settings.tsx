@@ -30,7 +30,7 @@ const RegionSettings = ({ regions }: TProps) => {
                 const value = e.target.value
                 const key = getStoreRegionKey(item.storeName)
                 cookies.set(key, `${value}`)
-                navigate({ query: { key: value }, replace: true })
+                navigate({ query: { [key]: value }, replace: true })
               }}
               value={cookies.get(getStoreRegionKey(item.storeName)) || item.defaultRegion}
               size="small"

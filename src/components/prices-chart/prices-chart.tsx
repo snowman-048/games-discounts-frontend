@@ -99,7 +99,7 @@ const PricesChartComponent = ({ game, lines, height = 300, width = 800 }: TProps
       width={width}
       height={height}
       syncMethod="value"
-      margin={{ bottom: 30, right: 40, left: 10 }}
+      margin={{ bottom: 30, right: 40, left: 10, top: 5 }}
     >
       {formattedLines.map((line, index) => (
         <Line

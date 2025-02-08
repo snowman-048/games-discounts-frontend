@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { storeColor } from '@/configs/store-color.config'
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
+import { getStoreDisplayName } from '@/helpers/getStoreDisplayName'
 
 import NintendoIcon from '../../../public/assets/svg/nintendo.svg'
 import PsIcon from '../../../public/assets/svg/ps.svg'
@@ -39,13 +40,6 @@ const STORE_TO_ICON_MAP = {
   },
 }
 
-const STORE_TO_STORE_NAME = {
-  [EStore.PSN]: 'PlayStation',
-  [EPriceHistoryMetaType.PS_PLUS]: 'PS+',
-  [EStore.NINTENDO]: 'Nintendo',
-  [EStore.XBOX]: 'Xbox',
-}
-
 const StoreIcon = ({ store, link, withLabel = true }: TProps) => {
   const config = STORE_TO_ICON_MAP[store]
 
@@ -57,7 +51,7 @@ const StoreIcon = ({ store, link, withLabel = true }: TProps) => {
       sx={{ background: config.color, padding: '4px 12px', borderRadius: 1.5 }}
     >
       <config.icon width={24} height={24} fill="#fff" />
-      {withLabel && <Typography fontWeight="bold">{STORE_TO_STORE_NAME[store]}</Typography>}
+      {withLabel && <Typography fontWeight="bold">{getStoreDisplayName(store).short}</Typography>}
     </Grid2>
   )
 

@@ -6,6 +6,7 @@ import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
 import { GameDiscountCard } from '../game-discount-card'
+import { NoDataLabel } from '../no-data-label'
 import { Pagination } from '../pagination'
 
 const LIST_SIZE = 25
@@ -39,6 +40,10 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
     totalGames = data[1]
   } catch (err) {
     console.log('Games fetch error', (err as any).message)
+  }
+
+  if (!games.length) {
+    return <NoDataLabel />
   }
 
   return (

@@ -6,6 +6,7 @@ import moment from 'moment'
 import Image from 'next/image'
 
 import { getGameById } from '@/api/games'
+import { BuyGameButton } from '@/components/buy-game-button'
 import { NoDataLabel } from '@/components/no-data-label'
 import { PlatformIcon } from '@/components/platform-icon'
 import { PriceInfoItem } from '@/components/price-info-item'
@@ -32,8 +33,8 @@ type TProps = {
   searchParams: Promise<TGameSearchParams>
 }
 
-const PRICE_ITEM_HEIGHT = 300
-const PRICE_ITEM_WIDTH = 800
+const PRICE_ITEM_HEIGHT = 250
+const PRICE_ITEM_WIDTH = 850
 
 const GameInfo = async ({ params, searchParams }: TProps) => {
   const { gameId } = await params
@@ -43,9 +44,27 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
   try {
     const { data } = await getGameById({ id: +gameId, ...query })
     game = data
+    game?.priceHistory.sort(
+      (a, b) => moment(b.discountEnds).valueOf() - moment(a.discountEnds).valueOf(),
+    )
   } catch (err) {
     console.log('Error getting game', (err as any).message)
   }
+
+  const storeLinks = game?.gameLinks.reduce(
+    (acc, item) => {
+      const storeName = game.gameStore?.find((gameStore) => gameStore.store.id === item.storeId)
+        ?.store.name
+      if (!storeName) {
+        return acc
+      }
+      if (!acc[storeName]) {
+        acc[storeName] = item.url
+      }
+      return acc
+    },
+    {} as Record<EStore, string>,
+  )
 
   console.log('game', game)
 
@@ -84,7 +103,13 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
 
         <GlassCard className={cn(styles.section, styles.mainInfoContainer)}>
           {/* This image is needed to reserve the space */}
-          <Box sx={{ padding: 2 }}>
+          <Box
+            sx={{
+              borderRadius: 15,
+              transform: 'translateY(-124px)',
+              marginBottom: '-124px',
+            }}
+          >
             {!!game.coverImageUrl && (
               <Image
                 src={game.coverImageUrl}
@@ -95,13 +120,39 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 style={{
                   width: '302px',
                   height: 'auto',
+                  marginBottom: '110px',
                   borderRadius: 15,
                   opacity: 0,
-                  marginBottom: '-70px',
-                  transform: 'translateY(-132px)',
+                  marginRight: 32,
                 }}
               />
             )}
+            <Stack spacing={2}>
+              {game.gameStore?.map((gameStore) => {
+                const latestPriceHistory = game.priceHistory.find(
+                  (item) => item.storeId === gameStore.store.id,
+                )
+                const link = storeLinks?.[gameStore.store.name]
+                if (!latestPriceHistory || !link) {
+                  return <></>
+                }
+                let additionalPriceHistoryItem: TPriceHistory | undefined
+                if (gameStore.store.name === EStore.PSN) {
+                  additionalPriceHistoryItem = game.priceHistory.find(
+                    (item) =>
+                      item.storeId === gameStore.store.id &&
+                      item.meta?.type === EPriceHistoryMetaType.PS_PLUS,
+                  )
+                }
+                return (
+                  <BuyGameButton
+                    priceHistoryItem={latestPriceHistory}
+                    link={link}
+                    additionalPriceHistoryItem={additionalPriceHistoryItem}
+                  />
+                )
+              })}
+            </Stack>
           </Box>
           <Stack flex={1} position="relative">
             <Typography variant="h4" fontWeight="bold">
@@ -136,10 +187,9 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 data={
                   <Grid2 container gap={2}>
                     {game.gameStore?.map((item) => {
-                      const link = game.gameLinks?.find(
-                        (gameLink) => gameLink.storeId === item.store.id,
-                      )?.url
-                      return <StoreIcon store={item.store.name} link={link} />
+                      return (
+                        <StoreIcon store={item.store.name} link={storeLinks?.[item.store.name]} />
+                      )
                     })}
                   </Grid2>
                 }
@@ -162,6 +212,9 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
             const storePriceHistory = game.priceHistory.filter(
               (item) => item.storeId === gameStore.store.id,
             )
+            if (!storePriceHistory?.length) {
+              return <></>
+            }
             const lines: TLineConfig[] = []
             if (gameStore.store.name === EStore.PSN) {
               const { commonDiscounts, psPlusDiscounts } = storePriceHistory.reduce(
@@ -206,7 +259,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           })}
         </GlassCard>
 
-        <Grid2 flex={1} className={cn(styles.section, styles.priceSection)}>
+        <Grid2 flex={1} paddingRight={0} className={cn(styles.section, styles.priceSection)}>
           <SectionTitle title="Price info" sx={{ opacity: 0 }} />
           {game.gameStore?.map((gameStore) => {
             return (
@@ -214,6 +267,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 priceHistory={game.priceHistory}
                 store={gameStore.store.name}
                 height={PRICE_ITEM_HEIGHT}
+                storeLink={storeLinks?.[gameStore.store.name]}
               />
             )
           })}

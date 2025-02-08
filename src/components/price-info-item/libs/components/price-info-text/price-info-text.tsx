@@ -9,10 +9,10 @@ type TProps = {
 const PriceInfoText = ({ label, value, valueColor = 'var(--text-primary)' }: TProps) => {
   return (
     <Grid2 container flexDirection="column" alignItems="center">
-      <Typography variant="h6" color="var(--text-primary)">
+      <Typography variant="body1" color="var(--text-primary)">
         {label}
       </Typography>
-      <Typography variant="h4" fontWeight="bold" color={valueColor}>
+      <Typography variant="h5" fontWeight="bold" color={valueColor}>
         {value}
       </Typography>
     </Grid2>
