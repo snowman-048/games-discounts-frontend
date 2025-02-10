@@ -13,7 +13,9 @@
   flex-direction: column;
   align-items: center;
   white-space: nowrap;
-  width: 1200px;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 
   &.initialized {
     opacity: 1;

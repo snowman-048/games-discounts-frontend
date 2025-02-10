@@ -1,6 +1,7 @@
 .section {
   opacity: 1;
   transition: opacity 0.3s ease-out;
+  width: 100%;
 
   &.loading {
     opacity: 0;
@@ -12,9 +13,11 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 100%;
 }
 
 .viewport {
+  min-width: 100%;
   overflow: hidden;
 }
 

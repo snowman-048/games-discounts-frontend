@@ -4,7 +4,15 @@ import { useMemo } from 'react'
 
 import moment from 'moment'
 import dynamic from 'next/dynamic'
-import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 
 import { TGame } from '@/types/game.types'
 
@@ -17,7 +25,6 @@ import { TPriceChartData } from './libs/types/price-chart-data.types'
 type TProps = {
   game: TGame
   lines: TLineConfig[]
-  width?: number
   height?: number
 }
 
@@ -26,7 +33,7 @@ type TChartData = {
   lineColor: string
 }[]
 
-const PricesChartComponent = ({ game, lines, height = 300, width = 800 }: TProps) => {
+const PricesChartComponent = ({ game, lines, height = 300 }: TProps) => {
   const commonRegion = useMemo(() => lines?.[0]?.priceHistory?.[0]?.region, [lines])
 
   const formattedLines: TChartData = useMemo(() => {
@@ -95,53 +102,52 @@ const PricesChartComponent = ({ game, lines, height = 300, width = 800 }: TProps
   }, [lines])
 
   return (
-    <LineChart
-      width={width}
-      height={height}
-      syncMethod="value"
-      margin={{ bottom: 30, right: 40, left: 10, top: 5 }}
-    >
-      {formattedLines.map((line, index) => (
-        <Line
-          key={index}
-          type="stepBefore"
-          dataKey="price"
-          stroke={line.lineColor}
-          data={line.data}
-          strokeWidth={4}
+    <ResponsiveContainer style={{ flex: 1 }} width="100%" height={height}>
+      <LineChart syncMethod="value" margin={{ bottom: 30, right: 40, left: 10, top: 5 }}>
+        {formattedLines.map((line, index) => (
+          <Line
+            key={index}
+            type="stepBefore"
+            dataKey="price"
+            stroke={line.lineColor}
+            data={line.data}
+            strokeWidth={4}
+          />
+        ))}
+        <CartesianGrid strokeDasharray="5 5" vertical={false} stroke="#555" />
+        <XAxis
+          dataKey="date"
+          ticks={formattedLines
+            .map((item) => item.data.map((dataItem) => dataItem.date))
+            .flat()
+            .reduce((acc, date) => {
+              const currentYear = moment(date).year()
+              const currentMonth = moment(date).month()
+              const isSameMonthExists = acc.find(
+                (item) =>
+                  moment(item).month() === currentMonth && moment(item).year() === currentYear,
+              )
+              if (!isSameMonthExists) {
+                acc.push(date)
+              }
+              return acc
+            }, [] as number[])}
+          tick={(props) => <XAxisTick {...props} />}
+          angle={-35}
+          stroke="var(--text-secondary)"
+          allowDuplicatedCategory={false}
         />
-      ))}
-      <CartesianGrid strokeDasharray="5 5" vertical={false} stroke="#555" />
-      <XAxis
-        dataKey="date"
-        ticks={formattedLines
-          .map((item) => item.data.map((dataItem) => dataItem.date))
-          .flat()
-          .reduce((acc, date) => {
-            const currentYear = moment(date).year()
-            const currentMonth = moment(date).month()
-            const isSameMonthExists = acc.find(
-              (item) =>
-                moment(item).month() === currentMonth && moment(item).year() === currentYear,
-            )
-            if (!isSameMonthExists) {
-              acc.push(date)
-            }
-            return acc
-          }, [] as number[])}
-        tick={(props) => <XAxisTick {...props} />}
-        angle={-35}
-        stroke="var(--text-secondary)"
-        allowDuplicatedCategory={false}
-      />
-      <YAxis
-        stroke="var(--text-secondary)"
-        tick={(props) => <YAxisTick region={commonRegion} {...props} />}
-      />
-      <Tooltip
-        content={({ active, payload }) => <ChartTooltip active={active} payload={payload as any} />}
-      />
-    </LineChart>
+        <YAxis
+          stroke="var(--text-secondary)"
+          tick={(props) => <YAxisTick region={commonRegion} {...props} />}
+        />
+        <Tooltip
+          content={({ active, payload }) => (
+            <ChartTooltip active={active} payload={payload as any} />
+          )}
+        />
+      </LineChart>
+    </ResponsiveContainer>
   )
 }
 

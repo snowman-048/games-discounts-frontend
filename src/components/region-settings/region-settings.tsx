@@ -20,9 +20,16 @@ const RegionSettings = ({ regions }: TProps) => {
 
   return (
     <GlassCard>
-      <Grid2 padding={3} container flexDirection="column" alignItems="center" gap={3}>
+      <Grid2
+        padding={3}
+        container
+        flexDirection="column"
+        alignItems="center"
+        gap={3}
+        width={{ xs: '100vw', sm: '400px' }}
+      >
         {defaultRegions.map((item) => (
-          <FormControl sx={{ width: 300 }} key={item.storeName}>
+          <FormControl sx={{ width: '100%' }} key={item.storeName}>
             <InputLabel>{item.storeName} Region</InputLabel>
             <Select
               label={`${item.storeName} Region`}

@@ -2,10 +2,12 @@
 
 import { ReactNode, useEffect, useRef, useState } from 'react'
 
-import { Grid2 } from '@mui/material'
+import { Grid2, Grid2Props } from '@mui/material'
 import cn from 'classnames'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
+
+import { useComponentWidth } from '@/hooks/useComponentWidth'
 
 import { NextButton, PrevButton, usePrevNextButtons } from './libs/utils/arrows'
 import { SelectedSnapDisplay, useSelectedSnapDisplay } from './libs/utils/snap-display'
@@ -13,20 +15,17 @@ import styles from './styles.module.scss'
 
 type TProps = Omit<EmblaOptionsType, 'slides'> & {
   slides: ReactNode[]
+  controlsContainerProps?: Grid2Props
 }
 
-const Carousel = ({ slides, ...rest }: TProps) => {
-  const [width, setWidth] = useState(200)
+const Carousel = ({ slides, controlsContainerProps, ...rest }: TProps) => {
   const [loading, setLoading] = useState(true)
 
   const section = useRef<HTMLDivElement>(null)
+  const width = useComponentWidth(section)
 
   useEffect(() => {
-    if (!section.current) {
-      return
-    }
-    setWidth(section.current.clientWidth)
-    setTimeout(() => setLoading(false), 500)
+    setTimeout(() => setLoading(false), 700)
   }, [section.current])
 
   const [emblaRef, emblaApi] = useEmblaCarousel(rest)
@@ -49,7 +48,13 @@ const Carousel = ({ slides, ...rest }: TProps) => {
           </div>
         </div>
 
-        <Grid2 container alignItems="center" justifyContent="space-between">
+        <Grid2
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          width="100%"
+          {...controlsContainerProps}
+        >
           <Grid2 container gap={2}>
             <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
             <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

@@ -37,4 +37,4 @@ type TGame = {
   gameStore?: TGameStore[]
 }
 
-export type { TGame }
+export type { TGame, TGameStore }

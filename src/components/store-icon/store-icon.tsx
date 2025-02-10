@@ -51,7 +51,11 @@ const StoreIcon = ({ store, link, withLabel = true }: TProps) => {
       sx={{ background: config.color, padding: '4px 12px', borderRadius: 1.5 }}
     >
       <config.icon width={24} height={24} fill="#fff" />
-      {withLabel && <Typography fontWeight="bold">{getStoreDisplayName(store).short}</Typography>}
+      {withLabel && (
+        <Typography fontWeight="bold" fontSize={{ xs: '0.8rem', sm: '1rem' }}>
+          {getStoreDisplayName(store).short}
+        </Typography>
+      )}
     </Grid2>
   )
 

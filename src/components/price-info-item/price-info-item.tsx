@@ -17,8 +17,10 @@ type TProps = {
   store: EStore
   priceHistory: TPriceHistory[]
   className?: string
-  height?: number
+  height?: number | string
   storeLink?: string
+  variant?: 'default' | 'inline'
+  showStoreLabel?: boolean
 }
 
 type TAdditionalLowestInfo = {
@@ -27,7 +29,15 @@ type TAdditionalLowestInfo = {
   color?: string
 }
 
-const PriceInfoItem = ({ store, priceHistory, className, height, storeLink }: TProps) => {
+const PriceInfoItem = ({
+  store,
+  priceHistory,
+  className,
+  height,
+  storeLink,
+  variant = 'default',
+  showStoreLabel = true,
+}: TProps) => {
   const { maxPrice, lowestPrice, region, additionalLowestInfo } = useMemo(() => {
     const storePriceHistory = priceHistory.filter((item) => item.store.name === store)
 
@@ -67,42 +77,63 @@ const PriceInfoItem = ({ store, priceHistory, className, height, storeLink }: TP
     return <></>
   }
 
-  return (
-    <GlassCard className={cn(styles.item, className)} style={{ height: height || 'auto' }}>
-      <Grid2 container alignItems="center" gap={2}>
-        <StoreIcon store={store} link={storeLink} />
-        <Typography>
-          {region.country} - {region.key}
-        </Typography>
-      </Grid2>
+  const isInline = variant === 'inline'
 
-      <Divider
-        sx={{
-          width: '100%',
-          background: 'var(--bg-light)',
-        }}
-      />
+  const renderDivider = () => (
+    <Divider
+      flexItem
+      sx={{
+        background: 'var(--bg-light)',
+      }}
+      orientation={isInline ? 'vertical' : 'horizontal'}
+    />
+  )
+
+  const renderLowestValues = () => (
+    <>
       <PriceInfoText
-        label="Highest price"
-        value={`${region.currencySymbol}${maxPrice}`}
-        valueColor="var(--red)"
+        label="Lowest price"
+        value={`${region.currencySymbol}${lowestPrice}`}
+        valueColor="var(--green)"
       />
-      <Divider sx={{ width: '100%', background: 'var(--bg-light)' }} />
-      <Grid2 container alignItems="center" gap={3}>
-        <PriceInfoText
-          label="Lowest price"
-          value={`${region.currencySymbol}${lowestPrice}`}
-          valueColor="var(--green)"
-        />
-        {additionalLowestInfo && (
+      {additionalLowestInfo && (
+        <>
+          {isInline && renderDivider()}
           <PriceInfoText
             label={additionalLowestInfo.label}
             value={`${region.currencySymbol}${additionalLowestInfo.price}`}
             valueColor={additionalLowestInfo.color || 'var(--green)'}
           />
-        )}
+        </>
+      )}
+    </>
+  )
+
+  return (
+    <GlassCard className={cn(styles.item, styles[variant], className)} style={{ height }}>
+      <Grid2 container flexDirection={isInline ? 'column' : 'row'} alignItems="center" gap={1}>
+        <StoreIcon store={store} link={storeLink} withLabel={showStoreLabel} />
+        <Typography fontSize={{ xs: '0.8rem', sm: '1rem' }}>
+          {region.country} - {region.key}
+        </Typography>
       </Grid2>
-      <Divider sx={{ width: '100%', background: 'var(--bg-light)' }} />
+
+      {renderDivider()}
+      <PriceInfoText
+        label="Highest price"
+        value={`${region.currencySymbol}${maxPrice}`}
+        valueColor="var(--red)"
+      />
+      {renderDivider()}
+      {isInline ? (
+        renderLowestValues()
+      ) : (
+        <Grid2 container alignItems="center" gap={3}>
+          {renderLowestValues()}
+        </Grid2>
+      )}
+
+      {!isInline && renderDivider()}
     </GlassCard>
   )
 }

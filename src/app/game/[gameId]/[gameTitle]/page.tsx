@@ -1,23 +1,20 @@
-import { Suspense } from 'react'
-
 import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
-import Image from 'next/image'
 
 import { getGameById } from '@/api/games'
-import { BuyGameButton } from '@/components/buy-game-button'
+import { GameImgWithBuy } from '@/components/game-img-with-buy'
+import { ImagesCarousel } from '@/components/images-carousel'
 import { NoDataLabel } from '@/components/no-data-label'
 import { PlatformIcon } from '@/components/platform-icon'
 import { PriceInfoItem } from '@/components/price-info-item'
-import { PricesChart } from '@/components/prices-chart'
 import { TLineConfig } from '@/components/prices-chart/libs/types/line-config.types'
 import { SectionTitle } from '@/components/section-title'
 import { StoreIcon } from '@/components/store-icon'
 import { GlassCard } from '@/components/ui/cards/glass-card'
-import { Carousel } from '@/components/ui/carousel'
 import { Container } from '@/components/ui/container'
 import { InfoItem } from '@/components/ui/info-item'
+import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
 import { getStoreColor } from '@/helpers/getStoreColor'
@@ -26,6 +23,7 @@ import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 import { TPriceHistory } from '@/types/price-history.types'
 
+import { PriceChartSection } from './libs/components/price-chart-section'
 import styles from './styles.module.scss'
 
 type TProps = {
@@ -34,7 +32,6 @@ type TProps = {
 }
 
 const PRICE_ITEM_HEIGHT = 250
-const PRICE_ITEM_WIDTH = 850
 
 const GameInfo = async ({ params, searchParams }: TProps) => {
   const { gameId } = await params
@@ -73,94 +70,31 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
   }
 
   return (
-    <Container gap={5} paddingTop={15} paddingBottom={5}>
-      <Box sx={{ position: 'relative', width: '100%' }}>
-        <Stack spacing={2} className={styles.imageWrapper}>
-          <GlassCard
-            style={{
-              width: 'fit-content',
-              padding: 16,
-              overflow: 'visible',
-            }}
-          >
-            {!!game.coverImageUrl && (
-              <Image
-                src={game.coverImageUrl}
-                alt={game.title}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: '300px', height: 'auto', borderRadius: 15 }}
-              />
-            )}
-          </GlassCard>
-          <GlassCard className={styles.typeContainer}>
-            <Typography color="accent.main" fontWeight="bold" letterSpacing={4}>
-              {game.type.toUpperCase()}
-            </Typography>
-          </GlassCard>
-        </Stack>
+    <Container
+      gap={{ xs: 3, md: 5 }}
+      paddingTop={{ xs: 0, md: 15 }}
+      paddingBottom={5}
+      className={styles.container}
+    >
+      <Grid2 sx={{ position: 'relative', width: '100%' }} container flexDirection="column" gap={3}>
+        <GameImgWithBuy game={game} storeLinks={storeLinks} className={styles.mainImgWrapper} />
 
         <GlassCard className={cn(styles.section, styles.mainInfoContainer)}>
-          {/* This image is needed to reserve the space */}
-          <Box
-            sx={{
-              borderRadius: 15,
-              transform: 'translateY(-124px)',
-              marginBottom: '-124px',
-            }}
-          >
-            {!!game.coverImageUrl && (
-              <Image
-                src={game.coverImageUrl}
-                alt={game.title}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{
-                  width: '302px',
-                  height: 'auto',
-                  marginBottom: '110px',
-                  borderRadius: 15,
-                  opacity: 0,
-                  marginRight: 32,
-                }}
-              />
-            )}
-            <Stack spacing={2}>
-              {game.gameStore?.map((gameStore) => {
-                const latestPriceHistory = game.priceHistory.find(
-                  (item) => item.storeId === gameStore.store.id,
-                )
-                const link = storeLinks?.[gameStore.store.name]
-                if (!latestPriceHistory || !link) {
-                  return <></>
-                }
-                let additionalPriceHistoryItem: TPriceHistory | undefined
-                if (gameStore.store.name === EStore.PSN) {
-                  additionalPriceHistoryItem = game.priceHistory.find(
-                    (item) =>
-                      item.storeId === gameStore.store.id &&
-                      item.meta?.type === EPriceHistoryMetaType.PS_PLUS,
-                  )
-                }
-                return (
-                  <BuyGameButton
-                    priceHistoryItem={latestPriceHistory}
-                    link={link}
-                    additionalPriceHistoryItem={additionalPriceHistoryItem}
-                  />
-                )
-              })}
-            </Stack>
-          </Box>
+          {/* This section is needed to reserve the space */}
+          <GameImgWithBuy
+            game={game}
+            storeLinks={storeLinks}
+            className={styles.fakeImgWrapper}
+            isFake
+          />
+
           <Stack flex={1} position="relative">
             <Typography variant="h4" fontWeight="bold">
               {game.title}
             </Typography>
             <Divider sx={{ margin: '16px 0', background: 'var(--accent)' }} />
 
-            <Stack spacing={1}>
+            <Stack gap={1}>
               <InfoItem label="Genres" data={game.genres?.map(makeFirstLetterUpper).join(', ')} />
               <InfoItem
                 label="Platforms"
@@ -172,7 +106,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
               />
               <InfoItem
                 label="Release date"
-                data={game.releaseDate && moment(game.releaseDate).format('DD.MM.YYYY')}
+                data={game.releaseDate && moment(game.releaseDate).format(DEFAULT_DATE_FORMATTING)}
               />
               <InfoItem
                 label="Text languages"
@@ -184,6 +118,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
               />
               <InfoItem
                 label="Available in stores"
+                withDivider={false}
                 data={
                   <Grid2 container gap={2}>
                     {game.gameStore?.map((item) => {
@@ -197,7 +132,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
             </Stack>
           </Stack>
         </GlassCard>
-      </Box>
+      </Grid2>
 
       <Grid2
         width="100%"
@@ -206,7 +141,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
         justifyContent="space-between"
         flexWrap="nowrap"
       >
-        <GlassCard className={cn(styles.section, styles.priceSection)}>
+        <GlassCard className={cn(styles.section, styles.priceSection, styles.priceHistorySection)}>
           <SectionTitle title="Price history" />
           {game.gameStore?.map((gameStore) => {
             const storePriceHistory = game.priceHistory.filter(
@@ -246,21 +181,25 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
             }
 
             return (
-              <div style={{ height: PRICE_ITEM_HEIGHT, width: PRICE_ITEM_WIDTH }}>
-                <PricesChart
-                  game={game}
-                  key={gameStore.store.id}
-                  lines={lines}
-                  height={PRICE_ITEM_HEIGHT}
-                  width={PRICE_ITEM_WIDTH}
-                />
-              </div>
+              <PriceChartSection
+                game={game}
+                key={gameStore.store.id}
+                lines={lines}
+                height={PRICE_ITEM_HEIGHT}
+                storeLink={storeLinks?.[gameStore.store.name]}
+                gameStore={gameStore}
+              />
             )
           })}
         </GlassCard>
 
-        <Grid2 flex={1} paddingRight={0} className={cn(styles.section, styles.priceSection)}>
-          <SectionTitle title="Price info" sx={{ opacity: 0 }} />
+        <Grid2
+          flex={1}
+          paddingRight={0}
+          maxWidth="fit-content"
+          width="fit-content"
+          className={cn(styles.section, styles.priceSection, styles.priceInfoSection)}
+        >
           {game.gameStore?.map((gameStore) => {
             return (
               <PriceInfoItem
@@ -276,30 +215,12 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
 
       <GlassCard className={styles.section}>
         <Stack spacing={3} width="100%">
-          <Stack spacing={2}>
+          <Stack gap={2} width="100%">
             <SectionTitle title="Screenshots" />
             {!!game.images.length ? (
-              <Suspense>
-                <Carousel
-                  loop
-                  align="center"
-                  slides={game.images.map((img, index) => (
-                    <Image
-                      key={index}
-                      src={img}
-                      alt={game.title}
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      style={{
-                        width: 'auto',
-                        height: 400,
-                        borderRadius: 15,
-                      }}
-                    />
-                  ))}
-                />
-              </Suspense>
+              <Grid2 mx={{ xs: -2, sm: -3 }}>
+                <ImagesCarousel images={game.images} alt={game.title} />
+              </Grid2>
             ) : (
               <NoDataLabel />
             )}

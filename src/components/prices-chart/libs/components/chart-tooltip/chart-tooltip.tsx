@@ -3,6 +3,7 @@ import { Stack } from '@mui/system'
 import moment from 'moment'
 
 import { StoreIcon } from '@/components/store-icon'
+import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
 
 import { TPriceChartData } from '../../types/price-chart-data.types'
 
@@ -30,7 +31,7 @@ const ChartTooltip = ({ active, payload }: TProps) => {
           />
           <Stack>
             <Typography variant="body2">
-              {moment(value.date).utc(true).format('DD.MM.YYYY')}
+              {moment(value.date).utc(true).format(DEFAULT_DATE_FORMATTING)}
             </Typography>
             <Typography variant="body2">
               {value.region.currencySymbol}

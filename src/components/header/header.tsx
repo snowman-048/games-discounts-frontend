@@ -32,7 +32,7 @@ const Header = () => {
     <>
       <Grid2
         container
-        width="100%"
+        width="100vw"
         marginBottom={3}
         position="fixed"
         sx={{ top: 0, left: 0, right: 0, zIndex: 5, height: 64 }}
@@ -60,7 +60,7 @@ const Header = () => {
       </Grid2>
 
       <Backdrop
-        sx={{ zIndex: 6, background: 'rgba(0, 0, 0, 0.7)' }}
+        sx={{ zIndex: 6, background: 'rgba(0, 0, 0, 0.7)', width: '100vw' }}
         open={!!locationAnchorEl}
         transitionDuration={100}
       >

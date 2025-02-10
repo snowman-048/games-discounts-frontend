@@ -20,6 +20,14 @@ declare module '@mui/material/Typography' {
   }
 }
 
+const breakpoints = {
+  xl: 1400,
+  lg: 1250,
+  md: 900,
+  sm: 600,
+  xs: 0,
+}
+
 const theme = createTheme({
   typography: {
     fontFamily: 'var(--font-roboto)',
@@ -44,6 +52,9 @@ const theme = createTheme({
       paper: '#000000',
     },
   },
+  breakpoints: {
+    values: breakpoints,
+  },
 })
 
-export { theme }
+export { theme, breakpoints }
