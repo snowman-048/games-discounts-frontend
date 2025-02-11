@@ -56,7 +56,7 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
       gap={5}
       paddingBottom={3}
     >
-      <Grid2 display="grid" width="100%" className={styles.list} gap={2.5}>
+      <Grid2 display="grid" width="100%" className={styles.list} gap={{ xs: 2, md: 2.5 }}>
         {games.map((game) => (
           <GameDiscountCard game={game} key={game.id} />
         ))}

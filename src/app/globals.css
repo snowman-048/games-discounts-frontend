@@ -8,6 +8,8 @@ html {
   --bg-light: #333;
   --bg-labels: #161616;
 
+  --backdrop: rgba(0, 0, 0, 0.7);
+
   --accent: #eacb47;
 
   --red: #fd452d;
@@ -62,4 +64,10 @@ a {
 ::-webkit-scrollbar-thumb {
   background: var(--bg-light); 
   border-radius: 1px;
+}
+
+@media screen and (max-width: 899px) {
+  #root  {
+    padding-top: 80px;
+  }
 }

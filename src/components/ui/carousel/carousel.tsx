@@ -22,7 +22,7 @@ const Carousel = ({ slides, controlsContainerProps, ...rest }: TProps) => {
   const [loading, setLoading] = useState(true)
 
   const section = useRef<HTMLDivElement>(null)
-  const width = useComponentWidth(section)
+  const width = useComponentWidth({ ref: section })
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 700)

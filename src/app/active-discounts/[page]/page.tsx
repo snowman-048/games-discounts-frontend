@@ -17,7 +17,7 @@ const Discounts = async ({
   const query = await searchParams
 
   return (
-    <Container gap={5}>
+    <Container gap={{ xs: 2, md: 5 }}>
       <GameDiscountsFilters />
       <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<div>Loading...</div>}>
         <GamesDiscountsList

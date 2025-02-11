@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
 
-const useComponentWidth = (currentRef: any) => {
+type TProps = {
+  ref?: any
+  viewport?: boolean
+}
+
+const useComponentWidth = ({ ref, viewport }: TProps) => {
   const [width, setWidth] = useState(0)
 
   useEffect(() => {
     const updateWidth = () => {
-      if (currentRef.current) {
-        setWidth(currentRef.current.offsetWidth)
+      if (ref?.current) {
+        setWidth(ref.current.offsetWidth)
+      } else if (viewport) {
+        setWidth(document.body.offsetWidth)
       }
     }
 

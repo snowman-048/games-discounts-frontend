@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import LocationOnIcon from '@mui/icons-material/LocationOn'
-import { Backdrop, Grid2, IconButton, Popover } from '@mui/material'
+import { Backdrop, Button, Grid2, Popover } from '@mui/material'
 
 import { getRegions } from '@/api/regions'
 import { TRegionWithStores } from '@/types/region.types'
@@ -51,16 +51,20 @@ const Header = () => {
             <Logo />
 
             <div>
-              <IconButton onClick={(e) => setLocationAnchorEl(e.currentTarget)}>
+              <Button
+                onClick={(e) => setLocationAnchorEl(e.currentTarget)}
+                sx={{ color: 'var(--text-primary)', gap: 1, textTransform: 'none' }}
+              >
+                Region Settings
                 <LocationOnIcon />
-              </IconButton>
+              </Button>
             </div>
           </Container>
         </GlassCard>
       </Grid2>
 
       <Backdrop
-        sx={{ zIndex: 6, background: 'rgba(0, 0, 0, 0.7)', width: '100vw' }}
+        sx={{ zIndex: 6, background: 'var(--backdrop)', width: '100vw' }}
         open={!!locationAnchorEl}
         transitionDuration={100}
       >
