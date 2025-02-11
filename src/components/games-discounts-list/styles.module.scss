@@ -1,0 +1,27 @@
+.list {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media screen and (max-width: 1270px) {
+  .list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+}

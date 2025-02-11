@@ -1,3 +1,5 @@
+import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
+
 import { TRegion } from './region.types'
 import { TStore } from './store.types'
 
@@ -13,7 +15,9 @@ type TPriceHistory = {
   discountPercentage: number
   store: TStore
   region: TRegion
-  meta?: any
+  meta?: {
+    type?: EPriceHistoryMetaType
+  }
 }
 
 export type { TPriceHistory }

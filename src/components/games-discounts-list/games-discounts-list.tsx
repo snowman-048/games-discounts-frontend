@@ -6,7 +6,9 @@ import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
 import { GameDiscountCard } from '../game-discount-card'
+import { NoDataLabel } from '../no-data-label'
 import { Pagination } from '../pagination'
+import styles from './styles.module.scss'
 
 const LIST_SIZE = 25
 
@@ -41,9 +43,20 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
     console.log('Games fetch error', (err as any).message)
   }
 
+  if (!games.length) {
+    return <NoDataLabel />
+  }
+
   return (
-    <Grid2 container flexDirection="column" alignItems="center" gap={5} paddingBottom={3}>
-      <Grid2 display="grid" gridTemplateColumns="repeat(5, 1fr)" gap={2.5}>
+    <Grid2
+      container
+      flexDirection="column"
+      alignItems="center"
+      width="100%"
+      gap={5}
+      paddingBottom={3}
+    >
+      <Grid2 display="grid" width="100%" className={styles.list} gap={2.5}>
         {games.map((game) => (
           <GameDiscountCard game={game} key={game.id} />
         ))}

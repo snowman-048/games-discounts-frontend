@@ -1,0 +1,141 @@
+import { useMemo } from 'react'
+
+import { Divider, Grid2, Typography } from '@mui/material'
+import cn from 'classnames'
+
+import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
+import { EStore } from '@/enums/store.enum'
+import { getStoreColor } from '@/helpers/getStoreColor'
+import { TPriceHistory } from '@/types/price-history.types'
+
+import { StoreIcon } from '../store-icon'
+import { GlassCard } from '../ui/cards/glass-card'
+import { PriceInfoText } from './libs/components/price-info-text'
+import styles from './styles.module.scss'
+
+type TProps = {
+  store: EStore
+  priceHistory: TPriceHistory[]
+  className?: string
+  height?: number | string
+  storeLink?: string
+  variant?: 'default' | 'inline'
+  showStoreLabel?: boolean
+}
+
+type TAdditionalLowestInfo = {
+  price: number
+  label: string
+  color?: string
+}
+
+const PriceInfoItem = ({
+  store,
+  priceHistory,
+  className,
+  height,
+  storeLink,
+  variant = 'default',
+  showStoreLabel = true,
+}: TProps) => {
+  const { maxPrice, lowestPrice, region, additionalLowestInfo } = useMemo(() => {
+    const storePriceHistory = priceHistory.filter((item) => item.store.name === store)
+
+    let maxPrice = storePriceHistory[0]?.initialPrice
+    let lowestPrice = storePriceHistory[0]?.discountedPrice
+    let additionalLowestInfo: TAdditionalLowestInfo | null = null
+
+    storePriceHistory.forEach((item) => {
+      if (item.initialPrice > maxPrice) {
+        maxPrice = item.initialPrice
+      }
+      if (item.meta?.type === EPriceHistoryMetaType.PS_PLUS) {
+        if (!additionalLowestInfo) {
+          additionalLowestInfo = {
+            price: item.discountedPrice,
+            label: 'PS+ lowest',
+            color: getStoreColor(EPriceHistoryMetaType.PS_PLUS),
+          }
+        } else if (additionalLowestInfo.price > item.discountedPrice) {
+          additionalLowestInfo.price = item.discountedPrice
+        }
+        return
+      }
+      if (item.discountedPrice < lowestPrice) {
+        lowestPrice = item.discountedPrice
+      }
+    })
+    return {
+      maxPrice,
+      lowestPrice,
+      region: storePriceHistory[0]?.region,
+      additionalLowestInfo: additionalLowestInfo as TAdditionalLowestInfo | null,
+    }
+  }, [priceHistory])
+
+  if (!region) {
+    return <></>
+  }
+
+  const isInline = variant === 'inline'
+
+  const renderDivider = () => (
+    <Divider
+      flexItem
+      sx={{
+        background: 'var(--bg-light)',
+      }}
+      orientation={isInline ? 'vertical' : 'horizontal'}
+    />
+  )
+
+  const renderLowestValues = () => (
+    <>
+      <PriceInfoText
+        label="Lowest price"
+        value={`${region.currencySymbol}${lowestPrice}`}
+        valueColor="var(--green)"
+      />
+      {additionalLowestInfo && (
+        <>
+          {isInline && renderDivider()}
+          <PriceInfoText
+            label={additionalLowestInfo.label}
+            value={`${region.currencySymbol}${additionalLowestInfo.price}`}
+            valueColor={additionalLowestInfo.color || 'var(--green)'}
+          />
+        </>
+      )}
+    </>
+  )
+
+  return (
+    <GlassCard className={cn(styles.item, styles[variant], className)} style={{ height }}>
+      <Grid2 container flexDirection={isInline ? 'column' : 'row'} alignItems="center" gap={1}>
+        <StoreIcon store={store} link={storeLink} withLabel={showStoreLabel} />
+        <Typography fontSize={{ xs: '0.8rem', sm: '1rem' }}>
+          {region.country} - {region.key}
+        </Typography>
+      </Grid2>
+
+      {renderDivider()}
+      <PriceInfoText
+        label="Highest price"
+        value={`${region.currencySymbol}${maxPrice}`}
+        valueColor="var(--red)"
+      />
+      {renderDivider()}
+      {isInline ? (
+        renderLowestValues()
+      ) : (
+        <Grid2 container alignItems="center" gap={3}>
+          {renderLowestValues()}
+        </Grid2>
+      )}
+
+      {!isInline && renderDivider()}
+    </GlassCard>
+  )
+}
+
+export { PriceInfoItem }

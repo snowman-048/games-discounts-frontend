@@ -32,7 +32,7 @@ const Header = () => {
     <>
       <Grid2
         container
-        width="100%"
+        width="100vw"
         marginBottom={3}
         position="fixed"
         sx={{ top: 0, left: 0, right: 0, zIndex: 5, height: 64 }}
@@ -44,9 +44,10 @@ const Header = () => {
             borderTopRightRadius: 0,
             borderTopLeftRadius: 0,
             marginTop: -1,
+            justifyContent: 'center',
           }}
         >
-          <Container flexDirection="row" alignItems="center" justifyContent="space-between">
+          <Container flexDirection="row" justifyContent="space-between">
             <Logo />
 
             <div>
@@ -59,7 +60,7 @@ const Header = () => {
       </Grid2>
 
       <Backdrop
-        sx={{ zIndex: 6, background: 'rgba(0, 0, 0, 0.7)' }}
+        sx={{ zIndex: 6, background: 'rgba(0, 0, 0, 0.7)', width: '100vw' }}
         open={!!locationAnchorEl}
         transitionDuration={100}
       >

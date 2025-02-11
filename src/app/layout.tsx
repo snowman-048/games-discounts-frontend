@@ -5,7 +5,6 @@ import { Roboto } from 'next/font/google'
 
 import { BackgroundHandler } from '@/components/background-handler'
 import { Header } from '@/components/header'
-import { Container } from '@/components/ui/container'
 import { theme } from '@/theme'
 
 import './globals.css'
@@ -31,7 +30,7 @@ const RootLayout = async ({
               <BackgroundHandler />
               <div id="root">
                 <Header />
-                <Container>{children}</Container>
+                {children}
               </div>
             </ThemeProvider>
           </CookiesProvider>

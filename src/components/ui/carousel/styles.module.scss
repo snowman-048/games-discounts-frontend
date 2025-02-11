@@ -1,0 +1,33 @@
+.section {
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+  width: 100%;
+
+  &.loading {
+    opacity: 0;
+  }
+}
+
+.wrapper {
+  --slide-spacing: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 100%;
+}
+
+.viewport {
+  min-width: 100%;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.slide {
+  padding-left: var(--slide-spacing);
+  width: fit-content;
+}

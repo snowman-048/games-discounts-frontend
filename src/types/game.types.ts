@@ -1,4 +1,7 @@
+import { EPlatform } from '@/enums/platform.enum'
+
 import { TPriceHistory } from './price-history.types'
+import { TStore } from './store.types'
 
 type TGameLink = {
   id: number
@@ -6,6 +9,10 @@ type TGameLink = {
   gameId: number
   storeId: number
   regionId: number
+}
+
+type TGameStore = {
+  store: TStore
 }
 
 type TGame = {
@@ -17,7 +24,7 @@ type TGame = {
   nintendoId?: string
   xboxId?: string
   type: string
-  platforms: string[]
+  platforms: EPlatform[]
   releaseDate?: string
   publisher?: string
   genres: string[]
@@ -25,8 +32,9 @@ type TGame = {
   textLanguages: string[]
   coverImageUrl?: string
   images: string[]
-  gameLink: TGameLink[]
+  gameLinks: TGameLink[]
   priceHistory: TPriceHistory[]
+  gameStore?: TGameStore[]
 }
 
-export type { TGame }
+export type { TGame, TGameStore }
