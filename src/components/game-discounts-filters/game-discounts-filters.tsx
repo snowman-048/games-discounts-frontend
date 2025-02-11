@@ -241,6 +241,7 @@ const GameDiscountsFilters = () => {
             <Button
               onClick={() => setIsModalOpen(false)}
               sx={{ fontSize: '1.2rem', marginTop: -1 }}
+              fullWidth
             >
               Close
             </Button>
