@@ -42,7 +42,7 @@ const BackgroundHandler = () => {
         const patternLength = pattern.length
         widthLeft -= patternLength * (FONT_SIZE / 1.2)
         if (takeChance(COLORIZE_CHANCE)) {
-          text += `<span style="color: var(--accent); opacity: ${getRandomIntInRange(10, 70) / 100}">${pattern} </span>`
+          text += `<span style="color: var(--accent); opacity: ${getRandomIntInRange(10, 40) / 100}">${pattern} </span>`
         } else {
           text += `${pattern} `
         }

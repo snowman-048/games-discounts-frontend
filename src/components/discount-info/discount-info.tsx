@@ -4,6 +4,7 @@ import moment from 'moment'
 import { getStoreColor } from '@/helpers/getStoreColor'
 import { TPriceHistory } from '@/types/price-history.types'
 
+import { StoreIcon } from '../store-icon'
 import { GlassCard } from '../ui/cards/glass-card'
 
 type TProps = {
@@ -28,15 +29,10 @@ const DiscountInfo = ({ discount }: TProps) => {
         padding={0.7}
         justifyContent="space-between"
       >
-        <Typography
-          color="text.primary"
-          variant="body2"
-          padding={0.3}
-          fontWeight="bold"
-          sx={{ background: storeColor, borderRadius: 0.8 }}
-        >
-          -{discount.discountPercentage}%
-        </Typography>
+        <StoreIcon
+          store={discount.meta?.type || discount.store.name}
+          customLabel={`-${discount.discountPercentage}%`}
+        />
         <Stack alignItems="flex-end">
           <Grid2 container gap={1}>
             <Typography

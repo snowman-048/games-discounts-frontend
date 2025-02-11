@@ -2,11 +2,11 @@ html {
   --text-primary: #ddd;
   --text-secondary: #aaa;
 
-  --bg-dark: #171717;
-  --bg-main: #1f1f1f;
-  --bg-medium: #2c2c2c;
-  --bg-light: #444;
-  --bg-labels: #2c2c2c;
+  --bg-dark: #0e0e0e;
+  --bg-main: #111;
+  --bg-medium: #222;
+  --bg-light: #333;
+  --bg-labels: #161616;
 
   --accent: #eacb47;
 

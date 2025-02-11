@@ -9,7 +9,7 @@ import { getStoreDisplayName } from '@/helpers/getStoreDisplayName'
 import { TPriceHistory } from '@/types/price-history.types'
 
 import { StoreIcon } from '../store-icon'
-import { VolumetricCard } from '../ui/cards/volumetric-card'
+import { GlassCard } from '../ui/cards/glass-card'
 import styles from './styles.module.scss'
 
 type TProps = {
@@ -27,9 +27,23 @@ const BuyGameButton = ({ priceHistoryItem, additionalPriceHistoryItem, link }: T
     : ''
 
   const renderContent = () => (
-    <Box>
-      <VolumetricCard>
-        <Grid2 container alignItems="center" justifyContent="space-between" padding={0.5}>
+    <Box
+      className={styles.container}
+      sx={{
+        '::before': {
+          background: getStoreColor(priceHistoryItem.store.name),
+          animationDelay: `${Math.random() * 2}s`,
+        },
+      }}
+    >
+      <GlassCard>
+        <Grid2
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          padding={1}
+          width="100%"
+        >
           <Grid2 container alignItems="center" gap={1}>
             <StoreIcon store={priceHistoryItem.store.name} withLabel={false} />
             <Stack>
@@ -90,12 +104,12 @@ const BuyGameButton = ({ priceHistoryItem, additionalPriceHistoryItem, link }: T
             )}
           </Stack>
         </Grid2>
-      </VolumetricCard>
+      </GlassCard>
     </Box>
   )
 
   return link ? (
-    <Link href={link} target="_blank" className={styles.container}>
+    <Link href={link} target="_blank">
       {renderContent()}
     </Link>
   ) : (

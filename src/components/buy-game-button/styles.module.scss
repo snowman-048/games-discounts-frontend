@@ -1,7 +1,34 @@
 .container {
+  position: relative;
   transition: transform 0.2s ease-out;
 
-  &:hover {
-    transform: scale(0.97);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    z-index: -1;
+    filter: blur(30px);
+    transition: all 1s ease-out;
+    animation: glow 4s ease-in-out infinite;
+  }
+
+  &:hover::before {
+    animation: none;
+    inset: 10px;
+    animation-delay: 0s !important;
+  }
+}
+
+@keyframes glow {
+  0% {
+    inset: 30px;
+  }
+
+  50% {
+    inset: 20px;
+  }
+
+  100% {
+    inset: 30px;
   }
 }

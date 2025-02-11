@@ -14,6 +14,7 @@ type TProps = {
   store: EStore | EPriceHistoryMetaType
   link?: string
   withLabel?: boolean
+  customLabel?: string
 }
 
 const STORE_TO_ICON_MAP = {
@@ -40,7 +41,7 @@ const STORE_TO_ICON_MAP = {
   },
 }
 
-const StoreIcon = ({ store, link, withLabel = true }: TProps) => {
+const StoreIcon = ({ store, link, withLabel = true, customLabel }: TProps) => {
   const config = STORE_TO_ICON_MAP[store]
 
   const renderItem = () => (
@@ -48,12 +49,12 @@ const StoreIcon = ({ store, link, withLabel = true }: TProps) => {
       container
       alignItems="center"
       gap={1}
-      sx={{ background: config.color, padding: '4px 12px', borderRadius: 1.5 }}
+      sx={{ background: config.color, padding: '4px 8px', borderRadius: 1.5 }}
     >
       <config.icon width={24} height={24} fill="#fff" />
       {withLabel && (
         <Typography fontWeight="bold" fontSize={{ xs: '0.8rem', sm: '1rem' }}>
-          {getStoreDisplayName(store).short}
+          {customLabel || getStoreDisplayName(store).short}
         </Typography>
       )}
     </Grid2>
