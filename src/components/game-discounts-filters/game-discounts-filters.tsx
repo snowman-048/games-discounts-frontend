@@ -98,9 +98,7 @@ const GameDiscountsFilters = () => {
         <Button
           sx={{ color: 'var(--bg-main)', textTransform: 'none', gap: 1 }}
           variant="contained"
-          onClick={() => {
-            handleFilterChange({ title: title.trim() })
-          }}
+          type="submit"
         >
           <SearchIcon />
           Search

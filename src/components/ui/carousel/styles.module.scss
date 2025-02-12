@@ -19,6 +19,7 @@
 .viewport {
   min-width: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .container {
@@ -30,4 +31,45 @@
 .slide {
   padding-left: var(--slide-spacing);
   width: fit-content;
+}
+
+.sideButtons {
+  pointer-events: none;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+
+  > * {
+    pointer-events: all;
+  }
+
+  &.prevBtn {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-main) 0%, rgba(0, 0, 0, 0) 100%);
+    padding-right: 90px;
+  }
+
+  &.nextBtn {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-main) 0%, rgba(0, 0, 0, 0) 100%);
+    padding-left: 90px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sideButtons {
+    width: 90px;
+
+    &.prevBtn {
+      padding-right: 30px;
+    }
+
+    &.nextBtn {
+      padding-left: 30px;
+    }
+  }
 }

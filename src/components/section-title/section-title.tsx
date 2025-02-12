@@ -1,7 +1,9 @@
+import { ReactNode } from 'react'
+
 import { Divider, DividerProps, SxProps, Theme, Typography } from '@mui/material'
 
-type TProps = DividerProps & {
-  title: string
+type TProps = Omit<DividerProps, 'title'> & {
+  title: string | ReactNode
   sx?: SxProps<Theme>
 }
 

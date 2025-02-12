@@ -1,7 +1,7 @@
 import { Grid2 } from '@mui/material'
 
 import { getGamesList } from '@/api/games'
-import { getGamesSorting } from '@/helpers/getGamesSorting'
+import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
@@ -23,20 +23,9 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
   let totalGames = 0
 
   try {
-    const { sort, ...rest } = query
-    const storeIds =
-      query['storeIds[]'] &&
-      (Array.isArray(query['storeIds[]']) ? query['storeIds[]'] : [query['storeIds[]']])
-
-    delete rest['storeIds[]']
-
-    const { data } = await getGamesList({
-      ...getGamesSorting(sort),
-      ...rest,
-      page,
-      limit: LIST_SIZE,
-      storeIds,
-    })
+    const { data } = await getGamesList(
+      prepareGamesSearchQuery({ ...query, page, limit: LIST_SIZE }),
+    )
     games = data[0]
     totalGames = data[1]
   } catch (err) {

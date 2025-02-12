@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@mui/material'
+import { Box, ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { CookiesProvider } from 'next-client-cookies/server'
 import { Roboto } from 'next/font/google'
@@ -31,7 +31,9 @@ const RootLayout = async ({
               <BackgroundHandler />
               <div id="root">
                 <Header />
-                {children}
+                <Box flex={1} width="100%" height="100%">
+                  {children}
+                </Box>
                 <Footer />
               </div>
             </ThemeProvider>

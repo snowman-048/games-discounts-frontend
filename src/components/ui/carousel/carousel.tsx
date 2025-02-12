@@ -16,9 +16,17 @@ import styles from './styles.module.scss'
 type TProps = Omit<EmblaOptionsType, 'slides'> & {
   slides: ReactNode[]
   controlsContainerProps?: Grid2Props
+  showCounter?: boolean
+  buttonsPosition?: 'bottom' | 'sides'
 }
 
-const Carousel = ({ slides, controlsContainerProps, ...rest }: TProps) => {
+const Carousel = ({
+  slides,
+  controlsContainerProps,
+  showCounter = true,
+  buttonsPosition = 'bottom',
+  ...rest
+}: TProps) => {
   const [loading, setLoading] = useState(true)
 
   const section = useRef<HTMLDivElement>(null)
@@ -46,22 +54,36 @@ const Carousel = ({ slides, controlsContainerProps, ...rest }: TProps) => {
               </div>
             ))}
           </div>
+          {buttonsPosition === 'sides' && (
+            <>
+              <div className={cn(styles.sideButtons, styles.prevBtn)}>
+                <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+              </div>
+              <div className={cn(styles.sideButtons, styles.nextBtn)}>
+                <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+              </div>
+            </>
+          )}
         </div>
 
-        <Grid2
-          container
-          alignItems="center"
-          justifyContent="space-between"
-          width="100%"
-          {...controlsContainerProps}
-        >
-          <Grid2 container gap={2}>
-            <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-            <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-          </Grid2>
+        {buttonsPosition === 'bottom' && (
+          <Grid2
+            container
+            alignItems="center"
+            justifyContent="space-between"
+            width="100%"
+            {...controlsContainerProps}
+          >
+            <Grid2 container gap={2}>
+              <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+              <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+            </Grid2>
 
-          <SelectedSnapDisplay selectedSnap={selectedSnap} snapCount={snapCount} />
-        </Grid2>
+            {showCounter && (
+              <SelectedSnapDisplay selectedSnap={selectedSnap} snapCount={snapCount} />
+            )}
+          </Grid2>
+        )}
       </div>
     </section>
   )

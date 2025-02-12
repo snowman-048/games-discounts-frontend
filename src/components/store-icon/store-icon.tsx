@@ -48,6 +48,7 @@ const StoreIcon = ({ store, link, withLabel = true, customLabel }: TProps) => {
     <Grid2
       container
       alignItems="center"
+      flexWrap="nowrap"
       gap={1}
       sx={{ background: config.color, padding: '4px 8px', borderRadius: 1.5 }}
     >
