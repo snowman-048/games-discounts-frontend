@@ -1,0 +1,46 @@
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  line-height: 1em;
+  margin: 0;
+}
+
+.link__top {
+  position: absolute;
+  top: 0;
+  display: inline-block;
+  clip-path: polygon(0% 66%, 0% 0%, 100% 0%, 100% 40%);
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1) 125ms,
+    color 250ms ease 110ms;
+}
+
+.link__bottom {
+  display: inline-block;
+  clip-path: polygon(0% 65%, 100% 40%, 100% 110%, 0% 110%);
+  text-decoration: underline;
+  transition:
+    color 250ms ease 110ms,
+    background-position 100ms ease 110ms;
+  text-decoration: none;
+  background-size: 200% 8%;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+.link:hover .link__top {
+  color: red;
+  transform: translateY(-0.5em) rotateZ(-3deg);
+  transition:
+    transform 250ms cubic-bezier(0.12, 0.8, 0.57, 1) 210ms,
+    color 250ms ease 110ms;
+}
+
+.link:hover .link__bottom {
+  color: red;
+  background-position: 100% bottom;
+  transition:
+    color 250ms ease 100ms,
+    background-position 100ms ease;
+}
