@@ -4,6 +4,7 @@ import { CookiesProvider } from 'next-client-cookies/server'
 import { Roboto } from 'next/font/google'
 
 import { BackgroundHandler } from '@/components/background-handler'
+import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { theme } from '@/theme'
 
@@ -31,6 +32,7 @@ const RootLayout = async ({
               <div id="root">
                 <Header />
                 {children}
+                <Footer />
               </div>
             </ThemeProvider>
           </CookiesProvider>
