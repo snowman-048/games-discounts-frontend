@@ -1,3 +1,4 @@
+import { EGameType } from '@/enums/game-type.enum'
 import { EPlatform } from '@/enums/platform.enum'
 
 import { TPriceHistory } from './price-history.types'
@@ -23,7 +24,7 @@ type TGame = {
   steamId?: string
   nintendoId?: string
   xboxId?: string
-  type: string
+  type: EGameType
   platforms: EPlatform[]
   releaseDate?: string
   publisher?: string

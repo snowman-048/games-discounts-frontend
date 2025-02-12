@@ -24,6 +24,8 @@ import {
 import { getStores } from '@/api/stores'
 import { gamesSortingOptions } from '@/configs/games-sorting-options.config'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { EFilter } from '@/enums/filter.enum'
+import { EGameType } from '@/enums/game-type.enum'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useGetAllSearchParams } from '@/hooks/useGetAllSearchParams'
 import { TStore } from '@/types/store.types'
@@ -55,59 +57,88 @@ const GameDiscountsFilters = () => {
     })()
   }, [])
 
-  const renderSearchInput = () => {
+  const renderTopFilters = () => {
     return (
       <Grid2
         container
+        flexDirection={{ xs: 'column-reverse', md: 'row' }}
         alignItems="center"
-        gap={2}
-        component="form"
-        onSubmit={(e) => {
-          e.preventDefault()
-          handleFilterChange({ title: title.trim() })
-          setIsModalOpen(false)
-        }}
+        gap={{ xs: 3, md: 2 }}
+        flexWrap="nowrap"
       >
-        <TextField
-          variant="outlined"
-          label="Title"
-          sx={{ flex: 1 }}
-          size="small"
-          value={title}
-          onChange={(e) => {
-            const value = e.target.value
-            setTitle(value)
-          }}
-          slotProps={{
-            input: {
-              endAdornment: (
-                <IconButton
-                  sx={{ padding: 0.5 }}
-                  onClick={() => {
-                    setTitle('')
-                    handleFilterChange({ title: '' })
-                  }}
-                >
-                  <ClearIcon />
-                </IconButton>
-              ),
-            },
-          }}
-        />
+        <FormControl sx={{ flex: 1, width: '100%', maxWidth: { xs: '100%', md: '300px' } }}>
+          <InputLabel>Type</InputLabel>
+          <Select
+            label="Type"
+            onChange={(e) => {
+              const value = e.target.value
+              handleFilterChange({ types: value === EFilter.ALL ? '' : [value] })
+            }}
+            size="small"
+            value={searchParams.types?.[0] || EFilter.ALL}
+          >
+            {[EFilter.ALL, ...Object.values(EGameType)].map((item) => (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-        <Button
-          sx={{ color: 'var(--bg-main)', textTransform: 'none', gap: 1 }}
-          variant="contained"
-          type="submit"
+        <Grid2
+          container
+          alignItems="center"
+          gap={2}
+          flex={1}
+          width="100%"
+          component="form"
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleFilterChange({ title: title.trim() })
+            setIsModalOpen(false)
+          }}
         >
-          <SearchIcon />
-          Search
-        </Button>
+          <TextField
+            variant="outlined"
+            label="Title"
+            sx={{ flex: 1 }}
+            size="small"
+            value={title}
+            onChange={(e) => {
+              const value = e.target.value
+              setTitle(value)
+            }}
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <IconButton
+                    sx={{ padding: 0.5 }}
+                    onClick={() => {
+                      setTitle('')
+                      handleFilterChange({ title: '' })
+                    }}
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                ),
+              },
+            }}
+          />
+
+          <Button
+            sx={{ color: 'var(--bg-main)', textTransform: 'none', gap: 1 }}
+            variant="contained"
+            type="submit"
+          >
+            <SearchIcon />
+            Search
+          </Button>
+        </Grid2>
       </Grid2>
     )
   }
 
-  const renderMainFilters = () => {
+  const renderBottomFilters = () => {
     return (
       <>
         <FormControl fullWidth>
@@ -195,9 +226,9 @@ const GameDiscountsFilters = () => {
                 },
               }}
             >
-              {renderSearchInput()}
+              {renderTopFilters()}
               <Grid2 flex={1} container flexWrap="nowrap" gap={2} alignItems="center">
-                {renderMainFilters()}
+                {renderBottomFilters()}
               </Grid2>
             </Stack>
           </Grid2>
@@ -234,8 +265,8 @@ const GameDiscountsFilters = () => {
             <Typography variant="h5" textAlign="center" fontWeight="bold" marginBottom={1}>
               Filter Games
             </Typography>
-            {renderSearchInput()}
-            {renderMainFilters()}
+            {renderTopFilters()}
+            {renderBottomFilters()}
             <Button
               onClick={() => setIsModalOpen(false)}
               sx={{ fontSize: '1.2rem', marginTop: -1 }}
