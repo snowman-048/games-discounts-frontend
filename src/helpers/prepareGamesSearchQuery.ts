@@ -2,7 +2,7 @@ import { TGameSearchParams } from '@/types/game-search.types'
 
 import { getGamesSorting } from './getGamesSorting'
 
-const prepareGamesSearchQuery = (query: TGameSearchParams & { page: number; limit: number }) => {
+const prepareGamesSearchQuery = (query: TGameSearchParams & { page?: number; limit?: number }) => {
   const { sort, ...rest } = query
   const storeIds =
     query['storeIds[]'] &&

@@ -4,8 +4,8 @@ import { Autocomplete, AutocompleteProps, Checkbox, TextField } from '@mui/mater
 
 import { TOption } from '@/types/option.types'
 
-type TProps = Partial<Omit<AutocompleteProps<TOption, true, any, any>, 'value'>> & {
-  options: TOption[]
+type TProps = Partial<Omit<AutocompleteProps<TOption<any>, true, any, any>, 'value'>> & {
+  options: TOption<any>[]
   label: string
   value?: string[]
   error?: boolean
@@ -26,7 +26,7 @@ const MultipleAutocomplete: FC<TProps> = ({
       multiple
       options={options}
       disableCloseOnSelect
-      getOptionLabel={(option) => (option as TOption).title}
+      getOptionLabel={(option) => (option as TOption<any>).title}
       renderOption={(props, option, { selected }) => {
         const { key, ...optionProps } = props
         return (
@@ -40,7 +40,9 @@ const MultipleAutocomplete: FC<TProps> = ({
         <TextField {...params} variant="outlined" label={label} error={error} />
       )}
       value={options.filter((option) => (value || []).some((item) => item === option.value))}
-      onChange={(_, newValue) => onChange((newValue as TOption[]).map((option) => option.value))}
+      onChange={(_, newValue) =>
+        onChange((newValue as TOption<any>[]).map((option) => option.value))
+      }
       {...rest}
     />
   )

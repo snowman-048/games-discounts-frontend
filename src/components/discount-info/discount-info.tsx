@@ -1,7 +1,6 @@
 import { Grid2, Stack, Typography } from '@mui/material'
 import moment from 'moment'
 
-import { getStoreColor } from '@/helpers/getStoreColor'
 import { TPriceHistory } from '@/types/price-history.types'
 
 import { StoreIcon } from '../store-icon'
@@ -12,8 +11,6 @@ type TProps = {
 }
 
 const DiscountInfo = ({ discount }: TProps) => {
-  const storeColor = getStoreColor(discount.meta?.type || discount.store.name)
-
   return (
     <GlassCard
       style={{

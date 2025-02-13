@@ -1,14 +1,13 @@
 import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
 import Link from 'next/link'
 
+import { OUR_EMAIL } from '@/configs/contacts.config'
 import { EAppRoute } from '@/enums/app-route.enum'
 
 import packageJson from '../../../package.json'
 import { Logo } from '../logo'
 import { GlassCard } from '../ui/cards/glass-card'
 import { Container } from '../ui/container'
-
-const email = 'co.luminescence@gmail.com'
 
 const Footer = () => {
   return (
@@ -18,6 +17,8 @@ const Footer = () => {
         borderRight: 0,
         borderBottom: 0,
         borderLeft: 0,
+        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 0,
       }}
     >
       <Container flexDirection="column" gap={2} py={2}>
@@ -46,8 +47,8 @@ const Footer = () => {
 
             <Stack direction={'row'} spacing={1} alignItems={'center'}>
               <address>
-                <a href={`mailto:${email}`}>
-                  <Typography>{email}</Typography>
+                <a href={`mailto:${OUR_EMAIL}`}>
+                  <Typography>{OUR_EMAIL}</Typography>
                 </a>
               </address>
             </Stack>

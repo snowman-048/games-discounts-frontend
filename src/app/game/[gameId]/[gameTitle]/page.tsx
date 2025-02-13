@@ -1,4 +1,4 @@
-import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
+import { Divider, Grid2, Stack, Typography } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
 

@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { Grid2, Stack } from '@mui/material'
 
 import { GamesCarousel } from '@/components/games-carousel/games-carousel'
@@ -16,79 +18,87 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
       <LogoGlitch />
 
       <Stack width="100%" marginTop={3} gap={{ xs: 2, sm: 5 }}>
-        <GamesCarousel
-          title="Biggest Discounts"
-          query={{
-            ...query,
-            sort: EGameSorting.BIGGEST_DISCOUNTS,
-          }}
-        />
+        <Suspense>
+          <GamesCarousel
+            title="Biggest Discounts"
+            query={{
+              ...query,
+              sort: EGameSorting.BIGGEST_DISCOUNTS,
+            }}
+          />
+        </Suspense>
 
-        <GamesCarousel
-          title={
-            <Grid2
-              container
-              alignItems="center"
-              flexDirection="row"
-              flexWrap="nowrap"
-              flex={1}
-              gap={1}
-              textTransform="none"
-            >
-              Newest <StoreIcon store={EStore.PSN} /> Discounts
-            </Grid2>
-          }
-          query={{
-            ...query,
-            sort: EGameSorting.NEWEST,
-            'storeIds[]': ['1'], // Refactor
-            onlySelectedStores: true,
-          }}
-        />
+        <Suspense>
+          <GamesCarousel
+            title={
+              <Grid2
+                container
+                alignItems="center"
+                flexDirection="row"
+                flexWrap="nowrap"
+                flex={1}
+                gap={1}
+                textTransform="none"
+              >
+                Newest <StoreIcon store={EStore.PSN} /> Discounts
+              </Grid2>
+            }
+            query={{
+              ...query,
+              sort: EGameSorting.NEWEST,
+              'storeIds[]': ['1'], // Refactor
+              onlySelectedStores: true,
+            }}
+          />
+        </Suspense>
 
-        <GamesCarousel
-          title={
-            <Grid2
-              container
-              alignItems="center"
-              flexDirection="row"
-              flexWrap="nowrap"
-              flex={1}
-              gap={1}
-              textTransform="none"
-            >
-              Newest <StoreIcon store={EStore.NINTENDO} /> Discounts
-            </Grid2>
-          }
-          query={{
-            ...query,
-            sort: EGameSorting.NEWEST,
-            'storeIds[]': ['2'], // Refactor
-            onlySelectedStores: true,
-          }}
-        />
+        <Suspense>
+          <GamesCarousel
+            title={
+              <Grid2
+                container
+                alignItems="center"
+                flexDirection="row"
+                flexWrap="nowrap"
+                flex={1}
+                gap={1}
+                textTransform="none"
+              >
+                Newest <StoreIcon store={EStore.NINTENDO} /> Discounts
+              </Grid2>
+            }
+            query={{
+              ...query,
+              sort: EGameSorting.NEWEST,
+              'storeIds[]': ['2'], // Refactor
+              onlySelectedStores: true,
+            }}
+          />
+        </Suspense>
 
-        <GamesCarousel
-          title={
-            <Grid2
-              container
-              alignItems="center"
-              flexDirection="row"
-              flexWrap="nowrap"
-              flex={1}
-              gap={1}
-              textTransform="none"
-            >
-              Newest <StoreIcon store={EStore.XBOX} /> Discounts
-            </Grid2>
-          }
-          query={{
-            ...query,
-            sort: EGameSorting.NEWEST,
-            'storeIds[]': ['3'], // Refactor
-            onlySelectedStores: true,
-          }}
-        />
+        <Suspense>
+          <GamesCarousel
+            title={
+              <Grid2
+                container
+                alignItems="center"
+                flexDirection="row"
+                flexWrap="nowrap"
+                flex={1}
+                gap={1}
+                textTransform="none"
+              >
+                Newest <StoreIcon store={EStore.XBOX} /> Discounts
+              </Grid2>
+            }
+            query={{
+              ...query,
+              sort: EGameSorting.NEWEST,
+              'storeIds[]': ['3'], // Refactor
+              onlySelectedStores: true,
+            }}
+          />
+        </Suspense>
       </Stack>
     </Container>
   )

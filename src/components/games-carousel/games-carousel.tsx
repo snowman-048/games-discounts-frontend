@@ -1,8 +1,11 @@
 import { ReactNode } from 'react'
 
-import { Grid2, Stack } from '@mui/material'
+import { Grid2, Stack, Typography } from '@mui/material'
+import Link from 'next/link'
 
 import { getGamesList } from '@/api/games'
+import { EAppRoute } from '@/enums/app-route.enum'
+import { createQueryString } from '@/helpers/createQueryString'
 import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
@@ -31,6 +34,10 @@ const GamesCarousel = async ({ title, query }: TProps) => {
     console.log('Games fetch error', (err as any).message)
   }
 
+  const viewAllLinkParams = JSON.parse(JSON.stringify(query))
+  viewAllLinkParams.storeIds = viewAllLinkParams['storeIds[]']
+  delete viewAllLinkParams['storeIds[]']
+
   return (
     <GlassCard style={{ width: '100%' }}>
       <Stack padding={2} width="100%" gap={3}>
@@ -50,6 +57,21 @@ const GamesCarousel = async ({ title, query }: TProps) => {
             ))}
           />
         </Grid2>
+
+        <Link
+          href={`/${EAppRoute.ACTIVE_DISCOUNTS}/1${createQueryString(viewAllLinkParams)}`}
+          style={{ width: '100%' }}
+        >
+          <Typography
+            fontWeight="bold"
+            textAlign="center"
+            color="var(--accent)"
+            letterSpacing={2.5}
+            textTransform="uppercase"
+          >
+            View More
+          </Typography>
+        </Link>
       </Stack>
     </GlassCard>
   )

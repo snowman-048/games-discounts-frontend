@@ -8,7 +8,7 @@ import { api } from '..'
 const BASE_URL = 'games'
 
 const getGamesList = (
-  params: TPagination & TSorting & { storeIds?: string[]; onlySelectedStores?: boolean },
+  params: Partial<TPagination> & TSorting & { storeIds?: string[]; onlySelectedStores?: boolean },
 ) => api.get<[TGame[], number]>(`${BASE_URL}/${createQueryString(params)}`)
 
 const getGameById = async ({
