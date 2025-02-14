@@ -127,6 +127,8 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
     return <NoDataLabel />
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 3000))
+
   return (
     <Container
       gap={{ xs: 3, md: 5 }}

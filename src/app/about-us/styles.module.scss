@@ -4,28 +4,8 @@
   width: 100%;
 }
 
-.mainInfoContainer {
-  display: flex;
-  gap: 24px;
-  position: relative;
-}
-
-.imageWrapper {
-  position: absolute;
-  z-index: 2;
-  left: 24px;
-  top: -24px;
-}
-
-.typeContainer {
-  display: flex;
-  justify-content: center;
-  padding: 8px 32px;
-  width: fit-content;
-}
-
-.priceSection {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+@media screen and (max-width: 600px) {
+  .section {
+    padding: 8px;
+  }
 }

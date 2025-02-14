@@ -24,50 +24,49 @@ export type TLink = {
 
 const HeroCard = ({ hero }: { hero: THero }) => {
   return (
-    <>
-      <Box sx={{ position: 'relative', width: '100%' }}>
-        <GlassCard className={cn(styles.section, styles.mainInfoContainer)}>
-          <Box
-            sx={{
-              borderRadius: 15,
-            }}
-          >
-            {!!hero.coverImageUrl && (
-              <Image
-                src={hero.coverImageUrl}
-                alt={hero.title}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: '300px', height: 'auto', borderRadius: 15 }}
-              />
-            )}
-          </Box>
-          <Stack flex={1} position="relative">
-            <Typography variant="h4" fontWeight="bold">
-              {hero.title}
-            </Typography>
-            <Divider sx={{ margin: '16px 0', background: 'var(--accent)' }} />
+    <Box sx={{ position: 'relative', width: '100%' }}>
+      <GlassCard className={cn(styles.section, styles.mainInfoContainer)}>
+        <Box
+          sx={{
+            borderRadius: 15,
+          }}
+        >
+          {!!hero.coverImageUrl && (
+            <Image
+              src={hero.coverImageUrl}
+              alt={hero.title}
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ height: 'auto', borderRadius: 15 }}
+            />
+          )}
+        </Box>
+        <Stack flex={1} position="relative">
+          <Typography variant="h4" fontWeight="bold">
+            {hero.title}
+          </Typography>
+          <Divider sx={{ margin: '16px 0', background: 'var(--accent)' }} />
 
-            <Stack spacing={1}>
-              <InfoItem label="About" data={hero.about} />
+          <Stack spacing={1}>
+            <InfoItem label="About" data={hero.about} />
 
-              <InfoItem
-                label="Links"
-                data={hero.links?.map((link) => (
-                  <Link key={link.url} href={link.url} target="_blank">
-                    <Grid2 container alignItems="center" gap={1}>
-                      <link.icon width={30} height={30} />
-                      <Typography fontWeight="bold">{link.title}</Typography>
-                    </Grid2>
-                  </Link>
-                ))}
-              />
-            </Stack>
+            <InfoItem
+              label="Links"
+              withDivider={false}
+              data={hero.links?.map((link) => (
+                <Link key={link.url} href={link.url} target="_blank">
+                  <Grid2 container alignItems="center" gap={1}>
+                    <link.icon width={30} height={30} />
+                    <Typography fontWeight="bold">{link.title}</Typography>
+                  </Grid2>
+                </Link>
+              ))}
+            />
           </Stack>
-        </GlassCard>
-      </Box>
-    </>
+        </Stack>
+      </GlassCard>
+    </Box>
   )
 }
 

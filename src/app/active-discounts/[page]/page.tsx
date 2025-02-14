@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { GameDiscountsFilters } from '@/components/game-discounts-filters'
 import { GamesDiscountsList } from '@/components/games-discounts-list'
 import { Container } from '@/components/ui/container'
+import { Loader } from '@/components/ui/loader'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
@@ -36,7 +37,7 @@ const Discounts = async ({
   return (
     <Container gap={{ xs: 2, md: 5 }}>
       <GameDiscountsFilters />
-      <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<div>Loading...</div>}>
+      <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<Loader />}>
         <GamesDiscountsList
           query={query}
           page={+page}

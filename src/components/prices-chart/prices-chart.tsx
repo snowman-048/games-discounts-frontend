@@ -3,7 +3,6 @@
 import { useMemo } from 'react'
 
 import moment from 'moment'
-import dynamic from 'next/dynamic'
 import {
   CartesianGrid,
   Line,
@@ -33,7 +32,7 @@ type TChartData = {
   lineColor: string
 }[]
 
-const PricesChartComponent = ({ game, lines, height = 300 }: TProps) => {
+const PricesChart = ({ game, lines, height = 300 }: TProps) => {
   const commonRegion = useMemo(() => lines?.[0]?.priceHistory?.[0]?.region, [lines])
 
   const formattedLines: TChartData = useMemo(() => {
@@ -150,9 +149,5 @@ const PricesChartComponent = ({ game, lines, height = 300 }: TProps) => {
     </ResponsiveContainer>
   )
 }
-
-const PricesChart = dynamic(() => Promise.resolve(PricesChartComponent), {
-  ssr: false,
-})
 
 export { PricesChart }

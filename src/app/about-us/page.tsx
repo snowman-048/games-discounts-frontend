@@ -13,7 +13,28 @@ import styles from './styles.module.scss'
 
 const heroes: THero[] = [
   {
-    coverImageUrl: '/assets/images/1694426860488.jpeg',
+    coverImageUrl: '/assets/images/snowman.jpeg',
+    title: 'Vlad Haiduk',
+    about: `I've been gaming since childhood, hopping between PCs and consoles like a kid in a candy store — except the candy is expensive, and a kid has no money for all the games in the world.
+      That’s why we built this site: to help fellow gamers score the best deals without resorting to selling a kidney (for now — remember, game development is becoming more expensive).
+      If you see a deal that looks too good to be true, don’t worry — it’s not a glitch... probably.
+      When I’m not buried in code (which doesn’t happen often), I’m either exploring new games, refining this site, or traveling while pretending my backlog doesn’t exist.
+      `,
+    links: [
+      {
+        url: `https://www.linkedin.com/in/vlad-gayduk-2ab37519a/`,
+        icon: LinkedInIcon,
+        title: 'LinkedIn',
+      },
+      {
+        url: `https://www.instagram.com/_vlad_gayduk_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==`,
+        icon: InstagramIcon,
+        title: 'Instagram',
+      },
+    ],
+  },
+  {
+    coverImageUrl: '/assets/images/hyena-ruz.jpeg',
     title: 'Novruz Babaiev',
     about: `Novruz is a programmer and a dedicated gamer who grew up playing on 8-bit consoles and has
             been passionate about video games since childhood. Over time, his love for gaming evolved 
@@ -28,26 +49,6 @@ const heroes: THero[] = [
       },
       {
         url: `https://www.instagram.com/hyena.ruz?igsh=eW13ZjB5OGlhdXNk`,
-        icon: InstagramIcon,
-        title: 'Instagram',
-      },
-    ],
-  },
-  {
-    coverImageUrl: '/assets/images/1666104941508.jpeg',
-    title: 'Vlad Gayduk',
-    about: ` Мы создали этот сервис, чтобы помочь геймерам находить лучшие скидки на игры из разных
-            магазинов. Наш сайт агрегирует данные с платформ, таких как PlayStation Store, Nintendo
-            eShop, Xbox и других, предоставляя удобный способ сравнения цен, отслеживания скидок и
-            анализа ценовой истории.`,
-    links: [
-      {
-        url: `https://www.linkedin.com/in/vlad-gayduk-2ab37519a/`,
-        icon: LinkedInIcon,
-        title: 'LinkedIn',
-      },
-      {
-        url: `https://www.instagram.com/_vlad_gayduk_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==`,
         icon: InstagramIcon,
         title: 'Instagram',
       },
@@ -70,9 +71,9 @@ export const metadata: Metadata = {
 
 const AboutUs = async () => {
   return (
-    <Container gap={5} paddingBottom={5}>
+    <Container gap={{ xs: 2, md: 4 }} paddingBottom={5}>
       <GlassCard className={styles.section}>
-        <Stack>
+        <Stack gap={2}>
           <SectionTitle title="About Us" />
           <Typography variant="body1">
             We created this service to help gamers find the best discounts from various stores. Our
@@ -83,10 +84,10 @@ const AboutUs = async () => {
             We strive to make our service as user-friendly, informative, and useful as possible.
             With flexible filters, price change graphs, and game tracking features, users can easily
             make informed purchasing decisions.
-            <br /> <br />
+            {/* <br /> <br />
             Our project is supported by advertisements, which help us maintain the website and add
             new features. If you enjoy our service, we would appreciate it if you disable your ad
-            blocker – this allows us to grow and continue providing up-to-date discount data.
+            blocker – this allows us to grow and continue providing up-to-date discount data. */}
             <br /> <br />
             Our team is constantly working on improving functionality and adding new features. If
             you have any suggestions or ideas, we would love to hear your feedback!
@@ -94,7 +95,7 @@ const AboutUs = async () => {
         </Stack>
       </GlassCard>
       <GlassCard className={styles.section}>
-        <Stack spacing={5}>
+        <Stack spacing={3}>
           <SectionTitle title="Meet the team" />
           {heroes.map((hero) => (
             <HeroCard hero={hero} />
