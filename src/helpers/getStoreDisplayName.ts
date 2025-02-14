@@ -3,7 +3,7 @@ import { EStore } from '@/enums/store.enum'
 
 const STORE_TO_STORE_NAME = {
   [EStore.PSN]: {
-    full: 'PlayStation store',
+    full: 'PlayStation Store',
     short: 'PlayStation',
   },
   [EPriceHistoryMetaType.PS_PLUS]: {
@@ -15,7 +15,7 @@ const STORE_TO_STORE_NAME = {
     short: 'Nintendo',
   },
   [EStore.XBOX]: {
-    full: 'Xbox store',
+    full: 'Xbox Store',
     short: 'Xbox',
   },
 }

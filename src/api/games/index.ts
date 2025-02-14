@@ -17,4 +17,6 @@ const getGameById = async ({
 }: TGetGameParams & { id: number; storeIds?: string[] }) =>
   api.get<TGame | null>(`${BASE_URL}/${id}/${createQueryString(params)}`)
 
-export { getGamesList, getGameById }
+const getGamesDataForSitemap = () => api.get<{ id: number; title: string }[]>(`${BASE_URL}/sitemap`)
+
+export { getGamesList, getGameById, getGamesDataForSitemap }

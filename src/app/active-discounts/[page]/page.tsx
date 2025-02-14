@@ -1,10 +1,27 @@
 import { Suspense } from 'react'
 
+import { Metadata } from 'next'
+
 import { GameDiscountsFilters } from '@/components/game-discounts-filters'
 import { GamesDiscountsList } from '@/components/games-discounts-list'
 import { Container } from '@/components/ui/container'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { EPlatform } from '@/enums/platform.enum'
+import { EStore } from '@/enums/store.enum'
 import { TGameSearchParams } from '@/types/game-search.types'
+
+export const metadata: Metadata = {
+  title: 'Active Discounts',
+  keywords: [
+    'discounts',
+    'price',
+    'low',
+    'games',
+    'video games',
+    ...Object.values(EStore),
+    ...Object.values(EPlatform),
+  ],
+}
 
 const Discounts = async ({
   params,

@@ -1,14 +1,35 @@
 import { Suspense } from 'react'
 
 import { Grid2, Stack } from '@mui/material'
+import { Metadata } from 'next'
 
 import { GamesCarousel } from '@/components/games-carousel/games-carousel'
 import { LogoGlitch } from '@/components/logo-glitch'
 import { StoreIcon } from '@/components/store-icon'
 import { Container } from '@/components/ui/container'
 import { EGameSorting } from '@/enums/game-sorting.enum'
+import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
 import { TGameSearchParams } from '@/types/game-search.types'
+
+export const metadata: Metadata = {
+  keywords: [
+    'games price pulse',
+    'discounts',
+    'price',
+    'low',
+    'games',
+    'video games',
+    'home',
+    'lowest',
+    'biggest',
+    'new',
+    'recent',
+    'percent',
+    ...Object.values(EStore),
+    ...Object.values(EPlatform),
+  ],
+}
 
 const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams> }) => {
   const query = await searchParams

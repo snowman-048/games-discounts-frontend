@@ -57,7 +57,7 @@ type TProps = IconButtonProps
 export const PrevButton = ({ children, ...rest }: TProps) => {
   return (
     <GlassCard className={styles.button}>
-      <IconButton {...rest}>
+      <IconButton aria-label="previous-slide" {...rest}>
         <NavigateBeforeIcon />
       </IconButton>
     </GlassCard>
@@ -67,7 +67,7 @@ export const PrevButton = ({ children, ...rest }: TProps) => {
 export const NextButton = ({ children, ...rest }: TProps) => {
   return (
     <GlassCard className={styles.button}>
-      <IconButton {...rest}>
+      <IconButton aria-label="next-slide" {...rest}>
         <NavigateNextIcon />
       </IconButton>
     </GlassCard>

@@ -6,6 +6,7 @@ const NoDataLabel = () => {
       variant="h5"
       fontWeight="bold"
       textAlign="center"
+      component="span"
       sx={{ textTransform: 'uppercase', color: 'var(--text-secondary)' }}
     >
       No Data

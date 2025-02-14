@@ -1,5 +1,6 @@
 import { Box, ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
+import { Metadata } from 'next'
 import { CookiesProvider } from 'next-client-cookies/server'
 import { Roboto } from 'next/font/google'
 
@@ -17,13 +18,22 @@ const roboto = Roboto({
   variable: '--font-roboto',
 })
 
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Games Price Pulse',
+    absolute: 'Games Price Pulse',
+  },
+  description:
+    'Discover the best video game discounts from PlayStation Store, Nintendo eShop, and Xbox. Stay updated with the latest price drops and exclusive deals to save on your favorite games across multiple platforms',
+}
+
 const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) => {
   return (
-    <html>
+    <html lang="en">
       <body className={roboto.variable}>
         <AppRouterCacheProvider>
           <CookiesProvider>

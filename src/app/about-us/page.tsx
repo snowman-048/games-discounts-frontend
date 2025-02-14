@@ -1,6 +1,7 @@
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import { Stack, Typography } from '@mui/material'
+import { Metadata } from 'next'
 
 import { HeroCard } from '@/components/hero-card'
 import { THero } from '@/components/hero-card/hero-card'
@@ -53,6 +54,19 @@ const heroes: THero[] = [
     ],
   },
 ]
+
+export const metadata: Metadata = {
+  title: 'About',
+  keywords: [
+    'about',
+    'company',
+    'people',
+    'goals',
+    'games',
+    'inspiration',
+    ...heroes.map((hero) => hero.title),
+  ],
+}
 
 const AboutUs = async () => {
   return (

@@ -1,9 +1,13 @@
+import { cache } from 'react'
+
 import { Divider, Grid2, Stack, Typography } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
+import { Metadata } from 'next'
 
 import { getGameById } from '@/api/games'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
+import { GameJsonLd } from '@/components/game-json-ld'
 import { ImagesCarousel } from '@/components/images-carousel'
 import { NoDataLabel } from '@/components/no-data-label'
 import { PlatformIcon } from '@/components/platform-icon'
@@ -33,19 +37,75 @@ type TProps = {
 
 const PRICE_ITEM_HEIGHT = 250
 
+const getGameInfoCached = cache(async (gameId: number, params: TGameSearchParams) => {
+  const { data } = await getGameById({ id: +gameId, ...params })
+  return data
+})
+
+export const generateMetadata = async ({ params, searchParams }: TProps): Promise<Metadata> => {
+  const { gameId } = await params
+  const query = await searchParams
+  const game = await getGameInfoCached(+gameId, query)
+
+  if (!game) {
+    return {}
+  }
+
+  const metadata: Metadata = {
+    title: game.title || '',
+  }
+
+  const keywords = [
+    game.title,
+    game.type,
+    game.publisher,
+    ...(game.genres || []),
+    ...(game.platforms || []),
+    ...(game.gameStore?.map((store) => store.store.name) || []),
+    'price',
+    'discount',
+    'reduced',
+    'low',
+    'graph',
+    'description',
+    'publisher',
+    'release',
+    'stores',
+    'platforms',
+    'video game',
+    'statistic',
+    'screenshots',
+  ].filter(Boolean) as string[]
+
+  if (keywords.length) {
+    metadata.keywords = keywords
+  }
+
+  if (game?.coverImageUrl) {
+    metadata.openGraph = {
+      images: [
+        {
+          url: game.coverImageUrl,
+        },
+      ],
+    }
+  }
+  return metadata
+}
+
 const GameInfo = async ({ params, searchParams }: TProps) => {
   const { gameId } = await params
   const query = await searchParams
 
   let game: TGame | null = null
   try {
-    const { data } = await getGameById({ id: +gameId, ...query })
-    game = data
+    game = await getGameInfoCached(+gameId, query)
     game?.priceHistory.sort(
       (a, b) => moment(b.discountEnds).valueOf() - moment(a.discountEnds).valueOf(),
     )
   } catch (err) {
     console.log('Error getting game', (err as any).message)
+    game = null
   }
 
   const storeLinks = game?.gameLinks.reduce(
@@ -62,8 +122,6 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
     },
     {} as Record<EStore, string>,
   )
-
-  console.log('game', game)
 
   if (!game) {
     return <NoDataLabel />
@@ -100,10 +158,11 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 label="Platforms"
                 data={
                   <Grid2 container gap={2}>
-                    {game.platforms?.map((item) => <PlatformIcon platform={item} />)}
+                    {game.platforms?.map((item) => <PlatformIcon platform={item} key={item} />)}
                   </Grid2>
                 }
               />
+              <InfoItem label="Publisher" data={game.publisher} />
               <InfoItem
                 label="Release date"
                 data={game.releaseDate && moment(game.releaseDate).format(DEFAULT_DATE_FORMATTING)}
@@ -123,7 +182,11 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                   <Grid2 container gap={2}>
                     {game.gameStore?.map((item) => {
                       return (
-                        <StoreIcon store={item.store.name} link={storeLinks?.[item.store.name]} />
+                        <StoreIcon
+                          key={item.store.name}
+                          store={item.store.name}
+                          link={storeLinks?.[item.store.name]}
+                        />
                       )
                     })}
                   </Grid2>
@@ -232,6 +295,8 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           </Stack>
         </Stack>
       </GlassCard>
+
+      <GameJsonLd game={game} storeLinks={storeLinks} />
     </Container>
   )
 }

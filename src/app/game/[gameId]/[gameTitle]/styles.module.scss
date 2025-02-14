@@ -37,8 +37,8 @@
 }
 
 .fakeImgWrapper {
-  transform: translateY(var(--img-offset));
-  margin-bottom: calc(var(--img-offset) + var(--section-padding));
+  transform: translateY(calc(var(--img-offset) - var(--section-padding)));
+  margin-bottom: calc(var(--img-offset) - var(--section-padding));
   margin-right: var(--section-padding);
 }
 
