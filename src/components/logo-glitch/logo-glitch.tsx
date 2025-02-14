@@ -9,7 +9,7 @@ const LogoGlitch = () => {
   return (
     <Link href={`/${EAppRoute.ACTIVE_DISCOUNTS}/1`}>
       <Typography variant="h1" fontWeight="bold" className={styles.text}>
-        Games Price Pulse
+        Game Price Pulse
       </Typography>
     </Link>
   )
