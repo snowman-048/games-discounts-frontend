@@ -127,8 +127,6 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
     return <NoDataLabel />
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 3000))
-
   return (
     <Container
       gap={{ xs: 3, md: 5 }}
@@ -183,13 +181,11 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 data={
                   <Grid2 container gap={2}>
                     {game.gameStore?.map((item) => {
-                      return (
-                        <StoreIcon
-                          key={item.store.name}
-                          store={item.store.name}
-                          link={storeLinks?.[item.store.name]}
-                        />
-                      )
+                      const link = storeLinks?.[item.store.name]
+                      if (!link) {
+                        return <></>
+                      }
+                      return <StoreIcon key={item.store.name} store={item.store.name} link={link} />
                     })}
                   </Grid2>
                 }
