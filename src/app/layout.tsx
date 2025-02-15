@@ -1,6 +1,7 @@
 import { Box, ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 import { CookiesProvider } from 'next-client-cookies/server'
 import { Roboto } from 'next/font/google'
@@ -52,6 +53,7 @@ const RootLayout = async ({
         </AppRouterCacheProvider>
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
