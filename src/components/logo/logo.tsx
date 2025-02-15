@@ -8,7 +8,7 @@ import styles from './logo.module.scss'
 const Logo = () => {
   return (
     <Link href={`/${EAppRoute.HOME}`}>
-      <Typography variant="h5" fontWeight="bold" className={styles.link}>
+      <Typography variant="h5" fontWeight="bold" className={styles.link} component="p">
         Game <span className={styles.link__top}>Price</span>
         <span className={styles.link__bottom}>Price</span>{' '}
         <span style={{ color: 'var(--accent)' }}>Pulse</span>

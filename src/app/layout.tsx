@@ -21,11 +21,11 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Games Price Pulse',
-    absolute: 'Games Price Pulse',
+    template: '%s | Game Price Pulse',
+    absolute: 'Game Price Pulse - Best Video Game Discounts and Deals',
   },
   description:
-    'Discover the best video game discounts from PlayStation Store, Nintendo eShop, and Xbox. Stay updated with the latest price drops and exclusive deals to save on your favorite games across multiple platforms',
+    'Discover the best video game discounts from PlayStation, Nintendo, and Xbox. Stay updated on price drops and exclusive deals to save on your favorite games!',
 }
 
 const RootLayout = async ({

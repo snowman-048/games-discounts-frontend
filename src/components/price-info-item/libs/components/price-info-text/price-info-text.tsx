@@ -21,6 +21,7 @@ const PriceInfoText = ({ label, value, valueColor = 'var(--text-primary)' }: TPr
         fontSize={{ xs: '1.15rem', sm: '1.5rem' }}
         fontWeight="bold"
         color={valueColor}
+        component="p"
       >
         {value}
       </Typography>
