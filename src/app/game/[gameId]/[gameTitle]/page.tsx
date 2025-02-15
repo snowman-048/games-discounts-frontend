@@ -149,7 +149,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           />
 
           <Stack flex={1} position="relative">
-            <Typography variant="h4" fontWeight="bold">
+            <Typography variant="h4" fontWeight="bold" component="h2">
               {game.title}
             </Typography>
             <Divider sx={{ margin: '16px 0', background: 'var(--accent)' }} />
