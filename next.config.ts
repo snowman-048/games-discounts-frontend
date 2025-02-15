@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    unoptimized: true,
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule: any) => rule.test?.test?.('.svg'))
