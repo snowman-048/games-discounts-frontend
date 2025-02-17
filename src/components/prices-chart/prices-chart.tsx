@@ -32,19 +32,23 @@ type TChartData = {
   lineColor: string
 }[]
 
+const firstDayOfDataCollection = moment().set({ year: 2025, dayOfYear: 1 }).valueOf() // There is no data before this date
+
 const PricesChart = ({ game, lines, height = 300 }: TProps) => {
   const commonRegion = useMemo(() => lines?.[0]?.priceHistory?.[0]?.region, [lines])
 
   const formattedLines: TChartData = useMemo(() => {
-    const now = moment().utc(true).startOf('day').valueOf()
+    const nowValue = moment().utc(true).startOf('day').valueOf()
+    const endOfTodayDate = moment().utc(true).endOf('day').valueOf()
+    const maxDiscountEndsForActiveDiscounts = moment(endOfTodayDate).toISOString()
     return lines.map((line) => {
       let hasActiveDiscount = false
 
       const formatted = line.priceHistory
         .map((item) => {
           let discountEnds
-          if (moment(item.discountEnds).valueOf() > now) {
-            discountEnds = moment().toISOString()
+          if (moment(item.discountEnds).valueOf() > nowValue) {
+            discountEnds = maxDiscountEndsForActiveDiscounts
             hasActiveDiscount = true
           } else {
             discountEnds = item.discountEnds
@@ -74,9 +78,7 @@ const PricesChart = ({ game, lines, height = 300 }: TProps) => {
         const releaseYear = moment(game.releaseDate).year()
         // All the prices are collected starting from 2025
         const firstEntryDate =
-          releaseYear >= 2025
-            ? moment(game.releaseDate).valueOf()
-            : moment().set({ year: 2025, dayOfYear: 1 }).valueOf()
+          releaseYear >= 2025 ? moment(game.releaseDate).valueOf() : firstDayOfDataCollection
 
         formatted.unshift({
           ...formatted[0],
@@ -88,7 +90,7 @@ const PricesChart = ({ game, lines, height = 300 }: TProps) => {
           formatted.push({
             ...lastItem,
             price: lastItem.historyItem.initialPrice,
-            date: moment().endOf('day').valueOf(),
+            date: endOfTodayDate,
           })
         }
       }
