@@ -8,11 +8,11 @@
   height: fit-content;
   padding: 16px;
   overflow: visible;
+  aspect-ratio: 1;
 
   img {
     width: 300px;
     height: auto;
-    border-radius: 15px;
   }
 }
 
