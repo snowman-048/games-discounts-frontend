@@ -1,5 +1,6 @@
 import { Box, ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
@@ -52,8 +53,15 @@ const RootLayout = async ({
           </CookiesProvider>
         </AppRouterCacheProvider>
 
-        <Analytics />
-        <SpeedInsights />
+        {process.env.NEXT_PUBLIC_NODE_ENV === 'production' && (
+          <>
+            <Analytics />
+            <SpeedInsights />
+            {!!process.env.NEXT_PUBLIC_GTAG && (
+              <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTAG} />
+            )}
+          </>
+        )}
       </body>
     </html>
   )
