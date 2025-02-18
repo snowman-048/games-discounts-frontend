@@ -1,4 +1,4 @@
-import { Grid2, Typography } from '@mui/material'
+import { Box, Grid2, Typography } from '@mui/material'
 import cn from 'classnames'
 import Image from 'next/image'
 
@@ -28,7 +28,9 @@ const GameImgWithBuy = ({ game, storeLinks, className, isFake = false }: TProps)
     >
       <GlassCard className={styles.imgContainer}>
         {!!game.coverImageUrl && (
-          <Image src={game.coverImageUrl} alt={game.title} width={0} height={0} sizes="100vw" />
+          <Box sx={{ overflow: 'hidden', borderRadius: '15px' }}>
+            <Image src={game.coverImageUrl} alt={game.title} width={0} height={0} sizes="100vw" />
+          </Box>
         )}
       </GlassCard>
 

@@ -21,6 +21,7 @@ import { InfoItem } from '@/components/ui/info-item'
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
+import { createGameLinks } from '@/helpers/createGameLinks'
 import { getStoreColor } from '@/helpers/getStoreColor'
 import { makeFirstLetterUpper } from '@/helpers/makeFirstLetterUpper'
 import { TGameSearchParams } from '@/types/game-search.types'
@@ -108,24 +109,11 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
     game = null
   }
 
-  const storeLinks = game?.gameLinks.reduce(
-    (acc, item) => {
-      const storeName = game.gameStore?.find((gameStore) => gameStore.store.id === item.storeId)
-        ?.store.name
-      if (!storeName) {
-        return acc
-      }
-      if (!acc[storeName]) {
-        acc[storeName] = item.url
-      }
-      return acc
-    },
-    {} as Record<EStore, string>,
-  )
-
   if (!game) {
     return <NoDataLabel />
   }
+
+  const storeLinks = createGameLinks(game)
 
   return (
     <Container
