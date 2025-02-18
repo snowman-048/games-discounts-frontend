@@ -38,6 +38,16 @@ const RootLayout = async ({
   return (
     <html lang="en">
       <body className={roboto.variable}>
+        {process.env.NEXT_PUBLIC_NODE_ENV === 'production' && (
+          <>
+            <Analytics />
+            <SpeedInsights />
+            {!!process.env.NEXT_PUBLIC_GTAG && (
+              <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTAG} />
+            )}
+          </>
+        )}
+
         <AppRouterCacheProvider>
           <CookiesProvider>
             <ThemeProvider theme={theme} defaultMode="dark">
@@ -52,16 +62,6 @@ const RootLayout = async ({
             </ThemeProvider>
           </CookiesProvider>
         </AppRouterCacheProvider>
-
-        {process.env.NEXT_PUBLIC_NODE_ENV === 'production' && (
-          <>
-            <Analytics />
-            <SpeedInsights />
-            {!!process.env.NEXT_PUBLIC_GTAG && (
-              <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTAG} />
-            )}
-          </>
-        )}
       </body>
     </html>
   )
