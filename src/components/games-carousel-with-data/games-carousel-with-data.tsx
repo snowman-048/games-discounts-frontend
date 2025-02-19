@@ -22,7 +22,7 @@ type TProps = {
   query: TGameSearchParams
 }
 
-const GamesCarousel = async ({ title, query }: TProps) => {
+const GamesCarouselWithData = async ({ title, query }: TProps) => {
   let games: TGame[] = []
 
   try {
@@ -51,8 +51,8 @@ const GamesCarousel = async ({ title, query }: TProps) => {
             showCounter={false}
             buttonsPosition="sides"
             slides={games.map((game) => (
-              <Grid2 width="240px" height="100%">
-                <GameDiscountCard game={game} key={game.id} />
+              <Grid2 width="240px" height="100%" key={game.id}>
+                <GameDiscountCard game={game} />
               </Grid2>
             ))}
           />
@@ -77,4 +77,4 @@ const GamesCarousel = async ({ title, query }: TProps) => {
   )
 }
 
-export { GamesCarousel }
+export { GamesCarouselWithData }

@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
 
-import { GamesCarousel } from '@/components/games-carousel/games-carousel'
+import { GamesCarouselWithData } from '@/components/games-carousel-with-data'
 import { LogoGlitch } from '@/components/logo-glitch'
 import { StoreIcon } from '@/components/store-icon'
 import { Container } from '@/components/ui/container'
@@ -40,7 +40,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
 
       <Stack width="100%" marginTop={3} gap={{ xs: 2, sm: 5 }}>
         <Suspense>
-          <GamesCarousel
+          <GamesCarouselWithData
             title="Biggest Discounts"
             query={{
               ...query,
@@ -50,7 +50,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
         </Suspense>
 
         <Suspense>
-          <GamesCarousel
+          <GamesCarouselWithData
             title={
               <Grid2
                 container
@@ -74,7 +74,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
         </Suspense>
 
         <Suspense>
-          <GamesCarousel
+          <GamesCarouselWithData
             title={
               <Grid2
                 container
@@ -98,7 +98,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
         </Suspense>
 
         <Suspense>
-          <GamesCarousel
+          <GamesCarouselWithData
             title={
               <Grid2
                 container

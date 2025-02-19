@@ -5,7 +5,8 @@ import cn from 'classnames'
 import moment from 'moment'
 import { Metadata } from 'next'
 
-import { getGameById } from '@/api/games'
+import { getGameById, getGameFamilyByGameId } from '@/api/games'
+import { GameDiscountCard } from '@/components/game-discount-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
 import { GameJsonLd } from '@/components/game-json-ld'
 import { ImagesCarousel } from '@/components/images-carousel'
@@ -16,6 +17,7 @@ import { TLineConfig } from '@/components/prices-chart/libs/types/line-config.ty
 import { SectionTitle } from '@/components/section-title'
 import { StoreIcon } from '@/components/store-icon'
 import { GlassCard } from '@/components/ui/cards/glass-card'
+import { Carousel } from '@/components/ui/carousel'
 import { Container } from '@/components/ui/container'
 import { InfoItem } from '@/components/ui/info-item'
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
@@ -24,6 +26,7 @@ import { EStore } from '@/enums/store.enum'
 import { createGameLinks } from '@/helpers/createGameLinks'
 import { getStoreColor } from '@/helpers/getStoreColor'
 import { makeFirstLetterUpper } from '@/helpers/makeFirstLetterUpper'
+import { TFamilyKey } from '@/types/family-key.type'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 import { TPriceHistory } from '@/types/price-history.types'
@@ -99,8 +102,14 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
   const query = await searchParams
 
   let game: TGame | null = null
+  let gameFamily: TFamilyKey[] | null = null
   try {
-    game = await getGameInfoCached(+gameId, query)
+    const [receivedGame, { data: receivedGameFamily }] = await Promise.all([
+      getGameInfoCached(+gameId, query),
+      getGameFamilyByGameId({ id: +gameId, ...query }),
+    ])
+    game = receivedGame
+    gameFamily = receivedGameFamily
     game?.priceHistory.sort(
       (a, b) => moment(b.discountEnds).valueOf() - moment(a.discountEnds).valueOf(),
     )
@@ -261,6 +270,24 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           })}
         </Grid2>
       </Grid2>
+
+      {!!gameFamily?.length && (
+        <GlassCard className={styles.section}>
+          <Stack gap={2} width="100%">
+            <SectionTitle title="Related items" />
+
+            <Carousel
+              loop
+              align="center"
+              slides={gameFamily.map((item) => (
+                <Grid2 width="240px" height="100%" key={item.game.id}>
+                  <GameDiscountCard game={item.game} />
+                </Grid2>
+              ))}
+            />
+          </Stack>
+        </GlassCard>
+      )}
 
       <GlassCard className={styles.section}>
         <Stack spacing={3} width="100%">
