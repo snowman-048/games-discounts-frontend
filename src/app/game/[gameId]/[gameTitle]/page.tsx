@@ -101,6 +101,10 @@ export const generateMetadata = async ({ params, searchParams }: TProps): Promis
       ],
     }
   }
+
+  if (game.description) {
+    metadata.description = game.description
+  }
   return metadata
 }
 

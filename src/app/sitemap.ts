@@ -5,7 +5,7 @@ import { getGamesDataForSitemap } from '@/api/games'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
 
-const SYNC_ONCE_IN_HOURS = 36
+const SYNC_ONCE_IN_HOURS = 168
 
 let gamesSitemap: MetadataRoute.Sitemap = []
 let lastSynced = 0

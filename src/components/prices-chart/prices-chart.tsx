@@ -32,44 +32,43 @@ type TChartData = {
   lineColor: string
 }[]
 
-const firstDayOfDataCollection = moment().set({ year: 2025, dayOfYear: 1 }).valueOf() // There is no data before this date
+const getClearDate = (date?: number | string) =>
+  moment(date).utc().set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).valueOf()
+
+const firstDayOfDataCollection = getClearDate(moment().set({ year: 2025, dayOfYear: 1 }).valueOf()) // There is no data before this date
 
 const PricesChart = ({ game, lines, height = 300 }: TProps) => {
   const commonRegion = useMemo(() => lines?.[0]?.priceHistory?.[0]?.region, [lines])
 
   const formattedLines: TChartData = useMemo(() => {
-    const nowValue = moment().utc(true).startOf('day').valueOf()
-    const endOfTodayDate = moment().utc(true).endOf('day').valueOf()
-    const maxDiscountEndsForActiveDiscounts = moment(endOfTodayDate).toISOString()
+    const endOfToday = getClearDate(moment().utc(true).endOf('day').valueOf())
     return lines.map((line) => {
       let hasActiveDiscount = false
 
       const formatted = line.priceHistory
-        .map((item) => {
-          let discountEnds
-          if (moment(item.discountEnds).valueOf() > nowValue) {
-            discountEnds = maxDiscountEndsForActiveDiscounts
+        .flatMap((item) => {
+          const discountEndsValue = getClearDate(item.discountEnds)
+          let discountEnds = discountEndsValue
+          if (discountEnds >= endOfToday) {
+            discountEnds = endOfToday
             hasActiveDiscount = true
-          } else {
-            discountEnds = item.discountEnds
           }
           const region = item.region
           return [
             {
-              date: moment(item.discountStarts).utc(true).valueOf(),
+              date: getClearDate(item.discountStarts),
               price: item.initialPrice,
               region,
               historyItem: item,
             },
             {
-              date: moment(discountEnds).utc(true).valueOf(),
+              date: discountEnds,
               price: item.discountedPrice,
               region,
               historyItem: item,
             },
           ]
         })
-        .flat()
         .sort(
           (a, b) => moment(a.date).valueOf() - moment(b.date).valueOf(), // ASC
         )
@@ -85,12 +84,12 @@ const PricesChart = ({ game, lines, height = 300 }: TProps) => {
           date: firstEntryDate,
         })
 
-        const lastItem = formatted[formatted.length - 1]
         if (!hasActiveDiscount) {
+          const lastItem = formatted[formatted.length - 1]
           formatted.push({
             ...lastItem,
             price: lastItem.historyItem.initialPrice,
-            date: endOfTodayDate,
+            date: endOfToday,
           })
         }
       }
