@@ -7,7 +7,8 @@ const NoDataLabel = () => {
       fontWeight="bold"
       textAlign="center"
       component="span"
-      sx={{ textTransform: 'uppercase', color: 'var(--text-secondary)' }}
+      display="block"
+      sx={{ textTransform: 'uppercase', color: 'var(--text-secondary)', width: '100%' }}
     >
       No Data
     </Typography>

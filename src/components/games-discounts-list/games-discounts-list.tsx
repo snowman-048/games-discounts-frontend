@@ -5,7 +5,7 @@ import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
-import { GameDiscountCard } from '../game-discount-card'
+import { GameCard } from '../game-card'
 import { NoDataLabel } from '../no-data-label'
 import { Pagination } from '../pagination'
 import styles from './styles.module.scss'
@@ -47,7 +47,7 @@ const GamesDiscountsList = async ({ page, paginationPath, query }: TProps) => {
     >
       <Grid2 display="grid" width="100%" className={styles.list} gap={{ xs: 2, md: 2.5 }}>
         {games.map((game) => (
-          <GameDiscountCard game={game} key={game.id} />
+          <GameCard game={game} key={game.id} />
         ))}
       </Grid2>
 

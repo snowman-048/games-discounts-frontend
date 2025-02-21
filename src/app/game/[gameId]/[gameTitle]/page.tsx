@@ -1,11 +1,12 @@
 import { cache } from 'react'
 
-import { Divider, Grid2, Stack, Typography } from '@mui/material'
+import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
 import { Metadata } from 'next'
 
-import { getGameById } from '@/api/games'
+import { getGameById, getGameFamilyByGameId } from '@/api/games'
+import { GameCard } from '@/components/game-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
 import { GameJsonLd } from '@/components/game-json-ld'
 import { ImagesCarousel } from '@/components/images-carousel'
@@ -16,6 +17,7 @@ import { TLineConfig } from '@/components/prices-chart/libs/types/line-config.ty
 import { SectionTitle } from '@/components/section-title'
 import { StoreIcon } from '@/components/store-icon'
 import { GlassCard } from '@/components/ui/cards/glass-card'
+import { Carousel } from '@/components/ui/carousel'
 import { Container } from '@/components/ui/container'
 import { InfoItem } from '@/components/ui/info-item'
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
@@ -24,6 +26,7 @@ import { EStore } from '@/enums/store.enum'
 import { createGameLinks } from '@/helpers/createGameLinks'
 import { getStoreColor } from '@/helpers/getStoreColor'
 import { makeFirstLetterUpper } from '@/helpers/makeFirstLetterUpper'
+import { TFamilyKey } from '@/types/family-key.type'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 import { TPriceHistory } from '@/types/price-history.types'
@@ -37,6 +40,13 @@ type TProps = {
 }
 
 const PRICE_ITEM_HEIGHT = 250
+
+const RELATED_ITEMS_CAROUSEL_WIDTH = 1318
+const RELATED_ITEMS_GAP = 24
+const RELATED_ITEMS_COUNT = 5
+const RELATED_ITEM_WIDTH =
+  (RELATED_ITEMS_CAROUSEL_WIDTH - RELATED_ITEMS_GAP * (RELATED_ITEMS_COUNT - 1)) /
+  RELATED_ITEMS_COUNT
 
 const getGameInfoCached = cache(async (gameId: number, params: TGameSearchParams) => {
   const { data } = await getGameById({ id: +gameId, ...params })
@@ -103,9 +113,16 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
   const query = await searchParams
 
   let game: TGame | null = null
+  let gameFamily: TFamilyKey[] | null = null
   try {
-    game = await getGameInfoCached(+gameId, query)
-    game?.priceHistory.sort(
+    const [receivedGame, { data: receivedGameFamily }] = await Promise.all([
+      getGameInfoCached(+gameId, query),
+      getGameFamilyByGameId({ id: +gameId, ...query }),
+    ])
+
+    game = receivedGame
+    gameFamily = receivedGameFamily
+    game?.priceHistory?.sort(
       (a, b) => moment(b.discountEnds).valueOf() - moment(a.discountEnds).valueOf(),
     )
   } catch (err) {
@@ -265,6 +282,23 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           })}
         </Grid2>
       </Grid2>
+
+      {!!gameFamily?.length && (
+        <GlassCard className={styles.section}>
+          <Stack gap={2} width="100%">
+            <SectionTitle title="Related items" />
+
+            <Carousel
+              align="center"
+              slides={gameFamily.map((item) => (
+                <Grid2 width={`${RELATED_ITEM_WIDTH}px`} height="100%" key={item.game.id}>
+                  <GameCard game={item.game} noShadow />
+                </Grid2>
+              ))}
+            />
+          </Stack>
+        </GlassCard>
+      )}
 
       <GlassCard className={styles.section}>
         <Stack spacing={3} width="100%">
