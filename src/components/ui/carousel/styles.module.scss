@@ -14,11 +14,11 @@
   flex-direction: column;
   gap: 16px;
   min-width: 100%;
+  overflow-x: hidden;
 }
 
 .viewport {
   min-width: 100%;
-  overflow: hidden;
   position: relative;
 }
 

@@ -1,12 +1,12 @@
 import { cache } from 'react'
 
-import { Divider, Grid2, Stack, Typography } from '@mui/material'
+import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
 import { Metadata } from 'next'
 
 import { getGameById, getGameFamilyByGameId } from '@/api/games'
-import { GameDiscountCard } from '@/components/game-discount-card'
+import { GameCard } from '@/components/game-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
 import { GameJsonLd } from '@/components/game-json-ld'
 import { ImagesCarousel } from '@/components/images-carousel'
@@ -40,6 +40,13 @@ type TProps = {
 }
 
 const PRICE_ITEM_HEIGHT = 250
+
+const RELATED_ITEMS_CAROUSEL_WIDTH = 1318
+const RELATED_ITEMS_GAP = 24
+const RELATED_ITEMS_COUNT = 5
+const RELATED_ITEM_WIDTH =
+  (RELATED_ITEMS_CAROUSEL_WIDTH - RELATED_ITEMS_GAP * (RELATED_ITEMS_COUNT - 1)) /
+  RELATED_ITEMS_COUNT
 
 const getGameInfoCached = cache(async (gameId: number, params: TGameSearchParams) => {
   const { data } = await getGameById({ id: +gameId, ...params })
@@ -108,9 +115,10 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
       getGameInfoCached(+gameId, query),
       getGameFamilyByGameId({ id: +gameId, ...query }),
     ])
+
     game = receivedGame
     gameFamily = receivedGameFamily
-    game?.priceHistory.sort(
+    game?.priceHistory?.sort(
       (a, b) => moment(b.discountEnds).valueOf() - moment(a.discountEnds).valueOf(),
     )
   } catch (err) {
@@ -277,11 +285,10 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
             <SectionTitle title="Related items" />
 
             <Carousel
-              loop
               align="center"
               slides={gameFamily.map((item) => (
-                <Grid2 width="240px" height="100%" key={item.game.id}>
-                  <GameDiscountCard game={item.game} />
+                <Grid2 width={`${RELATED_ITEM_WIDTH}px`} height="100%" key={item.game.id}>
+                  <GameCard game={item.game} noShadow />
                 </Grid2>
               ))}
             />

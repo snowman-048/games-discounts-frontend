@@ -10,7 +10,7 @@ import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
-import { GameDiscountCard } from '../game-discount-card'
+import { GameCard } from '../game-card'
 import { SectionTitle } from '../section-title'
 import { GlassCard } from '../ui/cards/glass-card'
 import { Carousel } from '../ui/carousel'
@@ -52,7 +52,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
             buttonsPosition="sides"
             slides={games.map((game) => (
               <Grid2 width="240px" height="100%" key={game.id}>
-                <GameDiscountCard game={game} />
+                <GameCard game={game} />
               </Grid2>
             ))}
           />
