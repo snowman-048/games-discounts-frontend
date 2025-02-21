@@ -11,6 +11,8 @@ type TProps = {
 }
 
 const DiscountInfo = ({ discount }: TProps) => {
+  const isDiscountActive = moment(discount.discountEnds).diff(moment(), 'seconds') > 0
+
   return (
     <GlassCard
       style={{
@@ -28,32 +30,36 @@ const DiscountInfo = ({ discount }: TProps) => {
       >
         <StoreIcon
           store={discount.meta?.type || discount.store.name}
-          customLabel={`-${discount.discountPercentage}%`}
+          customLabel={isDiscountActive ? `-${discount.discountPercentage}%` : ''}
         />
         <Stack alignItems="flex-end">
           <Grid2 container gap={1}>
             <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ textDecoration: 'line-through' }}
+              variant={isDiscountActive ? 'body2' : 'body1'}
+              color={isDiscountActive ? 'text.secondary' : 'text.primary'}
+              sx={{ textDecoration: isDiscountActive ? 'line-through' : 'none' }}
             >
               {discount.region.currencySymbol}
               {discount.initialPrice}
             </Typography>
-            <Typography variant="body2" color="text.primary">
-              {discount.region.currencySymbol}
-              {discount.discountedPrice}
-            </Typography>
+            {isDiscountActive && (
+              <Typography variant="body2" color="text.primary">
+                {discount.region.currencySymbol}
+                {discount.discountedPrice}
+              </Typography>
+            )}
           </Grid2>
-          <Typography variant="caption" lineHeight={1.5} color="text.secondary">
-            Ends in{' '}
-            {moment
-              .duration(
-                moment(discount.discountEnds).utc(true).endOf('day').valueOf() -
-                  moment().utc(true).startOf('day').valueOf(),
-              )
-              .humanize()}
-          </Typography>
+          {isDiscountActive && (
+            <Typography variant="caption" lineHeight={1.5} color="text.secondary">
+              Ends in{' '}
+              {moment
+                .duration(
+                  moment(discount.discountEnds).utc(true).endOf('day').valueOf() -
+                    moment().utc(true).startOf('day').valueOf(),
+                )
+                .humanize()}
+            </Typography>
+          )}
         </Stack>
       </Grid2>
     </GlassCard>

@@ -1,4 +1,5 @@
 import { Grid2, Stack, Typography } from '@mui/material'
+import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -14,17 +15,19 @@ import styles from './styles.module.scss'
 
 type TProps = {
   game: TGame
+  noShadow?: boolean
 }
 
-const GameDiscountCard = ({ game }: TProps) => {
+const GameCard = ({ game, noShadow }: TProps) => {
   const getColor = (item: TPriceHistory) => {
     return getStoreColor(item.meta?.type || item.store.name)
   }
 
-  const glow =
-    game.priceHistory.length === 1
+  const glow = game.priceHistory
+    ? game.priceHistory.length === 1
       ? getColor(game.priceHistory[0])
       : `linear-gradient(180deg, ${game.priceHistory.map((item, index) => `${getColor(item)} ${Math.floor(((index + 1) / game.priceHistory.length) * 100)}%`).join(', ')})`
+    : 'none'
 
   return (
     <Link
@@ -36,7 +39,7 @@ const GameDiscountCard = ({ game }: TProps) => {
         } as any
       }
     >
-      <GlassCard className={styles.card}>
+      <GlassCard className={cn(styles.card, { [styles.noShadow]: noShadow })}>
         <Grid2
           container
           flexDirection="column"
@@ -93,9 +96,7 @@ const GameDiscountCard = ({ game }: TProps) => {
               {game.title}
             </Typography>
             <Stack spacing={1} marginTop={1} width="100%">
-              {game.priceHistory.map((item) => (
-                <DiscountInfo discount={item} key={item.id} />
-              ))}
+              {game.priceHistory?.map((item) => <DiscountInfo discount={item} key={item.id} />)}
             </Stack>
           </Grid2>
         </Grid2>
@@ -104,4 +105,4 @@ const GameDiscountCard = ({ game }: TProps) => {
   )
 }
 
-export { GameDiscountCard }
+export { GameCard }
