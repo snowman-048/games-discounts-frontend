@@ -17,6 +17,11 @@ const SYMBOLS_TO_REMOVE = [
   '@',
   '.',
   ',',
+  '\\',
+  '/',
+  '?',
+  ':',
+  ';',
 ]
 
 const getGameTitleForLink = (title: string) =>
