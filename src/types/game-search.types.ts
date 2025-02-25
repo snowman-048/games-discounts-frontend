@@ -13,6 +13,7 @@ type TGameSearchParams = TGetGameParams & {
   sort?: EGameSorting
   'storeIds[]'?: string[]
   onlySelectedStores?: boolean
+  allGames?: boolean
 }
 
 export type { TGetGameParams, TGameSearchParams }

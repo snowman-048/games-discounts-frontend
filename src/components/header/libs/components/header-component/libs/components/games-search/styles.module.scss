@@ -1,0 +1,37 @@
+.gamesContainer {
+  position: fixed;
+  overflow-y: auto;
+  overflow-x: visible !important;
+  z-index: 1400;
+}
+
+.paper {
+  > * {
+    padding: 0 40px;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .gamesContainer {
+    width: 100vw !important;
+    max-width: 70vw;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .gamesContainer {
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .paper {
+    > * {
+      padding: 0 24px;
+    }
+
+    :global(.store-display-name-in-chip) {
+      display: none;
+    }
+  }
+}

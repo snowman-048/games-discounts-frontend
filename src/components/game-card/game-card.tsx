@@ -1,4 +1,4 @@
-import { Grid2, Stack, Typography } from '@mui/material'
+import { Box, Grid2, Stack, Typography } from '@mui/material'
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,9 +16,12 @@ import styles from './styles.module.scss'
 type TProps = {
   game: TGame
   noShadow?: boolean
+  variant?: 'card' | 'list-item'
+  onClick?: () => void
+  className?: string
 }
 
-const GameCard = ({ game, noShadow }: TProps) => {
+const GameCard = ({ game, variant = 'card', onClick, className, noShadow }: TProps) => {
   const getColor = (item: TPriceHistory) => {
     return getStoreColor(item.meta?.type || item.store.name)
   }
@@ -32,42 +35,53 @@ const GameCard = ({ game, noShadow }: TProps) => {
   return (
     <Link
       href={`/${EAppRoute.GAME}/${game.id}/${getGameTitleForLink(game.title)}`}
-      className={styles.wrapper}
+      className={cn(styles.wrapper, className)}
       style={
         {
           '--glow': glow,
         } as any
       }
+      onClick={onClick}
     >
-      <GlassCard className={cn(styles.card, { [styles.noShadow]: noShadow })}>
+      <GlassCard className={cn(styles.card, styles[variant], { [styles.noShadow]: noShadow })}>
         <Grid2
           container
-          flexDirection="column"
+          flexWrap="nowrap"
           position="relative"
           height="100%"
           width="100%"
           padding={1}
           gap={1}
+          className={styles.content}
         >
-          <Grid2
-            sx={{
-              aspectRatio: 1,
-              overflow: 'hidden',
-              width: '100%',
-              borderRadius: 3,
-              position: 'relative',
-            }}
-          >
+          <Grid2 className={styles.imageContainer}>
             {!!game.coverImageUrl && (
-              <Image
-                src={game.coverImageUrl}
-                alt={game.title}
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: '100%', height: 'auto' }}
-              />
+              <Box
+                sx={{
+                  aspectRatio: 1,
+                  overflow: 'hidden',
+                  borderRadius: '12px',
+                }}
+              >
+                <Image
+                  src={game.coverImageUrl}
+                  alt={game.title}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  className={styles.image}
+                />
+              </Box>
             )}
+            <Typography
+              color="accent.main"
+              fontWeight="bold"
+              className={styles.gameType}
+              letterSpacing={4}
+              textAlign="center"
+            >
+              {game.type.toUpperCase()}
+            </Typography>
           </Grid2>
           <Grid2
             flex={1}
@@ -76,27 +90,13 @@ const GameCard = ({ game, noShadow }: TProps) => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Typography
-              color="accent.main"
-              fontWeight="bold"
-              variant="body1"
-              letterSpacing={4}
-              textAlign="center"
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                background: 'rgba(0,0,0,0.6)',
-              }}
-            >
-              {game.type.toUpperCase()}
-            </Typography>
             <Typography color="text.primary" fontWeight="bold" variant="body2" textAlign="center">
               {game.title}
             </Typography>
-            <Stack spacing={1} marginTop={1} width="100%">
-              {game.priceHistory?.map((item) => <DiscountInfo discount={item} key={item.id} />)}
+            <Stack gap={1} marginTop={1} width="100%">
+              {game.priceHistory?.map((item) => (
+                <DiscountInfo discount={item} withStoreLabel={true} key={item.id} />
+              ))}
             </Stack>
           </Grid2>
         </Grid2>

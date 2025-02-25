@@ -53,9 +53,18 @@ const StoreIcon = ({ store, link, withLabel = true, customLabel }: TProps) => {
       sx={{ background: config.color, padding: '4px 8px', borderRadius: 1.5 }}
     >
       <config.icon width={24} height={24} fill="#fff" />
-      {withLabel && (
+      {withLabel && store !== EPriceHistoryMetaType.PS_PLUS && (
+        <Typography
+          fontWeight="bold"
+          fontSize={{ xs: '0.8rem', sm: '1rem' }}
+          className="store-display-name-in-chip"
+        >
+          {getStoreDisplayName(store).short}
+        </Typography>
+      )}
+      {!!customLabel && (
         <Typography fontWeight="bold" fontSize={{ xs: '0.8rem', sm: '1rem' }}>
-          {customLabel || getStoreDisplayName(store).short}
+          {customLabel}
         </Typography>
       )}
     </Grid2>
