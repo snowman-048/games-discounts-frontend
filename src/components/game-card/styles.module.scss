@@ -10,6 +10,59 @@
     &.noShadow {
       box-shadow: none;
     }
+
+    .content {
+      flex-direction: column;
+    }
+
+    .imageContainer {
+      overflow: visible;
+      border-radius: 12px;
+      position: relative !important;
+      aspect-ratio: 1;
+    }
+
+    .image {
+      width: 100%;
+      height: auto;
+    }
+
+    .gameType {
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      left: -8px;
+    }
+
+    &:not(.list-item) {
+      :global(.store-display-name-in-chip) {
+        display: none;
+      }
+    }
+
+    &.list-item {
+      .content {
+        flex-direction: row;
+      }
+
+      .imageContainer {
+        overflow: hidden;
+      }
+
+      .image {
+        width: 135px;
+        height: auto;
+      }
+
+      .gameType {
+        font-size: 12px;
+        top: 0;
+        right: 0;
+        left: 0;
+      }
+    }
   }
 
   &::before {

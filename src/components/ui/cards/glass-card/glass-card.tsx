@@ -1,20 +1,17 @@
-import { CSSProperties, MouseEvent, PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
+import { Box, BoxProps } from '@mui/material'
 import cn from 'classnames'
 
 import styles from './styles.module.scss'
 
-type TProps = PropsWithChildren & {
-  className?: string
-  style?: CSSProperties
-  onClick?: (e: MouseEvent) => void
-}
+type TProps = PropsWithChildren & BoxProps
 
-const GlassCard = ({ children, className, onClick, style }: TProps) => {
+const GlassCard = ({ children, className, ...other }: TProps) => {
   return (
-    <div style={style} className={cn(styles.card, className)} onClick={onClick}>
+    <Box className={cn(styles.card, className)} {...other}>
       {children}
-    </div>
+    </Box>
   )
 }
 

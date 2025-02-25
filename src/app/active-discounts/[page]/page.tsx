@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { Metadata } from 'next'
 
 import { GameDiscountsFilters } from '@/components/game-discounts-filters'
-import { GamesDiscountsList } from '@/components/games-discounts-list'
+import { GamesList } from '@/components/games-list'
 import { Container } from '@/components/ui/container'
 import { Loader } from '@/components/ui/loader'
 import { EAppRoute } from '@/enums/app-route.enum'
@@ -24,13 +24,12 @@ export const metadata: Metadata = {
   ],
 }
 
-const Discounts = async ({
-  params,
-  searchParams,
-}: {
+type Tprops = {
   params: Promise<{ page: string }>
   searchParams: Promise<TGameSearchParams>
-}) => {
+}
+
+const Discounts = async ({ params, searchParams }: Tprops) => {
   const { page } = await params
   const query = await searchParams
 
@@ -38,11 +37,7 @@ const Discounts = async ({
     <Container gap={{ xs: 2, md: 5 }}>
       <GameDiscountsFilters />
       <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<Loader />}>
-        <GamesDiscountsList
-          query={query}
-          page={+page}
-          paginationPath={EAppRoute.ACTIVE_DISCOUNTS}
-        />
+        <GamesList query={query} page={+page} paginationPath={EAppRoute.ACTIVE_DISCOUNTS} />
       </Suspense>
     </Container>
   )

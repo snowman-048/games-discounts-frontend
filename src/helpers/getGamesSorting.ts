@@ -1,4 +1,4 @@
-import { gamesSortingOptions } from '@/configs/games-sorting-options.config'
+import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
 import { EGameSorting } from '@/enums/game-sorting.enum'
 import { TSorting } from '@/types/api.types'
 
@@ -25,8 +25,10 @@ const MAPPER: Record<EGameSorting, TSorting> = {
   },
 }
 
-const getGamesSorting = (sorting = EGameSorting.NEWEST) => {
-  return MAPPER[sorting] || MAPPER[gamesSortingOptions[0].value]
+const getGamesSorting = (sorting?: EGameSorting, allGames = false) => {
+  return sorting && MAPPER[sorting]
+    ? MAPPER[sorting]
+    : MAPPER[(allGames ? allGamesSortingOptions : gamesSortingOptions)[0].value]
 }
 
 export { getGamesSorting }

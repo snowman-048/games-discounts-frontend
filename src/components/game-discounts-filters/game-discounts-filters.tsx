@@ -22,7 +22,7 @@ import {
 } from '@mui/material'
 
 import { getStores } from '@/api/stores'
-import { gamesSortingOptions } from '@/configs/games-sorting-options.config'
+import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { EFilter } from '@/enums/filter.enum'
 import { EGameType } from '@/enums/game-type.enum'
@@ -33,7 +33,11 @@ import { TStore } from '@/types/store.types'
 import { GlassCard } from '../ui/cards/glass-card'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
 
-const GameDiscountsFilters = () => {
+type TProps = {
+  usedForAllGames?: boolean
+}
+
+const GameDiscountsFilters = ({ usedForAllGames = false }: TProps) => {
   const searchParams = useGetAllSearchParams()
 
   const [title, setTitle] = useState<string>((searchParams.title as string) || '')
@@ -45,9 +49,16 @@ const GameDiscountsFilters = () => {
   const defaultStores = useMemo(() => stores.map((item) => `${item.id}`), [stores])
   const onlySelectedStores = searchParams.onlySelectedStores === 'true'
 
+  const sortOptions = usedForAllGames ? allGamesSortingOptions : gamesSortingOptions
+  const sort = searchParams.sort || sortOptions[0].value
+
   const handleFilterChange = (newFilter: Record<string, any>) => {
     // TODO: Handle different routes if needed
-    navigate({ path: `/${EAppRoute.ACTIVE_DISCOUNTS}/1`, query: newFilter, replace: true })
+    navigate({
+      path: `/${usedForAllGames ? EAppRoute.ALL_GAMES : EAppRoute.ACTIVE_DISCOUNTS}/1`,
+      query: newFilter,
+      replace: true,
+    })
   }
 
   useEffect(() => {
@@ -150,9 +161,9 @@ const GameDiscountsFilters = () => {
               handleFilterChange({ sort: value })
             }}
             size="small"
-            value={searchParams.sort || gamesSortingOptions[0].value}
+            value={sort}
           >
-            {gamesSortingOptions.map((item) => (
+            {sortOptions.map((item) => (
               <MenuItem key={item.value} value={item.value}>
                 {item.title}
               </MenuItem>
