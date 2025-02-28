@@ -5,6 +5,8 @@ import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
+import { GameCardAd } from '../ads/game-card-ad'
+import { MultiplexGridAd } from '../ads/multiplex-grid-ad'
 import { GameCard } from '../game-card'
 import { NoDataLabel } from '../no-data-label'
 import { Pagination } from '../pagination'
@@ -51,9 +53,12 @@ const GamesList = async ({ page, paginationPath, query, allGames }: TProps) => {
         {games.map((game) => (
           <GameCard game={game} key={game.id} switchToListOnMobile />
         ))}
+        <GameCardAd />
       </Grid2>
 
       <Pagination count={Math.ceil(totalGames / LIST_SIZE)} page={+page} path={paginationPath} />
+
+      <MultiplexGridAd />
     </Grid2>
   )
 }
