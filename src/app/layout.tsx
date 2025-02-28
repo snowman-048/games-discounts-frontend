@@ -44,7 +44,7 @@ const RootLayout = async ({
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       />
       <body className={roboto.variable}>
         {process.env.NEXT_PUBLIC_NODE_ENV === 'production' && (
