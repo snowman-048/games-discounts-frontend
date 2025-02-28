@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 import { CookiesProvider } from 'next-client-cookies/server'
 import { Roboto } from 'next/font/google'
+import Script from 'next/script'
 
 import { BackgroundHandler } from '@/components/background-handler'
 import { Footer } from '@/components/footer'
@@ -40,6 +41,11 @@ const RootLayout = async ({
 }>) => {
   return (
     <html lang="en">
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
+        crossorigin="anonymous"
+      />
       <body className={roboto.variable}>
         {process.env.NEXT_PUBLIC_NODE_ENV === 'production' && (
           <>
