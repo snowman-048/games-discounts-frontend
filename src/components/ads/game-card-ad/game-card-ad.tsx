@@ -8,7 +8,7 @@ const GameCardAd = () => {
       <script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       />
       <ins
         className="adsbygoogle"
