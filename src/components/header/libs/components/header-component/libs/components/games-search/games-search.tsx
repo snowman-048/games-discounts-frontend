@@ -81,7 +81,7 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
     setPopperStyle({
       left: `${rect.left - LIST_PADDING_X}px`,
       width: `${rect.width + LIST_PADDING_X * 2}px`,
-      maxHeight: `calc(100vh - ${rect.bottom}px)`,
+      maxHeight: `calc(100dvh - ${rect.bottom}px)`,
     })
 
     setOpen(true)
