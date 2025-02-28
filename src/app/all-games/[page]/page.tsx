@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 
 import { Metadata } from 'next'
 
-import { GameDiscountsFilters } from '@/components/game-discounts-filters'
+import { GamesFilters } from '@/components/games-filters'
 import { GamesList } from '@/components/games-list'
 import { Container } from '@/components/ui/container'
 import { Loader } from '@/components/ui/loader'
@@ -36,7 +36,7 @@ const AllGames = async ({ params, searchParams }: Tprops) => {
 
   return (
     <Container gap={{ xs: 2, md: 5 }}>
-      <GameDiscountsFilters usedForAllGames />
+      <GamesFilters usedForAllGames />
       <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<Loader />}>
         <GamesList query={query} page={+page} paginationPath={EAppRoute.ALL_GAMES} allGames />
       </Suspense>

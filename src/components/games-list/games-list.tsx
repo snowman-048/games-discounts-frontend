@@ -49,7 +49,7 @@ const GamesList = async ({ page, paginationPath, query, allGames }: TProps) => {
     >
       <Grid2 display="grid" width="100%" className={styles.list} gap={{ xs: 2, md: 2.5 }}>
         {games.map((game) => (
-          <GameCard game={game} key={game.id} />
+          <GameCard game={game} key={game.id} switchToListOnMobile />
         ))}
       </Grid2>
 

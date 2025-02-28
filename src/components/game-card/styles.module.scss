@@ -1,3 +1,25 @@
+@mixin list-item {
+  .content {
+    flex-direction: row;
+  }
+
+  .imageContainer {
+    overflow: hidden;
+  }
+
+  .image {
+    width: 135px;
+    height: auto;
+  }
+
+  .gameType {
+    font-size: 12px;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+}
+
 .wrapper {
   position: relative;
   border-radius: 20px;
@@ -43,25 +65,7 @@
     }
 
     &.list-item {
-      .content {
-        flex-direction: row;
-      }
-
-      .imageContainer {
-        overflow: hidden;
-      }
-
-      .image {
-        width: 135px;
-        height: auto;
-      }
-
-      .gameType {
-        font-size: 12px;
-        top: 0;
-        right: 0;
-        left: 0;
-      }
+      @include list-item();
     }
   }
 
@@ -83,6 +87,14 @@
 
     .card {
       box-shadow: none;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    .switchToListOnMobile {
+      @include list-item();
     }
   }
 }
