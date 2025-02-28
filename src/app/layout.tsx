@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   },
   description:
     'Discover the best video game discounts from PlayStation, Nintendo, and Xbox. Stay updated on price drops and exclusive deals to save on your favorite games!',
+  other: {
+    'google-adsense-account': process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT || '',
+  },
 }
 
 const RootLayout = async ({
