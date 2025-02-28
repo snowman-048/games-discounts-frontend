@@ -19,9 +19,17 @@ type TProps = {
   variant?: 'card' | 'list-item'
   onClick?: () => void
   className?: string
+  switchToListOnMobile?: boolean
 }
 
-const GameCard = ({ game, variant = 'card', onClick, className, noShadow }: TProps) => {
+const GameCard = ({
+  game,
+  variant = 'card',
+  onClick,
+  className,
+  noShadow,
+  switchToListOnMobile = false,
+}: TProps) => {
   const getColor = (item: TPriceHistory) => {
     return getStoreColor(item.meta?.type || item.store.name)
   }
@@ -43,7 +51,12 @@ const GameCard = ({ game, variant = 'card', onClick, className, noShadow }: TPro
       }
       onClick={onClick}
     >
-      <GlassCard className={cn(styles.card, styles[variant], { [styles.noShadow]: noShadow })}>
+      <GlassCard
+        className={cn(styles.card, styles[variant], {
+          [styles.noShadow]: noShadow,
+          [styles.switchToListOnMobile]: switchToListOnMobile,
+        })}
+      >
         <Grid2
           container
           flexWrap="nowrap"

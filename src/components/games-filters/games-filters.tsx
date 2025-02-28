@@ -9,6 +9,7 @@ import {
   Button,
   Checkbox,
   Dialog,
+  Fade,
   FormControl,
   FormControlLabel,
   Grid2,
@@ -37,7 +38,7 @@ type TProps = {
   usedForAllGames?: boolean
 }
 
-const GameDiscountsFilters = ({ usedForAllGames = false }: TProps) => {
+const GamesFilters = ({ usedForAllGames = false }: TProps) => {
   const searchParams = useGetAllSearchParams()
 
   const [title, setTitle] = useState<string>((searchParams.title as string) || '')
@@ -267,29 +268,42 @@ const GameDiscountsFilters = ({ usedForAllGames = false }: TProps) => {
             sx: {
               background: 'var(--backdrop)',
             },
-            transitionDuration: 100,
+            transitionDuration: 200,
           },
         }}
       >
-        <GlassCard style={{ width: '100%' }}>
-          <Grid2 container flexDirection="column" gap={3} padding={2} width="100%">
-            <Typography variant="h5" textAlign="center" fontWeight="bold" marginBottom={1}>
-              Filter Games
-            </Typography>
-            {renderTopFilters()}
-            {renderBottomFilters()}
-            <Button
-              onClick={() => setIsModalOpen(false)}
-              sx={{ fontSize: '1.2rem', marginTop: -1 }}
-              fullWidth
-            >
-              Close
-            </Button>
-          </Grid2>
-        </GlassCard>
+        <Fade
+          in={isModalOpen}
+          style={{
+            transitionDuration: '0.3s',
+            transitionDelay: isModalOpen ? '0.1s' : '0s',
+            transitionTimingFunction: 'ease-in',
+          }}
+        >
+          <GlassCard
+            sx={{
+              width: '100%',
+            }}
+          >
+            <Grid2 container flexDirection="column" gap={3} padding={2} width="100%">
+              <Typography variant="h5" textAlign="center" fontWeight="bold" marginBottom={1}>
+                Filter Games
+              </Typography>
+              {renderTopFilters()}
+              {renderBottomFilters()}
+              <Button
+                onClick={() => setIsModalOpen(false)}
+                sx={{ fontSize: '1.2rem', marginTop: -1 }}
+                fullWidth
+              >
+                Close
+              </Button>
+            </Grid2>
+          </GlassCard>
+        </Fade>
       </Dialog>
     </>
   )
 }
 
-export { GameDiscountsFilters }
+export { GamesFilters }
