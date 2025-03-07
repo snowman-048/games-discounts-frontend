@@ -1,3 +1,5 @@
+import { GoogleOAuthProvider } from '@react-oauth/google'
+
 import { Box, ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -12,6 +14,7 @@ import { BackgroundHandler } from '@/components/background-handler'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { theme } from '@/theme'
+import { UserHandler } from '@/utils/user-handler'
 
 import './globals.css'
 
@@ -60,14 +63,18 @@ const RootLayout = async ({
         <AppRouterCacheProvider>
           <CookiesProvider>
             <ThemeProvider theme={theme} defaultMode="dark">
-              <BackgroundHandler />
-              <div id="root">
-                <Header />
-                <Box flex={1} width="100%" height="100%">
-                  {children}
-                </Box>
-                <Footer />
-              </div>
+              <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!}>
+                <BackgroundHandler />
+                <UserHandler />
+
+                <div id="root">
+                  <Header />
+                  <Box flex={1} width="100%" height="100%">
+                    {children}
+                  </Box>
+                  <Footer />
+                </div>
+              </GoogleOAuthProvider>
             </ThemeProvider>
           </CookiesProvider>
         </AppRouterCacheProvider>

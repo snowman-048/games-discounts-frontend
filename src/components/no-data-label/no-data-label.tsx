@@ -1,6 +1,10 @@
 import { Typography } from '@mui/material'
 
-const NoDataLabel = () => {
+type TProps = {
+  label?: string
+}
+
+const NoDataLabel = ({ label = 'NO DATA' }: TProps) => {
   return (
     <Typography
       variant="h5"
@@ -8,9 +12,9 @@ const NoDataLabel = () => {
       textAlign="center"
       component="span"
       display="block"
-      sx={{ textTransform: 'uppercase', color: 'var(--text-secondary)', width: '100%' }}
+      sx={{ color: 'var(--text-secondary)', width: '100%' }}
     >
-      No Data
+      {label}
     </Typography>
   )
 }

@@ -1,0 +1,57 @@
+@import '@/utils/variables';
+
+.typography {
+  font-family: Roboto;
+}
+
+// Font sizes
+.text-s {
+  font-size: $fs-12;
+  line-height: $fs-16;
+}
+.text-sm {
+  font-size: $fs-13;
+  line-height: $fs-18;
+}
+.text-base {
+  font-size: $fs-14;
+  line-height: $fs-20;
+}
+.text-l {
+  font-size: $fs-16;
+  line-height: $fs-24;
+}
+.text-xl {
+  font-size: $fs-20;
+  line-height: $fs-28;
+}
+.text-2xl {
+  font-size: $fs-24;
+  line-height: $fs-32;
+}
+.heading-s {
+  font-size: $fs-28;
+  line-height: $fs-38;
+}
+.heading-m {
+  font-size: $fs-36;
+  line-height: $fs-42;
+}
+.heading-l {
+  font-size: $fs-44;
+  line-height: $fs-56;
+}
+
+// Font width
+.normal {
+  font-weight: 400;
+}
+.medium {
+  font-weight: 500;
+}
+.semibold {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}

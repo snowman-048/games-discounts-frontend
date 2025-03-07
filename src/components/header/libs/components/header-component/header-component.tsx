@@ -9,7 +9,6 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
 import WindowIcon from '@mui/icons-material/Window'
 import {
-  Backdrop,
   Box,
   Button,
   Divider,
@@ -34,6 +33,7 @@ import { TGameSearchParams } from '@/types/game-search.types'
 import { TRegionWithStores } from '@/types/region.types'
 
 import { GamesSearch } from './libs/components/games-search'
+import { ProfileButton } from './libs/components/profile-button'
 
 const links = [
   { label: 'Home', path: `/${EAppRoute.HOME}`, icon: WindowIcon },
@@ -83,8 +83,8 @@ const HeaderComponent = ({ query }: TProps) => {
         alignItems={inDrawer ? 'flex-start' : 'center'}
         justifyContent={inDrawer ? 'space-between' : 'flex-start'}
         gap={3}
-        flex={1}
         height="100%"
+        flexWrap="nowrap"
       >
         <Grid2
           container
@@ -92,7 +92,6 @@ const HeaderComponent = ({ query }: TProps) => {
           flexWrap="nowrap"
           alignItems={inDrawer ? 'flex-start' : 'center'}
           gap={3}
-          flex={1}
           width="100%"
         >
           <GamesSearch query={query} closeDrawer={() => setIsDrawerOpen(false)} />
@@ -129,6 +128,7 @@ const HeaderComponent = ({ query }: TProps) => {
           Regions
           <LocationOnIcon />
         </Button>
+        {!inDrawer && <ProfileButton />}
       </Grid2>
     )
   }
@@ -156,10 +156,11 @@ const HeaderComponent = ({ query }: TProps) => {
           <Container flexDirection="row" justifyContent="space-between" gap={5}>
             <Logo />
 
-            <Grid2 container flex={1} justifyContent="flex-end">
-              <Grid2 sx={{ display: { xs: 'none', md: 'block' } }} flex={1}>
+            <Grid2 container flex={1} justifyContent="flex-end" gap={2}>
+              <Grid2 sx={{ display: { xs: 'none', md: 'block' } }} flex={1} flexWrap="nowrap">
                 {renderNavigation()}
               </Grid2>
+              <ProfileButton sx={{ display: { xs: 'flex', md: 'none' } }} />
               <IconButton
                 onClick={() => setIsDrawerOpen(true)}
                 sx={{ display: { xs: 'flex', md: 'none' } }}
@@ -234,28 +235,32 @@ const HeaderComponent = ({ query }: TProps) => {
         </Box>
       </Drawer>
 
-      <Backdrop
-        sx={{ zIndex: 6, background: 'var(--backdrop)', width: '100vw' }}
+      <Popover
+        id="location-settings"
         open={!!locationAnchorEl}
+        anchorEl={locationAnchorEl}
+        onClose={() => setLocationAnchorEl(null)}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
         transitionDuration={100}
+        slotProps={{
+          root: {
+            slotProps: {
+              backdrop: {
+                sx: {
+                  background: 'var(--backdrop)',
+                  transitionDuration: 100,
+                },
+              },
+            },
+          },
+          paper: { sx: { background: 'transparent', boxShadow: 'none', borderRadius: '20px' } },
+        }}
       >
-        <Popover
-          id="location-settings"
-          open={!!locationAnchorEl}
-          anchorEl={locationAnchorEl}
-          onClose={() => setLocationAnchorEl(null)}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transitionDuration={100}
-          slotProps={{
-            paper: { sx: { background: 'transparent', boxShadow: 'none', borderRadius: '20px' } },
-          }}
-        >
-          <RegionSettings regions={regions} />
-        </Popover>
-      </Backdrop>
+        <RegionSettings regions={regions} />
+      </Popover>
     </>
   )
 }
