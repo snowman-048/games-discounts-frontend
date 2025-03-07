@@ -1,4 +1,6 @@
-import { Grid2, Typography } from '@mui/material'
+import { Grid2 } from '@mui/material'
+
+import { TypographyV2 } from '@/components/ui/typography'
 
 type TProps = {
   label: string
@@ -6,25 +8,18 @@ type TProps = {
   valueColor?: string
 }
 
-const PriceInfoText = ({ label, value, valueColor = 'var(--text-primary)' }: TProps) => {
+const PriceInfoText = ({ label, value, valueColor = 'var(--color-primary)' }: TProps) => {
   return (
-    <Grid2 container flexDirection="column" alignItems="center">
-      <Typography
-        variant="body1"
-        fontSize={{ xs: '0.8rem', sm: '1rem' }}
-        color="var(--text-primary)"
-      >
-        {label}
-      </Typography>
-      <Typography
-        variant="h5"
-        fontSize={{ xs: '1.15rem', sm: '1.5rem' }}
+    <Grid2 container flexDirection="column" alignItems="center" gap={0.5}>
+      <TypographyV2 adaptiveFontSize={{ xs: '0.8rem', sm: '1rem' }}>{label}</TypographyV2>
+      <TypographyV2
+        adaptiveFontSize={{ xs: '1.15rem', sm: '1.5rem' }}
         fontWeight="bold"
-        color={valueColor}
+        customColor={valueColor}
         component="p"
       >
         {value}
-      </Typography>
+      </TypographyV2>
     </Grid2>
   )
 }

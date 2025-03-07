@@ -2,13 +2,14 @@
 
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Autocomplete, Box, Button, Grid2, Stack, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, Grid2, Stack, TextField } from '@mui/material'
 import Link from 'next/link'
 
 import { getGamesList } from '@/api/games'
 import { GameCard } from '@/components/game-card'
 import { NoDataLabel } from '@/components/no-data-label'
 import { Loader } from '@/components/ui/loader'
+import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { createQueryString } from '@/helpers/createQueryString'
 import { getStoreRegionsFromQuery } from '@/helpers/getStoreRegionsFromQuery'
@@ -169,7 +170,9 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
                   variant={!!games.length ? 'outlined' : 'contained'}
                   onClick={() => handleClose()}
                 >
-                  <Typography fontWeight="bold">Close</Typography>
+                  <TypographyV2 fontSize="text-l" isUpperCase color="brand" fontWeight="bold">
+                    Close
+                  </TypographyV2>
                 </Button>
                 {!!games.length && (
                   <Link
@@ -181,7 +184,9 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
                     }}
                   >
                     <Button sx={{ marginTop: 2 }} fullWidth variant="contained">
-                      <Typography fontWeight="bold">View All</Typography>
+                      <TypographyV2 fontSize="text-l" fontWeight="bold" isUpperCase color="l1">
+                        View All
+                      </TypographyV2>
                     </Button>
                   </Link>
                 )}

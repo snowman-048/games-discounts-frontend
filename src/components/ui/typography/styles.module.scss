@@ -1,45 +1,45 @@
-@import '@/utils/variables';
+@use '@/utils/variables';
 
 .typography {
-  font-family: Roboto;
+  font-family: var(--font-roboto);
 }
 
 // Font sizes
 .text-s {
-  font-size: $fs-12;
-  line-height: $fs-16;
+  font-size: variables.$fs-12 !important;
+  line-height: variables.$fs-16 !important;
 }
 .text-sm {
-  font-size: $fs-13;
-  line-height: $fs-18;
+  font-size: variables.$fs-13 !important;
+  line-height: variables.$fs-18 !important;
 }
 .text-base {
-  font-size: $fs-14;
-  line-height: $fs-20;
+  font-size: variables.$fs-14 !important;
+  line-height: variables.$fs-20 !important;
 }
 .text-l {
-  font-size: $fs-16;
-  line-height: $fs-24;
+  font-size: variables.$fs-16 !important;
+  line-height: variables.$fs-24 !important;
 }
 .text-xl {
-  font-size: $fs-20;
-  line-height: $fs-28;
+  font-size: variables.$fs-20 !important;
+  line-height: variables.$fs-28 !important;
 }
 .text-2xl {
-  font-size: $fs-24;
-  line-height: $fs-32;
+  font-size: variables.$fs-24 !important;
+  line-height: variables.$fs-32 !important;
 }
 .heading-s {
-  font-size: $fs-28;
-  line-height: $fs-38;
+  font-size: variables.$fs-28 !important;
+  line-height: variables.$fs-38 !important;
 }
 .heading-m {
-  font-size: $fs-36;
-  line-height: $fs-42;
+  font-size: variables.$fs-36 !important;
+  line-height: variables.$fs-42 !important;
 }
 .heading-l {
-  font-size: $fs-44;
-  line-height: $fs-56;
+  font-size: variables.$fs-44 !important;
+  line-height: variables.$fs-56 !important;
 }
 
 // Font width

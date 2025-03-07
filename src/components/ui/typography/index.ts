@@ -1,1 +1,1 @@
-export { Typography } from './typography'
+export { TypographyV2 } from './typography'

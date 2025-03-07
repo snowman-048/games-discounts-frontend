@@ -8,17 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
 import WindowIcon from '@mui/icons-material/Window'
-import {
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  Grid2,
-  IconButton,
-  Popover,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { Box, Button, Divider, Drawer, Grid2, IconButton, Popover, Stack } from '@mui/material'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -27,6 +17,7 @@ import { Logo } from '@/components/logo'
 import { RegionSettings } from '@/components/region-settings/region-settings'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
+import { TypographyV2 } from '@/components/ui/typography'
 import { OUR_EMAIL } from '@/configs/contacts.config'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { TGameSearchParams } from '@/types/game-search.types'
@@ -97,28 +88,29 @@ const HeaderComponent = ({ query }: TProps) => {
           <GamesSearch query={query} closeDrawer={() => setIsDrawerOpen(false)} />
           {links.map((link) => (
             <Link href={link.path} key={link.label} onClick={() => setIsDrawerOpen(false)}>
-              <Typography
+              <TypographyV2
                 fontWeight="bold"
                 color={
                   (link.customIsActive ? link.customIsActive(pathname) : isLinkActive(link.path))
-                    ? 'var(--accent)'
-                    : 'var(--text-primary)'
+                    ? 'brand'
+                    : 'primary'
                 }
                 alignItems="center"
                 display="flex"
                 gap={0.5}
                 whiteSpace="nowrap"
+                fontSize="text-l"
               >
                 {link.icon && <link.icon />}
                 {link.label}
-              </Typography>
+              </TypographyV2>
             </Link>
           ))}
         </Grid2>
         <Button
           onClick={(e) => setLocationAnchorEl(e.currentTarget)}
           sx={{
-            color: 'var(--text-primary)',
+            color: 'var(--color-primary)',
             gap: 1,
             textTransform: 'none',
             width: inDrawer ? '100%' : 'fit-content',
@@ -221,12 +213,12 @@ const HeaderComponent = ({ query }: TProps) => {
                 {renderNavigation(true)}
               </Grid2>
               <Stack padding={3} paddingTop={0} width="100%">
-                <Typography color="var(--text-secondary)" textAlign="center" variant="body2">
+                <TypographyV2 color="inactive" textAlign="center" variant="body2">
                   Contact us
-                </Typography>
+                </TypographyV2>
                 <address>
                   <a href={`mailto:${OUR_EMAIL}`}>
-                    <Typography textAlign="center">{OUR_EMAIL}</Typography>
+                    <TypographyV2 textAlign="center">{OUR_EMAIL}</TypographyV2>
                   </a>
                 </address>
               </Stack>

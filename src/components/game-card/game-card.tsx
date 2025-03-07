@@ -1,4 +1,4 @@
-import { Box, Grid2, Stack, Typography } from '@mui/material'
+import { Box, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,6 +11,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 
 import { DiscountInfo } from '../discount-info'
 import { GlassCard } from '../ui/cards/glass-card'
+import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
 type TProps = {
@@ -86,15 +87,16 @@ const GameCard = ({
                 />
               </Box>
             )}
-            <Typography
-              color="accent.main"
+            <TypographyV2
+              color="brand"
               fontWeight="bold"
               className={styles.gameType}
               letterSpacing={4}
               textAlign="center"
+              fontSize="text-l"
             >
               {game.type.toUpperCase()}
-            </Typography>
+            </TypographyV2>
           </Grid2>
           <Grid2
             flex={1}
@@ -103,9 +105,9 @@ const GameCard = ({
             alignItems="center"
             justifyContent="space-between"
           >
-            <Typography color="text.primary" fontWeight="bold" variant="body2" textAlign="center">
+            <TypographyV2 fontWeight="bold" textAlign="center">
               {game.title}
-            </Typography>
+            </TypographyV2>
             <Stack gap={1} marginTop={1} width="100%">
               {game.priceHistory?.map((item) => (
                 <DiscountInfo discount={item} withStoreLabel={true} key={item.id} />

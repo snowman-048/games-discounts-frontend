@@ -15,7 +15,7 @@ const XAxisTick = ({ x, y, payload: { value } }: TProps) => {
         dx={25}
         dy={25}
         textAnchor="end"
-        fill="var(--text-secondary)"
+        fill="var(--color-inactive)"
         transform="rotate(-35)"
       >
         {moment(value).format('MMM YYYY')}

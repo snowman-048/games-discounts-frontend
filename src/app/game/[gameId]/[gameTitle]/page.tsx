@@ -1,6 +1,6 @@
 import { cache } from 'react'
 
-import { Divider, Grid2, Stack, Typography } from '@mui/material'
+import { Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
 import { Metadata } from 'next'
@@ -20,6 +20,7 @@ import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Carousel } from '@/components/ui/carousel'
 import { Container } from '@/components/ui/container'
 import { InfoItem } from '@/components/ui/info-item'
+import { TypographyV2 } from '@/components/ui/typography'
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
@@ -156,10 +157,10 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           />
 
           <Stack flex={1} position="relative">
-            <Typography variant="h4" fontWeight="bold" component="h2">
+            <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h2">
               {game.title}
-            </Typography>
-            <Divider sx={{ margin: '16px 0', background: 'var(--accent)' }} />
+            </TypographyV2>
+            <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
             <Stack gap={1}>
               <InfoItem label="Genres" data={game.genres?.map(makeFirstLetterUpper).join(', ')} />
@@ -315,7 +316,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
 
           <Stack spacing={2}>
             <SectionTitle title="Description" />
-            <Typography variant="body1">{game.description || <NoDataLabel />}</Typography>
+            <TypographyV2 fontSize="text-l">{game.description || <NoDataLabel />}</TypographyV2>
           </Stack>
         </Stack>
       </GlassCard>

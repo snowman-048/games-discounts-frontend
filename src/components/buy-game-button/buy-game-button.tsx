@@ -1,4 +1,4 @@
-import { Box, Grid2, Stack, Typography } from '@mui/material'
+import { Box, Grid2, Stack } from '@mui/material'
 import moment from 'moment'
 import Link from 'next/link'
 
@@ -10,6 +10,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 
 import { StoreIcon } from '../store-icon'
 import { GlassCard } from '../ui/cards/glass-card'
+import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
 type TProps = {
@@ -47,60 +48,54 @@ const BuyGameButton = ({ priceHistoryItem, additionalPriceHistoryItem, link }: T
           <Grid2 container alignItems="center" gap={1}>
             <StoreIcon store={priceHistoryItem.store.name} withLabel={false} />
             <Stack>
-              <Typography variant="body2" color="var(--text-secondary)">
-                Buy at
-              </Typography>
-              <Typography variant="body2" fontWeight="bold">
+              <TypographyV2 color="inactive">Buy at</TypographyV2>
+              <TypographyV2 fontWeight="bold">
                 {getStoreDisplayName(priceHistoryItem.store.name).full}
-              </Typography>
+              </TypographyV2>
               {isMainDiscountActive && (
-                <Typography variant="body2" color="var(--text-secondary)">
+                <TypographyV2 color="inactive">
                   Discount ends{' '}
                   {moment(priceHistoryItem.discountEnds).utc(true).format(DEFAULT_DATE_FORMATTING)}
-                </Typography>
+                </TypographyV2>
               )}
             </Stack>
           </Grid2>
           <Stack alignItems="flex-end">
             {isMainDiscountActive && (
-              <Typography
-                variant="body2"
-                color="var(--text-secondary)"
-                sx={{ textDecoration: 'line-through' }}
-              >
+              <TypographyV2 color="inactive" sx={{ textDecoration: 'line-through' }}>
                 {priceHistoryItem.region.currencySymbol}
                 {priceHistoryItem.initialPrice}
-              </Typography>
+              </TypographyV2>
             )}
             {isAdditionalDiscountActive && (
               <Grid2 container alignItems="center" gap={1}>
-                <Typography variant="body2" color={additionalDiscountLabelColor} fontWeight="bold">
+                <TypographyV2 customColor={additionalDiscountLabelColor} fontWeight="bold">
                   {
                     getStoreDisplayName(
                       additionalPriceHistoryItem.meta?.type ||
                         additionalPriceHistoryItem.store.name,
                     ).short
                   }
-                </Typography>
-                <Typography variant="body1" color={additionalDiscountLabelColor} fontWeight="bold">
+                </TypographyV2>
+                <TypographyV2 customColor={additionalDiscountLabelColor} fontWeight="bold">
                   {additionalPriceHistoryItem.region.currencySymbol}
                   {additionalPriceHistoryItem.discountedPrice}
-                </Typography>
+                </TypographyV2>
               </Grid2>
             )}
 
             {isMainDiscountActive && (
-              <Typography variant="body1" color="var(--green)" fontWeight="bold">
+              <TypographyV2 fontSize="text-l" color="green" fontWeight="bold">
                 {priceHistoryItem.region.currencySymbol}
                 {priceHistoryItem.discountedPrice}
-              </Typography>
+              </TypographyV2>
             )}
 
             {!isMainDiscountActive && (
-              <Typography variant="body1" color="var(--text-primary)">
+              <TypographyV2 fontSize="text-l">
                 {priceHistoryItem.region.currencySymbol}
                 {priceHistoryItem.initialPrice}
-              </Typography>
+              </TypographyV2>
             )}
           </Stack>
         </Grid2>

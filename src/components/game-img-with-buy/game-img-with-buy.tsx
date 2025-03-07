@@ -1,4 +1,4 @@
-import { Box, Grid2, Typography } from '@mui/material'
+import { Box, Grid2 } from '@mui/material'
 import cn from 'classnames'
 import Image from 'next/image'
 
@@ -9,6 +9,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 
 import { BuyGameButton } from '../buy-game-button'
 import { GlassCard } from '../ui/cards/glass-card'
+import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
 type TProps = {
@@ -36,9 +37,9 @@ const GameImgWithBuy = ({ game, storeLinks, className, isFake = false }: TProps)
 
       <Grid2 container flexDirection="column" gap={2} width="100%">
         <GlassCard className={styles.typeContainer}>
-          <Typography color="accent.main" fontWeight="bold" letterSpacing={4}>
+          <TypographyV2 color="brand" fontWeight="bold" fontSize="text-l" letterSpacing={4}>
             {game.type.toUpperCase()}
-          </Typography>
+          </TypographyV2>
         </GlassCard>
         {game.gameStore?.map((gameStore) => {
           const latestPriceHistory = game.priceHistory.find(

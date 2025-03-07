@@ -15,11 +15,11 @@ const Loader = ({ variant = 'circular', ...rest }: TProps) => {
   if (variant === 'linear')
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress sx={{ color: 'var(--accent)' }} {...rest} />
+        <LinearProgress sx={{ color: 'var(--color-brand)' }} {...rest} />
       </Box>
     )
 
-  return <CircularProgress sx={{ color: 'var(--accent)' }} {...rest} />
+  return <CircularProgress sx={{ color: 'var(--color-brand)' }} {...rest} />
 }
 
 export { Loader }

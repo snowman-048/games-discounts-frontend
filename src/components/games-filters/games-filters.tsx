@@ -19,7 +19,6 @@ import {
   Select,
   Stack,
   TextField,
-  Typography,
 } from '@mui/material'
 
 import { getStores } from '@/api/stores'
@@ -33,6 +32,7 @@ import { TStore } from '@/types/store.types'
 
 import { GlassCard } from '../ui/cards/glass-card'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
+import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
   usedForAllGames?: boolean
@@ -138,7 +138,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
           />
 
           <Button
-            sx={{ color: 'var(--bg-main)', textTransform: 'none', gap: 1 }}
+            sx={{ color: 'var(--color-l1)', textTransform: 'none', gap: 1 }}
             variant="contained"
             type="submit"
           >
@@ -214,7 +214,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
               onClick={() => setIsModalOpen(true)}
               sx={{
                 textTransform: 'none',
-                color: 'var(--text-primary)',
+                color: 'var(--color-primary)',
                 fontSize: '1rem',
                 gap: 1,
                 px: 2,
@@ -286,9 +286,14 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
             }}
           >
             <Grid2 container flexDirection="column" gap={3} padding={2} width="100%">
-              <Typography variant="h5" textAlign="center" fontWeight="bold" marginBottom={1}>
+              <TypographyV2
+                fontSize="text-2xl"
+                textAlign="center"
+                fontWeight="bold"
+                marginBottom={1}
+              >
                 Filter Games
-              </Typography>
+              </TypographyV2>
               {renderTopFilters()}
               {renderBottomFilters()}
               <Button

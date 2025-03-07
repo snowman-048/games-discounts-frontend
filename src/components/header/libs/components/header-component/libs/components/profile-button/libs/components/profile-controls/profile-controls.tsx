@@ -1,9 +1,10 @@
 import BookmarksIcon from '@mui/icons-material/Bookmarks'
 import PersonIcon from '@mui/icons-material/Person'
-import { Button, Stack, Typography } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import Link from 'next/link'
 
 import { GlassCard } from '@/components/ui/cards/glass-card'
+import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { logout } from '@/helpers/logout'
 import { useUserStore } from '@/store/user.store'
@@ -31,40 +32,42 @@ const ProfileControls = ({ closePopup }: TProps) => {
   return (
     <GlassCard padding={2} width="100%">
       <Stack gap={2} width="100%">
-        <Stack sx={{ borderBottom: '1px solid var(--accent)' }} paddingBottom={1}>
-          <Typography fontWeight="bold">{user?.username}</Typography>
-          <Typography color="var(--text-secondary)" variant="caption">
+        <Stack sx={{ borderBottom: '1px solid var(--color-brand)' }} paddingBottom={1}>
+          <TypographyV2 fontSize="text-l" fontWeight="bold">
+            {user?.username}
+          </TypographyV2>
+          <TypographyV2 color="inactive" fontSize="text-s">
             {user?.email}
-          </Typography>
+          </TypographyV2>
         </Stack>
 
         {links.map((link) => (
           <Link href={link.path} key={link.label} onClick={closePopup}>
-            <Typography
+            <TypographyV2
               fontWeight="bold"
-              color={'var(--text-primary)'}
               alignItems="center"
               display="flex"
               gap={1}
               whiteSpace="nowrap"
+              fontSize="text-l"
             >
               {link.icon && <link.icon sx={{ width: 20, height: 20 }} />}
               {link.label}
-            </Typography>
+            </TypographyV2>
           </Link>
         ))}
 
         <Button
           variant="contained"
-          sx={{ background: 'var(--red-light)' }}
+          sx={{ background: 'var(--color-red)' }}
           fullWidth
           onClick={() => {
             logout()
           }}
         >
-          <Typography variant="body2" sx={{ textTransform: 'none' }} fontWeight="bold">
+          <TypographyV2 variant="body2" sx={{ textTransform: 'none' }} color="l1" fontWeight="bold">
             Logout
-          </Typography>
+          </TypographyV2>
         </Button>
       </Stack>
     </GlassCard>

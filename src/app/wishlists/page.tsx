@@ -6,7 +6,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
-import { Button, Grid2, Stack, Typography } from '@mui/material'
+import { Button, Grid2, Stack } from '@mui/material'
 import Link from 'next/link'
 
 import { CreateWishlistModal } from '@/components/create-wishlist-modal'
@@ -14,6 +14,7 @@ import { NoDataLabel } from '@/components/no-data-label'
 import { SectionTitle } from '@/components/section-title'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
+import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { useUserStore } from '@/store/user.store'
 import { withRouteProtection } from '@/utils/with-route-protection'
@@ -47,15 +48,17 @@ const Wishlists = () => {
                       width="100%"
                       gap={2}
                     >
-                      <Typography>{item.name}</Typography>
+                      <TypographyV2 fontSize="text-l">{item.name}</TypographyV2>
                       <Grid2 container alignItems="center" gap={2}>
                         {item.discountNotificationByEmail && <MarkEmailReadIcon />}
                         <Grid2 container alignItems="center" gap={1}>
                           <SportsEsportsIcon />
-                          <Typography fontWeight="bold">{item.wishlistedGames.length}</Typography>
+                          <TypographyV2 fontSize="text-l" fontWeight="bold">
+                            {item.wishlistedGames.length}
+                          </TypographyV2>
                         </Grid2>
                         <ArrowForwardIosIcon
-                          sx={{ color: 'var(--accent)', width: 18, height: 18 }}
+                          sx={{ color: 'var(--color-brand)', width: 18, height: 18 }}
                         />
                       </Grid2>
                     </GlassCard>
@@ -69,9 +72,9 @@ const Wishlists = () => {
               onClick={() => setIsCreateWishlistOpen(true)}
             >
               <AddCircleOutlineIcon />
-              <Typography sx={{ textTransform: 'none' }} fontWeight="bold">
+              <TypographyV2 fontSize="text-l" color="brand" fontWeight="bold">
                 Create new
-              </Typography>
+              </TypographyV2>
             </Button>
           </Stack>
         </GlassCard>

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Grid2, Stack, Typography } from '@mui/material'
+import { Grid2, Stack } from '@mui/material'
 import Link from 'next/link'
 
 import { getGamesList } from '@/api/games'
@@ -14,6 +14,7 @@ import { GameCard } from '../game-card'
 import { SectionTitle } from '../section-title'
 import { GlassCard } from '../ui/cards/glass-card'
 import { Carousel } from '../ui/carousel'
+import { TypographyV2 } from '../ui/typography'
 
 const ITEMS_COUNT = 10
 
@@ -62,15 +63,16 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
           href={`/${EAppRoute.ACTIVE_DISCOUNTS}/1${createQueryString(viewAllLinkParams)}`}
           style={{ width: '100%' }}
         >
-          <Typography
+          <TypographyV2
             fontWeight="bold"
             textAlign="center"
-            color="var(--accent)"
+            color="brand"
             letterSpacing={2.5}
-            textTransform="uppercase"
+            isUpperCase
+            fontSize="text-l"
           >
             View More
-          </Typography>
+          </TypographyV2>
         </Link>
       </Stack>
     </GlassCard>

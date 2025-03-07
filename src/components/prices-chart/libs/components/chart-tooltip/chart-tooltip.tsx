@@ -1,8 +1,9 @@
-import { Grid2, Typography } from '@mui/material'
+import { Grid2 } from '@mui/material'
 import { Stack } from '@mui/system'
 import moment from 'moment'
 
 import { StoreIcon } from '@/components/store-icon'
+import { TypographyV2 } from '@/components/ui/typography'
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
 
 import { TPriceChartData } from '../../types/price-chart-data.types'
@@ -21,7 +22,7 @@ const ChartTooltip = ({ active, payload }: TProps) => {
     <Stack
       padding={2}
       spacing={1}
-      sx={{ background: 'var(--bg-main)', borderRadius: 3, border: '1px solid var(--bg-light)' }}
+      sx={{ background: 'var(--color-l1)', borderRadius: 3, border: '1px solid var(--color-l3)' }}
     >
       {payload.map(({ payload: value }, index) => (
         <Grid2 key={index} gap={2} container alignItems="center">
@@ -30,13 +31,13 @@ const ChartTooltip = ({ active, payload }: TProps) => {
             withLabel={false}
           />
           <Stack>
-            <Typography variant="body2">
+            <TypographyV2 fontSize="text-l" color="secondary">
               {moment(value.date).utc(true).format(DEFAULT_DATE_FORMATTING)}
-            </Typography>
-            <Typography variant="body2">
+            </TypographyV2>
+            <TypographyV2 fontSize="text-l" color="secondary">
               {value.region.currencySymbol}
               {value.price}
-            </Typography>
+            </TypographyV2>
           </Stack>
         </Grid2>
       ))}

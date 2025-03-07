@@ -1,4 +1,4 @@
-import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
+import { Box, Divider, Grid2, Stack } from '@mui/material'
 import Link from 'next/link'
 
 import { OUR_EMAIL } from '@/configs/contacts.config'
@@ -8,6 +8,7 @@ import packageJson from '../../../package.json'
 import { Logo } from '../logo'
 import { GlassCard } from '../ui/cards/glass-card'
 import { Container } from '../ui/container'
+import { TypographyV2 } from '../ui/typography'
 
 const Footer = () => {
   return (
@@ -34,33 +35,31 @@ const Footer = () => {
           </Box>
 
           <Stack>
-            <Typography>
-              <span style={{ color: 'var(--text-secondary)' }}>Useful Links:</span>
-            </Typography>
-            <Link href={`/${EAppRoute.ABOUT_US}`}>About Us</Link>
+            <TypographyV2 color="inactive">Useful Links:</TypographyV2>
+            <Link href={`/${EAppRoute.ABOUT_US}`}>
+              <TypographyV2>About Us</TypographyV2>
+            </Link>
           </Stack>
 
           <Stack>
-            <Typography>
-              <span style={{ color: 'var(--text-secondary)' }}>Contacts:</span>
-            </Typography>
+            <TypographyV2 color="inactive">Contacts:</TypographyV2>
 
             <Stack direction={'row'} spacing={1} alignItems={'center'}>
               <address>
                 <a href={`mailto:${OUR_EMAIL}`}>
-                  <Typography>{OUR_EMAIL}</Typography>
+                  <TypographyV2>{OUR_EMAIL}</TypographyV2>
                 </a>
               </address>
             </Stack>
           </Stack>
         </Grid2>
 
-        <Divider sx={{ background: 'var(--bg-light)' }} flexItem />
+        <Divider sx={{ background: 'var(--color-l3)' }} flexItem />
 
         <Grid2 width="100%" container justifyContent="flex-end">
-          <Typography variant="body2" fontWeight="bold" color="var(--text-secondary)">
+          <TypographyV2 fontWeight="bold" color="disabled">
             Version: {packageJson.version}
-          </Typography>
+          </TypographyV2>
         </Grid2>
       </Container>
     </GlassCard>

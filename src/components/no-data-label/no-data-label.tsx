@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
   label?: string
@@ -6,16 +6,17 @@ type TProps = {
 
 const NoDataLabel = ({ label = 'NO DATA' }: TProps) => {
   return (
-    <Typography
-      variant="h5"
+    <TypographyV2
       fontWeight="bold"
       textAlign="center"
       component="span"
       display="block"
-      sx={{ color: 'var(--text-secondary)', width: '100%' }}
+      color="inactive"
+      fontSize="text-2xl"
+      sx={{ width: '100%' }}
     >
       {label}
-    </Typography>
+    </TypographyV2>
   )
 }
 

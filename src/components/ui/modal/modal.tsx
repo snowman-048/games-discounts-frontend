@@ -3,17 +3,11 @@
 import { PropsWithChildren } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
-import {
-  Fade,
-  Grid2,
-  IconButton,
-  ModalProps,
-  Modal as MuiModal,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { Fade, Grid2, IconButton, ModalProps, Modal as MuiModal, Stack } from '@mui/material'
 
 import { GlassCard } from '@/components/ui/cards/glass-card'
+
+import { TypographyV2 } from '../typography'
 
 type TProps = PropsWithChildren &
   ModalProps & {
@@ -62,9 +56,9 @@ const Modal = ({ open, onClose, title, withClose = true, children, ...rest }: TP
               px={2.5}
             >
               {!!title && (
-                <Typography variant="h6" component="h2" align="center">
+                <TypographyV2 fontSize="text-xl" fontWeight="medium" component="h2" align="center">
                   {title}
-                </Typography>
+                </TypographyV2>
               )}
               {withClose && (
                 <IconButton
