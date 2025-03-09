@@ -42,6 +42,12 @@
   margin-right: var(--section-padding);
 }
 
+.description {
+  ul {
+    padding-left: 20px;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .priceInfoSection {
     display: none;
