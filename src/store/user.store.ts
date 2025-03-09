@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 
 import { getCurrentUser } from '@/api/account'
-import { ELocalStorageKey } from '@/enums/local-storage-key.enum'
+import { getTokens } from '@/helpers/auth-tokens'
 import { TUser, TWishlist } from '@/types/user.types'
 
 type TUserState = {
@@ -34,7 +34,8 @@ const useUserStore = create<TUserState>()(
 
       fetchUser: async () => {
         try {
-          if (!localStorage[ELocalStorageKey.ACCESS_TOKEN]) {
+          const tokens = await getTokens()
+          if (!tokens?.accessToken) {
             return
           }
           set({ isUserLoading: true })

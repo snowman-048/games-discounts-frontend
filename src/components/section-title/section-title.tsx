@@ -21,7 +21,7 @@ const SectionTitle = ({ title, sx, ...rest }: TProps) => {
       }}
       {...rest}
     >
-      <TypographyV2 fontWeight="bold" isUpperCase fontSize="heading-s">
+      <TypographyV2 fontWeight="bold" isUpperCase fontSize="heading-s" component="span">
         {title}
       </TypographyV2>
     </Divider>

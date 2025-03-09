@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-import { ELocalStorageKey } from '@/enums/local-storage-key.enum'
-import { isClientRequest } from '@/helpers/isClientRequest'
+import { getTokens, setTokens } from '@/helpers/auth-tokens'
 import { logout } from '@/helpers/logout'
 
 import { refreshTokens } from './auth'
@@ -15,14 +14,10 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    if (!isClientRequest()) {
-      return config
-    }
+    const tokens = await getTokens()
 
-    const token = localStorage[ELocalStorageKey.ACCESS_TOKEN] || ''
-
-    if (!config.headers.Authorization && token) {
-      config.headers.Authorization = `Bearer ${token}`
+    if (!config.headers.Authorization && tokens?.accessToken) {
+      config.headers.Authorization = `Bearer ${tokens.accessToken}`
     }
 
     return config
@@ -38,17 +33,17 @@ api.interceptors.response.use(
     const originalRequest = error.config
 
     // If the user is unauthorised
-    if (error.response?.status === 401 && isClientRequest()) {
+    if (error.response?.status === 401) {
       if (!originalRequest._retry) {
         originalRequest._retry = true
-        const refreshToken = localStorage[ELocalStorageKey.REFRESH_TOKEN]
-        if (!refreshToken) {
+        const tokens = await getTokens()
+        if (!tokens?.refreshToken) {
           return Promise.reject({ ...error, message: error.message })
         }
 
         try {
           const { data } = await refreshTokens()
-          localStorage[ELocalStorageKey.ACCESS_TOKEN] = data.accessToken
+          setTokens(data)
           originalRequest.headers.Authorization = `Bearer ${data.accessToken}`
           return api(originalRequest)
         } catch (err) {

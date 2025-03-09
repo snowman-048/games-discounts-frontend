@@ -32,7 +32,7 @@ const Wishlists = () => {
             <SectionTitle title="My Wishlists" />
 
             {!wishlists?.length && <NoDataLabel label="No Wishlists yet" />}
-            {wishlists?.length && (
+            {!!wishlists?.length && (
               <Stack gap={1}>
                 {wishlists.map((item) => (
                   <Link href={`/${EAppRoute.WISHLISTS}/${item.id}`} key={item.id}>

@@ -70,6 +70,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
             letterSpacing={2.5}
             isUpperCase
             fontSize="text-l"
+            component="span"
           >
             View More
           </TypographyV2>

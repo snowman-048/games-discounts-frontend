@@ -1,4 +1,5 @@
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { ToastContainer } from 'react-toastify'
 
 import { Box, ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
@@ -66,6 +67,7 @@ const RootLayout = async ({
               <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!}>
                 <BackgroundHandler />
                 <UserHandler />
+                <ToastContainer theme="dark" />
 
                 <div id="root">
                   <Header />

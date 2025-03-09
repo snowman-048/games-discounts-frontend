@@ -1,6 +1,6 @@
-enum ELocalStorageKey {
+enum EStorageKey {
   ACCESS_TOKEN = 'accessToken',
   REFRESH_TOKEN = 'refreshToken',
 }
 
-export { ELocalStorageKey }
+export { EStorageKey }

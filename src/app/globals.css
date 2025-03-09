@@ -10,9 +10,18 @@ html {
   --color-red: #f57070;
   --color-red-hover: #f78e8e;
   --color-green: #19fb9b;
+  --color-orange: #dd953c;
 
   --backdrop: rgba(0, 0, 0, 0.8);
   --bg-labels: #161616;
+}
+
+:root {
+  --toastify-color-info: var(--color-secondary);
+  --toastify-color-success: var(--color-green);
+  --toastify-color-warning: var(--color-orange);
+  --toastify-color-error: var(--color-red);
+  --toastify-color-dark: var(--color-l1);
 }
 
 body {
