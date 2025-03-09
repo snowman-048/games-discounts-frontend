@@ -14,11 +14,11 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   if (!gamesSitemap.length || moment().diff(moment(lastSynced), 'hours') > SYNC_ONCE_IN_HOURS) {
     const { data } = await getGamesDataForSitemap()
     // Check if this works for Google. It can detect inccorrect date changes
-    const lastModified = new Date()
+    // const lastModified = new Date()
 
     gamesSitemap = data.map(({ id, title }) => ({
       url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${EAppRoute.GAME}/${id}/${getGameTitleForLink(title)}`,
-      lastModified,
+      // lastModified,
     }))
     lastSynced = moment().valueOf()
   }
