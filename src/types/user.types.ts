@@ -5,7 +5,7 @@ type TWishlist = {
   id: number
   name: string
   discountNotificationByEmail: boolean
-  wishlistedGames: { id: number }[]
+  wishlistedGames: { id: number; gameId: number; wishlistId: number }[]
 }
 
 type TStoreRegionPreferences = {

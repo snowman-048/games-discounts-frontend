@@ -6,6 +6,7 @@ import moment from 'moment'
 import { Metadata } from 'next'
 
 import { getGameById, getGameFamilyByGameId } from '@/api/games'
+import { AddToWishlistButton } from '@/components/add-to-wishlist-button'
 import { GameCard } from '@/components/game-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
 import { GameJsonLd } from '@/components/game-json-ld'
@@ -157,9 +158,13 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           />
 
           <Stack flex={1} position="relative">
-            <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h2">
-              {game.title}
-            </TypographyV2>
+            <Grid2 container justifyContent="space-between" gap={2}>
+              <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h2">
+                {game.title}
+              </TypographyV2>
+
+              <AddToWishlistButton game={game} />
+            </Grid2>
             <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
             <Stack gap={1}>

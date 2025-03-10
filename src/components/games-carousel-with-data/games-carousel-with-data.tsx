@@ -44,7 +44,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
       <Stack padding={2} width="100%" gap={3}>
         <SectionTitle title={title} />
 
-        <Grid2 mx={-2}>
+        <Grid2 mx={-2} marginTop={-2}>
           <Carousel
             loop
             align="center"
@@ -52,8 +52,8 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
             showCounter={false}
             buttonsPosition="sides"
             slides={games.map((game) => (
-              <Grid2 width="240px" height="100%" key={game.id}>
-                <GameCard game={game} />
+              <Grid2 width="240px" height="100%" paddingTop={2} key={game.id}>
+                <GameCard game={game} noShadow />
               </Grid2>
             ))}
           />
@@ -61,11 +61,10 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
 
         <Link
           href={`/${EAppRoute.ACTIVE_DISCOUNTS}/1${createQueryString(viewAllLinkParams)}`}
-          style={{ width: '100%' }}
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
         >
           <TypographyV2
             fontWeight="bold"
-            textAlign="center"
             color="brand"
             letterSpacing={2.5}
             isUpperCase
