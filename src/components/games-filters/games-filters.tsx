@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import ClearIcon from '@mui/icons-material/Clear'
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
@@ -21,14 +21,13 @@ import {
   TextField,
 } from '@mui/material'
 
-import { getStores } from '@/api/stores'
 import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { EFilter } from '@/enums/filter.enum'
 import { EGameType } from '@/enums/game-type.enum'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useGetAllSearchParams } from '@/hooks/useGetAllSearchParams'
-import { TStore } from '@/types/store.types'
+import { useAppStore } from '@/store/app.store'
 
 import { GlassCard } from '../ui/cards/glass-card'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
@@ -39,10 +38,11 @@ type TProps = {
 }
 
 const GamesFilters = ({ usedForAllGames = false }: TProps) => {
+  const stores = useAppStore((state) => state.stores)
+
   const searchParams = useGetAllSearchParams()
 
   const [title, setTitle] = useState<string>((searchParams.title as string) || '')
-  const [stores, setStores] = useState<TStore[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const navigate = useCustomNavigate()
@@ -61,13 +61,6 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
       replace: true,
     })
   }
-
-  useEffect(() => {
-    ;(async () => {
-      const { data } = await getStores()
-      setStores(data)
-    })()
-  }, [])
 
   const renderTopFilters = () => {
     return (

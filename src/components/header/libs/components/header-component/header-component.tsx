@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
@@ -12,7 +12,6 @@ import { Box, Button, Divider, Drawer, Grid2, IconButton, Popover, Stack } from 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { getRegions } from '@/api/regions'
 import { Logo } from '@/components/logo'
 import { RegionSettings } from '@/components/region-settings/region-settings'
 import { GlassCard } from '@/components/ui/cards/glass-card'
@@ -20,8 +19,8 @@ import { Container } from '@/components/ui/container'
 import { TypographyV2 } from '@/components/ui/typography'
 import { OUR_EMAIL } from '@/configs/contacts.config'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { useAppStore } from '@/store/app.store'
 import { TGameSearchParams } from '@/types/game-search.types'
-import { TRegionWithStores } from '@/types/region.types'
 
 import { GamesSearch } from './libs/components/games-search'
 import { ProfileButton } from './libs/components/profile-button'
@@ -47,24 +46,14 @@ type TProps = {
 }
 
 const HeaderComponent = ({ query }: TProps) => {
+  const regions = useAppStore((state) => state.regions)
+
   const [locationAnchorEl, setLocationAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [regions, setRegions] = useState<TRegionWithStores[]>([])
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const pathname = usePathname()
 
   const isLinkActive = (path: string) => pathname === path
-
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const { data } = await getRegions()
-        setRegions(data)
-      } catch (err) {
-        console.log('Error getting regions', (err as any).message)
-      }
-    })()
-  }, [])
 
   const renderNavigation = (inDrawer = false) => {
     return (

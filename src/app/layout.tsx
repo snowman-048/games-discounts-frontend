@@ -15,7 +15,7 @@ import { BackgroundHandler } from '@/components/background-handler'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { theme } from '@/theme'
-import { UserHandler } from '@/utils/user-handler'
+import { InitHandler } from '@/utils/init-handler'
 
 import './globals.css'
 
@@ -66,7 +66,7 @@ const RootLayout = async ({
             <ThemeProvider theme={theme} defaultMode="dark">
               <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!}>
                 <BackgroundHandler />
-                <UserHandler />
+                <InitHandler />
                 <ToastContainer theme="dark" />
 
                 <div id="root">
