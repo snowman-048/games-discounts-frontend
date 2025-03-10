@@ -316,7 +316,14 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
 
           <Stack spacing={2}>
             <SectionTitle title="Description" />
-            <TypographyV2 fontSize="text-l">{game.description || <NoDataLabel />}</TypographyV2>
+            {!!game.description ? (
+              <TypographyV2
+                fontSize="text-l"
+                dangerouslySetInnerHTML={{ __html: game.description }}
+              />
+            ) : (
+              <NoDataLabel />
+            )}
           </Stack>
         </Stack>
       </GlassCard>
