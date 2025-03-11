@@ -5,25 +5,16 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Checkbox, FormControlLabel, Stack, TextField } from '@mui/material'
-import * as yup from 'yup'
 
 import { createWishlist } from '@/api/wishlist'
 import { Modal } from '@/components/ui/modal'
 import { useUserStore } from '@/store/user.store'
+import { screateWishlistSchema } from '@/validation/wishlist.validation'
 
 type TProps = {
   open: boolean
   handleClose: () => void
 }
-
-const validationSchema = yup.object({
-  name: yup
-    .string()
-    .required('Name is required')
-    .min(3, 'Name must be at least 3 characters')
-    .max(50, 'Name must be at most 50 characters'),
-  discountNotificationByEmail: yup.boolean().required(),
-})
 
 const defaultValues = {
   name: '',
@@ -41,7 +32,7 @@ const CreateWishlistModal = ({ open, handleClose }: TProps) => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(screateWishlistSchema),
     defaultValues,
   })
 

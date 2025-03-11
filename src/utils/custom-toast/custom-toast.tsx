@@ -30,7 +30,7 @@ const CustomToast = (type: TypeOptions, message: string, options?: TOptions) => 
       </Stack>
     ),
     {
-      closeOnClick: false,
+      closeOnClick: true,
       draggable: false,
       autoClose: 5000,
       type,

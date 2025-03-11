@@ -11,6 +11,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 
 import { AddToWishlistButton } from '../add-to-wishlist-button'
 import { DiscountInfo } from '../discount-info'
+import { RemoveFromWishlistButton } from '../remove-from-wishlist-button'
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
@@ -22,6 +23,9 @@ type TProps = {
   onClick?: () => void
   className?: string
   switchToListOnMobile?: boolean
+  wishlistButtonType?: 'add' | 'remove'
+  removeFromWishlistId?: number
+  onRemoveGameFromWishlist?: (gameId: number) => void
 }
 
 const GameCard = ({
@@ -31,6 +35,9 @@ const GameCard = ({
   className,
   noShadow,
   switchToListOnMobile = false,
+  wishlistButtonType = 'add',
+  removeFromWishlistId,
+  onRemoveGameFromWishlist,
 }: TProps) => {
   const getColor = (item: TPriceHistory) => {
     return getStoreColor(item.meta?.type || item.store.name)
@@ -44,8 +51,7 @@ const GameCard = ({
 
   return (
     <Box className={cn(styles.wrapper, className)}>
-      <AddToWishlistButton
-        game={game}
+      <Box
         sx={{
           position: 'absolute',
           top: -15,
@@ -53,7 +59,16 @@ const GameCard = ({
           left: { xs: switchToListOnMobile ? -5 : 'auto', sm: 'auto' },
           zIndex: 2,
         }}
-      />
+      >
+        {wishlistButtonType === 'add' && <AddToWishlistButton game={game} />}
+        {wishlistButtonType === 'remove' && !!removeFromWishlistId && (
+          <RemoveFromWishlistButton
+            game={game}
+            wishlistId={removeFromWishlistId}
+            onRemoveGame={onRemoveGameFromWishlist}
+          />
+        )}
+      </Box>
       <Link
         href={`/${EAppRoute.GAME}/${game.id}/${getGameTitleForLink(game.title)}`}
         style={

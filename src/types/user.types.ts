@@ -1,12 +1,6 @@
 import { TRegion } from './region.types'
 import { TStore } from './store.types'
-
-type TWishlist = {
-  id: number
-  name: string
-  discountNotificationByEmail: boolean
-  wishlistedGames: { id: number; gameId: number; wishlistId: number }[]
-}
+import { TUserWishlist } from './wishlist.types'
 
 type TStoreRegionPreferences = {
   id: number
@@ -21,8 +15,8 @@ type TUser = {
   id: number
   email: string
   username: string
-  wishlists: TWishlist[]
+  wishlists: TUserWishlist[]
   storeRegionPreferences: TStoreRegionPreferences[]
 }
 
-export type { TUser, TWishlist }
+export type { TUser }

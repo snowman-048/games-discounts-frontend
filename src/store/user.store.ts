@@ -3,14 +3,16 @@ import { devtools } from 'zustand/middleware'
 
 import { getCurrentUser } from '@/api/account'
 import { getTokens } from '@/helpers/auth-tokens'
-import { TUser, TWishlist } from '@/types/user.types'
+import { TUser } from '@/types/user.types'
+import { TUserWishlist } from '@/types/wishlist.types'
 
 type TUserState = {
   user: TUser | null
   isUserLoading: boolean
   setUser: (payload: TUser | null) => void
   fetchUser: () => Promise<void>
-  addWishlist: (wishlist: TWishlist) => void
+  addWishlist: (wishlist: TUserWishlist) => void
+  replaceWishlist: (id: number, wishlist: TUserWishlist) => void
 }
 
 const useUserStore = create<TUserState>()(
@@ -29,6 +31,25 @@ const useUserStore = create<TUserState>()(
           }
           return {
             user: { ...state.user, wishlists: [...state.user.wishlists, wishlist] },
+          }
+        }),
+
+      replaceWishlist: (id, wishlist) =>
+        set((state) => {
+          if (!state.user) {
+            return state
+          }
+          const wishlists = [...state.user.wishlists]
+          const index = wishlists.findIndex((item) => item.id === id)
+          const newWishlistData = { ...wishlist }
+          newWishlistData.wishlistedGames = newWishlistData.wishlistedGames.map((item) => ({
+            id: item.id,
+            wishlistId: item.wishlistId,
+            gameId: item.gameId,
+          }))
+          wishlists[index] = { ...wishlists[index], ...newWishlistData }
+          return {
+            user: { ...state.user, wishlists },
           }
         }),
 

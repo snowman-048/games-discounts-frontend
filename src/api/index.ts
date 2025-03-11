@@ -31,6 +31,7 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config
+    const message = error.response?.data?.message || error.message
 
     // If the user is unauthorised
     if (error.response?.status === 401) {
@@ -54,7 +55,7 @@ api.interceptors.response.use(
       }
     }
 
-    return Promise.reject({ ...error, message: error.message })
+    return Promise.reject({ ...error, message })
   },
 )
 

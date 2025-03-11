@@ -5,13 +5,13 @@ import { Button, Grid2 } from '@mui/material'
 import Link from 'next/link'
 
 import { EAppRoute } from '@/enums/app-route.enum'
-import { TWishlist } from '@/types/user.types'
+import { TUserWishlist } from '@/types/wishlist.types'
 
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
-  wishlist: TWishlist
+  wishlist: TUserWishlist
   withLink?: boolean
   onClick?: () => void
   isSmall?: boolean

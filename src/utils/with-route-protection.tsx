@@ -2,8 +2,7 @@
 
 import { JSX, PropsWithChildren } from 'react'
 
-import { Grid2 } from '@mui/material'
-
+import { Container } from '@/components/ui/container'
 import { Loader } from '@/components/ui/loader'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
@@ -17,9 +16,9 @@ const RouteProtectionWrapper = ({ children }: PropsWithChildren) => {
 
   if (isUserLoading) {
     return (
-      <Grid2 container justifyContent="center" width="100vw">
+      <Container>
         <Loader />
-      </Grid2>
+      </Container>
     )
   }
 
@@ -35,7 +34,9 @@ const RouteProtectionWrapper = ({ children }: PropsWithChildren) => {
 }
 
 const withRouteProtection = (Component: () => JSX.Element) => () => (
-  <RouteProtectionWrapper>{<Component />}</RouteProtectionWrapper>
+  <RouteProtectionWrapper>
+    <Component />
+  </RouteProtectionWrapper>
 )
 
 export { withRouteProtection }

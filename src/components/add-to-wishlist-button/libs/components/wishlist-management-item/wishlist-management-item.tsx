@@ -6,11 +6,11 @@ import { addGameToWishlist, removeGameFromWishlist } from '@/api/wishlist'
 import { WishlistLinkItem } from '@/components/wishlist-link-item'
 import { useUserStore } from '@/store/user.store'
 import { TGame } from '@/types/game.types'
-import { TWishlist } from '@/types/user.types'
+import { TUserWishlist } from '@/types/wishlist.types'
 import { CustomToast } from '@/utils/custom-toast'
 
 type TProps = {
-  wishlist: TWishlist
+  wishlist: TUserWishlist
   game: TGame
 }
 
@@ -51,12 +51,7 @@ const WishlistManagementItem = ({ game, wishlist }: TProps) => {
           : `Game added to wishlist "${wishlist?.name}"`,
       )
     } catch (err) {
-      CustomToast(
-        'error',
-        isSelected
-          ? `Error removing game from wishlist "${wishlist?.name}": ${(err as Error).message}`
-          : `Error adding game to wishlist "${wishlist?.name}": ${(err as Error).message}`,
-      )
+      CustomToast('error', (err as Error).message)
     } finally {
       setIsLoading(false)
     }

@@ -37,7 +37,7 @@ const onGoogleLogin = async (res: CredentialResponse, cookies: Cookies) => {
     useUserStore.setState({ isUserLoading: false, user: data.user })
     CustomToast('success', `You have successfully logged in with Google as ${data.user.username}`)
   } catch (err) {
-    CustomToast('error', `Error logging in with Google: ${(err as Error).message}`)
+    CustomToast('error', (err as Error).message)
   } finally {
     useUserStore.setState({ isUserLoading: false })
   }
