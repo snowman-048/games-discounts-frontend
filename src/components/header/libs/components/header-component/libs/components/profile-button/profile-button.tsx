@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react'
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { IconButton, IconButtonProps, Popover } from '@mui/material'
+import { IconButton, IconButtonProps } from '@mui/material'
 
+import { Popover } from '@/components/ui/popover'
 import { useUserStore } from '@/store/user.store'
 
 import { LoginModal } from './libs/components/login-modal'
@@ -43,33 +44,9 @@ const ProfileButton = (props: TProps) => {
       <LoginModal open={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} />
 
       <Popover
-        open={!!userControlsAnchorEl}
         anchorEl={userControlsAnchorEl}
         onClose={() => setUserControlsAnchorEl(null)}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transitionDuration={100}
-        slotProps={{
-          root: {
-            slotProps: {
-              backdrop: {
-                sx: {
-                  background: 'var(--backdrop)',
-                  transitionDuration: 100,
-                },
-              },
-            },
-          },
-          paper: {
-            sx: {
-              background: 'transparent',
-              boxShadow: 'none',
-              width: { xs: '100%', sm: '300px' },
-            },
-          },
-        }}
+        maxWidth={300}
       >
         <ProfileControls closePopup={() => setUserControlsAnchorEl(null)} />
       </Popover>

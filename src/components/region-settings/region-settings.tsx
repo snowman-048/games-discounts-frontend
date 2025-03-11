@@ -99,18 +99,9 @@ const RegionSettings = ({ regions }: TProps) => {
   }
 
   return (
-    <GlassCard>
-      <Grid2
-        padding={3}
-        container
-        flexDirection="column"
-        alignItems="center"
-        gap={3}
-        width={{ xs: '100vw', sm: '400px' }}
-      >
-        {renderCardContent()}
-      </Grid2>
-    </GlassCard>
+    <Grid2 container flexDirection="column" alignItems="center" gap={3} width="100%">
+      {renderCardContent()}
+    </Grid2>
   )
 }
 

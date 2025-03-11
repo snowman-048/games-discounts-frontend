@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
 import WindowIcon from '@mui/icons-material/Window'
-import { Box, Button, Divider, Drawer, Grid2, IconButton, Popover, Stack } from '@mui/material'
+import { Box, Button, Divider, Drawer, Grid2, IconButton, Stack } from '@mui/material'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -16,6 +16,7 @@ import { Logo } from '@/components/logo'
 import { RegionSettings } from '@/components/region-settings/region-settings'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
+import { Popover } from '@/components/ui/popover'
 import { TypographyV2 } from '@/components/ui/typography'
 import { OUR_EMAIL } from '@/configs/contacts.config'
 import { EAppRoute } from '@/enums/app-route.enum'
@@ -216,30 +217,7 @@ const HeaderComponent = ({ query }: TProps) => {
         </Box>
       </Drawer>
 
-      <Popover
-        id="location-settings"
-        open={!!locationAnchorEl}
-        anchorEl={locationAnchorEl}
-        onClose={() => setLocationAnchorEl(null)}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transitionDuration={100}
-        slotProps={{
-          root: {
-            slotProps: {
-              backdrop: {
-                sx: {
-                  background: 'var(--backdrop)',
-                  transitionDuration: 100,
-                },
-              },
-            },
-          },
-          paper: { sx: { background: 'transparent', boxShadow: 'none', borderRadius: '20px' } },
-        }}
-      >
+      <Popover anchorEl={locationAnchorEl} onClose={() => setLocationAnchorEl(null)} maxWidth={400}>
         <RegionSettings regions={regions} />
       </Popover>
     </>
