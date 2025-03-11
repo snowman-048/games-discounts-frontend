@@ -15,6 +15,7 @@ import { CustomToast } from '@/utils/custom-toast'
 
 import { CreateNewWishlistButton } from '../create-new-wishlist-button'
 import { Popover } from '../ui/popover'
+import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
 import { WishlistManagementItem } from './libs/components/wishlist-management-item'
 
@@ -38,22 +39,24 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
   return (
     <>
       <Box {...rest}>
-        <IconButton
-          sx={{
-            color: isIncludedInAnyWishlist ? 'var(--color-green)' : 'var(--color-primary)',
-          }}
-          onClick={(e) => {
-            e.stopPropagation()
-            if (!user) {
-              // TODO: Suggest to login
-              CustomToast('info', 'You need to be logged in to add game to wishlist')
-              return
-            }
-            setButtonAnchorEl(e.currentTarget)
-          }}
-        >
-          {isIncludedInAnyWishlist ? <BookmarkAddedIcon /> : <BookmarkAddIcon />}
-        </IconButton>
+        <Tooltip title={isIncludedInAnyWishlist ? 'Already in a wishlist' : 'Add to wishlist'}>
+          <IconButton
+            sx={{
+              color: isIncludedInAnyWishlist ? 'var(--color-green)' : 'var(--color-primary)',
+            }}
+            onClick={(e) => {
+              e.stopPropagation()
+              if (!user) {
+                // TODO: Suggest to login
+                CustomToast('info', 'You need to be logged in to add game to wishlist')
+                return
+              }
+              setButtonAnchorEl(e.currentTarget)
+            }}
+          >
+            {isIncludedInAnyWishlist ? <BookmarkAddedIcon /> : <BookmarkAddIcon />}
+          </IconButton>
+        </Tooltip>
       </Box>
 
       <Popover anchorEl={buttonAnchorEl} onClose={() => setButtonAnchorEl(null)}>

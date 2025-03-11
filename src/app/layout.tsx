@@ -20,7 +20,7 @@ import { InitHandler } from '@/utils/init-handler'
 import './globals.css'
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
+  weight: ['400', '500', '700', '900'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto',

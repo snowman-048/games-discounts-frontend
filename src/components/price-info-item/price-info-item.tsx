@@ -114,7 +114,7 @@ const PriceInfoItem = ({
     <GlassCard className={cn(styles.item, styles[variant], className)} style={{ height }}>
       <Grid2 container flexDirection={isInline ? 'column' : 'row'} alignItems="center" gap={1}>
         <StoreIcon store={store} link={storeLink} withLabel={showStoreLabel} />
-        <TypographyV2 adaptiveFontSize={{ xs: '0.8rem', sm: '1rem' }}>
+        <TypographyV2 adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }}>
           {region.country} - {region.key}
         </TypographyV2>
       </Grid2>

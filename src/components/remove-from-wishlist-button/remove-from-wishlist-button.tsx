@@ -11,6 +11,7 @@ import { TGame } from '@/types/game.types'
 import { CustomToast } from '@/utils/custom-toast'
 
 import { Popover } from '../ui/popover'
+import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
 
 type TProps = BoxProps & {
@@ -44,17 +45,19 @@ const RemoveFromWishlistButton = ({ game, wishlistId, onRemoveGame, ...rest }: T
   return (
     <>
       <Box {...rest}>
-        <IconButton
-          sx={{
-            color: 'var(--color-red)',
-          }}
-          onClick={(e) => {
-            e.stopPropagation()
-            setButtonAnchorEl(e.currentTarget)
-          }}
-        >
-          <BookmarkRemoveIcon />
-        </IconButton>
+        <Tooltip title="Remove the game from the wishlist">
+          <IconButton
+            sx={{
+              color: 'var(--color-red)',
+            }}
+            onClick={(e) => {
+              e.stopPropagation()
+              setButtonAnchorEl(e.currentTarget)
+            }}
+          >
+            <BookmarkRemoveIcon />
+          </IconButton>
+        </Tooltip>
       </Box>
 
       <Popover

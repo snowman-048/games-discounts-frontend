@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 
 import { Typography as MuiTypography, TypographyProps as MuiTypographyProps } from '@mui/material'
 import cn from 'classnames'
@@ -39,17 +39,41 @@ type TypographyProps = Omit<MuiTypographyProps, 'fontWeight' | 'color' | 'fontSi
   fontWeight?:
     | 'normal' // 400
     | 'medium' // 500
-    | 'semibold' // 600
-    | 'bold' // 700
+    | 'semibold' // 700
+    | 'bold' // 900
   color?: TFontColor
   customColor?: string
   adaptiveFontSize?: {
-    xl?: string
-    lg?: string
-    md?: string
-    sm?: string
-    xs?: string
+    xl?: TFontSize
+    lg?: TFontSize
+    md?: TFontSize
+    sm?: TFontSize
+    xs?: TFontSize
   }
+}
+
+const fontSizeMap: Record<TFontSize, number> = {
+  'text-s': 0.75,
+  'text-sm': 0.81,
+  'text-base': 0.88,
+  'text-l': 1,
+  'text-xl': 1.25,
+  'text-2xl': 1.5,
+  'heading-s': 1.75,
+  'heading-m': 2.25,
+  'heading-l': 3,
+}
+
+const lineHeightMap: Record<TFontSize, number> = {
+  'text-s': 1,
+  'text-sm': 1.12,
+  'text-base': 1.25,
+  'text-l': 1.5,
+  'text-xl': 1.75,
+  'text-2xl': 2,
+  'heading-s': 2.375,
+  'heading-m': 2.5,
+  'heading-l': 3.5,
 }
 
 const TypographyV2: FC<TypographyProps> = ({
@@ -64,26 +88,33 @@ const TypographyV2: FC<TypographyProps> = ({
   adaptiveFontSize,
   ...rest
 }) => {
+  const adaptiveValues = useMemo(
+    () =>
+      adaptiveFontSize
+        ? Object.keys(adaptiveFontSize).reduce(
+            (acc, key) => {
+              acc.adaptiveSize[key] =
+                `${fontSizeMap[(adaptiveFontSize as any)[key] as TFontSize]}rem !important`
+              acc.adaptiveHeight[key] =
+                `${lineHeightMap[(adaptiveFontSize as any)[key] as TFontSize]}rem !important`
+              return acc
+            },
+            { adaptiveSize: {}, adaptiveHeight: {} } as any,
+          )
+        : null,
+    [adaptiveFontSize],
+  )
+
   return (
     <MuiTypography
       className={cn(styles.typography, styles[fontSize], styles[fontWeight], className)}
-      fontWeight={fontWeight}
       textTransform={isUpperCase ? 'uppercase' : 'none'}
       sx={{
         color: customColor || `var(--color-${color})`,
         ...sx,
       }}
-      fontSize={
-        adaptiveFontSize
-          ? Object.keys(adaptiveFontSize).reduce(
-              (acc, key) => {
-                acc[key] = `${(adaptiveFontSize as any)[key]} !important`
-                return acc
-              },
-              {} as Record<string, string>,
-            )
-          : undefined
-      }
+      fontSize={adaptiveValues?.adaptiveSize}
+      lineHeight={adaptiveValues?.adaptiveHeight}
       {...rest}
     >
       {children}

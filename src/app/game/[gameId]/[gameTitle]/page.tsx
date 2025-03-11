@@ -297,7 +297,12 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
             <Carousel
               align="center"
               slides={gameFamily.map((item) => (
-                <Grid2 width={`${RELATED_ITEM_WIDTH}px`} height="100%" key={item.game.id}>
+                <Grid2
+                  width={`${RELATED_ITEM_WIDTH}px`}
+                  height="100%"
+                  key={item.game.id}
+                  paddingTop={2}
+                >
                   <GameCard game={item.game} noShadow />
                 </Grid2>
               ))}

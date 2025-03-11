@@ -6,6 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { IconButton, IconButtonProps } from '@mui/material'
 
 import { Popover } from '@/components/ui/popover'
+import { Tooltip } from '@/components/ui/tooltip'
 import { useUserStore } from '@/store/user.store'
 
 import { LoginModal } from './libs/components/login-modal'
@@ -27,19 +28,21 @@ const ProfileButton = (props: TProps) => {
 
   return (
     <>
-      <IconButton
-        onClick={(e) => {
-          if (!user) {
-            setIsLoginModalOpen(true)
-            return
-          }
-          setUserControlsAnchorEl(e.currentTarget)
-        }}
-        loading={isUserLoading}
-        {...props}
-      >
-        <AccountCircleIcon />
-      </IconButton>
+      <Tooltip title={isUserLoading ? null : user ? 'Profile' : 'Login'}>
+        <IconButton
+          onClick={(e) => {
+            if (!user) {
+              setIsLoginModalOpen(true)
+              return
+            }
+            setUserControlsAnchorEl(e.currentTarget)
+          }}
+          loading={isUserLoading}
+          {...props}
+        >
+          <AccountCircleIcon />
+        </IconButton>
+      </Tooltip>
 
       <LoginModal open={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} />
 

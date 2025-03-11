@@ -61,14 +61,14 @@ const StoreIcon = ({ store, link, withLabel = true, customLabel }: TProps) => {
       {withLabel && store !== EPriceHistoryMetaType.PS_PLUS && (
         <TypographyV2
           fontWeight="bold"
-          adaptiveFontSize={{ xs: '0.8rem', sm: '1rem' }}
+          adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }}
           className="store-display-name-in-chip"
         >
           {getStoreDisplayName(store).short}
         </TypographyV2>
       )}
       {!!customLabel && (
-        <TypographyV2 fontWeight="bold" adaptiveFontSize={{ xs: '0.8rem', sm: '1rem' }}>
+        <TypographyV2 fontWeight="bold" adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }}>
           {customLabel}
         </TypographyV2>
       )}

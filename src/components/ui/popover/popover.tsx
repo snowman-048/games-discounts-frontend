@@ -51,7 +51,6 @@ const Popover = ({
           sx: {
             background: 'transparent',
             boxShadow: 'none',
-            maxWidth: '100%',
             width: { xs: fixedWidth ? maxWidth : '100%', sm: maxWidth },
             overflow: 'visible',
           },

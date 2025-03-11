@@ -16,12 +16,27 @@ const SectionTitle = ({ title, sx, ...rest }: TProps) => {
         '::before': { background: 'var(--color-brand)' },
         '::after': { background: 'var(--color-brand)' },
         width: '100%',
+        overflow: 'hidden',
         fontSize: 'inherit',
+        '> span': {
+          display: 'block',
+          maxWidth: 'calc(100% - 30px)',
+        },
         ...sx,
       }}
       {...rest}
     >
-      <TypographyV2 fontWeight="bold" isUpperCase fontSize="heading-s" component="span">
+      <TypographyV2
+        fontWeight="bold"
+        isUpperCase
+        adaptiveFontSize={{ xs: 'text-xl', sm: 'text-2xl', md: 'heading-s' }}
+        component="span"
+        sx={{
+          display: 'block',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }}
+      >
         {title}
       </TypographyV2>
     </Divider>

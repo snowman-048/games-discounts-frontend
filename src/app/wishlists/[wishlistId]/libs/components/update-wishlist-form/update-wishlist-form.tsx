@@ -43,6 +43,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
       const { data } = await updateWishlist(wishlist.id, newData)
       replaceWishlist(wishlist.id, data)
       setWishlist(data)
+      CustomToast('success', 'Wishlist updated')
     } catch (err) {
       CustomToast('error', (err as Error).message)
     } finally {

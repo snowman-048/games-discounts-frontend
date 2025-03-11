@@ -31,6 +31,7 @@ import { useAppStore } from '@/store/app.store'
 
 import { GlassCard } from '../ui/cards/glass-card'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
+import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
@@ -180,13 +181,15 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
           disabled={!stores.length}
         />
 
-        <FormControlLabel
-          control={<Checkbox checked={onlySelectedStores} />}
-          label="Overlaps"
-          value={onlySelectedStores}
-          onChange={(_, value) => handleFilterChange({ onlySelectedStores: value })}
-          sx={{ marginTop: { xs: -1, md: 0 } }}
-        />
+        <Tooltip title="Show only games that are included in all the selected stores">
+          <FormControlLabel
+            control={<Checkbox checked={onlySelectedStores} />}
+            label="Overlaps"
+            value={onlySelectedStores}
+            onChange={(_, value) => handleFilterChange({ onlySelectedStores: value })}
+            sx={{ marginTop: { xs: -1, md: 0 } }}
+          />
+        </Tooltip>
       </>
     )
   }

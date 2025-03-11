@@ -132,7 +132,7 @@ const GameCard = ({
               alignItems="center"
               justifyContent="space-between"
             >
-              <TypographyV2 fontWeight="bold" textAlign="center">
+              <TypographyV2 fontWeight="medium" textAlign="center">
                 {game.title}
               </TypographyV2>
               <Stack gap={1} marginTop={1} width="100%">

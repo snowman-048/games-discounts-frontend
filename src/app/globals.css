@@ -1,7 +1,7 @@
-html {
+:root {
   --color-l1: #111;
-  --color-l2: ##222;
-  --color-l3: ##333;
+  --color-l2: #222;
+  --color-l3: #333;
   --color-brand: #eacb47;
   --color-primary: #f5f5f5;
   --color-secondary: #dedede;
@@ -14,9 +14,7 @@ html {
 
   --backdrop: rgba(0, 0, 0, 0.8);
   --bg-labels: #161616;
-}
 
-:root {
   --toastify-color-info: var(--color-secondary) !important;
   --toastify-color-success: var(--color-green) !important;
   --toastify-color-warning: var(--color-orange) !important;

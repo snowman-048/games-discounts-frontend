@@ -17,7 +17,7 @@ const Wishlists = () => {
 
   return (
     <Container>
-      <GlassCard width="100%" padding={3}>
+      <GlassCard width="100%" asSection>
         <Stack gap={2} width="100%">
           <SectionTitle title={`My Wishlists (${wishlists?.length || 0}/${MAX_WISHLISTS})`} />
 

@@ -8,6 +8,7 @@ import { EAppRoute } from '@/enums/app-route.enum'
 import { TUserWishlist } from '@/types/wishlist.types'
 
 import { GlassCard } from '../ui/cards/glass-card'
+import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
@@ -52,16 +53,21 @@ const WishlistLinkItem = ({
         >
           <TypographyV2
             fontSize="text-l"
+            fontWeight="semibold"
             sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}
           >
             {wishlist.name}
           </TypographyV2>
           <Grid2 container alignItems="center" gap={{ xs: 1, sm: 2 }} flexWrap="nowrap">
             {wishlist.discountNotificationByEmail && (
-              <MarkEmailReadIcon sx={{ width: { xs: 15, sm: 20 }, height: { xs: 15, sm: 20 } }} />
+              <Tooltip title="Email notifications are enabled">
+                <MarkEmailReadIcon sx={{ width: { xs: 15, sm: 20 }, height: { xs: 15, sm: 20 } }} />
+              </Tooltip>
             )}
             <Grid2 container alignItems="center" gap={{ xs: 0.7, sm: 1 }} flexWrap="nowrap">
-              <SportsEsportsIcon sx={{ width: { xs: 15, sm: 20 }, height: { xs: 15, sm: 20 } }} />
+              <Tooltip title="Items count in the wishlist">
+                <SportsEsportsIcon sx={{ width: { xs: 15, sm: 20 }, height: { xs: 15, sm: 20 } }} />
+              </Tooltip>
               <TypographyV2 fontSize="text-l" fontWeight="bold">
                 {wishlist.wishlistedGames.length}
               </TypographyV2>

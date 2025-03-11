@@ -44,14 +44,14 @@
 
 // Font width
 .normal {
-  font-weight: 400;
+  font-weight: 400 !important;
 }
 .medium {
-  font-weight: 500;
+  font-weight: 500 !important;
 }
 .semibold {
-  font-weight: 600;
+  font-weight: 700 !important;
 }
 .bold {
-  font-weight: 700;
+  font-weight: 900 !important;
 }
