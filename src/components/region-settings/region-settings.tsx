@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { FormControl, Grid2, InputLabel, MenuItem, Select } from '@mui/material'
+import { Grid2 } from '@mui/material'
 import { useCookies } from 'next-client-cookies'
 
 import { updatePreferedRegion } from '@/api/account'
@@ -12,11 +12,12 @@ import { getStoreRegionKey } from '@/helpers/getStoreRegionKey'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useAppStore } from '@/store/app.store'
 import { useUserStore } from '@/store/user.store'
+import { TOption } from '@/types/option.types'
 import { TRegionWithStores } from '@/types/region.types'
 import { CustomToast } from '@/utils/custom-toast'
 
-import { GlassCard } from '../ui/cards/glass-card'
 import { Loader } from '../ui/loader'
+import { Select } from '../ui/select'
 
 type TProps = {
   regions: TRegionWithStores[]
@@ -67,34 +68,29 @@ const RegionSettings = ({ regions }: TProps) => {
   }
 
   const renderCardContent = () => {
-    if (isUserLoading) {
+    if (isUserLoading || !regions?.length) {
       return <Loader />
     }
 
     return defaultRegions.map((item) => (
-      <FormControl sx={{ width: '100%' }} key={item.storeName}>
-        <InputLabel>{item.storeName} Region</InputLabel>
-        <Select
-          label={`${item.storeName} Region`}
-          disabled={isLoading}
-          onChange={(e) => {
-            const value = e.target.value
-            changeRegionForStore(item.storeName, +value)
-          }}
-          value={getRegionForStore(item.storeName)}
-          size="small"
-        >
-          {regions?.map((region) => {
-            if (region.regionStores?.find((id) => id.store.name === item.storeName)) {
-              return (
-                <MenuItem key={region.id} value={region.id}>
-                  {region.country} - {region.key} ({region.currency})
-                </MenuItem>
-              )
-            }
-          })}
-        </Select>
-      </FormControl>
+      <Select
+        label={`${item.storeName} Region`}
+        disabled={isLoading}
+        size="small"
+        value={getRegionForStore(item.storeName)}
+        options={regions.reduce((acc, region) => {
+          if (region.regionStores?.find((id) => id.store.name === item.storeName)) {
+            acc.push({
+              title: `${region.country} - ${region.key} (${region.currency})`,
+              value: region.id,
+            })
+          }
+          return acc
+        }, [] as TOption<number>[])}
+        onChange={(value) => {
+          changeRegionForStore(item.storeName, +value)
+        }}
+      />
     ))
   }
 

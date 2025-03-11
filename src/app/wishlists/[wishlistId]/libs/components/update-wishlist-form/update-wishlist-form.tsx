@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Checkbox, FormControlLabel, Grid2, Stack, TextField } from '@mui/material'
+import { Button, Checkbox, FormControlLabel, Grid2, Stack } from '@mui/material'
 
 import { updateWishlist } from '@/api/wishlist'
 import { TUpdateWishlistPayload } from '@/api/wishlist/types'
+import { Input } from '@/components/ui/input'
 import { useUserStore } from '@/store/user.store'
 import { TWishlistWithGames } from '@/types/wishlist.types'
 import { CustomToast } from '@/utils/custom-toast'
-import { screateWishlistSchema } from '@/validation/wishlist.validation'
+import { createWishlistSchema } from '@/validation/wishlist.validation'
 
 type Tprops = {
   wishlist: TWishlistWithGames
@@ -26,7 +27,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(screateWishlistSchema),
+    resolver: yupResolver(createWishlistSchema),
     defaultValues: {
       name: wishlist.name,
       discountNotificationByEmail: wishlist.discountNotificationByEmail,
@@ -58,17 +59,12 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
           <Controller
             name="name"
             control={control}
-            render={({ field: { ref, onChange, ...rest } }) => (
-              <TextField
+            render={({ field: { ref, ...rest } }) => (
+              <Input
                 variant="outlined"
                 label="Name"
-                sx={{ flex: 1 }}
                 size="small"
-                error={!!errors.name?.message}
-                onChange={(e) => {
-                  const value = e.target.value
-                  onChange(value)
-                }}
+                error={errors.name?.message}
                 {...rest}
               />
             )}
@@ -88,7 +84,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
               value={value}
               onChange={(_, value) => {
                 onChange(value)
-                handleSubmit(updateInfo)()
+                updateInfo({ discountNotificationByEmail: value })
               }}
               {...rest}
             />

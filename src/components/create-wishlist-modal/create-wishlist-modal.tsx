@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Checkbox, FormControlLabel, Stack, TextField } from '@mui/material'
+import { Button, Checkbox, FormControlLabel, Stack } from '@mui/material'
 
 import { createWishlist } from '@/api/wishlist'
 import { Modal } from '@/components/ui/modal'
 import { useUserStore } from '@/store/user.store'
-import { screateWishlistSchema } from '@/validation/wishlist.validation'
+import { createWishlistSchema } from '@/validation/wishlist.validation'
+
+import { Input } from '../ui/input'
 
 type TProps = {
   open: boolean
@@ -32,7 +34,7 @@ const CreateWishlistModal = ({ open, handleClose }: TProps) => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(screateWishlistSchema),
+    resolver: yupResolver(createWishlistSchema),
     defaultValues,
   })
 
@@ -63,17 +65,12 @@ const CreateWishlistModal = ({ open, handleClose }: TProps) => {
           <Controller
             name="name"
             control={control}
-            render={({ field: { ref, onChange, ...rest } }) => (
-              <TextField
+            render={({ field: { ref, ...rest } }) => (
+              <Input
                 variant="outlined"
                 label="Name"
-                sx={{ flex: 1 }}
                 size="small"
-                error={!!errors.name?.message}
-                onChange={(e) => {
-                  const value = e.target.value
-                  onChange(value)
-                }}
+                error={errors.name?.message}
                 {...rest}
               />
             )}

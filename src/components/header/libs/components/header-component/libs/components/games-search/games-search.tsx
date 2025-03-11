@@ -2,13 +2,13 @@
 
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Autocomplete, Box, Button, Grid2, Stack, TextField } from '@mui/material'
+import { Autocomplete, Box, Button, Grid2, Stack } from '@mui/material'
 import Link from 'next/link'
 
 import { getGamesList } from '@/api/games'
 import { GameCard } from '@/components/game-card'
 import { NoDataLabel } from '@/components/no-data-label'
-import { Loader } from '@/components/ui/loader'
+import { Input } from '@/components/ui/input'
 import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { createQueryString } from '@/helpers/createQueryString'
@@ -207,7 +207,7 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
           ),
         }}
         renderInput={(params) => (
-          <TextField
+          <Input
             {...params}
             label="Games Search"
             size="small"
@@ -216,16 +216,9 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
               zIndex: open ? 1405 : 1,
             }}
             slotProps={{
-              input: {
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? <Loader size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              },
+              input: params.InputProps,
             }}
+            loading={loading}
           />
         )}
       />

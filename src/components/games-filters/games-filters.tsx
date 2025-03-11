@@ -15,10 +15,8 @@ import {
   Grid2,
   IconButton,
   InputLabel,
-  MenuItem,
-  Select,
+  MenuItem, // Select,
   Stack,
-  TextField,
 } from '@mui/material'
 
 import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
@@ -30,7 +28,9 @@ import { useGetAllSearchParams } from '@/hooks/useGetAllSearchParams'
 import { useAppStore } from '@/store/app.store'
 
 import { GlassCard } from '../ui/cards/glass-card'
+import { Input } from '../ui/input'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
+import { Select } from '../ui/select'
 import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
 
@@ -72,24 +72,19 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         gap={{ xs: 3, md: 2 }}
         flexWrap="nowrap"
       >
-        <FormControl sx={{ flex: 1, width: '100%', maxWidth: { xs: '100%', md: '300px' } }}>
-          <InputLabel>Type</InputLabel>
-          <Select
-            label="Type"
-            onChange={(e) => {
-              const value = e.target.value
-              handleFilterChange({ types: value === EFilter.ALL ? '' : [value] })
-            }}
-            size="small"
-            value={searchParams.types?.[0] || EFilter.ALL}
-          >
-            {[EFilter.ALL, ...Object.values(EGameType)].map((item) => (
-              <MenuItem key={item} value={item}>
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Select
+          label="Type"
+          size="small"
+          value={searchParams.types?.[0] || EFilter.ALL}
+          options={[EFilter.ALL, ...Object.values(EGameType)].map((item) => ({
+            title: item,
+            value: item,
+          }))}
+          onChange={(value) => {
+            handleFilterChange({ types: value === EFilter.ALL ? '' : [value] })
+          }}
+          containerProps={{ sx: { maxWidth: { xs: '100%', md: '300px' } } }}
+        />
 
         <Grid2
           container
@@ -104,31 +99,23 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
             setIsModalOpen(false)
           }}
         >
-          <TextField
+          <Input
             variant="outlined"
             label="Title"
-            sx={{ flex: 1 }}
             size="small"
             value={title}
-            onChange={(e) => {
-              const value = e.target.value
-              setTitle(value)
-            }}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <IconButton
-                    sx={{ padding: 0.5 }}
-                    onClick={() => {
-                      setTitle('')
-                      handleFilterChange({ title: '' })
-                    }}
-                  >
-                    <ClearIcon />
-                  </IconButton>
-                ),
-              },
-            }}
+            onChange={setTitle}
+            endAdornment={
+              <IconButton
+                sx={{ padding: 0.5 }}
+                onClick={() => {
+                  setTitle('')
+                  handleFilterChange({ title: '' })
+                }}
+              >
+                <ClearIcon />
+              </IconButton>
+            }
           />
 
           <Button
@@ -147,24 +134,16 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
   const renderBottomFilters = () => {
     return (
       <>
-        <FormControl fullWidth>
-          <InputLabel>Sort by</InputLabel>
-          <Select
-            label="Sort by"
-            onChange={(e) => {
-              const value = e.target.value
-              handleFilterChange({ sort: value })
-            }}
-            size="small"
-            value={sort}
-          >
-            {sortOptions.map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.title}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Select
+          label="Sort by"
+          size="small"
+          value={sort}
+          options={sortOptions}
+          onChange={(value) => {
+            handleFilterChange({ sort: value })
+          }}
+          containerProps={{ sx: { minWidth: 300 } }}
+        />
 
         <MultipleAutocomplete
           label="Store"

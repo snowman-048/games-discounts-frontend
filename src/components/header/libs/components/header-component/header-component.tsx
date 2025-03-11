@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { Logo } from '@/components/logo'
-import { RegionSettings } from '@/components/region-settings/region-settings'
+import { RegionSettings } from '@/components/region-settings'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
 import { Popover } from '@/components/ui/popover'
