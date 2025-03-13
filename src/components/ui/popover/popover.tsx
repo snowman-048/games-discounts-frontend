@@ -1,15 +1,16 @@
 import { PropsWithChildren } from 'react'
 
-import { BoxProps, Popover as MuiPopover, PopoverOrigin, Zoom } from '@mui/material'
+import { BoxProps, Popover as MuiPopover, PopoverProps, Zoom } from '@mui/material'
 
 import { GlassCard } from '../cards/glass-card'
 
 type TProps = PropsWithChildren &
-  Partial<PopoverOrigin> & {
+  Omit<PopoverProps, 'open' | 'anchorEl' | 'onClose'> & {
     anchorEl: HTMLElement | null
     onClose: () => void
     maxWidth?: number
     fixedWidth?: boolean
+    fitContent?: boolean
     cardProps?: BoxProps
     withBackdrop?: boolean
   }
@@ -22,6 +23,7 @@ const Popover = ({
   maxWidth = 500,
   withBackdrop = true,
   fixedWidth,
+  fitContent,
   ...rest
 }: TProps) => {
   const { sx, ...restCardProps } = cardProps || {}
@@ -51,7 +53,10 @@ const Popover = ({
           sx: {
             background: 'transparent',
             boxShadow: 'none',
-            width: { xs: fixedWidth ? maxWidth : '100%', sm: maxWidth },
+            width: {
+              xs: fixedWidth ? maxWidth : fitContent ? 'fit-content' : '100%',
+              sm: fitContent ? 'fit-content' : maxWidth,
+            },
             overflow: 'visible',
           },
         },

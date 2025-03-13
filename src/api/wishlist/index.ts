@@ -16,6 +16,8 @@ const createWishlist = (payload: { name: string; discountNotificationByEmail: bo
 const updateWishlist = (id: number, payload: TUpdateWishlistPayload) =>
   api.put<TWishlistWithGames>(`${BASE_URL}/${id}`, payload)
 
+const deleteWishlist = (id: number) => api.delete<TUserWishlist>(`${BASE_URL}/${id}`)
+
 const addGameToWishlist = (payload: { gameId: number; wishlistId: number; storeIds: number[] }) =>
   api.post<TUserWishlist[]>(`${BASE_URL}/add-game`, payload)
 
@@ -27,6 +29,7 @@ export {
   getUserWishlistById,
   createWishlist,
   updateWishlist,
+  deleteWishlist,
   addGameToWishlist,
   removeGameFromWishlist,
 }

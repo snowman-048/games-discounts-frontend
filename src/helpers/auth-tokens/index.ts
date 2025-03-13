@@ -6,13 +6,13 @@ import { TAuthTokens } from '@/types/auth.types'
 import { getCookieServer } from '../getCookieServer'
 import { isClientRequest } from '../isClientRequest'
 
-const setTokens = (tokens: TAuthTokens) => {
+const setTokens = (tokens: Partial<TAuthTokens>) => {
   if (isClientRequest()) {
-    localStorage[EStorageKey.ACCESS_TOKEN] = tokens.accessToken
-    localStorage[EStorageKey.REFRESH_TOKEN] = tokens.refreshToken
+    if (tokens.accessToken) localStorage[EStorageKey.ACCESS_TOKEN] = tokens.accessToken
+    if (tokens.refreshToken) localStorage[EStorageKey.REFRESH_TOKEN] = tokens.refreshToken
   }
-  setCookie(EStorageKey.ACCESS_TOKEN, tokens.accessToken)
-  setCookie(EStorageKey.REFRESH_TOKEN, tokens.refreshToken)
+  if (tokens.accessToken) setCookie(EStorageKey.ACCESS_TOKEN, tokens.accessToken)
+  if (tokens.refreshToken) setCookie(EStorageKey.REFRESH_TOKEN, tokens.refreshToken)
 }
 
 const getTokens = async () => {

@@ -5,11 +5,12 @@ import { useEffect, useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { IconButton, IconButtonProps } from '@mui/material'
 
+import { Avatar } from '@/components/ui/avatar'
 import { Popover } from '@/components/ui/popover'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useUserStore } from '@/store/user.store'
 
-import { LoginModal } from './libs/components/login-modal'
+import { LoginModal } from '../../../../../../../login-modal'
 import { ProfileControls } from './libs/components/profile-controls'
 
 type TProps = IconButtonProps
@@ -40,7 +41,7 @@ const ProfileButton = (props: TProps) => {
           loading={isUserLoading}
           {...props}
         >
-          <AccountCircleIcon />
+          {user && !isUserLoading ? <Avatar user={user} /> : <AccountCircleIcon />}
         </IconButton>
       </Tooltip>
 

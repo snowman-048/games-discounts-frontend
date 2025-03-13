@@ -45,7 +45,7 @@ const RemoveFromWishlistButton = ({ game, wishlistId, onRemoveGame, ...rest }: T
   return (
     <>
       <Box {...rest}>
-        <Tooltip title="Remove the game from the wishlist">
+        <Tooltip title="Remove the game from the wishlist" delay={500}>
           <IconButton
             sx={{
               color: 'var(--color-red)',

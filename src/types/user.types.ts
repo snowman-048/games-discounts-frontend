@@ -17,6 +17,7 @@ type TUser = {
   username: string
   wishlists: TUserWishlist[]
   storeRegionPreferences: TStoreRegionPreferences[]
+  createdAt: string
 }
 
 export type { TUser }

@@ -4,6 +4,10 @@
   font-family: var(--font-roboto);
 }
 
+.handwritten {
+  font-family: var(--font-dancing-script) !important;
+}
+
 // Font sizes
 .text-s {
   font-size: variables.$fs-12 !important;
@@ -51,7 +55,15 @@
 }
 .semibold {
   font-weight: 700 !important;
+
+  &.handwritten {
+    font-weight: 600 !important;
+  }
 }
 .bold {
   font-weight: 900 !important;
+
+  &.handwritten {
+    font-weight: 700 !important;
+  }
 }

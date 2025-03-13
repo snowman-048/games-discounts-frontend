@@ -48,7 +48,7 @@ const WishlistDetails = () => {
 
   return (
     <Container gap={{ xs: 2, md: 5 }} paddingBottom={5}>
-      <GlassCard width="100%" asSection>
+      <GlassCard asSection>
         <Stack gap={2} width="100%">
           <SectionTitle title={wishlist.name} />
 
@@ -56,7 +56,7 @@ const WishlistDetails = () => {
         </Stack>
       </GlassCard>
 
-      <GlassCard width="100%" asSection>
+      <GlassCard asSection>
         <Stack gap={3} width="100%">
           <SectionTitle
             title={`Wishlisted Items${!!wishlist.wishlistedGames.length ? ` (${wishlist.wishlistedGames.length})` : ''}`}

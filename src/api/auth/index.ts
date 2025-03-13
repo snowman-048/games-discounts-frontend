@@ -19,11 +19,14 @@ const refreshTokens = async () => {
     throw new Error('No refresh token')
   }
 
-  return axios.get<TAuthTokens>(`${process.env.NEXT_PUBLIC_API_BASE_URL}${BASE_URL}/refresh`, {
-    headers: {
-      Authorization: `Bearer ${tokens.refreshToken}`,
+  return axios.get<{ accessToken: string }>(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}${BASE_URL}/refresh`,
+    {
+      headers: {
+        Authorization: `Bearer ${tokens.refreshToken}`,
+      },
     },
-  })
+  )
 }
 
 export { refreshTokens, authWithGoogle }

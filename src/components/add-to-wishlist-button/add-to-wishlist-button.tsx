@@ -11,9 +11,10 @@ import Link from 'next/link'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { useUserStore } from '@/store/user.store'
 import { TGame } from '@/types/game.types'
-import { CustomToast } from '@/utils/custom-toast'
 
 import { CreateNewWishlistButton } from '../create-new-wishlist-button'
+import { LoginModal } from '../login-modal'
+import { NoDataLabel } from '../no-data-label'
 import { Popover } from '../ui/popover'
 import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
@@ -27,6 +28,7 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
   const user = useUserStore((state) => state.user)
 
   const [buttonAnchorEl, setButtonAnchorEl] = useState<HTMLButtonElement | null>(null)
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
   const isIncludedInAnyWishlist = useMemo(
     () =>
@@ -39,7 +41,10 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
   return (
     <>
       <Box {...rest}>
-        <Tooltip title={isIncludedInAnyWishlist ? 'Already in a wishlist' : 'Add to wishlist'}>
+        <Tooltip
+          title={isIncludedInAnyWishlist ? 'Already in a wishlist' : 'Add to wishlist'}
+          delay={500}
+        >
           <IconButton
             sx={{
               color: isIncludedInAnyWishlist ? 'var(--color-green)' : 'var(--color-primary)',
@@ -47,8 +52,7 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
             onClick={(e) => {
               e.stopPropagation()
               if (!user) {
-                // TODO: Suggest to login
-                CustomToast('info', 'You need to be logged in to add game to wishlist')
+                setIsLoginModalOpen(true)
                 return
               }
               setButtonAnchorEl(e.currentTarget)
@@ -70,11 +74,14 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
           </TypographyV2>
 
           <FormGroup sx={{ width: '100%' }}>
-            <Stack gap={1} width="100%">
-              {user?.wishlists.map((wishlist) => (
-                <WishlistManagementItem key={wishlist.id} wishlist={wishlist} game={game} />
-              ))}
-            </Stack>
+            {!!user?.wishlists.length && (
+              <Stack gap={1} width="100%">
+                {user.wishlists.map((wishlist) => (
+                  <WishlistManagementItem key={wishlist.id} wishlist={wishlist} game={game} />
+                ))}
+              </Stack>
+            )}
+            {!user?.wishlists.length && <NoDataLabel label="You don't have any wishlists" />}
           </FormGroup>
 
           <Grid2 container alignItems="center" justifyContent="space-between" width="100%">
@@ -88,6 +95,8 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
           </Grid2>
         </Stack>
       </Popover>
+
+      <LoginModal open={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} />
     </>
   )
 }

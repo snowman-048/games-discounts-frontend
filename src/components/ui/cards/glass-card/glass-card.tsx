@@ -10,11 +10,12 @@ type TProps = PropsWithChildren &
     asSection?: boolean
   }
 
-const GlassCard = ({ children, className, asSection, padding, ...other }: TProps) => {
+const GlassCard = ({ children, className, asSection, padding, width, ...other }: TProps) => {
   return (
     <Box
       className={cn(styles.card, className)}
       padding={asSection ? { xs: 2, sm: 3 } : padding}
+      width={asSection ? '100%' : width}
       {...other}
     >
       {children}

@@ -5,19 +5,7 @@ import { useMemo, useState } from 'react'
 import ClearIcon from '@mui/icons-material/Clear'
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import SearchIcon from '@mui/icons-material/Search'
-import {
-  Button,
-  Checkbox,
-  Dialog,
-  Fade,
-  FormControl,
-  FormControlLabel,
-  Grid2,
-  IconButton,
-  InputLabel,
-  MenuItem, // Select,
-  Stack,
-} from '@mui/material'
+import { Button, Checkbox, FormControlLabel, Grid2, IconButton, Stack } from '@mui/material'
 
 import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
 import { EAppRoute } from '@/enums/app-route.enum'
@@ -29,10 +17,10 @@ import { useAppStore } from '@/store/app.store'
 
 import { GlassCard } from '../ui/cards/glass-card'
 import { Input } from '../ui/input'
+import { Modal } from '../ui/modal'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
 import { Select } from '../ui/select'
 import { Tooltip } from '../ui/tooltip'
-import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
   usedForAllGames?: boolean
@@ -151,7 +139,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
             title: store.name,
             value: `${store.id}`,
           }))}
-          onChange={(value) => {
+          onChange={(value: string[]) => {
             handleFilterChange({ storeIds: value })
           }}
           size="small"
@@ -160,13 +148,13 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
           disabled={!stores.length}
         />
 
-        <Tooltip title="Show only games that are included in all the selected stores">
+        <Tooltip title="Show only games that are included in all the selected stores" delay={500}>
           <FormControlLabel
             control={<Checkbox checked={onlySelectedStores} />}
             label="Overlaps"
             value={onlySelectedStores}
             onChange={(_, value) => handleFilterChange({ onlySelectedStores: value })}
-            sx={{ marginTop: { xs: -1, md: 0 } }}
+            sx={{ marginTop: { xs: -1, md: 0 }, width: 'fit-content' }}
           />
         </Tooltip>
       </>
@@ -222,66 +210,19 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         </GlassCard>
       </Grid2>
 
-      <Dialog
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        fullWidth
-        slotProps={{
-          paper: {
-            component: 'div',
-            sx: {
-              background: 'transparent',
-              padding: 0,
-              width: '100%',
-              margin: {
-                xs: 1,
-                sm: 2,
-              },
-            },
-          },
-          backdrop: {
-            sx: {
-              background: 'var(--backdrop)',
-            },
-            transitionDuration: 200,
-          },
-        }}
-      >
-        <Fade
-          in={isModalOpen}
-          style={{
-            transitionDuration: '0.3s',
-            transitionDelay: isModalOpen ? '0.1s' : '0s',
-            transitionTimingFunction: 'ease-in',
-          }}
-        >
-          <GlassCard
-            sx={{
-              width: '100%',
-            }}
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title="Filter Games">
+        <Stack gap={3} width="100%">
+          {renderTopFilters()}
+          {renderBottomFilters()}
+          <Button
+            onClick={() => setIsModalOpen(false)}
+            sx={{ fontSize: '1.2rem', marginTop: -1 }}
+            fullWidth
           >
-            <Grid2 container flexDirection="column" gap={3} padding={2} width="100%">
-              <TypographyV2
-                fontSize="text-2xl"
-                textAlign="center"
-                fontWeight="bold"
-                marginBottom={1}
-              >
-                Filter Games
-              </TypographyV2>
-              {renderTopFilters()}
-              {renderBottomFilters()}
-              <Button
-                onClick={() => setIsModalOpen(false)}
-                sx={{ fontSize: '1.2rem', marginTop: -1 }}
-                fullWidth
-              >
-                Close
-              </Button>
-            </Grid2>
-          </GlassCard>
-        </Fade>
-      </Dialog>
+            Close
+          </Button>
+        </Stack>
+      </Modal>
     </>
   )
 }

@@ -42,6 +42,7 @@ type TypographyProps = Omit<MuiTypographyProps, 'fontWeight' | 'color' | 'fontSi
     | 'semibold' // 700
     | 'bold' // 900
   color?: TFontColor
+  handwritten?: boolean
   customColor?: string
   adaptiveFontSize?: {
     xl?: TFontSize
@@ -86,6 +87,7 @@ const TypographyV2: FC<TypographyProps> = ({
   children,
   sx,
   adaptiveFontSize,
+  handwritten,
   ...rest
 }) => {
   const adaptiveValues = useMemo(
@@ -107,7 +109,9 @@ const TypographyV2: FC<TypographyProps> = ({
 
   return (
     <MuiTypography
-      className={cn(styles.typography, styles[fontSize], styles[fontWeight], className)}
+      className={cn(styles.typography, styles[fontSize], styles[fontWeight], className, {
+        [styles.handwritten]: handwritten,
+      })}
       textTransform={isUpperCase ? 'uppercase' : 'none'}
       sx={{
         color: customColor || `var(--color-${color})`,
@@ -123,4 +127,4 @@ const TypographyV2: FC<TypographyProps> = ({
 }
 
 export { TypographyV2 }
-export type { TypographyProps, TFontColor }
+export type { TypographyProps, TFontColor, TFontSize }

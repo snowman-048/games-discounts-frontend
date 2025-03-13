@@ -1,11 +1,14 @@
+'use client'
+
 import BookmarksIcon from '@mui/icons-material/Bookmarks'
 import PersonIcon from '@mui/icons-material/Person'
-import { Button, Stack } from '@mui/material'
+import { Stack } from '@mui/material'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
+import { LogoutButton } from '@/components/logout-button'
 import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
-import { logout } from '@/helpers/logout'
 import { useUserStore } from '@/store/user.store'
 
 const links = [
@@ -28,10 +31,12 @@ type TProps = {
 const ProfileControls = ({ closePopup }: TProps) => {
   const user = useUserStore((state) => state.user)
 
+  const pathname = usePathname()
+
   return (
     <Stack gap={2} width="100%">
-      <Stack sx={{ borderBottom: '1px solid var(--color-brand)' }} paddingBottom={1}>
-        <TypographyV2 fontSize="text-l" fontWeight="bold">
+      <Stack sx={{ borderBottom: '1px solid var(--color-disabled)' }} paddingBottom={1}>
+        <TypographyV2 fontSize="text-2xl" fontWeight="bold" handwritten>
           {user?.username}
         </TypographyV2>
         <TypographyV2 color="inactive" fontSize="text-s">
@@ -48,6 +53,7 @@ const ProfileControls = ({ closePopup }: TProps) => {
             gap={1}
             whiteSpace="nowrap"
             fontSize="text-l"
+            color={pathname === link.path ? 'brand' : 'primary'}
           >
             {link.icon && <link.icon sx={{ width: 20, height: 20 }} />}
             {link.label}
@@ -55,18 +61,7 @@ const ProfileControls = ({ closePopup }: TProps) => {
         </Link>
       ))}
 
-      <Button
-        variant="contained"
-        sx={{ background: 'var(--color-red)' }}
-        fullWidth
-        onClick={() => {
-          logout()
-        }}
-      >
-        <TypographyV2 variant="body2" sx={{ textTransform: 'none' }} color="l1" fontWeight="bold">
-          Logout
-        </TypographyV2>
-      </Button>
+      <LogoutButton />
     </Stack>
   )
 }

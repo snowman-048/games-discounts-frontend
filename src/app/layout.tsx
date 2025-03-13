@@ -6,9 +6,10 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import cn from 'classnames'
 import { Metadata } from 'next'
 import { CookiesProvider } from 'next-client-cookies/server'
-import { Roboto } from 'next/font/google'
+import { Dancing_Script, Roboto } from 'next/font/google'
 import Script from 'next/script'
 
 import { BackgroundHandler } from '@/components/background-handler'
@@ -24,6 +25,13 @@ const roboto = Roboto({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto',
+})
+
+const dancingScript = Dancing_Script({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-dancing-script',
 })
 
 export const metadata: Metadata = {
@@ -50,7 +58,7 @@ const RootLayout = async ({
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
         crossOrigin="anonymous"
       />
-      <body className={roboto.variable}>
+      <body className={cn(roboto.variable, dancingScript.variable)}>
         {process.env.NEXT_PUBLIC_NODE_ENV === 'production' && (
           <>
             <Analytics />

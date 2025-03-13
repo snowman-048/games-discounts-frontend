@@ -1,4 +1,4 @@
-import { styled } from '@mui/material'
+import { Zoom, styled } from '@mui/material'
 import MuiTooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip'
 
 import { TypographyV2 } from '../typography'
@@ -6,6 +6,7 @@ import { TypographyV2 } from '../typography'
 type TProps = TooltipProps & {
   maxWidth?: number
   title?: string | null
+  delay?: number
 }
 
 const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
@@ -19,7 +20,7 @@ const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }))
 
-const Tooltip = ({ title, maxWidth = 180, children }: TProps) => {
+const Tooltip = ({ title, maxWidth = 180, delay = 0, children }: TProps) => {
   if (!children) {
     return <></>
   }
@@ -39,6 +40,11 @@ const Tooltip = ({ title, maxWidth = 180, children }: TProps) => {
         maxWidth,
       }}
       arrow
+      enterDelay={delay}
+      enterNextDelay={delay}
+      slots={{
+        transition: Zoom,
+      }}
     >
       {children}
     </StyledTooltip>

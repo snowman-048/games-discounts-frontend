@@ -52,12 +52,15 @@ const useGoogleOneTap = () => {
   })
 }
 
-const GoogleAuthButton = () => {
+const GoogleAuthButton = ({ onSuccess }: { onSuccess?: () => void }) => {
   const cookies = useCookies()
 
   return (
     <GoogleLogin
-      onSuccess={(res) => onGoogleLogin(res, cookies)}
+      onSuccess={async (res) => {
+        await onGoogleLogin(res, cookies)
+        onSuccess?.()
+      }}
       onError={onGoogleLoginError}
       logo_alignment="center"
       theme="filled_black"

@@ -43,27 +43,22 @@ const Modal = ({ open, onClose, title, withClose = true, children, ...rest }: TP
             transform: 'translate(-50%, -50%)',
             position: 'absolute',
             width: { xs: '100%', sm: '600px' },
-            maxWidth: 'calc(100vw - 16px)',
+            maxWidth: `calc(100vw - ${withClose ? 24 : 16}px)`,
+            overflow: 'visible',
           }}
           padding={2}
         >
           <Stack width="100%" alignItems="center" gap={2}>
-            <Grid2
-              container
-              width="100%"
-              justifyContent="center"
-              sx={{ position: 'relative' }}
-              px={2.5}
-            >
+            <Grid2 container width="100%" justifyContent="center" sx={{ position: 'relative' }}>
               {!!title && (
-                <TypographyV2 fontSize="text-xl" fontWeight="medium" component="h2" align="center">
+                <TypographyV2 fontSize="text-2xl" fontWeight="medium" component="h2" align="center">
                   {title}
                 </TypographyV2>
               )}
               {withClose && (
                 <IconButton
                   onClick={onClose}
-                  sx={{ position: 'absolute', right: -12, top: 0, padding: 0.5 }}
+                  sx={{ position: 'absolute', right: -28, top: -28, padding: 0.5 }}
                 >
                   <CloseIcon />
                 </IconButton>
