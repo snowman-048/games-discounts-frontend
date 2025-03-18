@@ -7,7 +7,12 @@ type TBaseWishlistData = {
 }
 
 type TUserWishlist = TBaseWishlistData & {
-  wishlistedGames: { id: number; gameId: number; wishlistId: number }[]
+  wishlistedGames: {
+    id: number
+    gameId: number
+    wishlistId: number
+    wishlistedGameStores: { storeId: number }[]
+  }[]
 }
 
 type TWishlistWithGames = TBaseWishlistData & {

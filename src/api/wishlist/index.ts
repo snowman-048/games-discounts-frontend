@@ -18,8 +18,11 @@ const updateWishlist = (id: number, payload: TUpdateWishlistPayload) =>
 
 const deleteWishlist = (id: number) => api.delete<TUserWishlist>(`${BASE_URL}/${id}`)
 
-const addGameToWishlist = (payload: { gameId: number; wishlistId: number; storeIds: number[] }) =>
-  api.post<TUserWishlist[]>(`${BASE_URL}/add-game`, payload)
+const toggleGameInWishlist = (payload: {
+  gameId: number
+  wishlistId: number
+  storeIds: number[]
+}) => api.post<TUserWishlist[]>(`${BASE_URL}/toggle-game`, payload)
 
 const removeGameFromWishlist = (payload: { gameId: number; wishlistId: number }) =>
   api.post<TUserWishlist[]>(`${BASE_URL}/remove-game`, payload)
@@ -30,6 +33,6 @@ export {
   createWishlist,
   updateWishlist,
   deleteWishlist,
-  addGameToWishlist,
+  toggleGameInWishlist,
   removeGameFromWishlist,
 }

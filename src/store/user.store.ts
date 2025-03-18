@@ -46,6 +46,7 @@ const useUserStore = create<TUserState>()(
             id: item.id,
             wishlistId: item.wishlistId,
             gameId: item.gameId,
+            wishlistedGameStores: item.wishlistedGameStores,
           }))
           wishlists[index] = { ...wishlists[index], ...newWishlistData }
           return {

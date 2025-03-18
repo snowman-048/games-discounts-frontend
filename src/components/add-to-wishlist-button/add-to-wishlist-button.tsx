@@ -9,6 +9,7 @@ import { Box, BoxProps, FormGroup, Grid2, IconButton, Stack } from '@mui/materia
 import Link from 'next/link'
 
 import { EAppRoute } from '@/enums/app-route.enum'
+import { useAppStore } from '@/store/app.store'
 import { useUserStore } from '@/store/user.store'
 import { TGame } from '@/types/game.types'
 
@@ -25,6 +26,7 @@ type TProps = BoxProps & {
 }
 
 const AddToWishlistButton = ({ game, ...rest }: TProps) => {
+  const stores = useAppStore((state) => state.stores)
   const user = useUserStore((state) => state.user)
 
   const [buttonAnchorEl, setButtonAnchorEl] = useState<HTMLButtonElement | null>(null)
@@ -37,6 +39,10 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
       ),
     [user, game],
   )
+
+  if (!stores) {
+    return <></>
+  }
 
   return (
     <>
@@ -69,13 +75,18 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
             Add game to wishlist
           </TypographyV2>
 
-          <TypographyV2 sx={{ fontStyle: 'italic' }} textAlign="center">
+          <TypographyV2
+            sx={{ fontStyle: 'italic' }}
+            textAlign="center"
+            fontSize="text-l"
+            marginTop={-1}
+          >
             {game.title}
           </TypographyV2>
 
           <FormGroup sx={{ width: '100%' }}>
             {!!user?.wishlists.length && (
-              <Stack gap={1} width="100%">
+              <Stack gap={2} width="100%">
                 {user.wishlists.map((wishlist) => (
                   <WishlistManagementItem key={wishlist.id} wishlist={wishlist} game={game} />
                 ))}
