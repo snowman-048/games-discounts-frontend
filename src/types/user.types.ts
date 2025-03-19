@@ -1,3 +1,5 @@
+import { ERole } from '@/enums/roles.enum'
+
 import { TRegion } from './region.types'
 import { TStore } from './store.types'
 import { TUserWishlist } from './wishlist.types'
@@ -15,6 +17,7 @@ type TUser = {
   id: number
   email: string
   username: string
+  role: ERole
   wishlists: TUserWishlist[]
   storeRegionPreferences: TStoreRegionPreferences[]
   createdAt: string

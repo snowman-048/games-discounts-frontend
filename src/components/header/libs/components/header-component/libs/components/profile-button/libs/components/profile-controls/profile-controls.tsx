@@ -9,9 +9,10 @@ import { usePathname } from 'next/navigation'
 import { LogoutButton } from '@/components/logout-button'
 import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { ERole } from '@/enums/roles.enum'
 import { useUserStore } from '@/store/user.store'
 
-const links = [
+const allLinks = [
   {
     label: 'Wishlists',
     path: `/${EAppRoute.WISHLISTS}`,
@@ -22,6 +23,12 @@ const links = [
     path: `/${EAppRoute.PROFILE}`,
     icon: PersonIcon,
   },
+  {
+    label: 'Pending Connections',
+    path: `/${EAppRoute.PENDING_CONNECTIONS}/1`,
+    icon: PersonIcon,
+    adminOnly: true,
+  },
 ]
 
 type TProps = {
@@ -30,6 +37,8 @@ type TProps = {
 
 const ProfileControls = ({ closePopup }: TProps) => {
   const user = useUserStore((state) => state.user)
+
+  const links = allLinks.filter((link) => !link.adminOnly || user?.role === ERole.ADMIN)
 
   const pathname = usePathname()
 

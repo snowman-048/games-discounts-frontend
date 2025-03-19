@@ -3,6 +3,7 @@ import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { TPendingConnection } from '@/api/pending-connections/types'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
 import { getStoreColor } from '@/helpers/getStoreColor'
@@ -17,7 +18,7 @@ import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
 type TProps = {
-  game: TGame
+  game: TGame | TPendingConnection
   noShadow?: boolean
   variant?: 'card' | 'list-item'
   onClick?: () => void
@@ -29,7 +30,7 @@ type TProps = {
 }
 
 const GameCard = ({
-  game,
+  game: rawGame,
   variant = 'card',
   onClick,
   className,
@@ -39,6 +40,7 @@ const GameCard = ({
   removeFromWishlistId,
   onRemoveGameFromWishlist,
 }: TProps) => {
+  const game = 'gameData' in rawGame ? rawGame.gameData : rawGame
   const getColor = (item: TPriceHistory) => {
     return getStoreColor(item.meta?.type || item.store.name)
   }
@@ -51,24 +53,26 @@ const GameCard = ({
 
   return (
     <Box className={cn(styles.wrapper, className)}>
-      <Box
-        sx={{
-          position: 'absolute',
-          top: -15,
-          right: { xs: switchToListOnMobile ? 0 : -15, sm: -15 },
-          left: { xs: switchToListOnMobile ? -5 : 'auto', sm: 'auto' },
-          zIndex: 2,
-        }}
-      >
-        {wishlistButtonType === 'add' && <AddToWishlistButton game={game} />}
-        {wishlistButtonType === 'remove' && !!removeFromWishlistId && (
-          <RemoveFromWishlistButton
-            game={game}
-            wishlistId={removeFromWishlistId}
-            onRemoveGame={onRemoveGameFromWishlist}
-          />
-        )}
-      </Box>
+      {!('gameData' in rawGame) && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -15,
+            right: { xs: switchToListOnMobile ? 0 : -15, sm: -15 },
+            left: { xs: switchToListOnMobile ? -5 : 'auto', sm: 'auto' },
+            zIndex: 2,
+          }}
+        >
+          {wishlistButtonType === 'add' && <AddToWishlistButton game={game} />}
+          {wishlistButtonType === 'remove' && !!removeFromWishlistId && (
+            <RemoveFromWishlistButton
+              game={game}
+              wishlistId={removeFromWishlistId}
+              onRemoveGame={onRemoveGameFromWishlist}
+            />
+          )}
+        </Box>
+      )}
       <Link
         href={`/${EAppRoute.GAME}/${game.id}/${getGameTitleForLink(game.title)}`}
         style={

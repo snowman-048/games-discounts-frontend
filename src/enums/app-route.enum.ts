@@ -6,6 +6,7 @@ enum EAppRoute {
   ABOUT_US = 'about-us',
   WISHLISTS = 'wishlists',
   PROFILE = 'profile',
+  PENDING_CONNECTIONS = 'pending-connections',
 }
 
 export { EAppRoute }
