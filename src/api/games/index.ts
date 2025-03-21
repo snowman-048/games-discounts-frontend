@@ -26,4 +26,7 @@ const getGameFamilyByGameId = async ({
 
 const getGamesDataForSitemap = () => api.get<{ id: number; title: string }[]>(`${BASE_URL}/sitemap`)
 
-export { getGamesList, getGameById, getGamesDataForSitemap, getGameFamilyByGameId }
+const updateGame = async (id: number, data: TGame) =>
+  api.put<TGame | null>(`${BASE_URL}/${id}`, data)
+
+export { getGamesList, getGameById, getGamesDataForSitemap, getGameFamilyByGameId, updateGame }

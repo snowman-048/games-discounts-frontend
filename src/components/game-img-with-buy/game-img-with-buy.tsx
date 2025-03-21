@@ -42,7 +42,7 @@ const GameImgWithBuy = ({ game, storeLinks, className, isFake = false }: TProps)
           </TypographyV2>
         </GlassCard>
         {game.gameStore?.map((gameStore) => {
-          const latestPriceHistory = game.priceHistory.find(
+          const latestPriceHistory = game.priceHistory?.find(
             (item) => item.storeId === gameStore.store.id,
           )
           const link = storeLinks?.[gameStore.store.name]

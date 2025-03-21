@@ -33,4 +33,4 @@ type TPendingConnection = {
   gamesPendingConnectionsPotentialGames: { id: number; game: TGame }[]
 }
 
-export type { TSensitiveData, TGameDataMain, TPendingConnection }
+export type { TSensitiveData, TGameDataMain, TPendingConnection, TGameData }

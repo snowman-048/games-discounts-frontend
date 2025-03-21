@@ -1,5 +1,6 @@
 'use client'
 
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import BookmarksIcon from '@mui/icons-material/Bookmarks'
 import PersonIcon from '@mui/icons-material/Person'
 import { Stack } from '@mui/material'
@@ -26,7 +27,7 @@ const allLinks = [
   {
     label: 'Pending Connections',
     path: `/${EAppRoute.PENDING_CONNECTIONS}/1`,
-    icon: PersonIcon,
+    icon: AccessTimeIcon,
     adminOnly: true,
   },
 ]

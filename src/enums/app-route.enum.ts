@@ -7,6 +7,7 @@ enum EAppRoute {
   WISHLISTS = 'wishlists',
   PROFILE = 'profile',
   PENDING_CONNECTIONS = 'pending-connections',
+  RESOLVE_PENDING_CONNECTION = 'resolve-pending-connection'
 }
 
 export { EAppRoute }

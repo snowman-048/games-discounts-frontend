@@ -74,7 +74,11 @@ const GameCard = ({
         </Box>
       )}
       <Link
-        href={`/${EAppRoute.GAME}/${game.id}/${getGameTitleForLink(game.title)}`}
+        href={
+          'gameData' in rawGame
+            ? `/${EAppRoute.RESOLVE_PENDING_CONNECTION}/${rawGame.id}/${getGameTitleForLink(rawGame.gameData.title)}`
+            : `/${EAppRoute.GAME}/${game.id}/${getGameTitleForLink(game.title)}`
+        }
         style={
           {
             '--glow': glow,

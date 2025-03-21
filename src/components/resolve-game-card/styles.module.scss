@@ -1,0 +1,52 @@
+.container {
+  --img-offset: -100px;
+  --section-padding: 24px;
+  flex: auto;
+  min-height: 0;
+}
+
+.section {
+  padding: var(--section-padding);
+  overflow: visible;
+  max-width: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+.mainInfoContainer {
+  display: flex;
+  position: relative;
+}
+
+.mainImgWrapper {
+  position: absolute;
+  z-index: 2;
+  left: var(--section-padding);
+  top: var(--img-offset);
+}
+
+.typeContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.fakeImgWrapper {
+  transform: translateY(calc(var(--img-offset) - var(--section-padding)));
+  margin-bottom: calc(var(--img-offset) - var(--section-padding));
+  margin-right: var(--section-padding);
+}
+
+@media screen and (max-width: 899px) {
+  .mainImgWrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .container {
+    --section-padding: 16px;
+  }
+}
