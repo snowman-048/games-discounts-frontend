@@ -5,9 +5,7 @@ import * as React from 'react'
 import { toast } from 'react-toastify'
 
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
-import { Box, Divider, Grid2, LinearProgress, Modal, Stack } from '@mui/material'
-import Tab from '@mui/material/Tab'
-import Tabs from '@mui/material/Tabs'
+import { Box, Divider, Grid2, IconButton, LinearProgress, Modal, Stack } from '@mui/material'
 import { useParams } from 'next/navigation'
 
 import {
@@ -19,6 +17,9 @@ import { TPendingConnection } from '@/api/pending-connections/types'
 import { EditGameForm } from '@/components/edit-game-form/edit-game-form'
 import { NoDataLabel } from '@/components/no-data-label'
 import { ResolveGameCard } from '@/components/resolve-game-card/page'
+import { TwoTabs } from '@/components/two-tabs/two-tabs'
+import { GlassCard } from '@/components/ui/cards/glass-card'
+import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { ERole } from '@/enums/roles.enum'
 import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
@@ -36,23 +37,18 @@ const ResolvePendingConnection = () => {
   const [resolveMode, setResolveMode] = useState<'merge' | 'create'>('merge')
   const [resolveLoading, setResolveLoading] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [columnWidth, setColumnWidth] = useState(0)
 
   const stores = useAppStore((state) => state.stores)
   const navigate = useCustomNavigate()
   const params = useParams()
-
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
+  const descriptionElementRef = useRef<HTMLElement>(null)
 
   const closeModal = () => {
     setFormModalOpen(false)
     setMergedGameData(null)
   }
 
-  const descriptionElementRef = useRef<HTMLElement>(null)
   useEffect(() => {
     if (formModalOpen) {
       const { current: descriptionElement } = descriptionElementRef
@@ -81,6 +77,13 @@ const ResolvePendingConnection = () => {
       }
     })()
   }, [resolveId])
+
+  useEffect(() => {
+    const updateWidth = () => setColumnWidth(window.innerWidth)
+    updateWidth()
+    window.addEventListener('resize', updateWidth)
+    return () => window.removeEventListener('resize', updateWidth)
+  }, [])
 
   if (loading) {
     return <LinearProgress />
@@ -190,86 +193,76 @@ const ResolvePendingConnection = () => {
     }
   }
 
-  if (!pendingConnection) {
-    return <NoDataLabel />
-  }
-  
-
-  // return (
-  //   <Box sx={{ width: '100%' }}>
-  //     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-  //       <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered   variant="fullWidth">
-  //         <Tab label="New Game" {...a11yProps(0)} />
-  //         <Tab label="Merge with this" {...a11yProps(1)} />
-  //       </Tabs>
-  //     </Box>
-  //     <CustomTabPanel value={value} index={0}>
-  //       <Box flex={1}>
-  //         <ResolveGameCard
-  //           game={pendingConnection?.gameData}
-  //           actionButton={{ label: 'Create new', onClick: onCreateNew }}
-  //         />
-  //       </Box>
-  //     </CustomTabPanel>
-  //     <CustomTabPanel value={value} index={1}>
-  //       <Stack gap={0} flex={1}>
-  //         {pendingConnection?.gamesPendingConnectionsPotentialGames?.map((connection) => (
-  //           <ResolveGameCard
-  //             game={connection.game}
-  //             key={connection.id}
-  //             onClick={() =>
-  //               navigate({
-  //                 path: `/${EAppRoute.GAME}/${connection.game.id}/${getGameTitleForLink(connection.game.title)}`,
-  //                 replace: true,
-  //               })
-  //             }
-  //             actionButton={{
-  //               label: 'Merge ',
-  //               onClick: () => onMergePreview(connection.game),
-  //             }}
-  //           />
-  //         ))}
-  //       </Stack>
-  //     </CustomTabPanel>
-  //   </Box>
-  // )
-
   return (
     <>
-      <Grid2 container justifyContent="space-between" flex={1} gap={1} flexWrap="nowrap">
-        <Box flex={1}>
-          <ResolveGameCard
-            game={pendingConnection?.gameData}
-            actionButton={{ label: 'Create new', onClick: onCreateNew }}
-          />
-        </Box>
+      {columnWidth > 1024 ? (
+        <Grid2>
+          <Grid2 container justifyContent="space-between" flex={1} flexWrap="nowrap">
+            <Box flex={1}>
+              <ResolveGameCard
+                game={pendingConnection?.gameData}
+                actionButton={{ label: 'Create new', onClick: onCreateNew }}
+              />
+            </Box>
 
-        <Box>
-          <Divider orientation="vertical">
-            <DoubleArrowIcon />
-          </Divider>
-        </Box>
+            <Box>
+              <Divider orientation="vertical">
+                <DoubleArrowIcon />
+              </Divider>
+            </Box>
 
-        <Stack gap={0} flex={1}>
-          {pendingConnection?.gamesPendingConnectionsPotentialGames?.map((connection) => (
-            <ResolveGameCard
-              game={connection.game}
-              key={connection.id}
-              onClick={() =>
-                navigate({
-                  path: `/${EAppRoute.GAME}/${connection.game.id}/${getGameTitleForLink(connection.game.title)}`,
-                  replace: true,
-                })
-              }
-              actionButton={{
-                label: 'Merge ',
-                onClick: () => onMergePreview(connection.game),
-              }}
-            />
-          ))}
-        </Stack>
-      </Grid2>
-
+            <Stack flex={1}>
+              {pendingConnection?.gamesPendingConnectionsPotentialGames?.map((connection) => (
+                <ResolveGameCard
+                  game={connection.game}
+                  key={connection.id}
+                  onClick={() =>
+                    navigate({
+                      path: `/${EAppRoute.GAME}/${connection.game.id}/${getGameTitleForLink(connection.game.title)}`,
+                      replace: true,
+                    })
+                  }
+                  actionButton={{
+                    label: 'Merge ',
+                    onClick: () => onMergePreview(connection.game),
+                  }}
+                />
+              ))}
+            </Stack>
+          </Grid2>
+        </Grid2>
+      ) : (
+        <TwoTabs
+          tab1={
+            <Box flex={1}>
+              <ResolveGameCard
+                game={pendingConnection?.gameData}
+                actionButton={{ label: 'Create new', onClick: onCreateNew }}
+              />
+            </Box>
+          }
+          tab2={
+            <Stack flex={1}>
+              {pendingConnection?.gamesPendingConnectionsPotentialGames?.map((connection) => (
+                <ResolveGameCard
+                  game={connection.game}
+                  key={connection.id}
+                  onClick={() =>
+                    navigate({
+                      path: `/${EAppRoute.GAME}/${connection.game.id}/${getGameTitleForLink(connection.game.title)}`,
+                      replace: true,
+                    })
+                  }
+                  actionButton={{
+                    label: 'Merge',
+                    onClick: () => onMergePreview(connection.game),
+                  }}
+                />
+              ))}
+            </Stack>
+          }
+        />
+      )}
       <Modal open={formModalOpen} onClose={closeModal}>
         <Box
           sx={{
@@ -283,6 +276,16 @@ const ResolvePendingConnection = () => {
             maxWidth: 1000,
           }}
         >
+          <IconButton
+            onClick={closeModal}
+            sx={{ position: 'absolute', right: 13, top: 16, padding: 0.5, zIndex: 1000 }}
+          >
+            <GlassCard sx={{ padding: '8px 32px' }}>
+              <TypographyV2 color="red" fontWeight="bold" fontSize="text-l" letterSpacing={4}>
+                Close
+              </TypographyV2>
+            </GlassCard>
+          </IconButton>
           {!!mergedGameData && (
             <EditGameForm
               game={mergedGameData}
@@ -294,35 +297,6 @@ const ResolvePendingConnection = () => {
       </Modal>
     </>
   )
-}
-
-interface TabPanelProps {
-  children?: React.ReactNode
-  index: number
-  value: number
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  )
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  }
 }
 
 export default withRouteProtection(ResolvePendingConnection, [ERole.ADMIN])

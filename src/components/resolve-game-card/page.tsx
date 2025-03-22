@@ -62,7 +62,7 @@ const ResolveGameCard = ({ game, actionButton, onClick }: TProps) => {
           <Grid2 display={'flex'} justifyContent={'space-between'}>
             <GameImgWithBuy game={game} className={styles.fakeImgWrapper} isFake key={game.id} />
 
-            <Grid2 display={'flex'} flexDirection={'column'} gap={2}>
+            <Grid2 className={styles.buttonsContainer}>
               {game.gameLink ? (
                 <Link href={game.gameLink} target="_blank">
                   <CustomButton label={'View Game'} />

@@ -24,15 +24,14 @@ const PendingConnections = () => {
   const searchParams = useSearchParams()
 
   const [page, setPage] = useState(1)
+  const [totalConnections, setTotalConnections] = useState(0)
+  const [pendingConnections, setPendingConnections] = useState<TPendingConnection[] | null>(null)
 
   useEffect(() => {
     if (params?.page) {
       setPage(+params.page)
     }
   }, [params])
-
-  const [totalConnections, setTotalConnections] = useState(0)
-  const [pendingConnections, setPendingConnections] = useState<TPendingConnection[] | null>(null)
 
   useEffect(() => {
     ;(async () => {

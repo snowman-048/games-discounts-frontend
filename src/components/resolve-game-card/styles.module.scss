@@ -2,7 +2,8 @@
   --img-offset: -100px;
   --section-padding: 24px;
   flex: auto;
-  min-height: 0;
+  min-height: auto;
+  max-height: fit-content;
 }
 
 .section {
@@ -16,6 +17,12 @@
 .mainInfoContainer {
   display: flex;
   position: relative;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .mainImgWrapper {
@@ -42,6 +49,11 @@
     position: relative;
     top: 0;
     left: 0;
+  }
+  .buttonsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
   }
 }
 
