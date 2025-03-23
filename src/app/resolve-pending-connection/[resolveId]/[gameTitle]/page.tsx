@@ -133,6 +133,7 @@ const ResolvePendingConnection = () => {
       'psnId',
       'nintendoId',
       'xboxId',
+      'familyKey',
     ].reduce((acc, key) => {
       acc[key] = pendingConnection.gameData[key as keyof TGame] || game[key as keyof TGame] || null
       return acc

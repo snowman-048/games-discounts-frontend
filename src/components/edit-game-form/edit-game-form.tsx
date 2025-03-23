@@ -90,8 +90,9 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
     resolver: yupResolver(validationSchema as any),
   })
 
-  const submit = async (data: TGame) => {
-    const formattedData = { ...data, title: data.title.trim() }
+  const submit = async (data: TGame & { origin?: TGame }) => {
+    // const formattedData = { ...data, title: data.title.trim() }
+    const { origin, ...formattedData } = { ...data, title: data.title.trim() }
     if (customSubmit) {
       customSubmit(formattedData)
       return
