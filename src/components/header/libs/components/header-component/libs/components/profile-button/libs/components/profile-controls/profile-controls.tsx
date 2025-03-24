@@ -61,7 +61,7 @@ const ProfileControls = ({ closePopup }: TProps) => {
         </Link>
       ))}
 
-      <LogoutButton />
+      <LogoutButton onLogoutConfirm={closePopup} />
     </Stack>
   )
 }

@@ -10,9 +10,9 @@ import { logout } from '@/helpers/logout'
 import { Popover } from '../ui/popover'
 import { TypographyV2 } from '../ui/typography'
 
-type TProps = Omit<ButtonProps, 'onClick' | 'variant'>
+type TProps = Omit<ButtonProps, 'onClick' | 'variant'> & { onLogoutConfirm?: () => void }
 
-const LogoutButton = ({ sx, ...rest }: TProps) => {
+const LogoutButton = ({ sx, onLogoutConfirm, ...rest }: TProps) => {
   const [buttonAnchorEl, setButtonAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   return (
@@ -53,6 +53,7 @@ const LogoutButton = ({ sx, ...rest }: TProps) => {
               size="small"
               onClick={() => {
                 setButtonAnchorEl(null)
+                onLogoutConfirm?.()
                 logout()
               }}
             >
