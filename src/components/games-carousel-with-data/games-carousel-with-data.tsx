@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Grid2, Stack, Typography } from '@mui/material'
+import { Grid2, Stack } from '@mui/material'
 import Link from 'next/link'
 
 import { getGamesList } from '@/api/games'
@@ -14,6 +14,7 @@ import { GameCard } from '../game-card'
 import { SectionTitle } from '../section-title'
 import { GlassCard } from '../ui/cards/glass-card'
 import { Carousel } from '../ui/carousel'
+import { TypographyV2 } from '../ui/typography'
 
 const ITEMS_COUNT = 10
 
@@ -43,7 +44,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
       <Stack padding={2} width="100%" gap={3}>
         <SectionTitle title={title} />
 
-        <Grid2 mx={-2}>
+        <Grid2 mx={-2} marginTop={-2}>
           <Carousel
             loop
             align="center"
@@ -51,8 +52,8 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
             showCounter={false}
             buttonsPosition="sides"
             slides={games.map((game) => (
-              <Grid2 width="240px" height="100%" key={game.id}>
-                <GameCard game={game} />
+              <Grid2 width="240px" height="100%" paddingTop={2} key={game.id}>
+                <GameCard game={game} noShadow />
               </Grid2>
             ))}
           />
@@ -60,17 +61,18 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
 
         <Link
           href={`/${EAppRoute.ACTIVE_DISCOUNTS}/1${createQueryString(viewAllLinkParams)}`}
-          style={{ width: '100%' }}
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
         >
-          <Typography
+          <TypographyV2
             fontWeight="bold"
-            textAlign="center"
-            color="var(--accent)"
+            color="brand"
             letterSpacing={2.5}
-            textTransform="uppercase"
+            isUpperCase
+            fontSize="text-l"
+            component="span"
           >
             View More
-          </Typography>
+          </TypographyV2>
         </Link>
       </Stack>
     </GlassCard>

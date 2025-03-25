@@ -1,17 +1,22 @@
-import { Typography } from '@mui/material'
+import { TypographyV2 } from '../ui/typography'
 
-const NoDataLabel = () => {
+type TProps = {
+  label?: string
+}
+
+const NoDataLabel = ({ label = 'NO DATA' }: TProps) => {
   return (
-    <Typography
-      variant="h5"
+    <TypographyV2
       fontWeight="bold"
       textAlign="center"
       component="span"
       display="block"
-      sx={{ textTransform: 'uppercase', color: 'var(--text-secondary)', width: '100%' }}
+      color="inactive"
+      fontSize="text-2xl"
+      sx={{ width: '100%' }}
     >
-      No Data
-    </Typography>
+      {label}
+    </TypographyV2>
   )
 }
 

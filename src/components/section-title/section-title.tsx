@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
 
-import { Divider, DividerProps, SxProps, Theme, Typography } from '@mui/material'
+import { Divider, DividerProps, SxProps, Theme } from '@mui/material'
+
+import { TypographyV2 } from '../ui/typography'
 
 type TProps = Omit<DividerProps, 'title'> & {
   title: string | ReactNode
@@ -11,16 +13,32 @@ const SectionTitle = ({ title, sx, ...rest }: TProps) => {
   return (
     <Divider
       sx={{
-        '::before': { background: 'var(--accent)' },
-        '::after': { background: 'var(--accent)' },
+        '::before': { background: 'var(--color-brand)' },
+        '::after': { background: 'var(--color-brand)' },
         width: '100%',
+        overflow: 'hidden',
+        fontSize: 'inherit',
+        '> span': {
+          display: 'block',
+          maxWidth: 'calc(100% - 30px)',
+        },
         ...sx,
       }}
       {...rest}
     >
-      <Typography variant="h5" fontWeight="bold" textTransform="uppercase" component="h3">
+      <TypographyV2
+        fontWeight="bold"
+        isUpperCase
+        adaptiveFontSize={{ xs: 'text-xl', sm: 'text-2xl', md: 'heading-s' }}
+        component="span"
+        sx={{
+          display: 'block',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }}
+      >
         {title}
-      </Typography>
+      </TypographyV2>
     </Divider>
   )
 }

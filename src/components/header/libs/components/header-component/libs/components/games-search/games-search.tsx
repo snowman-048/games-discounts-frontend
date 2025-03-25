@@ -2,13 +2,15 @@
 
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Autocomplete, Box, Button, Grid2, Stack, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, Grid2, Stack } from '@mui/material'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { getGamesList } from '@/api/games'
 import { GameCard } from '@/components/game-card'
 import { NoDataLabel } from '@/components/no-data-label'
-import { Loader } from '@/components/ui/loader'
+import { Input } from '@/components/ui/input'
+import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { createQueryString } from '@/helpers/createQueryString'
 import { getStoreRegionsFromQuery } from '@/helpers/getStoreRegionsFromQuery'
@@ -35,6 +37,8 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
   const [popperStyle, setPopperStyle] = useState<CSSProperties>({})
 
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const pathname = usePathname()
 
   const searchRelatedQuery = useMemo(() => getStoreRegionsFromQuery(query), [query])
 
@@ -100,6 +104,10 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
       document.body.style.overflowY = ''
     }
   }, [])
+
+  useEffect(() => {
+    handleClose()
+  }, [pathname])
 
   return (
     <>
@@ -169,7 +177,14 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
                   variant={!!games.length ? 'outlined' : 'contained'}
                   onClick={() => handleClose()}
                 >
-                  <Typography fontWeight="bold">Close</Typography>
+                  <TypographyV2
+                    fontSize="text-l"
+                    isUpperCase
+                    color={!!games.length ? 'brand' : 'l1'}
+                    fontWeight="bold"
+                  >
+                    Close
+                  </TypographyV2>
                 </Button>
                 {!!games.length && (
                   <Link
@@ -181,7 +196,9 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
                     }}
                   >
                     <Button sx={{ marginTop: 2 }} fullWidth variant="contained">
-                      <Typography fontWeight="bold">View All</Typography>
+                      <TypographyV2 fontSize="text-l" fontWeight="bold" isUpperCase color="l1">
+                        View All
+                      </TypographyV2>
                     </Button>
                   </Link>
                 )}
@@ -202,7 +219,7 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
           ),
         }}
         renderInput={(params) => (
-          <TextField
+          <Input
             {...params}
             label="Games Search"
             size="small"
@@ -211,16 +228,9 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
               zIndex: open ? 1405 : 1,
             }}
             slotProps={{
-              input: {
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? <Loader size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              },
+              input: params.InputProps,
             }}
+            loading={loading}
           />
         )}
       />

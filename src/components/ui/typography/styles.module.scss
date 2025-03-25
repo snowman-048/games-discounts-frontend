@@ -1,0 +1,69 @@
+@use '@/utils/variables';
+
+.typography {
+  font-family: var(--font-roboto);
+}
+
+.handwritten {
+  font-family: var(--font-dancing-script) !important;
+}
+
+// Font sizes
+.text-s {
+  font-size: variables.$fs-12 !important;
+  line-height: variables.$fs-16 !important;
+}
+.text-sm {
+  font-size: variables.$fs-13 !important;
+  line-height: variables.$fs-18 !important;
+}
+.text-base {
+  font-size: variables.$fs-14 !important;
+  line-height: variables.$fs-20 !important;
+}
+.text-l {
+  font-size: variables.$fs-16 !important;
+  line-height: variables.$fs-24 !important;
+}
+.text-xl {
+  font-size: variables.$fs-20 !important;
+  line-height: variables.$fs-28 !important;
+}
+.text-2xl {
+  font-size: variables.$fs-24 !important;
+  line-height: variables.$fs-32 !important;
+}
+.heading-s {
+  font-size: variables.$fs-28 !important;
+  line-height: variables.$fs-38 !important;
+}
+.heading-m {
+  font-size: variables.$fs-36 !important;
+  line-height: variables.$fs-42 !important;
+}
+.heading-l {
+  font-size: variables.$fs-44 !important;
+  line-height: variables.$fs-56 !important;
+}
+
+// Font width
+.normal {
+  font-weight: 400 !important;
+}
+.medium {
+  font-weight: 500 !important;
+}
+.semibold {
+  font-weight: 700 !important;
+
+  &.handwritten {
+    font-weight: 600 !important;
+  }
+}
+.bold {
+  font-weight: 900 !important;
+
+  &.handwritten {
+    font-weight: 700 !important;
+  }
+}

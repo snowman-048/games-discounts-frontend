@@ -1,5 +1,5 @@
 import { SvgIconComponent } from '@mui/icons-material'
-import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
+import { Box, Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { InfoItem } from '@/components/ui/info-item'
 
 import { GlassCard } from '../ui/cards/glass-card'
+import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
 export type THero = {
@@ -43,10 +44,10 @@ const HeroCard = ({ hero }: { hero: THero }) => {
           )}
         </Box>
         <Stack flex={1} position="relative">
-          <Typography variant="h4" fontWeight="bold">
+          <TypographyV2 fontSize="heading-m" fontWeight="bold">
             {hero.title}
-          </Typography>
-          <Divider sx={{ margin: '16px 0', background: 'var(--accent)' }} />
+          </TypographyV2>
+          <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
           <Stack spacing={1}>
             <InfoItem label="About" data={hero.about} />
@@ -58,7 +59,9 @@ const HeroCard = ({ hero }: { hero: THero }) => {
                 <Link key={link.url} href={link.url} target="_blank">
                   <Grid2 container alignItems="center" gap={1}>
                     <link.icon width={30} height={30} />
-                    <Typography fontWeight="bold">{link.title}</Typography>
+                    <TypographyV2 fontSize="text-l" fontWeight="bold">
+                      {link.title}
+                    </TypographyV2>
                   </Grid2>
                 </Link>
               ))}

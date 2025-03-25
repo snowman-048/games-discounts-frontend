@@ -53,6 +53,9 @@ const PLATFORM_TO_ICON_MAP: Record<EPlatform, TMap> = {
 
 const PlatformIcon = ({ platform }: TProps) => {
   const config = PLATFORM_TO_ICON_MAP[platform]
+  if (!config) {
+    return <></>
+  }
   return <config.icon width={24} height={24} fill={'#fff'} {...config.props} />
 }
 
