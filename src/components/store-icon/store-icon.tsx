@@ -1,4 +1,4 @@
-import { Grid2, Typography } from '@mui/material'
+import { Grid2 } from '@mui/material'
 import Link from 'next/link'
 
 import { storeColor } from '@/configs/store-color.config'
@@ -9,6 +9,7 @@ import { getStoreDisplayName } from '@/helpers/getStoreDisplayName'
 import NintendoIcon from '../../../public/assets/svg/nintendo.svg'
 import PsIcon from '../../../public/assets/svg/ps.svg'
 import XboxIcon from '../../../public/assets/svg/xbox-store.svg'
+import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
   store: EStore | EPriceHistoryMetaType
@@ -25,9 +26,13 @@ const STORE_TO_ICON_MAP = {
   // TODO: Set PS PLUS icon
   [EPriceHistoryMetaType.PS_PLUS]: {
     icon: () => (
-      <Typography color={storeColor[EPriceHistoryMetaType.PS_PLUS]} fontWeight="bold">
+      <TypographyV2
+        fontSize="text-l"
+        customColor={storeColor[EPriceHistoryMetaType.PS_PLUS]}
+        fontWeight="bold"
+      >
         PS+
-      </Typography>
+      </TypographyV2>
     ),
     color: 'transparent',
   },
@@ -54,18 +59,18 @@ const StoreIcon = ({ store, link, withLabel = true, customLabel }: TProps) => {
     >
       <config.icon width={24} height={24} fill="#fff" />
       {withLabel && store !== EPriceHistoryMetaType.PS_PLUS && (
-        <Typography
+        <TypographyV2
           fontWeight="bold"
-          fontSize={{ xs: '0.8rem', sm: '1rem' }}
+          adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }}
           className="store-display-name-in-chip"
         >
           {getStoreDisplayName(store).short}
-        </Typography>
+        </TypographyV2>
       )}
       {!!customLabel && (
-        <Typography fontWeight="bold" fontSize={{ xs: '0.8rem', sm: '1rem' }}>
+        <TypographyV2 fontWeight="bold" adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }}>
           {customLabel}
-        </Typography>
+        </TypographyV2>
       )}
     </Grid2>
   )

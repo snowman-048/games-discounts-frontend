@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
@@ -8,32 +8,23 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
 import WindowIcon from '@mui/icons-material/Window'
-import {
-  Backdrop,
-  Box,
-  Button,
-  Divider,
-  Drawer,
-  Grid2,
-  IconButton,
-  Popover,
-  Stack,
-  Typography,
-} from '@mui/material'
+import { Box, Button, Divider, Drawer, Grid2, IconButton, Stack } from '@mui/material'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { getRegions } from '@/api/regions'
 import { Logo } from '@/components/logo'
-import { RegionSettings } from '@/components/region-settings/region-settings'
+import { RegionSettings } from '@/components/region-settings'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
+import { Popover } from '@/components/ui/popover'
+import { TypographyV2 } from '@/components/ui/typography'
 import { OUR_EMAIL } from '@/configs/contacts.config'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { useAppStore } from '@/store/app.store'
 import { TGameSearchParams } from '@/types/game-search.types'
-import { TRegionWithStores } from '@/types/region.types'
 
 import { GamesSearch } from './libs/components/games-search'
+import { ProfileButton } from './libs/components/profile-button'
 
 const links = [
   { label: 'Home', path: `/${EAppRoute.HOME}`, icon: WindowIcon },
@@ -56,24 +47,14 @@ type TProps = {
 }
 
 const HeaderComponent = ({ query }: TProps) => {
+  const regions = useAppStore((state) => state.regions)
+
   const [locationAnchorEl, setLocationAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [regions, setRegions] = useState<TRegionWithStores[]>([])
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const pathname = usePathname()
 
   const isLinkActive = (path: string) => pathname === path
-
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const { data } = await getRegions()
-        setRegions(data)
-      } catch (err) {
-        console.log('Error getting regions', (err as any).message)
-      }
-    })()
-  }, [])
 
   const renderNavigation = (inDrawer = false) => {
     return (
@@ -83,8 +64,8 @@ const HeaderComponent = ({ query }: TProps) => {
         alignItems={inDrawer ? 'flex-start' : 'center'}
         justifyContent={inDrawer ? 'space-between' : 'flex-start'}
         gap={3}
-        flex={1}
         height="100%"
+        flexWrap="nowrap"
       >
         <Grid2
           container
@@ -92,34 +73,34 @@ const HeaderComponent = ({ query }: TProps) => {
           flexWrap="nowrap"
           alignItems={inDrawer ? 'flex-start' : 'center'}
           gap={3}
-          flex={1}
           width="100%"
         >
           <GamesSearch query={query} closeDrawer={() => setIsDrawerOpen(false)} />
           {links.map((link) => (
             <Link href={link.path} key={link.label} onClick={() => setIsDrawerOpen(false)}>
-              <Typography
+              <TypographyV2
                 fontWeight="bold"
                 color={
                   (link.customIsActive ? link.customIsActive(pathname) : isLinkActive(link.path))
-                    ? 'var(--accent)'
-                    : 'var(--text-primary)'
+                    ? 'brand'
+                    : 'primary'
                 }
                 alignItems="center"
                 display="flex"
                 gap={0.5}
                 whiteSpace="nowrap"
+                fontSize="text-l"
               >
                 {link.icon && <link.icon />}
                 {link.label}
-              </Typography>
+              </TypographyV2>
             </Link>
           ))}
         </Grid2>
         <Button
           onClick={(e) => setLocationAnchorEl(e.currentTarget)}
           sx={{
-            color: 'var(--text-primary)',
+            color: 'var(--color-primary)',
             gap: 1,
             textTransform: 'none',
             width: inDrawer ? '100%' : 'fit-content',
@@ -129,6 +110,7 @@ const HeaderComponent = ({ query }: TProps) => {
           Regions
           <LocationOnIcon />
         </Button>
+        {!inDrawer && <ProfileButton />}
       </Grid2>
     )
   }
@@ -156,10 +138,11 @@ const HeaderComponent = ({ query }: TProps) => {
           <Container flexDirection="row" justifyContent="space-between" gap={5}>
             <Logo />
 
-            <Grid2 container flex={1} justifyContent="flex-end">
-              <Grid2 sx={{ display: { xs: 'none', md: 'block' } }} flex={1}>
+            <Grid2 container flex={1} justifyContent="flex-end" gap={2}>
+              <Grid2 sx={{ display: { xs: 'none', md: 'block' } }} flex={1} flexWrap="nowrap">
                 {renderNavigation()}
               </Grid2>
+              <ProfileButton sx={{ display: { xs: 'flex', md: 'none' } }} />
               <IconButton
                 onClick={() => setIsDrawerOpen(true)}
                 sx={{ display: { xs: 'flex', md: 'none' } }}
@@ -220,12 +203,12 @@ const HeaderComponent = ({ query }: TProps) => {
                 {renderNavigation(true)}
               </Grid2>
               <Stack padding={3} paddingTop={0} width="100%">
-                <Typography color="var(--text-secondary)" textAlign="center" variant="body2">
+                <TypographyV2 color="inactive" textAlign="center" variant="body2">
                   Contact us
-                </Typography>
+                </TypographyV2>
                 <address>
                   <a href={`mailto:${OUR_EMAIL}`}>
-                    <Typography textAlign="center">{OUR_EMAIL}</Typography>
+                    <TypographyV2 textAlign="center">{OUR_EMAIL}</TypographyV2>
                   </a>
                 </address>
               </Stack>
@@ -234,28 +217,9 @@ const HeaderComponent = ({ query }: TProps) => {
         </Box>
       </Drawer>
 
-      <Backdrop
-        sx={{ zIndex: 6, background: 'var(--backdrop)', width: '100vw' }}
-        open={!!locationAnchorEl}
-        transitionDuration={100}
-      >
-        <Popover
-          id="location-settings"
-          open={!!locationAnchorEl}
-          anchorEl={locationAnchorEl}
-          onClose={() => setLocationAnchorEl(null)}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transitionDuration={100}
-          slotProps={{
-            paper: { sx: { background: 'transparent', boxShadow: 'none', borderRadius: '20px' } },
-          }}
-        >
-          <RegionSettings regions={regions} />
-        </Popover>
-      </Backdrop>
+      <Popover anchorEl={locationAnchorEl} onClose={() => setLocationAnchorEl(null)} maxWidth={400}>
+        <RegionSettings regions={regions} />
+      </Popover>
     </>
   )
 }

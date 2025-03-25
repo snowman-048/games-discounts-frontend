@@ -49,13 +49,13 @@
 
   &.prevBtn {
     left: 0;
-    background: linear-gradient(to right, var(--bg-main) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to right, var(--color-l1) 0%, rgba(0, 0, 0, 0) 100%);
     padding-right: 90px;
   }
 
   &.nextBtn {
     right: 0;
-    background: linear-gradient(to left, var(--bg-main) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to left, var(--color-l1) 0%, rgba(0, 0, 0, 0) 100%);
     padding-left: 90px;
   }
 }

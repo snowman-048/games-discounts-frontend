@@ -2,7 +2,7 @@
   position: relative;
   padding: 8px;
   display: flex;
-  background-color: var(--bg-medium);
+  background-color: var(--color-l2);
   border-radius: 20px;
   // box-shadow:
   //   rgba(0, 0, 0, 0.25) 0px 20px 50px -20px,
@@ -18,7 +18,7 @@
 .cardInner {
   flex: 1;
   overflow: hidden;
-  background-color: var(--bg-medium);
+  background-color: var(--color-l2);
   // box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 0px inset;
   border-radius: 15px;
 }

@@ -1,6 +1,6 @@
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import { Stack, Typography } from '@mui/material'
+import { Stack } from '@mui/material'
 import { Metadata } from 'next'
 
 import { HeroCard } from '@/components/hero-card'
@@ -8,6 +8,7 @@ import { THero } from '@/components/hero-card/hero-card'
 import { SectionTitle } from '@/components/section-title'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
+import { TypographyV2 } from '@/components/ui/typography'
 
 import styles from './styles.module.scss'
 
@@ -75,7 +76,7 @@ const AboutUs = async () => {
       <GlassCard className={styles.section}>
         <Stack gap={2}>
           <SectionTitle title="About Us" />
-          <Typography variant="body1">
+          <TypographyV2>
             We created this service to help gamers find the best discounts from various stores. Our
             website aggregates data from platforms such as PlayStation Store, Nintendo eShop, Xbox,
             and others, providing a convenient way to compare prices, track discounts, and analyze
@@ -91,7 +92,7 @@ const AboutUs = async () => {
             <br /> <br />
             Our team is constantly working on improving functionality and adding new features. If
             you have any suggestions or ideas, we would love to hear your feedback!
-          </Typography>
+          </TypographyV2>
         </Stack>
       </GlassCard>
       <GlassCard className={styles.section}>

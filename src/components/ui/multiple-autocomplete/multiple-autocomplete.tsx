@@ -1,18 +1,19 @@
-import { FC } from 'react'
+import { Autocomplete, Checkbox, TextField, styled } from '@mui/material'
 
-import { Autocomplete, AutocompleteProps, Checkbox, TextField } from '@mui/material'
-
+import { styledInputParams } from '@/configs/styled-input-params.config'
 import { TOption } from '@/types/option.types'
 
-type TProps = Partial<Omit<AutocompleteProps<TOption<any>, true, any, any>, 'value'>> & {
-  options: TOption<any>[]
+type TProps<T> = {
+  options: TOption<T>[]
   label: string
   value?: string[]
   error?: boolean
   onChange: (value: string[]) => void
-}
+} & any
 
-const MultipleAutocomplete: FC<TProps> = ({
+const StyledAutocomplete = styled(Autocomplete)(styledInputParams)
+
+const MultipleAutocomplete = <T,>({
   options,
   value,
   onChange,
@@ -20,26 +21,30 @@ const MultipleAutocomplete: FC<TProps> = ({
   error,
   label,
   ...rest
-}) => {
+}: TProps<T>) => {
   return (
-    <Autocomplete
+    <StyledAutocomplete
       multiple
       options={options}
       disableCloseOnSelect
-      getOptionLabel={(option) => (option as TOption<any>).title}
-      renderOption={(props, option, { selected }) => {
-        const { key, ...optionProps } = props
-        return (
-          <li key={key} {...optionProps}>
-            <Checkbox style={{ marginRight: 8 }} checked={selected} />
-            {option.title}
-          </li>
-        )
-      }}
+      getOptionLabel={(option: any) => (option as any).title}
+      renderOption={
+        ((props: any, option: TOption<T>, { selected }: any) => {
+          const { key, ...optionProps } = props
+          return (
+            <li key={key} {...optionProps}>
+              <Checkbox style={{ marginRight: 8 }} checked={selected} />
+              {(option as any).title}
+            </li>
+          )
+        }) as any
+      }
       renderInput={(params) => (
         <TextField {...params} variant="outlined" label={label} error={error} />
       )}
-      value={options.filter((option) => (value || []).some((item) => item === option.value))}
+      value={options.filter((option: any) =>
+        (value || []).some((item: any) => item === option.value),
+      )}
       onChange={(_, newValue) =>
         onChange((newValue as TOption<any>[]).map((option) => option.value))
       }

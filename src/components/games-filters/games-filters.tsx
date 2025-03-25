@@ -1,48 +1,37 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import ClearIcon from '@mui/icons-material/Clear'
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import SearchIcon from '@mui/icons-material/Search'
-import {
-  Button,
-  Checkbox,
-  Dialog,
-  Fade,
-  FormControl,
-  FormControlLabel,
-  Grid2,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Button, Checkbox, FormControlLabel, Grid2, IconButton, Stack } from '@mui/material'
 
-import { getStores } from '@/api/stores'
 import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { EFilter } from '@/enums/filter.enum'
 import { EGameType } from '@/enums/game-type.enum'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useGetAllSearchParams } from '@/hooks/useGetAllSearchParams'
-import { TStore } from '@/types/store.types'
+import { useAppStore } from '@/store/app.store'
 
 import { GlassCard } from '../ui/cards/glass-card'
+import { Input } from '../ui/input'
+import { Modal } from '../ui/modal'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
+import { Select } from '../ui/select'
+import { Tooltip } from '../ui/tooltip'
 
 type TProps = {
   usedForAllGames?: boolean
 }
 
 const GamesFilters = ({ usedForAllGames = false }: TProps) => {
+  const stores = useAppStore((state) => state.stores)
+
   const searchParams = useGetAllSearchParams()
 
   const [title, setTitle] = useState<string>((searchParams.title as string) || '')
-  const [stores, setStores] = useState<TStore[]>([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const navigate = useCustomNavigate()
@@ -62,13 +51,6 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
     })
   }
 
-  useEffect(() => {
-    ;(async () => {
-      const { data } = await getStores()
-      setStores(data)
-    })()
-  }, [])
-
   const renderTopFilters = () => {
     return (
       <Grid2
@@ -78,24 +60,19 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         gap={{ xs: 3, md: 2 }}
         flexWrap="nowrap"
       >
-        <FormControl sx={{ flex: 1, width: '100%', maxWidth: { xs: '100%', md: '300px' } }}>
-          <InputLabel>Type</InputLabel>
-          <Select
-            label="Type"
-            onChange={(e) => {
-              const value = e.target.value
-              handleFilterChange({ types: value === EFilter.ALL ? '' : [value] })
-            }}
-            size="small"
-            value={searchParams.types?.[0] || EFilter.ALL}
-          >
-            {[EFilter.ALL, ...Object.values(EGameType)].map((item) => (
-              <MenuItem key={item} value={item}>
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Select
+          label="Type"
+          size="small"
+          value={searchParams.types?.[0] || EFilter.ALL}
+          options={[EFilter.ALL, ...Object.values(EGameType)].map((item) => ({
+            title: item,
+            value: item,
+          }))}
+          onChange={(value) => {
+            handleFilterChange({ types: value === EFilter.ALL ? '' : [value] })
+          }}
+          containerProps={{ sx: { maxWidth: { xs: '100%', md: '300px' } } }}
+        />
 
         <Grid2
           container
@@ -110,35 +87,27 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
             setIsModalOpen(false)
           }}
         >
-          <TextField
+          <Input
             variant="outlined"
             label="Title"
-            sx={{ flex: 1 }}
             size="small"
             value={title}
-            onChange={(e) => {
-              const value = e.target.value
-              setTitle(value)
-            }}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <IconButton
-                    sx={{ padding: 0.5 }}
-                    onClick={() => {
-                      setTitle('')
-                      handleFilterChange({ title: '' })
-                    }}
-                  >
-                    <ClearIcon />
-                  </IconButton>
-                ),
-              },
-            }}
+            onChange={setTitle}
+            endAdornment={
+              <IconButton
+                sx={{ padding: 0.5 }}
+                onClick={() => {
+                  setTitle('')
+                  handleFilterChange({ title: '' })
+                }}
+              >
+                <ClearIcon />
+              </IconButton>
+            }
           />
 
           <Button
-            sx={{ color: 'var(--bg-main)', textTransform: 'none', gap: 1 }}
+            sx={{ color: 'var(--color-l1)', textTransform: 'none', gap: 1 }}
             variant="contained"
             type="submit"
           >
@@ -153,24 +122,16 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
   const renderBottomFilters = () => {
     return (
       <>
-        <FormControl fullWidth>
-          <InputLabel>Sort by</InputLabel>
-          <Select
-            label="Sort by"
-            onChange={(e) => {
-              const value = e.target.value
-              handleFilterChange({ sort: value })
-            }}
-            size="small"
-            value={sort}
-          >
-            {sortOptions.map((item) => (
-              <MenuItem key={item.value} value={item.value}>
-                {item.title}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Select
+          label="Sort by"
+          size="small"
+          value={sort}
+          options={sortOptions}
+          onChange={(value) => {
+            handleFilterChange({ sort: value })
+          }}
+          containerProps={{ sx: { minWidth: 300 } }}
+        />
 
         <MultipleAutocomplete
           label="Store"
@@ -178,7 +139,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
             title: store.name,
             value: `${store.id}`,
           }))}
-          onChange={(value) => {
+          onChange={(value: string[]) => {
             handleFilterChange({ storeIds: value })
           }}
           size="small"
@@ -187,13 +148,15 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
           disabled={!stores.length}
         />
 
-        <FormControlLabel
-          control={<Checkbox checked={onlySelectedStores} />}
-          label="Overlaps"
-          value={onlySelectedStores}
-          onChange={(_, value) => handleFilterChange({ onlySelectedStores: value })}
-          sx={{ marginTop: { xs: -1, md: 0 } }}
-        />
+        <Tooltip title="Show only games that are included in all the selected stores" delay={500}>
+          <FormControlLabel
+            control={<Checkbox checked={onlySelectedStores} />}
+            label="Overlaps"
+            value={onlySelectedStores}
+            onChange={(_, value) => handleFilterChange({ onlySelectedStores: value })}
+            sx={{ marginTop: { xs: -1, md: 0 }, width: 'fit-content' }}
+          />
+        </Tooltip>
       </>
     )
   }
@@ -214,7 +177,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
               onClick={() => setIsModalOpen(true)}
               sx={{
                 textTransform: 'none',
-                color: 'var(--text-primary)',
+                color: 'var(--color-primary)',
                 fontSize: '1rem',
                 gap: 1,
                 px: 2,
@@ -247,61 +210,19 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         </GlassCard>
       </Grid2>
 
-      <Dialog
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        fullWidth
-        slotProps={{
-          paper: {
-            component: 'div',
-            sx: {
-              background: 'transparent',
-              padding: 0,
-              width: '100%',
-              margin: {
-                xs: 1,
-                sm: 2,
-              },
-            },
-          },
-          backdrop: {
-            sx: {
-              background: 'var(--backdrop)',
-            },
-            transitionDuration: 200,
-          },
-        }}
-      >
-        <Fade
-          in={isModalOpen}
-          style={{
-            transitionDuration: '0.3s',
-            transitionDelay: isModalOpen ? '0.1s' : '0s',
-            transitionTimingFunction: 'ease-in',
-          }}
-        >
-          <GlassCard
-            sx={{
-              width: '100%',
-            }}
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title="Filter Games">
+        <Stack gap={3} width="100%">
+          {renderTopFilters()}
+          {renderBottomFilters()}
+          <Button
+            onClick={() => setIsModalOpen(false)}
+            sx={{ fontSize: '1.2rem', marginTop: -1 }}
+            fullWidth
           >
-            <Grid2 container flexDirection="column" gap={3} padding={2} width="100%">
-              <Typography variant="h5" textAlign="center" fontWeight="bold" marginBottom={1}>
-                Filter Games
-              </Typography>
-              {renderTopFilters()}
-              {renderBottomFilters()}
-              <Button
-                onClick={() => setIsModalOpen(false)}
-                sx={{ fontSize: '1.2rem', marginTop: -1 }}
-                fullWidth
-              >
-                Close
-              </Button>
-            </Grid2>
-          </GlassCard>
-        </Fade>
-      </Dialog>
+            Close
+          </Button>
+        </Stack>
+      </Modal>
     </>
   )
 }

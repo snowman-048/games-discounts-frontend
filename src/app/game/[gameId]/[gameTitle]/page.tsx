@@ -1,11 +1,12 @@
 import { cache } from 'react'
 
-import { Divider, Grid2, Stack, Typography } from '@mui/material'
+import { Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
 import { Metadata } from 'next'
 
 import { getGameById, getGameFamilyByGameId } from '@/api/games'
+import { AddToWishlistButton } from '@/components/add-to-wishlist-button'
 import { GameCard } from '@/components/game-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
 import { GameJsonLd } from '@/components/game-json-ld'
@@ -20,6 +21,7 @@ import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Carousel } from '@/components/ui/carousel'
 import { Container } from '@/components/ui/container'
 import { InfoItem } from '@/components/ui/info-item'
+import { TypographyV2 } from '@/components/ui/typography'
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
@@ -156,10 +158,14 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           />
 
           <Stack flex={1} position="relative">
-            <Typography variant="h4" fontWeight="bold" component="h2">
-              {game.title}
-            </Typography>
-            <Divider sx={{ margin: '16px 0', background: 'var(--accent)' }} />
+            <Stack gap={1} width="100%">
+              <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h2">
+                {game.title}
+              </TypographyV2>
+
+              <AddToWishlistButton game={game} />
+            </Stack>
+            <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
             <Stack gap={1}>
               <InfoItem label="Genres" data={game.genres?.map(makeFirstLetterUpper).join(', ')} />
@@ -291,7 +297,12 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
             <Carousel
               align="center"
               slides={gameFamily.map((item) => (
-                <Grid2 width={`${RELATED_ITEM_WIDTH}px`} height="100%" key={item.game.id}>
+                <Grid2
+                  width={`${RELATED_ITEM_WIDTH}px`}
+                  height="100%"
+                  key={item.game.id}
+                  paddingTop={2}
+                >
                   <GameCard game={item.game} noShadow />
                 </Grid2>
               ))}
@@ -316,10 +327,9 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           <Stack spacing={2}>
             <SectionTitle title="Description" />
             {!!game.description ? (
-              <Typography
-                variant="body1"
+              <TypographyV2
+                fontSize="text-l"
                 dangerouslySetInnerHTML={{ __html: game.description }}
-                className={styles.description}
               />
             ) : (
               <NoDataLabel />

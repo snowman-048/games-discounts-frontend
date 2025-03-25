@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { Divider, Grid2, Typography } from '@mui/material'
+import { Divider, Grid2 } from '@mui/material'
 import cn from 'classnames'
 
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
@@ -10,6 +10,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 
 import { StoreIcon } from '../store-icon'
 import { GlassCard } from '../ui/cards/glass-card'
+import { TypographyV2 } from '../ui/typography'
 import { PriceInfoText } from './libs/components/price-info-text'
 import styles from './styles.module.scss'
 
@@ -83,7 +84,7 @@ const PriceInfoItem = ({
     <Divider
       flexItem
       sx={{
-        background: 'var(--bg-light)',
+        background: 'var(--color-l3)',
       }}
       orientation={isInline ? 'vertical' : 'horizontal'}
     />
@@ -94,7 +95,7 @@ const PriceInfoItem = ({
       <PriceInfoText
         label="Lowest price"
         value={`${region.currencySymbol}${lowestPrice}`}
-        valueColor="var(--green)"
+        valueColor="var(--color-green)"
       />
       {additionalLowestInfo && (
         <>
@@ -102,7 +103,7 @@ const PriceInfoItem = ({
           <PriceInfoText
             label={additionalLowestInfo.label}
             value={`${region.currencySymbol}${additionalLowestInfo.price}`}
-            valueColor={additionalLowestInfo.color || 'var(--green)'}
+            valueColor={additionalLowestInfo.color || 'var(--color-green)'}
           />
         </>
       )}
@@ -113,16 +114,16 @@ const PriceInfoItem = ({
     <GlassCard className={cn(styles.item, styles[variant], className)} style={{ height }}>
       <Grid2 container flexDirection={isInline ? 'column' : 'row'} alignItems="center" gap={1}>
         <StoreIcon store={store} link={storeLink} withLabel={showStoreLabel} />
-        <Typography fontSize={{ xs: '0.8rem', sm: '1rem' }}>
+        <TypographyV2 adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }}>
           {region.country} - {region.key}
-        </Typography>
+        </TypographyV2>
       </Grid2>
 
       {renderDivider()}
       <PriceInfoText
         label="Highest price"
         value={`${region.currencySymbol}${maxPrice}`}
-        valueColor="var(--red)"
+        valueColor="var(--color-red)"
       />
       {renderDivider()}
       {isInline ? (

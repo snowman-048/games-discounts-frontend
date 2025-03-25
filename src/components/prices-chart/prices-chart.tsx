@@ -134,11 +134,11 @@ const PricesChart = ({ game, lines, height = 300 }: TProps) => {
             }, [] as number[])}
           tick={(props) => <XAxisTick {...props} />}
           angle={-35}
-          stroke="var(--text-secondary)"
+          stroke="var(--color-inactive)"
           allowDuplicatedCategory={false}
         />
         <YAxis
-          stroke="var(--text-secondary)"
+          stroke="var(--color-inactive)"
           tick={(props) => <YAxisTick region={commonRegion} {...props} />}
         />
         <Tooltip

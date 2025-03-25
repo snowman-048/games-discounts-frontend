@@ -1,10 +1,11 @@
-import { Grid2, Stack, Typography } from '@mui/material'
+import { Grid2, Stack } from '@mui/material'
 import moment from 'moment'
 
 import { TPriceHistory } from '@/types/price-history.types'
 
 import { StoreIcon } from '../store-icon'
 import { GlassCard } from '../ui/cards/glass-card'
+import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
   discount: TPriceHistory
@@ -40,25 +41,25 @@ const DiscountInfo = ({ discount, withStoreLabel }: TProps) => {
           withLabel={withStoreLabel}
         />
         <Stack alignItems="flex-end">
-          <Grid2 container gap={1}>
-            <Typography
-              variant={isDiscountActive ? 'body2' : 'body1'}
-              color={isDiscountActive ? 'text.secondary' : 'text.primary'}
+          <Grid2 container gap={1} alignItems="center">
+            <TypographyV2
+              fontSize={isDiscountActive ? 'text-base' : 'text-l'}
+              color={isDiscountActive ? 'inactive' : 'primary'}
               sx={{ textDecoration: isDiscountActive ? 'line-through' : 'none' }}
               lineHeight={1.2}
             >
               {discount.region.currencySymbol}
               {discount.initialPrice}
-            </Typography>
+            </TypographyV2>
             {isDiscountActive && (
-              <Typography variant="body2" color="text.primary" lineHeight={1.2}>
+              <TypographyV2>
                 {discount.region.currencySymbol}
                 {discount.discountedPrice}
-              </Typography>
+              </TypographyV2>
             )}
           </Grid2>
           {isDiscountActive && (
-            <Typography variant="caption" lineHeight={1.2} color="text.secondary">
+            <TypographyV2 fontSize="text-s" color="inactive">
               Ends in{' '}
               {moment
                 .duration(
@@ -66,7 +67,7 @@ const DiscountInfo = ({ discount, withStoreLabel }: TProps) => {
                     moment().utc(true).startOf('day').valueOf(),
                 )
                 .humanize()}
-            </Typography>
+            </TypographyV2>
           )}
         </Stack>
       </Grid2>

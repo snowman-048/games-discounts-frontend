@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
 
-import { Divider, Grid2, Typography } from '@mui/material'
+import { Divider, Grid2 } from '@mui/material'
+
+import { TypographyV2 } from '../typography'
 
 type TProps = {
   label: string
@@ -15,13 +17,13 @@ const InfoItem = ({ label, data, withDivider = true }: TProps) => {
   return (
     <Grid2 container flexDirection="column" gap={1}>
       <Grid2 container alignItems="center" gap={1}>
-        <Typography>
-          <span style={{ color: 'var(--text-secondary)' }}>{label}:</span>{' '}
+        <TypographyV2 fontSize="text-l">
+          <span style={{ color: 'var(--color-inactive)' }}>{label}:</span>{' '}
           {!isJsx && (isEmpty ? '-' : data)}
-        </Typography>
+        </TypographyV2>
         {isJsx && data}
       </Grid2>
-      {withDivider && <Divider sx={{ background: 'var(--bg-light)' }} />}
+      {withDivider && <Divider sx={{ background: 'var(--color-l3)' }} />}
     </Grid2>
   )
 }
