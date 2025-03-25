@@ -57,8 +57,10 @@ const RegionSettings = ({ regions }: TProps) => {
 
       const storeId = stores.find((item) => item.name === storeName)!.id
 
-      const { data } = await updatePreferedRegion({ storeId, regionId })
-      setUser(data)
+      if (user) {
+        const { data } = await updatePreferedRegion({ storeId, regionId })
+        setUser(data)
+      }
       navigate({ query: { [regionKey]: regionId }, replace: true })
     } catch (err) {
       CustomToast('error', `Error changing region for ${storeName}: ${(err as Error).message}`)
