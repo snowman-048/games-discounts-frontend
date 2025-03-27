@@ -56,7 +56,29 @@ const Footer = () => {
 
         <Divider sx={{ background: 'var(--color-l3)' }} flexItem />
 
-        <Grid2 width="100%" container justifyContent="flex-end">
+        <Grid2
+          width="100%"
+          container
+          justifyContent="space-between"
+          gap={2}
+          flexDirection={{ xs: 'column', sm: 'row' }}
+        >
+          <div
+            className="trustpilot-widget"
+            data-locale="en-US"
+            data-template-id="56278e9abfbbba0bdcd568bc"
+            data-businessunit-id="67e53b7d07f885f02f1f7eca"
+            data-style-height="52px"
+            data-style-width="100%"
+          >
+            <a
+              href="https://www.trustpilot.com/review/game-price-pulse.com"
+              target="_blank"
+              rel="noopener"
+            >
+              Trustpilot
+            </a>
+          </div>
           <TypographyV2 fontWeight="bold" color="disabled">
             Version: {packageJson.version}
           </TypographyV2>
