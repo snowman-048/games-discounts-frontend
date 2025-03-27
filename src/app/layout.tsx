@@ -58,6 +58,12 @@ const RootLayout = async ({
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
         crossOrigin="anonymous"
       />
+      <Script
+        async
+        type="text/javascript"
+        src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
+        crossOrigin="anonymous"
+      />
       <body className={cn(roboto.variable, dancingScript.variable)}>
         {process.env.NEXT_PUBLIC_NODE_ENV === 'production' && (
           <>
