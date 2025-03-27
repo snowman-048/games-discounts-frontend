@@ -3,12 +3,13 @@
 import { useState } from 'react'
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 
 import { MAX_WISHLISTS } from '@/configs/wishlists.config'
 import { useUserStore } from '@/store/user.store'
 
 import { CreateWishlistModal } from '../create-wishlist-modal'
+import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
 
 const CreateNewWishlistButton = () => {
@@ -20,23 +21,31 @@ const CreateNewWishlistButton = () => {
 
   return (
     <>
-      <Button
-        sx={{
-          gap: 1,
-          alignSelf: 'flex-start',
-        }}
-        onClick={() => setIsCreateWishlistOpen(true)}
-        disabled={isWishlistsLimit}
-      >
-        <AddCircleOutlineIcon />
-        <TypographyV2
-          fontSize="text-l"
-          color={isWishlistsLimit ? 'disabled' : 'brand'}
-          fontWeight="bold"
+      <Tooltip title={isWishlistsLimit ? 'You have reached the wishlists limit' : ''}>
+        <Box
+          width="fit-content"
+          sx={{
+            alignSelf: 'flex-start',
+          }}
         >
-          Create new
-        </TypographyV2>
-      </Button>
+          <Button
+            sx={{
+              gap: 1,
+            }}
+            onClick={() => setIsCreateWishlistOpen(true)}
+            disabled={isWishlistsLimit}
+          >
+            <AddCircleOutlineIcon />
+            <TypographyV2
+              fontSize="text-l"
+              color={isWishlistsLimit ? 'disabled' : 'brand'}
+              fontWeight="bold"
+            >
+              Create new
+            </TypographyV2>
+          </Button>
+        </Box>
+      </Tooltip>
 
       <CreateWishlistModal
         open={isCreateWishlistOpen}

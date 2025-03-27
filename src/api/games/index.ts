@@ -24,7 +24,8 @@ const getGameFamilyByGameId = async ({
 }: TGetGameParams & { id: number; storeIds?: string[] }) =>
   api.get<TFamilyKey[] | null>(`${BASE_URL}/${id}/family${createQueryString(params)}`)
 
-const getGamesDataForSitemap = () => api.get<{ id: number; title: string }[]>(`${BASE_URL}/sitemap`)
+const getGamesDataForSitemap = () =>
+  api.get<{ id: number; title: string; updatedAt: string }[]>(`${BASE_URL}/sitemap`)
 
 const updateGame = async (id: number, data: TGame) =>
   api.put<TGame | null>(`${BASE_URL}/${id}`, data)
