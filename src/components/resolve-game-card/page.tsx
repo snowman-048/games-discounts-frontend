@@ -84,7 +84,12 @@ const ResolveGameCard = ({ game, actionButton, onClick }: TProps) => {
 
           <Stack flex={1} position="relative" paddingTop={{ xs: 1, md: 2 }}>
             <Stack gap={1} width="100%">
-              <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h2">
+              <TypographyV2
+                fontSize="heading-m"
+                fontWeight="bold"
+                component="h2"
+                sx={{ wordBreak: 'break-word' }}
+              >
                 {game?.title}
               </TypographyV2>
             </Stack>

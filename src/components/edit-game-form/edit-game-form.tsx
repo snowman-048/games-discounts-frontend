@@ -27,7 +27,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import cn from 'classnames'
 import * as yup from 'yup'
 
 import { updateGame } from '@/api/games'
@@ -38,8 +37,6 @@ import { TGame } from '@/types/game.types'
 
 import { GameImgWithBuy } from '../game-img-with-buy'
 import { StoreIcon } from '../store-icon'
-import { GlassCard } from '../ui/cards/glass-card'
-import { Container } from '../ui/container'
 import { InfoItem } from '../ui/info-item'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
 import { TypographyV2 } from '../ui/typography'
@@ -91,7 +88,6 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
   })
 
   const submit = async (data: TGame & { origin?: TGame }) => {
-    // const formattedData = { ...data, title: data.title.trim() }
     const { origin, ...formattedData } = { ...data, title: data.title.trim() }
     if (customSubmit) {
       customSubmit(formattedData)
@@ -137,7 +133,12 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
               render={({ field: { value, onChange, ...rest } }) => (
                 <Stack>
                   <Stack gap={2}>
-                    <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h2">
+                    <TypographyV2
+                      fontSize="heading-m"
+                      fontWeight="bold"
+                      component="h2"
+                      sx={{ wordBreak: 'break-word' }}
+                    >
                       {value}
                     </TypographyV2>
 
