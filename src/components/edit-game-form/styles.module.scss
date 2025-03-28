@@ -10,13 +10,6 @@
   left: var(--section-padding);
   top: var(--img-offset);
 }
-.section {
-  padding: var(--section-padding);
-  overflow: visible;
-  max-width: 100%;
-  width: 100%;
-  flex-direction: column;
-}
 .mainInfoContainer {
   display: flex;
   position: relative;

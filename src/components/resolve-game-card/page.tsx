@@ -1,9 +1,10 @@
 'use client'
 
+import { useMemo } from 'react'
+
 import { Box, Button, ButtonProps, Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
-import Link from 'next/link'
 
 import { TGameDataMain } from '@/api/pending-connections/types'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
@@ -34,18 +35,14 @@ const ResolveGameCard = ({ game, actionButton, onClick }: TProps) => {
     return <NoDataLabel />
   }
 
-  const CustomButton = ({
-    label,
-    onClick,
-    ...buttonProps
-  }: NonNullable<TProps['actionButton']>) => (
-    <GlassCard className={styles.typeContainer}>
-      <Button fullWidth sx={{ padding: '8px 25px' }} {...buttonProps} onClick={() => onClick()}>
-        <TypographyV2 color="brand" fontWeight="bold" fontSize="text-l" letterSpacing={4}>
-          {label}
-        </TypographyV2>
-      </Button>
-    </GlassCard>
+  const availablePlatforms = useMemo(
+    () =>
+      [
+        { platform: EStore.PSN, id: game.psnId },
+        { platform: EStore.NINTENDO, id: game.nintendoId },
+        { platform: EStore.XBOX, id: game.xboxId },
+      ].filter((entry) => entry.id),
+    [game.psnId, game.nintendoId, game.xboxId],
   )
 
   return (
@@ -63,14 +60,25 @@ const ResolveGameCard = ({ game, actionButton, onClick }: TProps) => {
             <GameImgWithBuy game={game} className={styles.fakeImgWrapper} isFake key={game.id} />
 
             <Grid2 className={styles.buttonsContainer}>
-              {game.gameLink ? (
-                <Link href={game.gameLink} target="_blank">
-                  <CustomButton label={'View Game'} />
-                </Link>
-              ) : (
-                <CustomButton label={'View Game'} onClick={onClick} />
+              <Button
+                sx={{ color: 'var(--color-l1)', textTransform: 'none', gap: 1 }}
+                variant="contained"
+                type="submit"
+                onClick={onClick}
+              >
+                View Game
+              </Button>
+
+              {!!actionButton && (
+                <Button
+                  sx={{ color: 'var(--color-l1)', textTransform: 'none', gap: 1 }}
+                  variant="contained"
+                  type="submit"
+                  onClick={actionButton.onClick}
+                >
+                  {actionButton.label}
+                </Button>
               )}
-              {!!actionButton && <CustomButton {...actionButton} />}
             </Grid2>
           </Grid2>
 
@@ -87,20 +95,12 @@ const ResolveGameCard = ({ game, actionButton, onClick }: TProps) => {
                 label="Stores ID"
                 data={
                   <Grid2 container gap={3}>
-                    {[
-                      { platform: EStore.PSN, id: game.psnId },
-                      { platform: EStore.NINTENDO, id: game.nintendoId },
-                      { platform: EStore.XBOX, id: game.xboxId },
-                    ]
-                      .filter((entry) => entry.id)
-                      .map(({ platform, id }) => {
-                        return (
-                          <Box display={'flex'} alignItems={'center'} gap={1} key={id}>
-                            <StoreIcon store={platform} withLabel={false} />
-                            <strong>{id}</strong>
-                          </Box>
-                        )
-                      })}
+                    {availablePlatforms.map(({ platform, id }) => (
+                      <Box display="flex" alignItems="center" gap={1} key={id}>
+                        <StoreIcon store={platform} withLabel={false} />
+                        <strong>{id}</strong>
+                      </Box>
+                    ))}
                   </Grid2>
                 }
               />

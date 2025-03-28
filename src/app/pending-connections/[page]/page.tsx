@@ -1,10 +1,9 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import { useEffect, useState } from 'react'
 
 import { Grid2 } from '@mui/material'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 import { getPendingConnections } from '@/api/pending-connections'
 import { TPendingConnection } from '@/api/pending-connections/types'
@@ -12,26 +11,18 @@ import { GameCard } from '@/components/game-card'
 import { GameCardsList } from '@/components/game-cards-list'
 import { Pagination } from '@/components/pagination'
 import { Container } from '@/components/ui/container'
-import { Loader } from '@/components/ui/loader'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { ERole } from '@/enums/roles.enum'
+import { CustomToast } from '@/utils/custom-toast'
 import { withRouteProtection } from '@/utils/with-route-protection'
 
 const LIST_SIZE = 25
 
 const PendingConnections = () => {
-  const params = useParams()
-  const searchParams = useSearchParams()
+  const { page } = useParams()
 
-  const [page, setPage] = useState(1)
   const [totalConnections, setTotalConnections] = useState(0)
   const [pendingConnections, setPendingConnections] = useState<TPendingConnection[] | null>(null)
-
-  useEffect(() => {
-    if (params?.page) {
-      setPage(+params.page)
-    }
-  }, [params])
 
   useEffect(() => {
     ;(async () => {
@@ -41,10 +32,10 @@ const PendingConnections = () => {
         setPendingConnections(info)
         setTotalConnections(totalCount)
       } catch (err) {
-        toast(`Error loading pending connections: ${(err as any).message}`, { type: 'error' })
+        CustomToast('error', `Error loading pending connections: ${(err as any).message}`)
       }
     })()
-  }, [page])
+  }, [])
 
   return (
     <Container>
@@ -56,13 +47,11 @@ const PendingConnections = () => {
         gap={5}
         paddingBottom={3}
       >
-        <Suspense key={`${page}${searchParams.toString()}`} fallback={<Loader />}>
-          <GameCardsList>
-            {pendingConnections?.map((game) => (
-              <GameCard game={game} key={game.id} switchToListOnMobile />
-            ))}
-          </GameCardsList>
-        </Suspense>
+        <GameCardsList>
+          {pendingConnections?.map((game) => (
+            <GameCard game={game} key={game.id} switchToListOnMobile />
+          ))}
+        </GameCardsList>
 
         <Pagination
           count={Math.ceil(totalConnections / LIST_SIZE)}

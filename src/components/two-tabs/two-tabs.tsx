@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { Box, Tab, Tabs } from '@mui/material'
+import { Box, Tab, Tabs as MuiTabs } from '@mui/material'
 
 import { GlassCard } from '../ui/cards/glass-card'
 
@@ -10,7 +10,7 @@ interface TabPanelProps {
   value: number
 }
 
-function CustomTabPanel(props: TabPanelProps) {
+const CustomTabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props
 
   return (
@@ -26,14 +26,19 @@ function CustomTabPanel(props: TabPanelProps) {
   )
 }
 
-function a11yProps(index: number) {
+const a11yProps = (index: number) => {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   }
 }
 
-const TwoTabs = ({ tab1, tab2 }: any) => {
+type TTab = {
+  label: string
+  content: React.ReactNode
+}
+
+const Tabs = ({ tabs }: { tabs: TTab[] }) => {
   const [value, setValue] = useState(0)
   const scrollPositions = useRef<{ [key: number]: number }>({ 0: 0, 1: 0 })
 
@@ -56,7 +61,7 @@ const TwoTabs = ({ tab1, tab2 }: any) => {
             width: '100%',
           }}
         >
-          <Tabs
+          <MuiTabs
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
@@ -64,20 +69,18 @@ const TwoTabs = ({ tab1, tab2 }: any) => {
             variant="fullWidth"
             sx={{ width: '100%' }}
           >
-            <Tab label="New Game" {...a11yProps(0)} />
-            <Tab label="Merge with this" {...a11yProps(1)} />
-          </Tabs>
+            {tabs?.map((tab, index) => <Tab label={tab.label} {...a11yProps(index)} />)}
+          </MuiTabs>
         </GlassCard>
       </Box>
 
-      <CustomTabPanel value={value} index={0}>
-        {tab1}
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        {tab2}
-      </CustomTabPanel>
+      {tabs?.map((tab, index) => (
+        <CustomTabPanel key={index} value={value} index={index}>
+          {tab.content}
+        </CustomTabPanel>
+      ))}
     </Box>
   )
 }
 
-export { TwoTabs }
+export { Tabs }

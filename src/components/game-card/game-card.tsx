@@ -40,7 +40,8 @@ const GameCard = ({
   removeFromWishlistId,
   onRemoveGameFromWishlist,
 }: TProps) => {
-  const game = 'gameData' in rawGame ? rawGame.gameData : rawGame
+  const isPendingConnection = 'gameData' in rawGame
+  const game = isPendingConnection ? rawGame.gameData : rawGame
   const getColor = (item: TPriceHistory) => {
     return getStoreColor(item.meta?.type || item.store.name)
   }
@@ -53,7 +54,7 @@ const GameCard = ({
 
   return (
     <Box className={cn(styles.wrapper, className)}>
-      {!('gameData' in rawGame) && (
+      {!isPendingConnection && (
         <Box
           sx={{
             position: 'absolute',
@@ -75,7 +76,7 @@ const GameCard = ({
       )}
       <Link
         href={
-          'gameData' in rawGame
+          isPendingConnection
             ? `/${EAppRoute.RESOLVE_PENDING_CONNECTION}/${rawGame.id}/${getGameTitleForLink(rawGame.gameData.title)}`
             : `/${EAppRoute.GAME}/${game.id}/${getGameTitleForLink(game.title)}`
         }
