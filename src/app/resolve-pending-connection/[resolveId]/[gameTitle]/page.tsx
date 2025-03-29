@@ -257,7 +257,7 @@ const ResolvePendingConnection = () => {
         onClose={closeModal}
         title={`${resolveMode === 'merge' ? 'Merge' : 'Create New Game'}`}
       >
-        <Stack overflow="scroll" maxHeight="90vh">
+        <>
           {!!mergedGameData && (
             <EditGameForm
               game={mergedGameData}
@@ -265,7 +265,7 @@ const ResolvePendingConnection = () => {
               readonly={resolveLoading}
             />
           )}
-        </Stack>
+        </>
       </Modal>
     </>
   )

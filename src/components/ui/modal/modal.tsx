@@ -3,7 +3,7 @@
 import { PropsWithChildren } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
-import { Fade, Grid2, IconButton, ModalProps, Modal as MuiModal, Stack } from '@mui/material'
+import { Box, Fade, Grid2, IconButton, ModalProps, Modal as MuiModal, Stack } from '@mui/material'
 
 import { GlassCard } from '@/components/ui/cards/glass-card'
 
@@ -45,6 +45,7 @@ const Modal = ({ open, onClose, title, withClose = true, children, ...rest }: TP
             width: { xs: '100%', sm: '600px' },
             maxWidth: `calc(100vw - ${withClose ? 24 : 16}px)`,
             overflow: 'visible',
+            maxHeight: `calc(100dvh - ${withClose ? 24 : 16}px)`,
           }}
           padding={2}
         >
@@ -65,7 +66,9 @@ const Modal = ({ open, onClose, title, withClose = true, children, ...rest }: TP
               )}
             </Grid2>
 
-            {children}
+            <Box overflow="auto" width="100%">
+              {children}
+            </Box>
           </Stack>
         </GlassCard>
       </Fade>
