@@ -41,30 +41,33 @@ const GameImgWithBuy = ({ game, storeLinks, className, isFake = false }: TProps)
             {game.type.toUpperCase()}
           </TypographyV2>
         </GlassCard>
-        {game.gameStore?.map((gameStore) => {
-          const latestPriceHistory = game.priceHistory?.find(
-            (item) => item.storeId === gameStore.store.id,
-          )
-          const link = storeLinks?.[gameStore.store.name]
-          if (!latestPriceHistory || !link) {
-            return <></>
-          }
-          let additionalPriceHistoryItem: TPriceHistory | undefined
-          if (gameStore.store.name === EStore.PSN) {
-            additionalPriceHistoryItem = game.priceHistory.find(
-              (item) =>
-                item.storeId === gameStore.store.id &&
-                item.meta?.type === EPriceHistoryMetaType.PS_PLUS,
+        {game.gameStore
+          ?.map((gameStore) => {
+            const latestPriceHistory = game.priceHistory?.find(
+              (item) => item.storeId === gameStore.store.id,
             )
-          }
-          return (
-            <BuyGameButton
-              priceHistoryItem={latestPriceHistory}
-              link={isFake ? undefined : link}
-              additionalPriceHistoryItem={additionalPriceHistoryItem}
-            />
-          )
-        })}
+            const link = storeLinks?.[gameStore.store.name]
+            if (!latestPriceHistory || !link) {
+              return null
+            }
+            let additionalPriceHistoryItem: TPriceHistory | undefined
+            if (gameStore.store.name === EStore.PSN) {
+              additionalPriceHistoryItem = game.priceHistory.find(
+                (item) =>
+                  item.storeId === gameStore.store.id &&
+                  item.meta?.type === EPriceHistoryMetaType.PS_PLUS,
+              )
+            }
+            return (
+              <BuyGameButton
+                priceHistoryItem={latestPriceHistory}
+                link={isFake ? undefined : link}
+                additionalPriceHistoryItem={additionalPriceHistoryItem}
+                key={gameStore.store.id}
+              />
+            )
+          })
+          .filter(Boolean)}
       </Grid2>
     </Grid2>
   )

@@ -20,7 +20,7 @@ const mergeGameWithPendingConnection = async (
   },
   connectionId: number,
   newStoreId: number,
-) => api.post(`${BASE_URL}/merge/${connectionId}/${newStoreId}`, body)
+) => api.post<number>(`${BASE_URL}/merge/${connectionId}/${newStoreId}`, body)
 
 const createGameFromPendingConnection = async (
   body: {
@@ -29,7 +29,7 @@ const createGameFromPendingConnection = async (
   },
   connectionId: number,
   newStoreId: number,
-) => api.post(`${BASE_URL}/create-new/${connectionId}/${newStoreId}`, body)
+) => api.post<number>(`${BASE_URL}/create-new/${connectionId}/${newStoreId}`, body)
 
 export {
   getPendingConnections,

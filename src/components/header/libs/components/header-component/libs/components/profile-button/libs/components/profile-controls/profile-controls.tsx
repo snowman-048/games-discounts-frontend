@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation'
 import { LogoutButton } from '@/components/logout-button'
 import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
-import { ERole } from '@/enums/roles.enum'
+import { useIsAdmin } from '@/hooks/useIsAdmin'
 import { useUserStore } from '@/store/user.store'
 
 const allLinks = [
@@ -39,7 +39,9 @@ type TProps = {
 const ProfileControls = ({ closePopup }: TProps) => {
   const user = useUserStore((state) => state.user)
 
-  const links = allLinks.filter((link) => !link.adminOnly || user?.role === ERole.ADMIN)
+  const isAdmin = useIsAdmin()
+
+  const links = allLinks.filter((link) => !link.adminOnly || isAdmin)
 
   const pathname = usePathname()
 

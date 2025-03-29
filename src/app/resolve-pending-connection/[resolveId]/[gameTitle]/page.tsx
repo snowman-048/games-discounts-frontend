@@ -28,6 +28,8 @@ import { CustomToast } from '@/utils/custom-toast'
 import { withRouteProtection } from '@/utils/with-route-protection'
 
 const ResolvePendingConnection = () => {
+  const stores = useAppStore((state) => state.stores)
+
   const [pendingConnection, setPendingConnection] = useState<TPendingConnection | null>(null)
   const [formModalOpen, setFormModalOpen] = useState(false)
   const [mergedGameData, setMergedGameData] = useState<(TGame & { origin?: TGame }) | null>(null)
@@ -35,10 +37,11 @@ const ResolvePendingConnection = () => {
   const [resolveLoading, setResolveLoading] = useState(false)
   const [loading, setLoading] = useState(true)
 
-  const stores = useAppStore((state) => state.stores)
+  const showMobileVersion = useMediaQuery(`(max-width: 1024px)`)
+
+  const { resolveId } = useParams<{ resolveId: string }>()
+
   const navigate = useCustomNavigate()
-  const { resolveId } = useParams()
-  const showDesktopVersion = useMediaQuery(`(max-width: 1024px)`)
 
   const closeModal = () => {
     setFormModalOpen(false)
@@ -49,15 +52,15 @@ const ResolvePendingConnection = () => {
     ;(async () => {
       try {
         setLoading(true)
-        const { data } = await getPendingConnectionById(+resolveId!)
+        const { data } = await getPendingConnectionById(+resolveId)
         setPendingConnection(data)
       } catch (err) {
-        CustomToast('error', `Error loading stats: ${(err as any).message}`)
+        CustomToast('error', `Error loading data: ${(err as any).message}`)
       } finally {
         setLoading(false)
       }
     })()
-  }, [resolveId])
+  }, [])
 
   if (loading) {
     return <LinearProgress />
@@ -138,7 +141,7 @@ const ResolvePendingConnection = () => {
       const store = stores?.find((item) => item.name === pendingConnection.gameData.store)
 
       if (!store) {
-        throw new Error(`Store ${pendingConnection.gameData.store} not found in Redux`)
+        throw new Error(`Store ${pendingConnection.gameData.store} not found`)
       }
 
       const { data } = await (
@@ -182,7 +185,7 @@ const ResolvePendingConnection = () => {
       ),
     },
     {
-      label: 'Merge with this',
+      label: 'Merge',
       content: (
         <Stack flex={1}>
           {pendingConnection?.gamesPendingConnectionsPotentialGames?.map((connection) => (
@@ -208,7 +211,9 @@ const ResolvePendingConnection = () => {
 
   return (
     <>
-      {!showDesktopVersion ? (
+      {showMobileVersion ? (
+        <Tabs tabs={tabsContent} />
+      ) : (
         <Grid2>
           <Grid2 container justifyContent="space-between" flex={1} flexWrap="nowrap">
             <Box flex={1}>
@@ -245,16 +250,14 @@ const ResolvePendingConnection = () => {
             </Stack>
           </Grid2>
         </Grid2>
-      ) : (
-        <Tabs tabs={tabsContent} />
       )}
 
       <Modal
         open={formModalOpen}
         onClose={closeModal}
-        title={`${resolveMode === 'merge' ? 'Merge with this' : 'New Game'}`}
+        title={`${resolveMode === 'merge' ? 'Merge' : 'Create New Game'}`}
       >
-        <Stack overflow={'scroll'} height={'90vh'}>
+        <Stack overflow="scroll" maxHeight="90vh">
           {!!mergedGameData && (
             <EditGameForm
               game={mergedGameData}

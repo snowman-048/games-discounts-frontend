@@ -48,6 +48,9 @@ type TProps = {
   customSubmit?: (data: TGame) => void
 }
 
+const replacedColor = 'rgba(0, 255, 0, 0.1)'
+const originalColor = 'rgba(255, 0, 0, 0.1)'
+
 const PLATFORMS = Object.values(EPlatform).map((platform) => ({ title: platform, value: platform }))
 
 const validationSchema = yup.object({
@@ -111,8 +114,8 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
       return {}
     }
     return watchedValues[key] !== game.origin?.[key]
-      ? { backgroundColor: 'rgba(0, 255, 0, 0.1)' }
-      : { backgroundColor: 'rgba(255, 0, 0, 0.1)' }
+      ? { backgroundColor: replacedColor }
+      : { backgroundColor: originalColor }
   }
 
   return (
@@ -124,7 +127,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
         />
 
         <Stack>
-          <GameImgWithBuy game={game} className={styles.fakeImgWrapper} isFake key={game.id} />
+          <GameImgWithBuy game={game} className={styles.fakeImgWrapper} isFake />
 
           <Stack flex={1} position="relative" paddingTop={{ xs: 1, md: 2 }} gap={2}>
             <Controller
@@ -160,7 +163,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
                         <FormControlLabel
                           value={game.origin?.title}
                           control={<Radio />}
-                          label="Origin"
+                          label="Original"
                         />
                       </Stack>
                     </RadioGroup>
@@ -183,10 +186,10 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
                     .filter((entry) => entry.id)
                     .map(({ platform, id }) => {
                       return (
-                        <Box display={'flex'} alignItems={'center'} gap={1} key={id}>
+                        <Grid2 container alignItems="center" gap={1} key={id}>
                           <StoreIcon store={platform} withLabel={false} />
                           <strong>{id}</strong>
-                        </Box>
+                        </Grid2>
                       )
                     })}
                 </Grid2>
@@ -314,7 +317,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
                           {...getTagProps({ index })}
                           key={option}
                           label={option}
-                          sx={isChanged ? { backgroundColor: 'rgba(0, 255, 0, 0.1)' } : {}}
+                          sx={isChanged ? { backgroundColor: replacedColor } : {}}
                         />
                       )
                     })
@@ -352,7 +355,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
                           {...getTagProps({ index })}
                           key={option}
                           label={option}
-                          sx={isChanged ? { backgroundColor: 'rgba(0, 255, 0, 0.1)' } : {}}
+                          sx={isChanged ? { backgroundColor: replacedColor } : {}}
                         />
                       )
                     })

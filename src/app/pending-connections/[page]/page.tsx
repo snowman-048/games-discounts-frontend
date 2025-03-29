@@ -19,7 +19,7 @@ import { withRouteProtection } from '@/utils/with-route-protection'
 const LIST_SIZE = 25
 
 const PendingConnections = () => {
-  const { page } = useParams()
+  const { page } = useParams<{ page: string }>()
 
   const [totalConnections, setTotalConnections] = useState(0)
   const [pendingConnections, setPendingConnections] = useState<TPendingConnection[] | null>(null)
@@ -27,7 +27,7 @@ const PendingConnections = () => {
   useEffect(() => {
     ;(async () => {
       try {
-        const { data } = await getPendingConnections({ page, limit: LIST_SIZE })
+        const { data } = await getPendingConnections({ page: +page, limit: LIST_SIZE })
         const [info, totalCount] = data
         setPendingConnections(info)
         setTotalConnections(totalCount)

@@ -26,7 +26,7 @@ const RouteProtectionWrapper = ({
     )
   }
 
-  if (!user || (requiredRoles.length > 0 && !requiredRoles.includes(user.role))) {
+  if (!user || (requiredRoles.length && !requiredRoles.includes(user.role))) {
     navigate({
       path: `/${EAppRoute.HOME}`,
       replace: true,
