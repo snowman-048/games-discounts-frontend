@@ -6,6 +6,7 @@ import { Stack } from '@mui/material'
 import { useParams } from 'next/navigation'
 
 import { getUserWishlistById } from '@/api/wishlist'
+import { NoDataLabel } from '@/components/no-data-label'
 import { SectionTitle } from '@/components/section-title'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
@@ -38,10 +39,18 @@ const WishlistDetails = () => {
     })()
   }, [])
 
-  if (isLoading || !wishlist) {
+  if (isLoading) {
     return (
       <Container>
         <Loader variant="linear" />
+      </Container>
+    )
+  }
+
+  if (!wishlist) {
+    return (
+      <Container>
+        <NoDataLabel />
       </Container>
     )
   }

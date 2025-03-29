@@ -1,0 +1,41 @@
+.container {
+  --img-offset: -100px;
+  --section-padding: 24px;
+  flex: auto;
+  min-height: 0;
+}
+.mainImgWrapper {
+  position: absolute;
+  z-index: 2;
+  left: var(--section-padding);
+  top: var(--img-offset);
+}
+.mainInfoContainer {
+  display: flex;
+  position: relative;
+}
+
+.fakeImgWrapper {
+  transform: translateY(calc(var(--img-offset) - var(--section-padding)));
+  margin-bottom: calc(var(--img-offset) - var(--section-padding));
+  margin-right: var(--section-padding);
+}
+
+.changed {
+  border: 2px solid green !important;
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+@media screen and (max-width: 899px) {
+  .mainImgWrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .container {
+    --section-padding: 16px;
+  }
+}
