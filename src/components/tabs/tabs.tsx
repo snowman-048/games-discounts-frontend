@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { Box, Tab, Tabs as MuiTabs } from '@mui/material'
+import { Box, Tabs as MuiTabs, Tab } from '@mui/material'
 
 import { GlassCard } from '../ui/cards/glass-card'
 
@@ -42,7 +42,7 @@ const Tabs = ({ tabs }: { tabs: TTab[] }) => {
   const [value, setValue] = useState(0)
   const scrollPositions = useRef<{ [key: number]: number }>({ 0: 0, 1: 0 })
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (newValue: number) => {
     scrollPositions.current[value] = window.scrollY
     setValue(newValue)
   }
@@ -63,7 +63,7 @@ const Tabs = ({ tabs }: { tabs: TTab[] }) => {
         >
           <MuiTabs
             value={value}
-            onChange={handleChange}
+            onChange={(_, value) => handleChange(value)}
             aria-label="basic tabs example"
             centered
             variant="fullWidth"
