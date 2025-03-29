@@ -15,7 +15,7 @@ import { TPendingConnection } from '@/api/pending-connections/types'
 import { EditGameForm } from '@/components/edit-game-form/edit-game-form'
 import { NoDataLabel } from '@/components/no-data-label'
 import { ResolveGameCard } from '@/components/resolve-game-card/page'
-import { Tabs } from '@/components/two-tabs/two-tabs'
+import { Tabs } from '@/components/tabs/tabs'
 import { Modal } from '@/components/ui/modal'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { ERole } from '@/enums/roles.enum'
@@ -38,7 +38,7 @@ const ResolvePendingConnection = () => {
   const stores = useAppStore((state) => state.stores)
   const navigate = useCustomNavigate()
   const { resolveId } = useParams()
-  const showDesktopVursia = useMediaQuery(`(max-width: 1024px)`)
+  const showDesktopVersion = useMediaQuery(`(max-width: 1024px)`)
 
   const closeModal = () => {
     setFormModalOpen(false)
@@ -208,7 +208,7 @@ const ResolvePendingConnection = () => {
 
   return (
     <>
-      {!showDesktopVursia ? (
+      {!showDesktopVersion ? (
         <Grid2>
           <Grid2 container justifyContent="space-between" flex={1} flexWrap="nowrap">
             <Box flex={1}>
