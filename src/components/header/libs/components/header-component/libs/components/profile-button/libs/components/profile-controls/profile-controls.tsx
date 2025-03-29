@@ -1,5 +1,6 @@
 'use client'
 
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import BookmarksIcon from '@mui/icons-material/Bookmarks'
 import PersonIcon from '@mui/icons-material/Person'
 import { Stack } from '@mui/material'
@@ -9,9 +10,10 @@ import { usePathname } from 'next/navigation'
 import { LogoutButton } from '@/components/logout-button'
 import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { useIsAdmin } from '@/hooks/useIsAdmin'
 import { useUserStore } from '@/store/user.store'
 
-const links = [
+const allLinks = [
   {
     label: 'Wishlists',
     path: `/${EAppRoute.WISHLISTS}`,
@@ -22,6 +24,12 @@ const links = [
     path: `/${EAppRoute.PROFILE}`,
     icon: PersonIcon,
   },
+  {
+    label: 'Pending Connections',
+    path: `/${EAppRoute.PENDING_CONNECTIONS}/1`,
+    icon: AccessTimeIcon,
+    adminOnly: true,
+  },
 ]
 
 type TProps = {
@@ -30,6 +38,10 @@ type TProps = {
 
 const ProfileControls = ({ closePopup }: TProps) => {
   const user = useUserStore((state) => state.user)
+
+  const isAdmin = useIsAdmin()
+
+  const links = allLinks.filter((link) => !link.adminOnly || isAdmin)
 
   const pathname = usePathname()
 
