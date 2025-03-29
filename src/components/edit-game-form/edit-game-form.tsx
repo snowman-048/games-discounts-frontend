@@ -9,7 +9,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Autocomplete,
-  Box,
   Button,
   Chip,
   Divider,
