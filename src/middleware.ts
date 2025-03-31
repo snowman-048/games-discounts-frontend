@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getCurrentCountryByIp } from './api/third-party'
 import { defaultRegions } from './configs/default-regions.config'
 
 // const cachedRegions: TRegionWithStores[] = []
@@ -27,13 +26,7 @@ export async function middleware(req: NextRequest) {
 
   // console.log('areAllStoresSetToCookies', areAllStoresSetToCookies)
 
-  console.log('getCurrentCountryByIp req', (req as any).geo, req)
-  try {
-    const { data } = await getCurrentCountryByIp()
-    console.log('getCurrentCountryByIp data', data)
-  } catch (err) {
-    console.error('getCurrentCountryByIp err', err)
-  }
+  console.log('country', req.headers.get('x-vercel-ip-country'))
 
   // Handles different regions for stores
   const url = new URL(req.url)
