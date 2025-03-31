@@ -27,6 +27,7 @@ export async function middleware(req: NextRequest) {
 
   // console.log('areAllStoresSetToCookies', areAllStoresSetToCookies)
 
+  console.log('getCurrentCountryByIp req', (req as any).geo, req)
   try {
     const { data } = await getCurrentCountryByIp()
     console.log('getCurrentCountryByIp data', data)
