@@ -28,19 +28,23 @@ const useOnGoogleLogin = () => {
         throw new Error('No credential found')
       }
 
-      const regionCookies = defaultRegions.reduce((acc, item) => {
-        const key = getStoreRegionKey(item.storeName)
-        ;(acc as any)[key] = +(cookies.get(key) || item.defaultRegion)
+      const cookieRegions = defaultRegions.reduce((acc, item) => {
+        ;(acc as any)[item.queryKey] = +(cookies.get(item.queryKey) || item.defaultRegion)
         return acc
       }, {})
 
       useUserStore.setState({ isUserLoading: true })
-      const { data } = await authWithGoogle({ ...regionCookies, token: res.credential })
+      const { data } = await authWithGoogle({ ...cookieRegions, token: res.credential })
 
       setTokens(data.tokens)
 
+      const accountRegions = data.user.storeRegionPreferences.reduce((acc, item) => {
+        ;(acc as any)[getStoreRegionKey(item.store.name)] = item.regionId
+        return acc
+      }, {})
+
       useUserStore.setState({ isUserLoading: false, user: data.user })
-      navigate({ query: regionCookies, replace: true })
+      navigate({ query: accountRegions, replace: true })
       CustomToast('success', `You have successfully logged in with Google as ${data.user.username}`)
     } catch (err) {
       CustomToast('error', (err as Error).message)
