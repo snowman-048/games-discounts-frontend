@@ -1,0 +1,173 @@
+{
+  "Header": {
+    "home": "Acasă",
+    "active_discounts": "Reduceri Active",
+    "explore": "Explorează",
+    "regions": "Regiuni",
+    "contact_us": "Contactează-ne"
+  },
+  "LanguagesSwitch": {
+    "language": "Limbă"
+  },
+  "RegionSettings": {
+    "store_region": "Regiunea {store}"
+  },
+  "ProfileButton": {
+    "profile": "Profil",
+    "login": "Conectează-te"
+  },
+  "GamesSearch": {
+    "games_search": "Căutare Jocuri",
+    "close": "Închide",
+    "view_all": "Vezi tot"
+  },
+  "Home": {
+    "biggest_discounts": "Cele mai mari reduceri",
+    "newest_discounts": "Cele mai noi reduceri <store></store>"
+  },
+  "GamesCarouselWithData": {
+    "view_more": "Vezi mai mult"
+  },
+  "GamesFilters": {
+    "filter_games": "Filtrare jocuri",
+    "type": "Tip",
+    "title": "Titlu",
+    "search": "Căutare",
+    "sort_by": "Sortează după",
+    "store": "Magazin",
+    "overlaps": "Se suprapun",
+    "oevrlaps_tooltip": "Arată doar jocurile disponibile în toate magazinele selectate",
+    "close": "Închide"
+  },
+  "GameInfo": {
+    "genres": "Genuri",
+    "platforms": "Platforme",
+    "publisher": "Editor",
+    "release_date": "Data lansării",
+    "text_languages": "Limbi pentru texte",
+    "voice_languages": "Limbi pentru voce",
+    "available_in_stores": "Disponibil în magazine",
+    "price_history": "Istoricul prețurilor",
+    "related_items": "Articole asociate",
+    "screenshots": "Capturi de ecran",
+    "description": "Descriere"
+  },
+  "PriceInfoItem": {
+    "lowest_price": "Cel mai mic preț",
+    "highest_price": "Cel mai mare preț"
+  },
+  "BuyGameButton": {
+    "buy_at": "Cumpără de la",
+    "discount_ends": "Reducerea se încheie pe {date}"
+  },
+  "DiscountInfo": {
+    "ends_in": "Se încheie în {date}"
+  },
+  "LoginModal": {
+    "login_signup": "Autentificare/Înregistrare",
+    "new_methods": "Noi metode de autentificare vor fi disponibile curând"
+  },
+  "ProfileControls": {
+    "wishlists": "Liste de dorințe",
+    "profile": "Profil"
+  },
+  "Wishlists": {
+    "my_wishlists": "Listele mele de dorințe ({total}/{max})",
+    "total_tracking_items": "Numărul total de articole urmărite"
+  },
+  "WishlistLinkItem": {
+    "email_toast": "Notificările prin e-mail sunt activate",
+    "count_toast": "Numărul de articole din lista de dorințe"
+  },
+  "CreateNewWishlistButton": {
+    "create_new": "Creează una nouă"
+  },
+  "UpdateWishlistForm": {
+    "name": "Nume",
+    "wishlist_updated": "Lista de dorințe a fost actualizată",
+    "wishlist_deleted": "Lista de dorințe a fost ștearsă",
+    "email_label": "Primiți notificări prin e-mail despre noi reduceri pentru articolele din această listă de dorințe",
+    "delete_warning": "Sigur doriți să ștergeți această listă de dorințe?",
+    "rename": "Redenumește"
+  },
+  "RemoveFromWishlistButton": {
+    "delete_warning": "Sigur doriți să eliminați acest joc din lista de dorințe?"
+  },
+  "AddToWishlistButton": {
+    "already_in_wishlist": "Deja în lista de dorințe",
+    "add_to_wishlist": "Adaugă în lista de dorințe",
+    "add_to_wishlist_title": "Adaugă jocul în lista de dorințe",
+    "manage_wishlists": "Gestionează listele de dorințe",
+    "no_wishlists": "Nu aveți nicio listă de dorințe"
+  },
+  "CreateWishlistModal": {
+    "create_wishlist": "Creează lista de dorințe",
+    "name": "Nume",
+    "email_label": "Primiți notificări prin e-mail despre noi reduceri pentru articolele din această listă de dorințe",
+    "create": "Creează"
+  },
+  "WishlistDetails": {
+    "wishlisted_items": "Articole din lista de dorințe ({count})"
+  },
+  "Profile": {
+    "my_profile": "Profilul meu",
+    "username": "Nume utilizator",
+    "email": "Email",
+    "account_created": "Cont creat"
+  },
+  "Footer": {
+    "useful_links": "Linkuri utile",
+    "about_us": "Despre noi",
+    "contacts": "Contactează-ne",
+    "version": "Versiune"
+  },
+  "AboutUs": {
+    "about_us": "Despre noi",
+    "description": "Am creat acest serviciu pentru a ajuta gamerii să găsească cele mai bune reduceri din diferite magazine. Website-ul nostru adună date de pe platforme precum PlayStation Store, Nintendo eShop, Xbox și altele, oferind o modalitate convenabilă de a compara prețuri, de a urmări reduceri și de a analiza istoricul prețurilor.<br></br>Ne străduim să facem serviciul nostru cât mai prietenos cu utilizatorul, informativ și util posibil. Cu filtre flexibile, grafice de schimbare a prețurilor și funcții de urmărire a jocurilor, utilizatorii pot lua decizii informate de cumpărare.<br></br>Echipa noastră lucrează constant la îmbunătățirea funcționalității și la adăugarea de noi caracteristici. Dacă aveți sugestii sau idei, ne-ar plăcea să le auzim!",
+    "meet_the_team": "Cunoaște echipa"
+  },
+  "HeroCard": {
+    "about": "Despre",
+    "links": "Linkuri"
+  },
+  "validation": {
+    "wishlist": {
+      "name_required": "Numele este obligatoriu",
+      "name_min": "Numele trebuie să aibă cel puțin {length} caractere",
+      "name_max": "Numele poate avea cel mult {length} caractere"
+    }
+  },
+  "toast": {
+    "attention": "Atenție",
+    "error": "Eroare",
+    "success": "Succes",
+    "warning": "Avertisment"
+  },
+  "google_auth": {
+    "success_message": "Te-ai autentificat cu succes cu Google ca {username}"
+  },
+  "game_type": {
+    "All": "Toate",
+    "Game": "Joc",
+    "Bundle": "Pachet",
+    "Premium Edition": "Ediție Premium",
+    "Currency": "Monedă",
+    "Soundtrack": "Coloană sonoră",
+    "DLC": "DLC",
+    "Pack": "Pachet",
+    "Season Pass": "Sezonul"
+  },
+  "sorting": {
+    "newest": "Cele mai noi",
+    "finishing": "Termină",
+    "biggest_discounts": "Cele mai mari reduceri",
+    "az": "A-Z",
+    "za": "Z-A"
+  },
+  "Logout": {
+    "logout": "Deconectare",
+    "warning": "Sigur doriți să vă deconectați?"
+  },
+  "no": "Nu",
+  "yes": "Da"
+}

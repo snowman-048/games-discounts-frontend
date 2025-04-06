@@ -1,0 +1,173 @@
+{
+  "Header": {
+    "home": "Strona główna",
+    "active_discounts": "Aktywne Promocje",
+    "explore": "Eksploruj",
+    "regions": "Regiony",
+    "contact_us": "Skontaktuj się z nami"
+  },
+  "LanguagesSwitch": {
+    "language": "Język"
+  },
+  "RegionSettings": {
+    "store_region": "Region {store}"
+  },
+  "ProfileButton": {
+    "profile": "Profil",
+    "login": "Zaloguj się"
+  },
+  "GamesSearch": {
+    "games_search": "Wyszukiwanie Gier",
+    "close": "Zamknij",
+    "view_all": "Zobacz wszystko"
+  },
+  "Home": {
+    "biggest_discounts": "Największe Zniżki",
+    "newest_discounts": "Najnowsze promocje <store></store>"
+  },
+  "GamesCarouselWithData": {
+    "view_more": "Zobacz więcej"
+  },
+  "GamesFilters": {
+    "filter_games": "Filtruj Gry",
+    "type": "Typ",
+    "title": "Tytuł",
+    "search": "Szukaj",
+    "sort_by": "Sortuj według",
+    "store": "Sklep",
+    "overlaps": "Nakładanie się",
+    "oevrlaps_tooltip": "Pokaż tylko gry dostępne we wszystkich wybranych sklepach",
+    "close": "Zamknij"
+  },
+  "GameInfo": {
+    "genres": "Gatunki",
+    "platforms": "Platformy",
+    "publisher": "Wydawca",
+    "release_date": "Data premiery",
+    "text_languages": "Języki tekstowe",
+    "voice_languages": "Języki dialogów",
+    "available_in_stores": "Dostępne w sklepach",
+    "price_history": "Historia cen",
+    "related_items": "Powiązane elementy",
+    "screenshots": "Zrzuty ekranu",
+    "description": "Opis"
+  },
+  "PriceInfoItem": {
+    "lowest_price": "Najniższa cena",
+    "highest_price": "Najwyższa cena"
+  },
+  "BuyGameButton": {
+    "buy_at": "Kup w",
+    "discount_ends": "Zniżka kończy się {date}"
+  },
+  "DiscountInfo": {
+    "ends_in": "Kończy się za {date}"
+  },
+  "LoginModal": {
+    "login_signup": "Zaloguj / Zarejestruj się",
+    "new_methods": "Nowe metody logowania będą wkrótce dostępne"
+  },
+  "ProfileControls": {
+    "wishlists": "Listy życzeń",
+    "profile": "Profil"
+  },
+  "Wishlists": {
+    "my_wishlists": "Moje Listy Życzeń ({total}/{max})",
+    "total_tracking_items": "Łączna liczba śledzonych elementów"
+  },
+  "WishlistLinkItem": {
+    "email_toast": "Powiadomienia e-mail są włączone",
+    "count_toast": "Liczba elementów na liście"
+  },
+  "CreateNewWishlistButton": {
+    "create_new": "Utwórz nową"
+  },
+  "UpdateWishlistForm": {
+    "name": "Nazwa",
+    "wishlist_updated": "Lista została zaktualizowana",
+    "wishlist_deleted": "Lista została usunięta",
+    "email_label": "Otrzymuj powiadomienia e-mail o nowych promocjach na elementy z tej listy",
+    "delete_warning": "Czy na pewno chcesz usunąć tę listę życzeń?",
+    "rename": "Zmień nazwę"
+  },
+  "RemoveFromWishlistButton": {
+    "delete_warning": "Czy na pewno chcesz usunąć tę grę z listy życzeń?"
+  },
+  "AddToWishlistButton": {
+    "already_in_wishlist": "Już na liście życzeń",
+    "add_to_wishlist": "Dodaj do listy życzeń",
+    "add_to_wishlist_title": "Dodaj grę do listy życzeń",
+    "manage_wishlists": "Zarządzaj listami życzeń",
+    "no_wishlists": "Nie masz jeszcze żadnej listy życzeń"
+  },
+  "CreateWishlistModal": {
+    "create_wishlist": "Utwórz listę życzeń",
+    "name": "Nazwa",
+    "email_label": "Otrzymuj powiadomienia e-mail o nowych promocjach na elementy z tej listy",
+    "create": "Utwórz"
+  },
+  "WishlistDetails": {
+    "wishlisted_items": "Elementy na liście ({count})"
+  },
+  "Profile": {
+    "my_profile": "Mój Profil",
+    "username": "Nazwa użytkownika",
+    "email": "Email",
+    "account_created": "Konto utworzono"
+  },
+  "Footer": {
+    "useful_links": "Przydatne linki",
+    "about_us": "O nas",
+    "contacts": "Kontakt",
+    "version": "Wersja"
+  },
+  "AboutUs": {
+    "about_us": "O nas",
+    "description": "Stworzyliśmy ten serwis, aby pomóc graczom znaleźć najlepsze promocje z różnych sklepów. Nasza strona agreguje dane z takich platform jak PlayStation Store, Nintendo eShop, Xbox i innych, oferując wygodny sposób na porównywanie cen, śledzenie zniżek i analizowanie historii cen.<br></br>Staramy się, aby nasz serwis był jak najbardziej przyjazny dla użytkownika, informacyjny i użyteczny. Dzięki elastycznym filtrom, wykresom zmian cen i funkcji śledzenia gier użytkownicy mogą podejmować świadome decyzje zakupowe.<br></br>Nasz zespół nieustannie pracuje nad ulepszaniem funkcjonalności i dodawaniem nowych funkcji. Jeśli masz sugestie lub pomysły – chętnie je usłyszymy!",
+    "meet_the_team": "Poznaj zespół"
+  },
+  "HeroCard": {
+    "about": "O nas",
+    "links": "Linki"
+  },
+  "validation": {
+    "wishlist": {
+      "name_required": "Nazwa jest wymagana",
+      "name_min": "Nazwa musi mieć co najmniej {length} znaków",
+      "name_max": "Nazwa może mieć maksymalnie {length} znaków"
+    }
+  },
+  "toast": {
+    "attention": "Uwaga",
+    "error": "Błąd",
+    "success": "Sukces",
+    "warning": "Ostrzeżenie"
+  },
+  "google_auth": {
+    "success_message": "Zalogowano się pomyślnie przez Google jako {username}"
+  },
+  "game_type": {
+    "All": "Wszystko",
+    "Game": "Gra",
+    "Bundle": "Zestaw",
+    "Premium Edition": "Edycja Premium",
+    "Currency": "Waluta",
+    "Soundtrack": "Ścieżka dźwiękowa",
+    "DLC": "DLC",
+    "Pack": "Pakiet",
+    "Season Pass": "Przepustka sezonowa"
+  },
+  "sorting": {
+    "newest": "Najnowsze",
+    "finishing": "Kończące się",
+    "biggest_discounts": "Największe Zniżki",
+    "az": "A-Z",
+    "za": "Z-A"
+  },
+  "Logout": {
+    "logout": "Wyloguj się",
+    "warning": "Czy na pewno chcesz się wylogować?"
+  },
+  "no": "Nie",
+  "yes": "Tak"
+}
