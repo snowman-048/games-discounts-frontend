@@ -3,6 +3,7 @@
 import { CredentialResponse, GoogleLogin, useGoogleOneTapLogin } from '@react-oauth/google'
 
 import { useCookies } from 'next-client-cookies'
+import { useTranslations } from 'next-intl'
 
 import { authWithGoogle } from '@/api/auth'
 import { defaultRegions } from '@/configs/default-regions.config'
@@ -19,6 +20,7 @@ const onGoogleLoginError = () => {
 }
 
 const useOnGoogleLogin = () => {
+  const t = useTranslations('google_auth')
   const cookies = useCookies()
   const navigate = useCustomNavigate()
 
@@ -45,7 +47,7 @@ const useOnGoogleLogin = () => {
 
       useUserStore.setState({ isUserLoading: false, user: data.user })
       navigate({ query: accountRegions, replace: true })
-      CustomToast('success', `You have successfully logged in with Google as ${data.user.username}`)
+      CustomToast('success', t('success_message', { username: data.user.username }))
     } catch (err) {
       CustomToast('error', (err as Error).message)
     } finally {

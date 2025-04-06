@@ -1,6 +1,7 @@
 'use client'
 
 import { Stack } from '@mui/material'
+import { useTranslations } from 'use-intl'
 
 import { Modal } from '@/components/ui/modal'
 import { GoogleAuthButton } from '@/utils/google-auth'
@@ -13,11 +14,13 @@ type TProps = {
 }
 
 const LoginModal = ({ open, handleClose }: TProps) => {
+  const t = useTranslations('LoginModal')
+
   return (
-    <Modal open={open} onClose={handleClose} title="Login/Signup">
+    <Modal open={open} onClose={handleClose} title={t('login_signup')}>
       <Stack gap={2} alignItems="center">
         <TypographyV2 color="brand" fontWeight="bold" fontSize="text-2xl" handwritten>
-          New authentication methods will be available soon
+          {t('new_methods')}
         </TypographyV2>
 
         <GoogleAuthButton onSuccess={handleClose} />

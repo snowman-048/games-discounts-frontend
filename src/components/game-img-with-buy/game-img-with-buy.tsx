@@ -1,5 +1,8 @@
+'use server'
+
 import { Box, Grid2 } from '@mui/material'
 import cn from 'classnames'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
@@ -19,7 +22,9 @@ type TProps = {
   isFake?: boolean
 }
 
-const GameImgWithBuy = ({ game, storeLinks, className, isFake = false }: TProps) => {
+const GameImgWithBuy = async ({ game, storeLinks, className, isFake = false }: TProps) => {
+  const t = await getTranslations()
+
   return (
     <Grid2
       container
@@ -38,7 +43,7 @@ const GameImgWithBuy = ({ game, storeLinks, className, isFake = false }: TProps)
       <Grid2 container flexDirection="column" gap={2} width="100%">
         <GlassCard className={styles.typeContainer}>
           <TypographyV2 color="brand" fontWeight="bold" fontSize="text-l" letterSpacing={4}>
-            {game.type.toUpperCase()}
+            {t(`game_type.${game.type}`).toUpperCase()}
           </TypographyV2>
         </GlassCard>
         {game.gameStore

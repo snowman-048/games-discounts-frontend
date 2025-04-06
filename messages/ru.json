@@ -1,0 +1,170 @@
+{
+  "Header": {
+    "home": "Главная",
+    "active_discounts": "Текущие скидки",
+    "explore": "Обзор",
+    "regions": "Регионы",
+    "contact_us": "Связаться с нами"
+  },
+  "LanguagesSwitch": {
+    "language": "Язык"
+  },
+  "RegionSettings": {
+    "store_region": "{store} Регион"
+  },
+  "ProfileButton": {
+    "profile": "Профиль",
+    "login": "Войти"
+  },
+  "GamesSearch": {
+    "games_search": "Поиск игр",
+    "close": "Закрыть",
+    "view_all": "Посмотреть все"
+  },
+  "Home": {
+    "biggest_discounts": "Самые большие скидки",
+    "newest_discounts": "Новые <store></store> Скидки"
+  },
+  "GamesCarouselWithData": {
+    "view_more": "Ещё"
+  },
+  "GamesFilters": {
+    "filter_games": "Фильтровать игры",
+    "type": "Тип",
+    "title": "Название",
+    "search": "Поиск",
+    "sort_by": "Сортировать",
+    "store": "Магазин",
+    "overlaps": "Пересекаются",
+    "oevrlaps_tooltip": "Показыввать только те игры, которые есть во всех выбранных магазинах",
+    "close": "Закрыть"
+  },
+  "GameInfo": {
+    "genres": "Жанры",
+    "platforms": "Платформы",
+    "publisher": "Издатель",
+    "release_date": "Дата релиза",
+    "text_languages": "Языки текста",
+    "voice_languages": "Языки озвучки",
+    "available_in_stores": "Доступно в магазинах",
+    "price_history": "История цен",
+    "related_items": "Связанные товары",
+    "screenshots": "Скриншоты",
+    "description": "Описание"
+  },
+  "PriceInfoItem": {
+    "lowest_price": "Самая низкая цена",
+    "highest_price": "Самая высокая цена"
+  },
+  "BuyGameButton": {
+    "buy_at": "Купить в",
+    "discount_ends": "Скидка до {date}"
+  },
+  "DiscountInfo": {
+    "ends_in": "Конец через {date}"
+  },
+  "LoginModal": {
+    "login_signup": "Вход/Регистрация",
+    "new_methods": "Новые методы авторизации будут доступны скоро"
+  },
+  "ProfileControls": {
+    "wishlists": "Список желаний",
+    "profile": "Профиль"
+  },
+  "Wishlists": {
+    "my_wishlists": "Мои списки желаний ({total}/{max})",
+    "total_tracking_items": "Всего отслеживаемых элементов"
+  },
+  "WishlistLinkItem": {
+    "email_toast": "Уведомления по электронной почте включены",
+    "count_toast": "Количество элементов в списке желаний"
+  },
+  "CreateNewWishlistButton": {
+    "create_new": "Создать новый"
+  },
+  "UpdateWishlistForm": {
+    "name": "Название",
+    "wishlist_updated": "Список желаний обновлен",
+    "wishlist_deleted": "Список желаний удален",
+    "email_label": "Получать уведомления по электронной почте о новых скидках на элементы в этом списке желаний",
+    "delete_warning": "Вы уверены, что хотите удалить этот список желаний?",
+    "rename": "Переименовать"
+  },
+  "RemoveFromWishlistButton": {
+    "delete_warning": "Вы уверены, что хотите удалить этот элемент из списка желаний?"
+  },
+  "AddToWishlistButton": {
+    "already_in_wishlist": "Уже в списке желаний",
+    "add_to_wishlist": "Добавить в список желаний",
+    "add_to_wishlist_title": "Добавить игру в список желаний",
+    "manage_wishlists": "Управление списками желаний",
+    "no_wishlists": "У вас нет списков желаний"
+  },
+  "CreateWishlistModal": {
+    "create_wishlist": "Создать список желаний",
+    "name": "Название",
+    "email_label": "Получать уведомления по электронной почте о новых скидках на элементы в этом списке желаний",
+    "create": "Создать"
+  },
+  "Profile": {
+    "my_profile": "Мой профиль",
+    "username": "Имя пользователя",
+    "email": "Электронная почта",
+    "account_created": "Аккаунт создан"
+  },
+  "Footer": {
+    "useful_links": "Полезные ссылки",
+    "about_us": "О нас",
+    "contacts": "Контакты",
+    "version": "Версия"
+  },
+  "AboutUs": {
+    "about_us": "О нас",
+    "description": "Мы создали этот сервис, чтобы помочь геймерам находить лучшие скидки в различных магазинах. Наш сайт агрегирует данные с таких платформ, как PlayStation Store, Nintendo eShop, Xbox и других, предоставляя удобный способ сравнивать цены, отслеживать скидки и анализировать историю цен.<br></br>Мы стремимся сделать наш сервис максимально удобным, информативным и полезным. Благодаря гибким фильтрам, графикам изменения цен и функциям отслеживания игр пользователи могут легко принимать обоснованные решения о покупке.<br></br>Наша команда постоянно работает над улучшением функциональности и добавлением новых возможностей. Если у вас есть предложения или идеи — мы будем рады вашей обратной связи!",
+    "meet_the_team": "Познакомьтесь с командой"
+  },
+  "HeroCard": {
+    "about": "Описание",
+    "links": "Ссылки"
+  },
+  "validation": {
+    "wishlist": {
+      "name_required": "Название обязательно",
+      "name_min": "Название должно быть не менее {length} символов",
+      "name_max": "Название должно быть не более {length} символов"
+    }
+  },
+  "toast": {
+    "attention": "Внимание",
+    "error": "Ошибка",
+    "success": "Успех",
+    "warning": "Предупреждение"
+  },
+  "google_auth": {
+    "success_message": "Вы успешно вошли через Google как {username}"
+  },
+  "game_type": {
+    "All": "Всe",
+    "Game": "Игра",
+    "Bundle": "Бандл",
+    "Premium Edition": "Премиальное издание",
+    "Currency": "Валюта",
+    "Soundtrack": "Музыка",
+    "DLC": "Дополнение",
+    "Pack": "Набор",
+    "Season Pass": "Сезонный пропуск"
+  },
+  "sorting": {
+    "newest": "Самые новые",
+    "finishing": "Заканчивающиеся",
+    "biggest_discounts": "Самые большие скидки",
+    "az": "А-Я",
+    "za": "Я-А"
+  },
+  "Logout": {
+    "logout": "Выйти",
+    "warning": "Вы уверены, что хотите выйти?"
+  },
+  "no": "Нет",
+  "yes": "Да"
+}

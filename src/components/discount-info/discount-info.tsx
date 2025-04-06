@@ -10,9 +10,10 @@ import { TypographyV2 } from '../ui/typography'
 type TProps = {
   discount: TPriceHistory
   withStoreLabel?: boolean
+  t: any
 }
 
-const DiscountInfo = ({ discount, withStoreLabel }: TProps) => {
+const DiscountInfo = ({ discount, withStoreLabel, t }: TProps) => {
   const isDiscountActive = moment(discount.discountEnds).diff(moment(), 'seconds') > 0
 
   return (
@@ -60,13 +61,14 @@ const DiscountInfo = ({ discount, withStoreLabel }: TProps) => {
           </Grid2>
           {isDiscountActive && (
             <TypographyV2 fontSize="text-s" color="inactive">
-              Ends in{' '}
-              {moment
-                .duration(
-                  moment(discount.discountEnds).utc(true).endOf('day').valueOf() -
-                    moment().utc(true).startOf('day').valueOf(),
-                )
-                .humanize()}
+              {t('DiscountInfo.ends_in', {
+                date: moment
+                  .duration(
+                    moment(discount.discountEnds).utc(true).endOf('day').valueOf() -
+                      moment().utc(true).startOf('day').valueOf(),
+                  )
+                  .humanize(),
+              })}
             </TypographyV2>
           )}
         </Stack>

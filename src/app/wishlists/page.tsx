@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 
 import { Stack } from '@mui/material'
+import { useTranslations } from 'use-intl'
 
 import { CreateNewWishlistButton } from '@/components/create-new-wishlist-button'
 import { NoDataLabel } from '@/components/no-data-label'
@@ -16,6 +17,8 @@ import { useUserStore } from '@/store/user.store'
 import { withRouteProtection } from '@/utils/with-route-protection'
 
 const Wishlists = () => {
+  const t = useTranslations('Wishlists')
+
   const wishlists = useUserStore((state) => state.user?.wishlists)
 
   const totalWishlistedGames = useMemo(
@@ -31,7 +34,9 @@ const Wishlists = () => {
     <Container>
       <GlassCard asSection>
         <Stack gap={2} width="100%">
-          <SectionTitle title={`My Wishlists (${wishlists?.length || 0}/${MAX_WISHLISTS})`} />
+          <SectionTitle
+            title={t('my_wishlists', { total: wishlists?.length || 0, max: MAX_WISHLISTS })}
+          />
 
           {!wishlists?.length && <NoDataLabel label="No Wishlists yet" />}
           {!!wishlists?.length && (
@@ -44,7 +49,7 @@ const Wishlists = () => {
 
           {!!wishlists?.length && (
             <InfoItem
-              label="Total tracking items"
+              label={t('total_tracking_items')}
               data={totalWishlistedGames}
               withDivider={false}
             />

@@ -14,16 +14,16 @@ type TOptions = {
 
 const CustomToast = (type: TypeOptions, message: string, options?: TOptions) => {
   const tostStyles = getToastStyles(type)
-  const { noIcon, noTitle } = options || {}
+  const { noIcon } = options || {}
 
   toast(
     () => (
       <Stack width="100%">
-        {!noTitle && (
+        {/* {!noTitle && (
           <TypographyV2 fontSize="text-l" fontWeight="bold">
             {tostStyles.title}
           </TypographyV2>
-        )}
+        )} */}
         <TypographyV2 fontWeight="medium" color="secondary">
           {message}
         </TypographyV2>

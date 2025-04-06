@@ -9,12 +9,15 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import cn from 'classnames'
 import { Metadata } from 'next'
 import { CookiesProvider } from 'next-client-cookies/server'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import { Dancing_Script, Roboto } from 'next/font/google'
 import Script from 'next/script'
 
 import { BackgroundHandler } from '@/components/background-handler'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
+import { setMomentLocale } from '@/helpers/setMomentLocale'
 import { theme } from '@/theme'
 import { InitHandler } from '@/utils/init-handler'
 
@@ -51,8 +54,12 @@ const RootLayout = async ({
 }: Readonly<{
   children: React.ReactNode
 }>) => {
+  const locale = await getLocale()
+  setMomentLocale(locale)
+  const messages = await getMessages({ locale })
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
@@ -75,25 +82,27 @@ const RootLayout = async ({
           </>
         )}
 
-        <AppRouterCacheProvider>
-          <CookiesProvider>
-            <ThemeProvider theme={theme} defaultMode="dark">
-              <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!}>
-                <BackgroundHandler />
-                <InitHandler />
-                <ToastContainer theme="dark" />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <AppRouterCacheProvider>
+            <CookiesProvider>
+              <ThemeProvider theme={theme} defaultMode="dark">
+                <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!}>
+                  <BackgroundHandler />
+                  <InitHandler locale={locale} />
+                  <ToastContainer theme="dark" />
 
-                <div id="root">
-                  <Header />
-                  <Box flex={1} width="100%" height="100%">
-                    {children}
-                  </Box>
-                  <Footer />
-                </div>
-              </GoogleOAuthProvider>
-            </ThemeProvider>
-          </CookiesProvider>
-        </AppRouterCacheProvider>
+                  <div id="root">
+                    <Header />
+                    <Box flex={1} width="100%" height="100%">
+                      {children}
+                    </Box>
+                    <Footer />
+                  </div>
+                </GoogleOAuthProvider>
+              </ThemeProvider>
+            </CookiesProvider>
+          </AppRouterCacheProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

@@ -28,7 +28,7 @@ const MAPPER: Record<EGameSorting, TSorting> = {
 const getGamesSorting = (sorting?: EGameSorting, allGames = false) => {
   return sorting && MAPPER[sorting]
     ? MAPPER[sorting]
-    : MAPPER[(allGames ? allGamesSortingOptions : gamesSortingOptions)[0].value]
+    : MAPPER[(allGames ? allGamesSortingOptions : gamesSortingOptions)[0]]
 }
 
 export { getGamesSorting }

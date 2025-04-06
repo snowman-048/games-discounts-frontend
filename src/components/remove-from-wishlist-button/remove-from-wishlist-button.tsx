@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove'
 import { Box, BoxProps, Button, Grid2, IconButton, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 
 import { removeGameFromWishlist } from '@/api/wishlist'
 import { useUserStore } from '@/store/user.store'
@@ -21,6 +22,8 @@ type TProps = BoxProps & {
 }
 
 const RemoveFromWishlistButton = ({ game, wishlistId, onRemoveGame, ...rest }: TProps) => {
+  const t = useTranslations()
+
   const user = useUserStore((state) => state.user)
   const setUser = useUserStore((state) => state.setUser)
 
@@ -68,7 +71,7 @@ const RemoveFromWishlistButton = ({ game, wishlistId, onRemoveGame, ...rest }: T
         fixedWidth
       >
         <Stack gap={1.5}>
-          <TypographyV2>Are you sure you want to remove this game from your wishlist?</TypographyV2>
+          <TypographyV2>{t('RemoveFromWishlistButton.delete_warning')}</TypographyV2>
 
           <Grid2 container alignItems="center" justifyContent="flex-end" gap={1}>
             <Button
@@ -77,10 +80,10 @@ const RemoveFromWishlistButton = ({ game, wishlistId, onRemoveGame, ...rest }: T
               onClick={() => setButtonAnchorEl(null)}
               disabled={isLoading}
             >
-              NO
+              {t('no')}
             </Button>
             <Button variant="outlined" size="small" loading={isLoading} onClick={removeGame}>
-              YES
+              {t('yes')}
             </Button>
           </Grid2>
         </Stack>

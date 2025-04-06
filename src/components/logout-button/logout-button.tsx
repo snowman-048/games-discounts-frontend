@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import LogoutIcon from '@mui/icons-material/Logout'
 import { Button, ButtonProps, Grid2, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 
 import { logout } from '@/helpers/logout'
 
@@ -13,6 +14,8 @@ import { TypographyV2 } from '../ui/typography'
 type TProps = Omit<ButtonProps, 'onClick' | 'variant'> & { onLogoutConfirm?: () => void }
 
 const LogoutButton = ({ sx, onLogoutConfirm, ...rest }: TProps) => {
+  const t = useTranslations()
+
   const [buttonAnchorEl, setButtonAnchorEl] = useState<HTMLButtonElement | null>(null)
 
   return (
@@ -28,7 +31,7 @@ const LogoutButton = ({ sx, onLogoutConfirm, ...rest }: TProps) => {
       >
         <LogoutIcon />
         <TypographyV2 sx={{ textTransform: 'none' }} color="l1" fontWeight="semibold">
-          Logout
+          {t('Logout.logout')}
         </TypographyV2>
       </Button>
 
@@ -42,11 +45,11 @@ const LogoutButton = ({ sx, onLogoutConfirm, ...rest }: TProps) => {
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Stack gap={1.5}>
-          <TypographyV2>Are you sure you want to logout?</TypographyV2>
+          <TypographyV2> {t('Logout.warning')}</TypographyV2>
 
           <Grid2 container alignItems="center" justifyContent="flex-end" gap={1}>
             <Button variant="contained" size="small" onClick={() => setButtonAnchorEl(null)}>
-              NO
+              {t('no')}
             </Button>
             <Button
               variant="outlined"
@@ -57,7 +60,7 @@ const LogoutButton = ({ sx, onLogoutConfirm, ...rest }: TProps) => {
                 logout()
               }}
             >
-              YES
+              {t('yes')}
             </Button>
           </Grid2>
         </Stack>

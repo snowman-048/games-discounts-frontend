@@ -6,6 +6,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import SearchIcon from '@mui/icons-material/Search'
 import { Button, Checkbox, FormControlLabel, Grid2, IconButton, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 
 import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
 import { EAppRoute } from '@/enums/app-route.enum'
@@ -27,6 +28,8 @@ type TProps = {
 }
 
 const GamesFilters = ({ usedForAllGames = false }: TProps) => {
+  const t = useTranslations()
+
   const stores = useAppStore((state) => state.stores)
 
   const searchParams = useGetAllSearchParams()
@@ -40,7 +43,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
   const onlySelectedStores = searchParams.onlySelectedStores === 'true'
 
   const sortOptions = usedForAllGames ? allGamesSortingOptions : gamesSortingOptions
-  const sort = searchParams.sort || sortOptions[0].value
+  const sort = searchParams.sort || sortOptions[0]
 
   const handleFilterChange = (newFilter: Record<string, any>) => {
     // TODO: Handle different routes if needed
@@ -61,11 +64,11 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         flexWrap="nowrap"
       >
         <Select
-          label="Type"
+          label={t('GamesFilters.type')}
           size="small"
           value={searchParams.types?.[0] || EFilter.ALL}
           options={[EFilter.ALL, ...Object.values(EGameType)].map((item) => ({
-            title: item,
+            title: t(`game_type.${item}`),
             value: item,
           }))}
           onChange={(value) => {
@@ -89,7 +92,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         >
           <Input
             variant="outlined"
-            label="Title"
+            label={t('GamesFilters.title')}
             size="small"
             value={title}
             onChange={setTitle}
@@ -112,7 +115,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
             type="submit"
           >
             <SearchIcon />
-            Search
+            {t('GamesFilters.search')}
           </Button>
         </Grid2>
       </Grid2>
@@ -123,10 +126,13 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
     return (
       <>
         <Select
-          label="Sort by"
+          label={t('GamesFilters.sort_by')}
           size="small"
           value={sort}
-          options={sortOptions}
+          options={sortOptions.map((item) => ({
+            title: t(`sorting.${item}`),
+            value: item,
+          }))}
           onChange={(value) => {
             handleFilterChange({ sort: value })
           }}
@@ -134,7 +140,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         />
 
         <MultipleAutocomplete
-          label="Store"
+          label={t('GamesFilters.store')}
           options={stores.map((store) => ({
             title: store.name,
             value: `${store.id}`,
@@ -148,10 +154,10 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
           disabled={!stores.length}
         />
 
-        <Tooltip title="Show only games that are included in all the selected stores" delay={500}>
+        <Tooltip title={t('GamesFilters.oevrlaps_tooltip')} delay={500}>
           <FormControlLabel
             control={<Checkbox checked={onlySelectedStores} />}
-            label="Overlaps"
+            label={t('GamesFilters.overlaps')}
             value={onlySelectedStores}
             onChange={(_, value) => handleFilterChange({ onlySelectedStores: value })}
             sx={{ marginTop: { xs: -1, md: 0 }, width: 'fit-content' }}
@@ -188,7 +194,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
               }}
             >
               <FilterAltIcon />
-              Filter Games
+              {t('GamesFilters.filter_games')}
             </Button>
 
             <Stack
@@ -210,7 +216,11 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
         </GlassCard>
       </Grid2>
 
-      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} title="Filter Games">
+      <Modal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={t('GamesFilters.filter_games')}
+      >
         <Stack gap={3} width="100%">
           {renderTopFilters()}
           {renderBottomFilters()}
@@ -219,7 +229,7 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
             sx={{ fontSize: '1.2rem', marginTop: -1 }}
             fullWidth
           >
-            Close
+            {t('GamesFilters.close')}
           </Button>
         </Stack>
       </Modal>

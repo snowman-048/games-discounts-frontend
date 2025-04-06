@@ -4,6 +4,7 @@ import { Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
 import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 import { getGameById, getGameFamilyByGameId } from '@/api/games'
 import { AddToWishlistButton } from '@/components/add-to-wishlist-button'
@@ -113,6 +114,7 @@ export const generateMetadata = async ({ params, searchParams }: TProps): Promis
 const GameInfo = async ({ params, searchParams }: TProps) => {
   const { gameId } = await params
   const query = await searchParams
+  const t = await getTranslations()
 
   let game: TGame | null = null
   let gameFamily: TFamilyKey[] | null = null
@@ -168,30 +170,33 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
             <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
             <Stack gap={1}>
-              <InfoItem label="Genres" data={game.genres?.map(makeFirstLetterUpper).join(', ')} />
               <InfoItem
-                label="Platforms"
+                label={t('GameInfo.genres')}
+                data={game.genres?.map(makeFirstLetterUpper).join(', ')}
+              />
+              <InfoItem
+                label={t('GameInfo.platforms')}
                 data={
                   <Grid2 container gap={2}>
                     {game.platforms?.map((item) => <PlatformIcon platform={item} key={item} />)}
                   </Grid2>
                 }
               />
-              <InfoItem label="Publisher" data={game.publisher} />
+              <InfoItem label={t('GameInfo.publisher')} data={game.publisher} />
               <InfoItem
-                label="Release date"
+                label={t('GameInfo.release_date')}
                 data={game.releaseDate && moment(game.releaseDate).format(DEFAULT_DATE_FORMATTING)}
               />
               <InfoItem
-                label="Text languages"
+                label={t('GameInfo.text_languages')}
                 data={game.textLanguages?.map(makeFirstLetterUpper).join(', ')}
               />
               <InfoItem
-                label="Voice languages"
+                label={t('GameInfo.voice_languages')}
                 data={game.voiceLanguages?.map(makeFirstLetterUpper).join(', ')}
               />
               <InfoItem
-                label="Available in stores"
+                label={t('GameInfo.available_in_stores')}
                 withDivider={false}
                 data={
                   <Grid2 container gap={2}>
@@ -218,7 +223,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
         flexWrap="nowrap"
       >
         <GlassCard className={cn(styles.section, styles.priceSection, styles.priceHistorySection)}>
-          <SectionTitle title="Price history" />
+          <SectionTitle title={t('GameInfo.price_history')} />
           {game.gameStore?.map((gameStore) => {
             const storePriceHistory = game.priceHistory.filter(
               (item) => item.storeId === gameStore.store.id,
@@ -292,7 +297,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
       {!!gameFamily?.length && (
         <GlassCard className={styles.section}>
           <Stack gap={2} width="100%">
-            <SectionTitle title="Related items" />
+            <SectionTitle title={t('GameInfo.related_items')} />
 
             <Carousel
               align="center"
@@ -303,7 +308,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                   key={item.game.id}
                   paddingTop={2}
                 >
-                  <GameCard game={item.game} noShadow />
+                  <GameCard game={item.game} t={t} noShadow />
                 </Grid2>
               ))}
             />
@@ -314,7 +319,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
       <GlassCard className={styles.section}>
         <Stack spacing={3} width="100%">
           <Stack gap={2} width="100%">
-            <SectionTitle title="Screenshots" />
+            <SectionTitle title={t('GameInfo.screenshots')} />
             {!!game.images.length ? (
               <Grid2 mx={{ xs: -2, sm: -3 }}>
                 <ImagesCarousel images={game.images} alt={game.title} />
@@ -325,7 +330,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           </Stack>
 
           <Stack spacing={2}>
-            <SectionTitle title="Description" />
+            <SectionTitle title={t('GameInfo.description')} />
             {!!game.description ? (
               <TypographyV2
                 fontSize="text-l"
