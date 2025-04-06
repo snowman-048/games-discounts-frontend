@@ -1,16 +1,20 @@
 import { Box, Divider, Grid2, Stack } from '@mui/material'
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
 import { OUR_EMAIL } from '@/configs/contacts.config'
 import { EAppRoute } from '@/enums/app-route.enum'
 
 import packageJson from '../../../package.json'
+import { LanguagesSwitch } from '../languages-switch'
 import { Logo } from '../logo'
 import { GlassCard } from '../ui/cards/glass-card'
 import { Container } from '../ui/container'
 import { TypographyV2 } from '../ui/typography'
 
-const Footer = () => {
+const Footer = async () => {
+  const t = await getTranslations('Footer')
+
   return (
     <GlassCard
       style={{
@@ -27,22 +31,24 @@ const Footer = () => {
           gap={2}
           container
           width="100%"
-          flexDirection={{ xs: 'column', sm: 'row' }}
+          flexDirection={{ xs: 'column', md: 'row' }}
           justifyContent="space-between"
         >
           <Box sx={{ alignSelf: 'center' }}>
             <Logo />
           </Box>
 
+          <LanguagesSwitch />
+
           <Stack>
-            <TypographyV2 color="inactive">Useful Links:</TypographyV2>
+            <TypographyV2 color="inactive">{t('useful_links')}:</TypographyV2>
             <Link href={`/${EAppRoute.ABOUT_US}`}>
-              <TypographyV2>About Us</TypographyV2>
+              <TypographyV2>{t('about_us')}</TypographyV2>
             </Link>
           </Stack>
 
           <Stack>
-            <TypographyV2 color="inactive">Contacts:</TypographyV2>
+            <TypographyV2 color="inactive">{t('contacts')}:</TypographyV2>
 
             <Stack direction={'row'} spacing={1} alignItems={'center'}>
               <address>
@@ -82,7 +88,7 @@ const Footer = () => {
             </div>
           </Box>
           <TypographyV2 fontWeight="bold" color="disabled">
-            Version: {packageJson.version}
+            {t('version')}: {packageJson.version}
           </TypographyV2>
         </Grid2>
       </Container>

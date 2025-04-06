@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { Box, Button } from '@mui/material'
+import { useTranslations } from 'next-intl'
 
 import { MAX_WISHLISTS } from '@/configs/wishlists.config'
 import { useUserStore } from '@/store/user.store'
@@ -13,6 +14,8 @@ import { Tooltip } from '../ui/tooltip'
 import { TypographyV2 } from '../ui/typography'
 
 const CreateNewWishlistButton = () => {
+  const t = useTranslations('CreateNewWishlistButton')
+
   const user = useUserStore((state) => state.user)
 
   const [isCreateWishlistOpen, setIsCreateWishlistOpen] = useState(false)
@@ -41,7 +44,7 @@ const CreateNewWishlistButton = () => {
               color={isWishlistsLimit ? 'disabled' : 'brand'}
               fontWeight="bold"
             >
-              Create new
+              {t('create_new')}
             </TypographyV2>
           </Button>
         </Box>

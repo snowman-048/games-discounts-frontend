@@ -1,7 +1,10 @@
+'use client'
+
 import { useMemo } from 'react'
 
 import { Divider, Grid2 } from '@mui/material'
 import cn from 'classnames'
+import { useTranslations } from 'use-intl'
 
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
@@ -39,6 +42,8 @@ const PriceInfoItem = ({
   variant = 'default',
   showStoreLabel = true,
 }: TProps) => {
+  const t = useTranslations('PriceInfoItem')
+
   const { maxPrice, lowestPrice, region, additionalLowestInfo } = useMemo(() => {
     const storePriceHistory = priceHistory.filter((item) => item.store.name === store)
 
@@ -85,6 +90,7 @@ const PriceInfoItem = ({
       flexItem
       sx={{
         background: 'var(--color-l3)',
+        mx: 0.5,
       }}
       orientation={isInline ? 'vertical' : 'horizontal'}
     />
@@ -93,7 +99,7 @@ const PriceInfoItem = ({
   const renderLowestValues = () => (
     <>
       <PriceInfoText
-        label="Lowest price"
+        label={t('lowest_price')}
         value={`${region.currencySymbol}${lowestPrice}`}
         valueColor="var(--color-green)"
       />
@@ -111,17 +117,17 @@ const PriceInfoItem = ({
   )
 
   return (
-    <GlassCard className={cn(styles.item, styles[variant], className)} style={{ height }}>
+    <GlassCard className={cn(styles.item, styles[variant], className)} sx={{ height }}>
       <Grid2 container flexDirection={isInline ? 'column' : 'row'} alignItems="center" gap={1}>
         <StoreIcon store={store} link={storeLink} withLabel={showStoreLabel} />
-        <TypographyV2 adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }}>
+        <TypographyV2 adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }} textAlign="center">
           {region.country} - {region.key}
         </TypographyV2>
       </Grid2>
 
       {renderDivider()}
       <PriceInfoText
-        label="Highest price"
+        label={t('highest_price')}
         value={`${region.currencySymbol}${maxPrice}`}
         valueColor="var(--color-red)"
       />

@@ -19,6 +19,7 @@ import styles from './styles.module.scss'
 
 type TProps = {
   game: TGame | TPendingConnection
+  t: any
   noShadow?: boolean
   variant?: 'card' | 'list-item'
   onClick?: () => void
@@ -31,6 +32,7 @@ type TProps = {
 
 const GameCard = ({
   game: rawGame,
+  t,
   variant = 'card',
   onClick,
   className,
@@ -131,7 +133,7 @@ const GameCard = ({
                 textAlign="center"
                 fontSize="text-l"
               >
-                {game.type.toUpperCase()}
+                {t(`game_type.${game.type}`).toUpperCase()}
               </TypographyV2>
             </Grid2>
             <Grid2
@@ -146,7 +148,7 @@ const GameCard = ({
               </TypographyV2>
               <Stack gap={1} marginTop={1} width="100%">
                 {game.priceHistory?.map((item) => (
-                  <DiscountInfo discount={item} withStoreLabel={true} key={item.id} />
+                  <DiscountInfo discount={item} withStoreLabel={true} key={item.id} t={t} />
                 ))}
               </Stack>
             </Grid2>

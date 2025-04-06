@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 
 import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 import { GamesCarouselWithData } from '@/components/games-carousel-with-data'
 import { LogoGlitch } from '@/components/logo-glitch'
@@ -33,6 +34,7 @@ export const metadata: Metadata = {
 
 const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams> }) => {
   const query = await searchParams
+  const t = await getTranslations('Home')
 
   return (
     <Container paddingBottom={8}>
@@ -41,7 +43,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
       <Stack width="100%" marginTop={3} gap={{ xs: 2, sm: 5 }}>
         <Suspense>
           <GamesCarouselWithData
-            title="Biggest Discounts"
+            title={t('biggest_discounts')}
             query={{
               ...query,
               sort: EGameSorting.BIGGEST_DISCOUNTS,
@@ -61,7 +63,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
                 gap={1}
                 textTransform="none"
               >
-                Newest <StoreIcon store={EStore.PSN} /> Discounts
+                {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.PSN} /> })}
               </Grid2>
             }
             query={{
@@ -85,7 +87,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
                 gap={1}
                 textTransform="none"
               >
-                Newest <StoreIcon store={EStore.NINTENDO} /> Discounts
+                {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.NINTENDO} /> })}
               </Grid2>
             }
             query={{
@@ -109,7 +111,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
                 gap={1}
                 textTransform="none"
               >
-                Newest <StoreIcon store={EStore.XBOX} /> Discounts
+                {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.XBOX} /> })}
               </Grid2>
             }
             query={{

@@ -1,4 +1,5 @@
 import { Grid2 } from '@mui/material'
+import { getTranslations } from 'next-intl/server'
 
 import { getGamesList } from '@/api/games'
 import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
@@ -20,6 +21,8 @@ type TProps = {
 }
 
 const GamesList = async ({ page, paginationPath, query, allGames }: TProps) => {
+  const t = await getTranslations()
+
   let games: TGame[] = []
   let totalGames = 0
 
@@ -49,7 +52,7 @@ const GamesList = async ({ page, paginationPath, query, allGames }: TProps) => {
     >
       <GameCardsList>
         {games.map((game) => (
-          <GameCard game={game} key={game.id} switchToListOnMobile />
+          <GameCard game={game} key={game.id} t={t} switchToListOnMobile />
         ))}
       </GameCardsList>
 

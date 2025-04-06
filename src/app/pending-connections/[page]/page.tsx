@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { Grid2, LinearProgress } from '@mui/material'
 import { useParams } from 'next/navigation'
+import { useTranslations } from 'use-intl'
 
 import { getPendingConnections } from '@/api/pending-connections'
 import { TPendingConnection } from '@/api/pending-connections/types'
@@ -20,6 +21,8 @@ import { withRouteProtection } from '@/utils/with-route-protection'
 const LIST_SIZE = 25
 
 const PendingConnections = () => {
+  const t = useTranslations()
+
   const { page } = useParams<{ page: string }>()
 
   const [totalConnections, setTotalConnections] = useState(0)
@@ -62,7 +65,7 @@ const PendingConnections = () => {
       >
         <GameCardsList>
           {pendingConnections?.map((game) => (
-            <GameCard game={game} key={game.id} switchToListOnMobile />
+            <GameCard game={game} key={game.id} switchToListOnMobile t={t} />
           ))}
         </GameCardsList>
 

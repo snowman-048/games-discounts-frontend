@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { IconButton, IconButtonProps } from '@mui/material'
+import { useTranslations } from 'next-intl'
 
 import { Avatar } from '@/components/ui/avatar'
 import { Popover } from '@/components/ui/popover'
@@ -16,6 +17,8 @@ import { ProfileControls } from './libs/components/profile-controls'
 type TProps = IconButtonProps
 
 const ProfileButton = (props: TProps) => {
+  const t = useTranslations('ProfileButton')
+
   const user = useUserStore((state) => state.user)
   const isUserLoading = useUserStore((state) => state.isUserLoading)
 
@@ -29,7 +32,7 @@ const ProfileButton = (props: TProps) => {
 
   return (
     <>
-      <Tooltip title={isUserLoading ? null : user ? 'Profile' : 'Login'}>
+      <Tooltip title={isUserLoading ? null : user ? t('profile') : t('login')}>
         <IconButton
           onClick={(e) => {
             if (!user) {

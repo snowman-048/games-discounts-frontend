@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
@@ -9,6 +9,7 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
 import WindowIcon from '@mui/icons-material/Window'
 import { Box, Button, Divider, Drawer, Grid2, IconButton, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -26,27 +27,13 @@ import { TGameSearchParams } from '@/types/game-search.types'
 import { GamesSearch } from './libs/components/games-search'
 import { ProfileButton } from './libs/components/profile-button'
 
-const links = [
-  { label: 'Home', path: `/${EAppRoute.HOME}`, icon: WindowIcon },
-  {
-    label: 'Active Discounts',
-    path: `/${EAppRoute.ACTIVE_DISCOUNTS}/1`,
-    icon: WhatshotIcon,
-    customIsActive: (pathname: string) => pathname.includes(EAppRoute.ACTIVE_DISCOUNTS),
-  },
-  {
-    label: 'Explore',
-    path: `/${EAppRoute.ALL_GAMES}/1`,
-    icon: SportsEsportsIcon,
-    customIsActive: (pathname: string) => pathname.includes(EAppRoute.ALL_GAMES),
-  },
-]
-
 type TProps = {
   query: TGameSearchParams
 }
 
 const HeaderComponent = ({ query }: TProps) => {
+  const t = useTranslations('Header')
+
   const regions = useAppStore((state) => state.regions)
 
   const [locationAnchorEl, setLocationAnchorEl] = useState<HTMLButtonElement | null>(null)
@@ -55,6 +42,25 @@ const HeaderComponent = ({ query }: TProps) => {
   const pathname = usePathname()
 
   const isLinkActive = (path: string) => pathname === path
+
+  const links = useMemo(
+    () => [
+      { label: t('home'), path: `/${EAppRoute.HOME}`, icon: WindowIcon },
+      {
+        label: t('active_discounts'),
+        path: `/${EAppRoute.ACTIVE_DISCOUNTS}/1`,
+        icon: WhatshotIcon,
+        customIsActive: (pathname: string) => pathname.includes(EAppRoute.ACTIVE_DISCOUNTS),
+      },
+      {
+        label: t('explore'),
+        path: `/${EAppRoute.ALL_GAMES}/1`,
+        icon: SportsEsportsIcon,
+        customIsActive: (pathname: string) => pathname.includes(EAppRoute.ALL_GAMES),
+      },
+    ],
+    [t],
+  )
 
   const renderNavigation = (inDrawer = false) => {
     return (
@@ -107,7 +113,7 @@ const HeaderComponent = ({ query }: TProps) => {
           }}
           variant="outlined"
         >
-          Regions
+          {t('regions')}
           <LocationOnIcon />
         </Button>
         {!inDrawer && <ProfileButton />}
@@ -204,7 +210,7 @@ const HeaderComponent = ({ query }: TProps) => {
               </Grid2>
               <Stack padding={3} paddingTop={0} width="100%">
                 <TypographyV2 color="inactive" textAlign="center" variant="body2">
-                  Contact us
+                  {t('contact_us')}
                 </TypographyV2>
                 <address>
                   <a href={`mailto:${OUR_EMAIL}`}>

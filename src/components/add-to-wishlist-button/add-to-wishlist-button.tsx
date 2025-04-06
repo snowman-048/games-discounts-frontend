@@ -6,6 +6,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd'
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded'
 import { Box, BoxProps, FormGroup, Grid2, IconButton, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 
 import { EAppRoute } from '@/enums/app-route.enum'
@@ -26,6 +27,8 @@ type TProps = BoxProps & {
 }
 
 const AddToWishlistButton = ({ game, ...rest }: TProps) => {
+  const t = useTranslations('AddToWishlistButton')
+
   const stores = useAppStore((state) => state.stores)
   const user = useUserStore((state) => state.user)
 
@@ -48,7 +51,7 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
     <>
       <Box {...rest}>
         <Tooltip
-          title={isIncludedInAnyWishlist ? 'Already in a wishlist' : 'Add to wishlist'}
+          title={isIncludedInAnyWishlist ? t('already_in_wishlist') : t('add_to_wishlist')}
           delay={500}
         >
           <IconButton
@@ -72,7 +75,7 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
       <Popover anchorEl={buttonAnchorEl} onClose={() => setButtonAnchorEl(null)}>
         <Stack alignItems="center" width="100%" gap={3}>
           <TypographyV2 fontWeight="bold" fontSize="text-l">
-            Add game to wishlist
+            {t('add_to_wishlist_title')}
           </TypographyV2>
 
           <TypographyV2
@@ -92,14 +95,14 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
                 ))}
               </Stack>
             )}
-            {!user?.wishlists.length && <NoDataLabel label="You don't have any wishlists" />}
+            {!user?.wishlists.length && <NoDataLabel label={t('no_wishlists')} />}
           </FormGroup>
 
           <Grid2 container alignItems="center" justifyContent="space-between" width="100%">
             <CreateNewWishlistButton />
             <Link href={`/${EAppRoute.WISHLISTS}`}>
               <Grid2 container alignItems="center" gap={1} sx={{ color: 'var(--color-brand)' }}>
-                <TypographyV2 color="brand">Manage Wishlists</TypographyV2>
+                <TypographyV2 color="brand">{t('manage_wishlists')}</TypographyV2>
                 <ArrowForwardIosIcon sx={{ width: 15, height: 15 }} />
               </Grid2>
             </Link>

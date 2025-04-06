@@ -2,6 +2,7 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import { Stack } from '@mui/material'
 import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 import { HeroCard } from '@/components/hero-card'
 import { THero } from '@/components/hero-card/hero-card'
@@ -71,33 +72,28 @@ export const metadata: Metadata = {
 }
 
 const AboutUs = async () => {
+  const t = await getTranslations('AboutUs')
+
   return (
     <Container gap={{ xs: 2, md: 4 }} paddingBottom={5}>
       <GlassCard className={styles.section}>
         <Stack gap={2}>
-          <SectionTitle title="About Us" />
+          <SectionTitle title={t('about_us')} />
           <TypographyV2>
-            We created this service to help gamers find the best discounts from various stores. Our
-            website aggregates data from platforms such as PlayStation Store, Nintendo eShop, Xbox,
-            and others, providing a convenient way to compare prices, track discounts, and analyze
-            price history.
-            <br /> <br />
-            We strive to make our service as user-friendly, informative, and useful as possible.
-            With flexible filters, price change graphs, and game tracking features, users can easily
-            make informed purchasing decisions.
-            {/* <br /> <br />
-            Our project is supported by advertisements, which help us maintain the website and add
-            new features. If you enjoy our service, we would appreciate it if you disable your ad
-            blocker – this allows us to grow and continue providing up-to-date discount data. */}
-            <br /> <br />
-            Our team is constantly working on improving functionality and adding new features. If
-            you have any suggestions or ideas, we would love to hear your feedback!
+            {t.rich('description', {
+              br: () => (
+                <>
+                  <br />
+                  <br />
+                </>
+              ),
+            })}
           </TypographyV2>
         </Stack>
       </GlassCard>
       <GlassCard className={styles.section}>
         <Stack spacing={3}>
-          <SectionTitle title="Meet the team" />
+          <SectionTitle title={t('meet_the_team')} />
           {heroes.map((hero) => (
             <HeroCard hero={hero} />
           ))}

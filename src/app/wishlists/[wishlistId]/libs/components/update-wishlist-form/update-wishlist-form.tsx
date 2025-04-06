@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -5,11 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { Button, Checkbox, FormControlLabel, Grid2, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 
 import { deleteWishlist, updateWishlist } from '@/api/wishlist'
 import { TUpdateWishlistPayload } from '@/api/wishlist/types'
 import { Input } from '@/components/ui/input'
 import { Popover } from '@/components/ui/popover'
+import { Tooltip } from '@/components/ui/tooltip'
 import { TypographyV2 } from '@/components/ui/typography'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
@@ -24,6 +28,8 @@ type Tprops = {
 }
 
 const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
+  const t = useTranslations()
+
   const user = useUserStore((state) => state.user)
   const setUser = useUserStore((state) => state.setUser)
   const replaceWishlist = useUserStore((state) => state.replaceWishlist)
@@ -55,7 +61,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
       const { data } = await updateWishlist(wishlist.id, newData)
       replaceWishlist(wishlist.id, data)
       setWishlist(data)
-      CustomToast('success', 'Wishlist updated')
+      CustomToast('success', t('UpdateWishlistForm.wishlist_updated'))
     } catch (err) {
       CustomToast('error', (err as Error).message)
     } finally {
@@ -71,7 +77,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
         ...user,
         wishlists: user?.wishlists.filter((item) => item.id !== data.id),
       } as any)
-      CustomToast('success', 'Wishlist deleted')
+      CustomToast('success', t('UpdateWishlistForm.wishlist_deleted'))
       navigate({ path: `/${EAppRoute.WISHLISTS}`, replace: true })
     } catch (err) {
       CustomToast('error', (err as Error).message)
@@ -90,21 +96,23 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
               render={({ field: { ref, ...rest } }) => (
                 <Input
                   variant="outlined"
-                  label="Name"
+                  label={t('UpdateWishlistForm.name')}
                   size="small"
                   error={errors.name?.message}
                   {...rest}
                 />
               )}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              loading={isLoading}
-              sx={{ padding: 0.75, minWidth: 0 }}
-            >
-              <EditIcon />
-            </Button>
+            <Tooltip title={t('UpdateWishlistForm.rename')}>
+              <Button
+                type="submit"
+                variant="contained"
+                loading={isLoading}
+                sx={{ padding: 0.75, minWidth: 0 }}
+              >
+                <EditIcon />
+              </Button>
+            </Tooltip>
             <Button
               type="button"
               variant="contained"
@@ -122,7 +130,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
             render={({ field: { ref, onChange, value, ...rest } }) => (
               <FormControlLabel
                 control={<Checkbox checked={value} />}
-                label="Receive email notifications about new discounts for items in this wishlist"
+                label={t('UpdateWishlistForm.email_label')}
                 value={value}
                 onChange={(_, value) => {
                   onChange(value)
@@ -143,7 +151,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
         fixedWidth
       >
         <Stack gap={1.5}>
-          <TypographyV2>Are you sure you want to delete this wishlist?</TypographyV2>
+          <TypographyV2>{t('UpdateWishlistForm.delete_warning')}</TypographyV2>
 
           <Grid2 container alignItems="center" justifyContent="flex-end" gap={1}>
             <Button
@@ -152,7 +160,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
               onClick={() => setDeleteButtonAnchorEl(null)}
               disabled={isLoading}
             >
-              NO
+              {t('no')}
             </Button>
             <Button
               variant="outlined"
@@ -160,7 +168,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
               loading={isLoading}
               onClick={handleDeleteWishlist}
             >
-              YES
+              {t('yes')}
             </Button>
           </Grid2>
         </Stack>

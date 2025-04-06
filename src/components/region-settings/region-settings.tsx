@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { Grid2 } from '@mui/material'
 import { useCookies } from 'next-client-cookies'
+import { useTranslations } from 'next-intl'
 
 import { updatePreferedRegion } from '@/api/account'
 import { defaultRegions } from '@/configs/default-regions.config'
@@ -24,6 +25,8 @@ type TProps = {
 }
 
 const RegionSettings = ({ regions }: TProps) => {
+  const t = useTranslations('RegionSettings')
+
   const isUserLoading = useUserStore((state) => state.isUserLoading)
   const user = useUserStore((state) => state.user)
   const setUser = useUserStore((state) => state.setUser)
@@ -76,7 +79,7 @@ const RegionSettings = ({ regions }: TProps) => {
 
     return defaultRegions.map((item) => (
       <Select
-        label={`${item.storeName} Region`}
+        label={t('store_region', { store: item.storeName })}
         disabled={isLoading}
         size="small"
         value={getRegionForStore(item.storeName)}
@@ -92,6 +95,7 @@ const RegionSettings = ({ regions }: TProps) => {
         onChange={(value) => {
           changeRegionForStore(item.storeName, +value)
         }}
+        key={item.storeName}
       />
     ))
   }

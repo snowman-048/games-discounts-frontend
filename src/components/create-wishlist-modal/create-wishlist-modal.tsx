@@ -5,6 +5,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Checkbox, FormControlLabel, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 
 import { createWishlist } from '@/api/wishlist'
 import { Modal } from '@/components/ui/modal'
@@ -24,6 +25,8 @@ const defaultValues = {
 }
 
 const CreateWishlistModal = ({ open, handleClose }: TProps) => {
+  const t = useTranslations()
+
   const addWishlist = useUserStore((state) => state.addWishlist)
 
   const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +37,7 @@ const CreateWishlistModal = ({ open, handleClose }: TProps) => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(createWishlistSchema),
+    resolver: yupResolver(createWishlistSchema(t)),
     defaultValues,
   })
 
@@ -59,16 +62,16 @@ const CreateWishlistModal = ({ open, handleClose }: TProps) => {
   }, [open])
 
   return (
-    <Modal open={open} onClose={handleClose} title="Create Wishlist">
+    <Modal open={open} onClose={handleClose} title={t('CreateWishlistModal.create_wishlist')}>
       <form style={{ width: '100%' }} onSubmit={handleSubmit(submit)}>
-        <Stack width={'100%'} gap={2}>
+        <Stack width={'100%'} gap={2} paddingTop={1}>
           <Controller
             name="name"
             control={control}
             render={({ field: { ref, ...rest } }) => (
               <Input
                 variant="outlined"
-                label="Name"
+                label={t('CreateWishlistModal.name')}
                 size="small"
                 error={errors.name?.message}
                 {...rest}
@@ -82,7 +85,7 @@ const CreateWishlistModal = ({ open, handleClose }: TProps) => {
             render={({ field: { ref, onChange, value, ...rest } }) => (
               <FormControlLabel
                 control={<Checkbox checked={value} />}
-                label="Receive email notifications about new discounts for items in this wishlist"
+                label={t('CreateWishlistModal.email_label')}
                 value={value}
                 onChange={(_, value) => onChange(value)}
                 sx={{ marginTop: { xs: -1, md: 0 } }}
@@ -92,7 +95,7 @@ const CreateWishlistModal = ({ open, handleClose }: TProps) => {
           />
 
           <Button type="submit" variant="contained" fullWidth loading={isLoading}>
-            Create
+            {t('CreateWishlistModal.create')}
           </Button>
         </Stack>
       </form>

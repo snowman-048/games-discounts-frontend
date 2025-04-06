@@ -2,13 +2,13 @@
   grid-template-columns: repeat(5, 1fr);
 }
 
-@media screen and (max-width: 1270px) {
+@media screen and (max-width: 1350px) {
   .list {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1070px) {
   .list {
     grid-template-columns: repeat(3, 1fr);
   }

@@ -1,6 +1,7 @@
 import { SvgIconComponent } from '@mui/icons-material'
 import { Box, Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -23,7 +24,9 @@ export type TLink = {
   title: string
 }
 
-const HeroCard = ({ hero }: { hero: THero }) => {
+const HeroCard = async ({ hero }: { hero: THero }) => {
+  const t = await getTranslations('HeroCard')
+
   return (
     <Box sx={{ position: 'relative', width: '100%' }}>
       <GlassCard className={cn(styles.section, styles.mainInfoContainer)}>
@@ -50,10 +53,10 @@ const HeroCard = ({ hero }: { hero: THero }) => {
           <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
           <Stack spacing={1}>
-            <InfoItem label="About" data={hero.about} />
+            <InfoItem label={t('about')} data={hero.about} />
 
             <InfoItem
-              label="Links"
+              label={t('links')}
               withDivider={false}
               data={hero.links?.map((link) => (
                 <Link key={link.url} href={link.url} target="_blank">

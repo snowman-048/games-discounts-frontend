@@ -3,6 +3,7 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Autocomplete, Box, Button, Grid2, Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -30,6 +31,8 @@ const ITEMS_COUNT = 15
 const LIST_PADDING_X = 40
 
 const GamesSearch = ({ query, closeDrawer }: TProps) => {
+  const t = useTranslations()
+
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [games, setGames] = useState<TGame[]>([])
@@ -135,6 +138,7 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
             game={games[(option as any)['data-option-index']]}
             variant="list-item"
             noShadow
+            t={t}
             onClick={() => {
               handleClose()
               closeDrawer()
@@ -183,7 +187,7 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
                     color={!!games.length ? 'brand' : 'l1'}
                     fontWeight="bold"
                   >
-                    Close
+                    {t('GamesSearch.close')}
                   </TypographyV2>
                 </Button>
                 {!!games.length && (
@@ -197,7 +201,7 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
                   >
                     <Button sx={{ marginTop: 2 }} fullWidth variant="contained">
                       <TypographyV2 fontSize="text-l" fontWeight="bold" isUpperCase color="l1">
-                        View All
+                        {t('GamesSearch.view_all')}
                       </TypographyV2>
                     </Button>
                   </Link>
@@ -221,7 +225,7 @@ const GamesSearch = ({ query, closeDrawer }: TProps) => {
         renderInput={(params) => (
           <Input
             {...params}
-            label="Games Search"
+            label={t('GamesSearch.games_search')}
             size="small"
             inputRef={inputRef}
             sx={{

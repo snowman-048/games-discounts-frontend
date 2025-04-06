@@ -2,6 +2,7 @@
 
 import { Grid2, Stack, useMediaQuery } from '@mui/material'
 import moment from 'moment'
+import { useTranslations } from 'next-intl'
 
 import { LogoutButton } from '@/components/logout-button'
 import { SectionTitle } from '@/components/section-title'
@@ -15,6 +16,8 @@ import { useUserStore } from '@/store/user.store'
 import { withRouteProtection } from '@/utils/with-route-protection'
 
 const Profile = () => {
+  const t = useTranslations('Profile')
+
   const user = useUserStore((state) => state.user)
   const isUserLoading = useUserStore((state) => state.isUserLoading)
 
@@ -32,7 +35,7 @@ const Profile = () => {
     <Container>
       <GlassCard asSection>
         <Stack gap={2} width="100%" alignItems="center">
-          <SectionTitle title="My Profile" />
+          <SectionTitle title={t('my_profile')} />
 
           <Grid2 container alignItems="center" gap={2} width="100%">
             {smallAvatar ? (
@@ -41,11 +44,11 @@ const Profile = () => {
               <Avatar user={user} size="large" />
             )}
 
-            <Stack gap={1}>
-              <InfoItem label="Username" data={user.username} />
-              <InfoItem label="Email" data={user.email} />
+            <Stack gap={1} flex={1}>
+              <InfoItem label={t('username')} data={user.username} />
+              <InfoItem label={t('email')} data={user.email} />
               <InfoItem
-                label="Account created"
+                label={t('account_created')}
                 data={moment(user.createdAt).format(DEFAULT_DATE_FORMATTING)}
                 withDivider={false}
               />

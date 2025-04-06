@@ -1,5 +1,8 @@
+'use server'
+
 import { Box, Grid2, Stack } from '@mui/material'
 import moment from 'moment'
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
@@ -19,7 +22,9 @@ type TProps = {
   link?: string
 }
 
-const BuyGameButton = ({ priceHistoryItem, additionalPriceHistoryItem, link }: TProps) => {
+const BuyGameButton = async ({ priceHistoryItem, additionalPriceHistoryItem, link }: TProps) => {
+  const t = await getTranslations('BuyGameButton')
+
   const isMainDiscountActive = checkIfDiscountIsActive(priceHistoryItem.discountEnds)
   const isAdditionalDiscountActive =
     !!additionalPriceHistoryItem && checkIfDiscountIsActive(additionalPriceHistoryItem.discountEnds)
@@ -48,14 +53,17 @@ const BuyGameButton = ({ priceHistoryItem, additionalPriceHistoryItem, link }: T
           <Grid2 container alignItems="center" gap={1}>
             <StoreIcon store={priceHistoryItem.store.name} withLabel={false} />
             <Stack>
-              <TypographyV2 color="inactive">Buy at</TypographyV2>
+              <TypographyV2 color="inactive">{t('buy_at')}</TypographyV2>
               <TypographyV2 fontWeight="bold">
                 {getStoreDisplayName(priceHistoryItem.store.name).full}
               </TypographyV2>
               {isMainDiscountActive && (
                 <TypographyV2 color="inactive">
-                  Discount ends{' '}
-                  {moment(priceHistoryItem.discountEnds).utc(true).format(DEFAULT_DATE_FORMATTING)}
+                  {t('discount_ends', {
+                    date: moment(priceHistoryItem.discountEnds)
+                      .utc(true)
+                      .format(DEFAULT_DATE_FORMATTING),
+                  })}
                 </TypographyV2>
               )}
             </Stack>

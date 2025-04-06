@@ -1,3 +1,5 @@
+import { useTranslations } from 'use-intl'
+
 import { GameCard } from '@/components/game-card'
 import { GameCardsList } from '@/components/game-cards-list'
 import { NoDataLabel } from '@/components/no-data-label'
@@ -9,6 +11,8 @@ type TProps = {
 }
 
 const WishlistedItemsList = ({ wishlist, setWishlist }: TProps) => {
+  const t = useTranslations()
+
   if (!wishlist.wishlistedGames.length) {
     return <NoDataLabel />
   }
@@ -24,6 +28,7 @@ const WishlistedItemsList = ({ wishlist, setWishlist }: TProps) => {
               item.wishlistedGameStores.some((preference) => preference.storeId === ph.storeId),
             ),
           }}
+          t={t}
           key={item.gameId}
           switchToListOnMobile
           wishlistButtonType="remove"

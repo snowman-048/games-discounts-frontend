@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { Grid2, Stack } from '@mui/material'
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
 import { getGamesList } from '@/api/games'
@@ -24,6 +25,8 @@ type TProps = {
 }
 
 const GamesCarouselWithData = async ({ title, query }: TProps) => {
+  const t = await getTranslations()
+
   let games: TGame[] = []
 
   try {
@@ -53,7 +56,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
             buttonsPosition="sides"
             slides={games.map((game) => (
               <Grid2 width="240px" height="100%" paddingTop={2} key={game.id}>
-                <GameCard game={game} noShadow />
+                <GameCard game={game} t={t} noShadow />
               </Grid2>
             ))}
           />
@@ -71,7 +74,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
             fontSize="text-l"
             component="span"
           >
-            View More
+            {t('GamesCarouselWithData.view_more')}
           </TypographyV2>
         </Link>
       </Stack>

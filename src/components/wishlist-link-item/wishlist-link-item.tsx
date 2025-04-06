@@ -1,8 +1,11 @@
+'use client'
+
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import { Button, Grid2 } from '@mui/material'
 import Link from 'next/link'
+import { useTranslations } from 'use-intl'
 
 import { EAppRoute } from '@/enums/app-route.enum'
 import { TUserWishlist } from '@/types/wishlist.types'
@@ -26,6 +29,8 @@ const WishlistLinkItem = ({
   disabled,
   onClick,
 }: TProps) => {
+  const t = useTranslations('WishlistLinkItem')
+
   const renderContent = () => (
     <GlassCard
       onClick={() => {
@@ -60,12 +65,12 @@ const WishlistLinkItem = ({
           </TypographyV2>
           <Grid2 container alignItems="center" gap={{ xs: 1, sm: 2 }} flexWrap="nowrap">
             {wishlist.discountNotificationByEmail && (
-              <Tooltip title="Email notifications are enabled">
+              <Tooltip title={t('email_toast')}>
                 <MarkEmailReadIcon sx={{ width: { xs: 15, sm: 20 }, height: { xs: 15, sm: 20 } }} />
               </Tooltip>
             )}
             <Grid2 container alignItems="center" gap={{ xs: 0.7, sm: 1 }} flexWrap="nowrap">
-              <Tooltip title="Items count in the wishlist">
+              <Tooltip title={t('count_toast')}>
                 <SportsEsportsIcon sx={{ width: { xs: 15, sm: 20 }, height: { xs: 15, sm: 20 } }} />
               </Tooltip>
               <TypographyV2 fontSize="text-l" fontWeight="bold">

@@ -1,9 +1,12 @@
 'use client'
 
+import { useMemo } from 'react'
+
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import BookmarksIcon from '@mui/icons-material/Bookmarks'
 import PersonIcon from '@mui/icons-material/Person'
 import { Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -13,33 +16,38 @@ import { EAppRoute } from '@/enums/app-route.enum'
 import { useIsAdmin } from '@/hooks/useIsAdmin'
 import { useUserStore } from '@/store/user.store'
 
-const allLinks = [
-  {
-    label: 'Wishlists',
-    path: `/${EAppRoute.WISHLISTS}`,
-    icon: BookmarksIcon,
-  },
-  {
-    label: 'Profile',
-    path: `/${EAppRoute.PROFILE}`,
-    icon: PersonIcon,
-  },
-  {
-    label: 'Pending Connections',
-    path: `/${EAppRoute.PENDING_CONNECTIONS}/1`,
-    icon: AccessTimeIcon,
-    adminOnly: true,
-  },
-]
-
 type TProps = {
   closePopup: () => void
 }
 
 const ProfileControls = ({ closePopup }: TProps) => {
+  const t = useTranslations('ProfileControls')
+
   const user = useUserStore((state) => state.user)
 
   const isAdmin = useIsAdmin()
+
+  const allLinks = useMemo(
+    () => [
+      {
+        label: t('wishlists'),
+        path: `/${EAppRoute.WISHLISTS}`,
+        icon: BookmarksIcon,
+      },
+      {
+        label: t('profile'),
+        path: `/${EAppRoute.PROFILE}`,
+        icon: PersonIcon,
+      },
+      {
+        label: 'Pending Connections',
+        path: `/${EAppRoute.PENDING_CONNECTIONS}/1`,
+        icon: AccessTimeIcon,
+        adminOnly: true,
+      },
+    ],
+    [t],
+  )
 
   const links = allLinks.filter((link) => !link.adminOnly || isAdmin)
 
