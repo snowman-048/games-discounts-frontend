@@ -44,7 +44,7 @@ const UpdateWishlistForm = ({ wishlist, setWishlist }: Tprops) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(createWishlistSchema),
+    resolver: yupResolver(createWishlistSchema(t)),
     defaultValues: {
       name: wishlist.name,
       discountNotificationByEmail: wishlist.discountNotificationByEmail,
