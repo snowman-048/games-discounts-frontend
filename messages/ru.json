@@ -23,7 +23,7 @@
   },
   "Home": {
     "biggest_discounts": "Самые большие скидки",
-    "newest_discounts": "Новые <store></store> Скидки"
+    "newest_discounts": "Новые Скидки <store></store>"
   },
   "GamesCarouselWithData": {
     "view_more": "Ещё"
@@ -105,6 +105,9 @@
     "name": "Название",
     "email_label": "Получать уведомления по электронной почте о новых скидках на элементы в этом списке желаний",
     "create": "Создать"
+  },
+  "WishlistDetails": {
+    "wishlisted_items": "Элементы в списке желаний ({count})"
   },
   "Profile": {
     "my_profile": "Мой профиль",

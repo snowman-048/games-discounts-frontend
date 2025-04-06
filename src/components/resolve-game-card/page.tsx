@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 import { Box, Button, ButtonProps, Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
+import { useTranslations } from 'use-intl'
 
 import { TGameDataMain } from '@/api/pending-connections/types'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
@@ -31,6 +32,8 @@ type TProps = {
 }
 
 const ResolveGameCard = ({ game, actionButton, onClick }: TProps) => {
+  const t = useTranslations()
+
   if (!game) {
     return <NoDataLabel />
   }
@@ -53,11 +56,17 @@ const ResolveGameCard = ({ game, actionButton, onClick }: TProps) => {
       className={styles.container}
     >
       <Grid2 sx={{ position: 'relative', width: '100%' }} container flexDirection="column" gap={3}>
-        <GameImgWithBuy game={game} className={styles.mainImgWrapper} />
+        <GameImgWithBuy game={game} t={t} className={styles.mainImgWrapper} />
 
         <GlassCard className={cn(styles.section, styles.mainInfoContainer)}>
           <Grid2 display={'flex'} justifyContent={'space-between'}>
-            <GameImgWithBuy game={game} className={styles.fakeImgWrapper} isFake key={game.id} />
+            <GameImgWithBuy
+              game={game}
+              t={t}
+              className={styles.fakeImgWrapper}
+              isFake
+              key={game.id}
+            />
 
             <Grid2 className={styles.buttonsContainer}>
               <Button

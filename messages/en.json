@@ -106,6 +106,9 @@
     "email_label": "Receive email notifications about new discounts for items in this wishlist",
     "create": "Create"
   },
+  "WishlistDetails": {
+    "wishlisted_items": "Wishlisted Items ({count})"
+  },
   "Profile": {
     "my_profile": "My Profile",
     "username": "Username",

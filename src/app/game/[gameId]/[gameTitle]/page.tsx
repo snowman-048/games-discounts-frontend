@@ -148,12 +148,18 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
       className={styles.container}
     >
       <Grid2 sx={{ position: 'relative', width: '100%' }} container flexDirection="column" gap={3}>
-        <GameImgWithBuy game={game} storeLinks={storeLinks} className={styles.mainImgWrapper} />
+        <GameImgWithBuy
+          game={game}
+          t={t}
+          storeLinks={storeLinks}
+          className={styles.mainImgWrapper}
+        />
 
         <GlassCard className={cn(styles.section, styles.mainInfoContainer)}>
           {/* This section is needed to reserve the space */}
           <GameImgWithBuy
             game={game}
+            t={t}
             storeLinks={storeLinks}
             className={styles.fakeImgWrapper}
             isFake

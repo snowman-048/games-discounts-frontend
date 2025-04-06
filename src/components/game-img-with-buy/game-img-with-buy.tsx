@@ -1,8 +1,5 @@
-'use server'
-
 import { Box, Grid2 } from '@mui/material'
 import cn from 'classnames'
-import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
@@ -17,14 +14,13 @@ import styles from './styles.module.scss'
 
 type TProps = {
   game: TGame
+  t: any
   storeLinks?: Record<EStore, string>
   className?: string
   isFake?: boolean
 }
 
-const GameImgWithBuy = async ({ game, storeLinks, className, isFake = false }: TProps) => {
-  const t = await getTranslations()
-
+const GameImgWithBuy = ({ game, storeLinks, className, isFake = false, t }: TProps) => {
   return (
     <Grid2
       container
