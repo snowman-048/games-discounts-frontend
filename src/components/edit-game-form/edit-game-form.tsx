@@ -26,6 +26,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import { useTranslations } from 'use-intl'
 import * as yup from 'yup'
 
 import { updateGame } from '@/api/games'
@@ -65,6 +66,8 @@ const validationSchema = yup.object({
 })
 
 const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
+  const t = useTranslations()
+
   const [loading, setLoading] = useState(false)
 
   const {
@@ -122,11 +125,12 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
       <Grid2 sx={{ position: 'relative', width: '100%' }} container flexDirection="column" gap={3}>
         <GameImgWithBuy
           game={{ ...game, coverImageUrl: watch('coverImageUrl'), type: watch('type') }}
+          t={t}
           className={styles.mainImgWrapper}
         />
 
         <Stack>
-          <GameImgWithBuy game={game} className={styles.fakeImgWrapper} isFake />
+          <GameImgWithBuy game={game} className={styles.fakeImgWrapper} isFake t={t} />
 
           <Stack flex={1} position="relative" paddingTop={{ xs: 1, md: 2 }} gap={2}>
             <Controller

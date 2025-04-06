@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { Stack } from '@mui/material'
+import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 
 import { getUserWishlistById } from '@/api/wishlist'
@@ -19,6 +20,8 @@ import { UpdateWishlistForm } from './libs/components/update-wishlist-form'
 import { WishlistedItemsList } from './libs/components/wishlisted-items-list'
 
 const WishlistDetails = () => {
+  const t = useTranslations('WishlistDetails')
+
   const [wishlist, setWishlist] = useState<TWishlistWithGames | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -67,9 +70,7 @@ const WishlistDetails = () => {
 
       <GlassCard asSection>
         <Stack gap={3} width="100%">
-          <SectionTitle
-            title={`Wishlisted Items${!!wishlist.wishlistedGames.length ? ` (${wishlist.wishlistedGames.length})` : ''}`}
-          />
+          <SectionTitle title={t('wishlisted_items', { count: wishlist.wishlistedGames.length })} />
 
           <WishlistedItemsList setWishlist={setWishlist} wishlist={wishlist} />
         </Stack>

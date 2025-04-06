@@ -61,7 +61,7 @@
     "discount_ends": "Знижка до {date}"
   },
   "DiscountInfo": {
-    "ends_in": "Закінчується через {date}"
+    "ends_in": "Кінець через {date}"
   },
   "LoginModal": {
     "login_signup": "Вхід/Реєстрація",
@@ -105,6 +105,9 @@
     "name": "Назва",
     "email_label": "Отримувати сповіщення на електронну пошту про нові знижки на елементи в цьому списку бажаного",
     "create": "Створити"
+  },
+  "WishlistDetails": {
+    "wishlisted_items": "Елементи в списку бажаного ({count})"
   },
   "Profile": {
     "my_profile": "Мій профіль",
