@@ -1,0 +1,170 @@
+{
+  "Header": {
+    "home": "Головна",
+    "active_discounts": "Актуальні знижки",
+    "explore": "Огляд",
+    "regions": "Регіони",
+    "contact_us": "Зв'язатися з нами"
+  },
+  "LanguagesSwitch": {
+    "language": "Мова"
+  },
+  "RegionSettings": {
+    "store_region": "Регіон {store}"
+  },
+  "ProfileButton": {
+    "profile": "Профіль",
+    "login": "Увійти"
+  },
+  "GamesSearch": {
+    "games_search": "Пошук ігор",
+    "close": "Закрити",
+    "view_all": "Переглянути всі"
+  },
+  "Home": {
+    "biggest_discounts": "Найбільші знижки",
+    "newest_discounts": "Нові знижки <store></store>"
+  },
+  "GamesCarouselWithData": {
+    "view_more": "Більше"
+  },
+  "GamesFilters": {
+    "filter_games": "Фільтрувати ігри",
+    "type": "Тип",
+    "title": "Назва",
+    "search": "Пошук",
+    "sort_by": "Сортувати за",
+    "store": "Магазин",
+    "overlaps": "Перетинаються",
+    "oevrlaps_tooltip": "Показувати тільки ті ігри, які є в усіх вибраних магазинах",
+    "close": "Закрити"
+  },
+  "GameInfo": {
+    "genres": "Жанри",
+    "platforms": "Платформи",
+    "publisher": "Видавець",
+    "release_date": "Дата релізу",
+    "text_languages": "Мови тексту",
+    "voice_languages": "Мови озвучення",
+    "available_in_stores": "Доступно в магазинах",
+    "price_history": "Історія цін",
+    "related_items": "Схожі товари",
+    "screenshots": "Скріншоти",
+    "description": "Опис"
+  },
+  "PriceInfoItem": {
+    "lowest_price": "Найнижча ціна",
+    "highest_price": "Найвища ціна"
+  },
+  "BuyGameButton": {
+    "buy_at": "Купити в",
+    "discount_ends": "Знижка до {date}"
+  },
+  "DiscountInfo": {
+    "ends_in": "Закінчується через {date}"
+  },
+  "LoginModal": {
+    "login_signup": "Вхід/Реєстрація",
+    "new_methods": "Нові методи авторизації скоро будуть доступні"
+  },
+  "ProfileControls": {
+    "wishlists": "Списки бажаного",
+    "profile": "Профіль"
+  },
+  "Wishlists": {
+    "my_wishlists": "Мої списки бажаного ({total}/{max})",
+    "total_tracking_items": "Всього відстежуваних елементів"
+  },
+  "WishlistLinkItem": {
+    "email_toast": "Сповіщення на електронну пошту увімкнено",
+    "count_toast": "Кількість елементів у списку бажаного"
+  },
+  "CreateNewWishlistButton": {
+    "create_new": "Створити новий"
+  },
+  "UpdateWishlistForm": {
+    "name": "Назва",
+    "wishlist_updated": "Список бажаного оновлено",
+    "wishlist_deleted": "Список бажаного видалено",
+    "email_label": "Отримувати сповіщення на електронну пошту про нові знижки на елементи в цьому списку бажаного",
+    "delete_warning": "Ви впевнені, що хочете видалити цей список бажаного?",
+    "rename": "Перейменувати"
+  },
+  "RemoveFromWishlistButton": {
+    "delete_warning": "Ви впевнені, що хочете видалити цей елемент зі списку бажаного?"
+  },
+  "AddToWishlistButton": {
+    "already_in_wishlist": "Вже у списку бажаного",
+    "add_to_wishlist": "Додати до списку бажаного",
+    "add_to_wishlist_title": "Додати гру до списку бажаного",
+    "manage_wishlists": "Керування списками бажаного",
+    "no_wishlists": "У вас немає списків бажаного"
+  },
+  "CreateWishlistModal": {
+    "create_wishlist": "Створити список бажаного",
+    "name": "Назва",
+    "email_label": "Отримувати сповіщення на електронну пошту про нові знижки на елементи в цьому списку бажаного",
+    "create": "Створити"
+  },
+  "Profile": {
+    "my_profile": "Мій профіль",
+    "username": "Ім'я користувача",
+    "email": "Електронна пошта",
+    "account_created": "Обліковий запис створено"
+  },
+  "Footer": {
+    "useful_links": "Корисні посилання",
+    "about_us": "Про нас",
+    "contacts": "Контакти",
+    "version": "Версія"
+  },
+  "AboutUs": {
+    "about_us": "Про нас",
+    "description": "Ми створили цей сервіс, щоб допомогти геймерам знаходити найкращі знижки в різних магазинах. Наш сайт агрегує дані з таких платформ, як PlayStation Store, Nintendo eShop, Xbox та інших, надаючи зручний спосіб порівнювати ціни, відстежувати знижки й аналізувати історію цін.<br></br>Ми прагнемо зробити наш сервіс максимально зручним, інформативним і корисним. Завдяки гнучким фільтрам, графікам змін цін і функціям відстеження ігор, користувачі можуть легко приймати обґрунтовані рішення про покупку.<br></br>Наша команда постійно працює над покращенням функціональності та додаванням нових можливостей. Якщо у вас є пропозиції чи ідеї — ми будемо раді вашому зворотному зв’язку!",
+    "meet_the_team": "Знайомтесь з командою"
+  },
+  "HeroCard": {
+    "about": "Опис",
+    "links": "Посилання"
+  },
+  "validation": {
+    "wishlist": {
+      "name_required": "Назва обов'язкова",
+      "name_min": "Назва повинна містити щонайменше {length} символів",
+      "name_max": "Назва повинна містити не більше {length} символів"
+    }
+  },
+  "toast": {
+    "attention": "Увага",
+    "error": "Помилка",
+    "success": "Успішно",
+    "warning": "Попередження"
+  },
+  "google_auth": {
+    "success_message": "Ви успішно увійшли через Google як {username}"
+  },
+  "game_type": {
+    "All": "Усі",
+    "Game": "Гра",
+    "Bundle": "Бандл",
+    "Premium Edition": "Преміум-видання",
+    "Currency": "Валюта",
+    "Soundtrack": "Саундтрек",
+    "DLC": "Доповнення",
+    "Pack": "Набір",
+    "Season Pass": "Сезонний пропуск"
+  },
+  "sorting": {
+    "newest": "Найновіші",
+    "finishing": "Закінчуються",
+    "biggest_discounts": "Найбільші знижки",
+    "az": "А-Я",
+    "za": "Я-А"
+  },
+  "Logout": {
+    "logout": "Вийти",
+    "warning": "Ви впевнені, що хочете вийти?"
+  },
+  "no": "Ні",
+  "yes": "Так"
+}

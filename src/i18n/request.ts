@@ -1,19 +1,25 @@
 import { getRequestConfig } from 'next-intl/server'
 import { headers } from 'next/headers'
 
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '@/configs/locales'
+import { DEFAULT_LOCALE } from '@/configs/locales'
 import { ECookieKey } from '@/enums/cookie-key.enum'
+import { extractLocaleFromHeader } from '@/helpers/extractLocaleFromHeader'
 import { getCookieServer } from '@/helpers/getCookieServer'
 
 export default getRequestConfig(async () => {
-  const currentHeaders = await headers()
-  const headerLocale = currentHeaders
-    .get('accept-language')
-    ?.split(',')
-    .map((lang) => lang.split(';')[0].trim())
-    .find((lang) => SUPPORTED_LOCALES.includes(lang))
+  let locale = await getCookieServer(ECookieKey.LOCALE)
 
-  const locale = (await getCookieServer(ECookieKey.LOCALE)) || headerLocale || DEFAULT_LOCALE
+  if (!locale) {
+    const currentHeaders = await headers()
+    const localeHeader = currentHeaders.get('accept-language')
+    if (localeHeader) {
+      locale = extractLocaleFromHeader(localeHeader)
+    }
+  }
+
+  if (!locale) {
+    locale = DEFAULT_LOCALE
+  }
 
   return {
     locale,

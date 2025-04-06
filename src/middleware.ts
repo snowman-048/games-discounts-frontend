@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getRegions } from './api/regions'
 import { defaultRegions } from './configs/default-regions.config'
+import { DEFAULT_LOCALE } from './configs/locales'
+import { ECookieKey } from './enums/cookie-key.enum'
+import { extractLocaleFromHeader } from './helpers/extractLocaleFromHeader'
 import { TRegionWithStores } from './types/region.types'
 
 const cachedRegions: TRegionWithStores[] = []
@@ -52,6 +55,22 @@ export async function middleware(req: NextRequest) {
     response.cookies.set(key, region)
     req.cookies.set(key, region)
   })
+
+  // Detect locale
+  let locale = req.cookies.get(ECookieKey.LOCALE)?.value
+
+  if (!locale) {
+    const localeHeader = req.headers.get('accept-language')
+    if (localeHeader) {
+      locale = extractLocaleFromHeader(localeHeader)
+    }
+  }
+
+  if (!locale) {
+    locale = DEFAULT_LOCALE
+  }
+
+  response.cookies.set(ECookieKey.LOCALE, locale)
 
   return response
 }
