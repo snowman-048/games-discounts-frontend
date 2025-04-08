@@ -63,10 +63,6 @@
   "DiscountInfo": {
     "ends_in": "Termina tra {date}"
   },
-  "LoginModal": {
-    "login_signup": "Accedi/Registrati",
-    "new_methods": "Nuovi metodi di autenticazione saranno disponibili presto"
-  },
   "ProfileControls": {
     "wishlists": "Liste Desideri",
     "profile": "Profilo"
@@ -135,7 +131,22 @@
       "name_required": "Il nome è obbligatorio",
       "name_min": "Il nome deve contenere almeno {length} caratteri",
       "name_max": "Il nome può contenere al massimo {length} caratteri"
-    }
+    },
+    "user": {
+      "username_required": "Il nome utente è obbligatorio",
+      "username_min": "Il nome utente deve essere lungo almeno {length} caratteri",
+      "username_max": "Il nome utente deve essere lungo al massimo {length} caratteri",
+      "email_required": "L'email è obbligatoria",
+      "email_invalid": "L'email non è valida",
+      "password_required": "La password è obbligatoria",
+      "password_min": "La password deve essere lunga almeno {length} caratteri",
+      "password_max": "La password deve essere lunga al massimo {length} caratteri",
+      "password_match": "Le password devono essere le stesse",
+      "username_characters": "Il nome utente può contenere solo lettere, numeri e i seguenti caratteri speciali: @ . _ -",
+      "password_characters": "La password può contenere solo lettere, numeri e i seguenti caratteri speciali: @ . _ -",
+      "username_taken": "Questo nome utente è già stato preso"
+    },
+    "field_required": "Questo campo è obbligatorio"
   },
   "toast": {
     "attention": "Attenzione",
@@ -169,5 +180,29 @@
     "warning": "Sei sicuro di voler uscire?"
   },
   "no": "No",
-  "yes": "Sì"
+  "yes": "Sì",
+  "user": {
+    "email": "E-mail",
+    "username": "Nome utente",
+    "password": "Password",
+    "repeat_password": "Ripeti la password"
+  },
+  "RegisterForm": {
+    "create_account": "Creare un account",
+    "have_account": "Hai già un account?",
+    "login": "Login",
+    "success_message": "Hai creato con successo il tuo account"
+  },
+  "LoginForm": {
+    "username_or_email": "Nome utente o email",
+    "login": "Login",
+    "no_account": "Non hai un account?",
+    "register": "Registro",
+    "success_message": "Hai effettuato l'accesso con successo"
+  },
+  "AuthModal": {
+    "login": "Login",
+    "signup": "Iscrizione",
+    "or": "O"
+  }
 }

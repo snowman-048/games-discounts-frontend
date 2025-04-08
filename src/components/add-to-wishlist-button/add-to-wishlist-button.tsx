@@ -14,8 +14,8 @@ import { useAppStore } from '@/store/app.store'
 import { useUserStore } from '@/store/user.store'
 import { TGame } from '@/types/game.types'
 
+import { AuthModal } from '../auth-modal'
 import { CreateNewWishlistButton } from '../create-new-wishlist-button'
-import { LoginModal } from '../login-modal'
 import { NoDataLabel } from '../no-data-label'
 import { Popover } from '../ui/popover'
 import { Tooltip } from '../ui/tooltip'
@@ -110,7 +110,7 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
         </Stack>
       </Popover>
 
-      <LoginModal open={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} />
+      <AuthModal open={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} />
     </>
   )
 }

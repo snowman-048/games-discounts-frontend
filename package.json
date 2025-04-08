@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lang": "node ./translationScript/createTranslation.mjs",
+    "lang:delete": "node ./translationScript/deleteTranslation.mjs"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -35,6 +37,7 @@
     "react-toastify": "^11.0.5",
     "recharts": "^2.15.1",
     "schema-dts": "^1.1.2",
+    "unirest": "^0.6.0",
     "yup": "^1.6.1",
     "zustand": "^5.0.3"
   },

@@ -63,10 +63,6 @@
   "DiscountInfo": {
     "ends_in": "Kończy się za {date}"
   },
-  "LoginModal": {
-    "login_signup": "Zaloguj / Zarejestruj się",
-    "new_methods": "Nowe metody logowania będą wkrótce dostępne"
-  },
   "ProfileControls": {
     "wishlists": "Listy życzeń",
     "profile": "Profil"
@@ -135,7 +131,22 @@
       "name_required": "Nazwa jest wymagana",
       "name_min": "Nazwa musi mieć co najmniej {length} znaków",
       "name_max": "Nazwa może mieć maksymalnie {length} znaków"
-    }
+    },
+    "user": {
+      "username_required": "Nazwa użytkownika jest wymagana",
+      "username_min": "Nazwa użytkownika musi mieć co najmniej {length} znaków",
+      "username_max": "Nazwa użytkownika musi mieć maksymalnie {length} znaków",
+      "email_required": "Adres e-mail jest wymagany",
+      "email_invalid": "Adres e-mail jest nieprawidłowy",
+      "password_required": "Hasło jest wymagane",
+      "password_min": "Hasło musi mieć co najmniej {length} znaków",
+      "password_max": "Hasło musi mieć maksymalnie {length} znaków",
+      "password_match": "Hasła muszą być takie same",
+      "username_characters": "Nazwa użytkownika może zawierać tylko litery, cyfry i następujące znaki specjalne: @ . _ -",
+      "password_characters": "Hasło może zawierać tylko litery, cyfry i następujące znaki specjalne: @ . _ -",
+      "username_taken": "Ta nazwa użytkownika jest już zajęta"
+    },
+    "field_required": "To pole jest wymagane"
   },
   "toast": {
     "attention": "Uwaga",
@@ -169,5 +180,29 @@
     "warning": "Czy na pewno chcesz się wylogować?"
   },
   "no": "Nie",
-  "yes": "Tak"
+  "yes": "Tak",
+  "user": {
+    "email": "E-mail",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "repeat_password": "Powtórz hasło"
+  },
+  "RegisterForm": {
+    "create_account": "Utwórz konto",
+    "have_account": "Masz już konto?",
+    "login": "Login",
+    "success_message": "Pomyślnie utworzyłeś swoje konto"
+  },
+  "LoginForm": {
+    "username_or_email": "Nazwa użytkownika lub adres e-mail",
+    "login": "Login",
+    "no_account": "Nie masz konta?",
+    "register": "Rejestr",
+    "success_message": "Zalogowano pomyślnie"
+  },
+  "AuthModal": {
+    "login": "Login",
+    "signup": "Zapisać się",
+    "or": "Lub"
+  }
 }

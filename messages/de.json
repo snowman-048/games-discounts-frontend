@@ -63,10 +63,6 @@
   "DiscountInfo": {
     "ends_in": "Endet in {date}"
   },
-  "LoginModal": {
-    "login_signup": "Anmelden/Registrieren",
-    "new_methods": "Neue Anmeldemethoden werden bald verfügbar sein"
-  },
   "ProfileControls": {
     "wishlists": "Wunschlisten",
     "profile": "Profil"
@@ -135,7 +131,22 @@
       "name_required": "Name ist erforderlich",
       "name_min": "Name muss mindestens {length} Zeichen lang sein",
       "name_max": "Name darf höchstens {length} Zeichen lang sein"
-    }
+    },
+    "user": {
+      "username_required": "Benutzername ist erforderlich",
+      "username_min": "Der Benutzername muss mindestens {length} Zeichen lang sein",
+      "username_max": "Der Benutzername darf höchstens {length} Zeichen lang sein",
+      "email_required": "E-Mail ist erforderlich",
+      "email_invalid": "E-Mail ist ungültig",
+      "password_required": "Passwort erforderlich",
+      "password_min": "Das Passwort muss mindestens {length} Zeichen lang sein",
+      "password_max": "Das Passwort darf höchstens {length} Zeichen lang sein",
+      "password_match": "Die Passwörter müssen identisch sein",
+      "username_characters": "Der Benutzername darf nur Buchstaben, Zahlen und die folgenden Sonderzeichen enthalten: @ . _ -",
+      "password_characters": "Das Passwort darf nur Buchstaben, Zahlen und die folgenden Sonderzeichen enthalten: @ . _ -",
+      "username_taken": "Dieser Benutzername ist bereits vergeben"
+    },
+    "field_required": "Dieses Feld ist erforderlich"
   },
   "toast": {
     "attention": "Achtung",
@@ -169,5 +180,29 @@
     "warning": "Möchten Sie sich wirklich abmelden?"
   },
   "no": "Nein",
-  "yes": "Ja"
+  "yes": "Ja",
+  "user": {
+    "email": "E-Mail",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "repeat_password": "Passwort wiederholen"
+  },
+  "RegisterForm": {
+    "create_account": "Benutzerkonto erstellen",
+    "have_account": "Hast du schon ein Konto?",
+    "login": "Login",
+    "success_message": "Sie haben Ihr Konto erfolgreich erstellt"
+  },
+  "LoginForm": {
+    "username_or_email": "Benutzername oder E-Mail",
+    "login": "Login",
+    "no_account": "Sie haben noch kein Konto?",
+    "register": "Registrieren",
+    "success_message": "Sie haben sich erfolgreich angemeldet"
+  },
+  "AuthModal": {
+    "login": "Login",
+    "signup": "Melden Sie sich an",
+    "or": "Oder"
+  }
 }

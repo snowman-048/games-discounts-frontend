@@ -63,10 +63,6 @@
   "DiscountInfo": {
     "ends_in": "Se încheie în {date}"
   },
-  "LoginModal": {
-    "login_signup": "Autentificare/Înregistrare",
-    "new_methods": "Noi metode de autentificare vor fi disponibile curând"
-  },
   "ProfileControls": {
     "wishlists": "Liste de dorințe",
     "profile": "Profil"
@@ -135,7 +131,22 @@
       "name_required": "Numele este obligatoriu",
       "name_min": "Numele trebuie să aibă cel puțin {length} caractere",
       "name_max": "Numele poate avea cel mult {length} caractere"
-    }
+    },
+    "user": {
+      "username_required": "Numele de utilizator este obligatoriu",
+      "username_min": "Numele de utilizator trebuie să aibă cel puțin {length} caractere",
+      "username_max": "Numele de utilizator trebuie să aibă cel mult {length} caractere",
+      "email_required": "E-mailul este obligatoriu",
+      "email_invalid": "E-mailul este nevalid",
+      "password_required": "Este necesară parola",
+      "password_min": "Parola trebuie să aibă cel puțin {length} caractere",
+      "password_max": "Parola trebuie să aibă cel mult {length} caractere",
+      "password_match": "Parolele trebuie să fie aceleași",
+      "username_characters": "Numele de utilizator poate conține numai litere, cifre și următoarele caractere speciale: @ . _ -",
+      "password_characters": "Parola poate conține numai litere, cifre și următoarele caractere speciale: @ . _ -",
+      "username_taken": "Acest nume de utilizator este deja luat"
+    },
+    "field_required": "Acest câmp este obligatoriu"
   },
   "toast": {
     "attention": "Atenție",
@@ -169,5 +180,29 @@
     "warning": "Sigur doriți să vă deconectați?"
   },
   "no": "Nu",
-  "yes": "Da"
+  "yes": "Da",
+  "user": {
+    "email": "E-mail",
+    "username": "Nume de utilizator",
+    "password": "Parolă",
+    "repeat_password": "Repetați parola"
+  },
+  "RegisterForm": {
+    "create_account": "Creează cont",
+    "have_account": "Aveți deja un cont?",
+    "login": "Log in",
+    "success_message": "V-ați creat contul cu succes"
+  },
+  "LoginForm": {
+    "username_or_email": "Nume de utilizator sau e-mail",
+    "login": "Log in",
+    "no_account": "Nu ai un cont?",
+    "register": "Registru",
+    "success_message": "Te-ai conectat cu succes"
+  },
+  "AuthModal": {
+    "login": "Log in",
+    "signup": "Înscrieți-vă",
+    "or": "Sau"
+  }
 }

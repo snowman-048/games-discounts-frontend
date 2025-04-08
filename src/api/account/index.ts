@@ -9,4 +9,6 @@ const getCurrentUser = () => api.get<TUser>(`${BASE_URL}/me`)
 const updatePreferedRegion = (payload: { regionId: number; storeId: number }) =>
   api.put<TUser>(`${BASE_URL}/prefered-region`, payload)
 
-export { getCurrentUser, updatePreferedRegion }
+const checkUsername = (username: string) => api.post(`${BASE_URL}/check-username`, { username })
+
+export { getCurrentUser, updatePreferedRegion, checkUsername }

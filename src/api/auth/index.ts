@@ -12,6 +12,16 @@ const BASE_URL = 'auth'
 const authWithGoogle = (payload: TGetGameParams & { token: string }) =>
   api.post<{ tokens: TAuthTokens; user: TUser }>(`${BASE_URL}/google`, payload)
 
+const signup = (payload: {
+  username: string
+  email: string
+  password: string
+  regions: TGetGameParams
+}) => api.post<{ tokens: TAuthTokens; user: TUser }>(`${BASE_URL}/signup`, payload)
+
+const login = (payload: { login: string; password: string }) =>
+  api.post<{ tokens: TAuthTokens; user: TUser }>(`${BASE_URL}/login`, payload)
+
 const refreshTokens = async () => {
   const tokens = await getTokens()
 
@@ -29,4 +39,4 @@ const refreshTokens = async () => {
   )
 }
 
-export { refreshTokens, authWithGoogle }
+export { refreshTokens, authWithGoogle, signup, login }
