@@ -2,6 +2,7 @@
 
 import { CredentialResponse, GoogleLogin, useGoogleOneTapLogin } from '@react-oauth/google'
 
+import { Box } from '@mui/material'
 import { useTranslations } from 'next-intl'
 
 import { authWithGoogle } from '@/api/auth'
@@ -54,15 +55,17 @@ const GoogleAuthButton = ({ onSuccess }: { onSuccess?: () => void }) => {
   const onGoogleLogin = useOnGoogleLogin()
 
   return (
-    <GoogleLogin
-      onSuccess={async (res) => {
-        await onGoogleLogin(res)
-        onSuccess?.()
-      }}
-      onError={onGoogleLoginError}
-      logo_alignment="center"
-      theme="filled_black"
-    />
+    <Box height="44px" overflow="hidden">
+      <GoogleLogin
+        onSuccess={async (res) => {
+          await onGoogleLogin(res)
+          onSuccess?.()
+        }}
+        onError={onGoogleLoginError}
+        logo_alignment="center"
+        theme="filled_black"
+      />
+    </Box>
   )
 }
 

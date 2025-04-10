@@ -59,7 +59,7 @@ const Modal = ({ open, onClose, title, withClose = true, children, ...rest }: TP
               {withClose && (
                 <IconButton
                   onClick={onClose}
-                  sx={{ position: 'absolute', right: -28, top: -28, padding: 0.5 }}
+                  sx={{ position: 'absolute', right: -26, top: -26, padding: 0.5 }}
                 >
                   <CloseIcon />
                 </IconButton>
