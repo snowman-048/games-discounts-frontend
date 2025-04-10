@@ -11,7 +11,7 @@ import { Popover } from '@/components/ui/popover'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useUserStore } from '@/store/user.store'
 
-import { LoginModal } from '../../../../../../../login-modal'
+import { AuthModal } from '../../../../../../../auth-modal'
 import { ProfileControls } from './libs/components/profile-controls'
 
 type TProps = IconButtonProps
@@ -48,7 +48,7 @@ const ProfileButton = (props: TProps) => {
         </IconButton>
       </Tooltip>
 
-      <LoginModal open={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} />
+      <AuthModal open={isLoginModalOpen} handleClose={() => setIsLoginModalOpen(false)} />
 
       <Popover
         anchorEl={userControlsAnchorEl}

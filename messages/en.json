@@ -63,10 +63,6 @@
   "DiscountInfo": {
     "ends_in": "Ends in {date}"
   },
-  "LoginModal": {
-    "login_signup": "Login/Signup",
-    "new_methods": "New authentication methods will be available soon"
-  },
   "ProfileControls": {
     "wishlists": "Wishlists",
     "profile": "Profile"
@@ -135,7 +131,22 @@
       "name_required": "Name is required",
       "name_min": "Name must be at least {length} characters long",
       "name_max": "Name must be at most {length} characters long"
-    }
+    },
+    "user": {
+      "username_required": "Username is required",
+      "username_min": "Username must be at least {length} characters long",
+      "username_max": "Username must be at most {length} characters long",
+      "email_required": "Email is required",
+      "email_invalid": "Email is invalid",
+      "password_required": "Password is required",
+      "password_min": "Password must be at least {length} characters long",
+      "password_max": "Password must be at most {length} characters long",
+      "password_match": "The passwords must be the same",
+      "username_characters": "Username can only contain letters, numbers and the following special characters: @ . _ -",
+      "password_characters": "Password can only contain letters, numbers and the following special characters: @ . _ -",
+      "username_taken": "This username is already taken"
+    },
+    "field_required": "This field is required"
   },
   "toast": {
     "attention": "Attention",
@@ -169,5 +180,34 @@
     "warning": "Are you sure you want to logout?"
   },
   "no": "No",
-  "yes": "Yes"
+  "yes": "Yes",
+  "user": {
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "repeat_password": "Repeat password"
+  },
+  "RegisterForm": {
+    "create_account": "Create account",
+    "have_account": "Already have an account?",
+    "login": "Login",
+    "success_message": "You have sucessfully created your account"
+  },
+  "LoginForm": {
+    "username_or_email": "Username or email",
+    "login": "Login",
+    "no_account": "Don't have an account?",
+    "register": "Register",
+    "success_message": "You have sucessfully logged in"
+  },
+  "AuthModal": {
+    "login": "Login",
+    "signup": "Signup",
+    "or": "Or"
+  },
+  "EmailConfirmModal": {
+    "confirm_email": "Confirm your email",
+    "confirmation_code": "Confirmation code"
+  },
+  "confirm": "Confirm"
 }

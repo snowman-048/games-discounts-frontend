@@ -2,14 +2,10 @@
 
 import { CredentialResponse, GoogleLogin, useGoogleOneTapLogin } from '@react-oauth/google'
 
-import { useCookies } from 'next-client-cookies'
 import { useTranslations } from 'next-intl'
 
 import { authWithGoogle } from '@/api/auth'
-import { defaultRegions } from '@/configs/default-regions.config'
-import { setTokens } from '@/helpers/auth-tokens'
-import { getStoreRegionKey } from '@/helpers/getStoreRegionKey'
-import { useCustomNavigate } from '@/hooks/useCustomNavigate'
+import { useHandleLogin } from '@/hooks/useHandleLogin.hook'
 import { useUserStore } from '@/store/user.store'
 
 import { CustomToast } from './custom-toast'
@@ -21,32 +17,21 @@ const onGoogleLoginError = () => {
 
 const useOnGoogleLogin = () => {
   const t = useTranslations('google_auth')
-  const cookies = useCookies()
-  const navigate = useCustomNavigate()
+
+  const { prepareRegions, handleLogin } = useHandleLogin()
 
   return async (res: CredentialResponse) => {
     try {
       if (!res.credential) {
-        throw new Error('No credential found')
+        throw new Error('No credentials found')
       }
 
-      const cookieRegions = defaultRegions.reduce((acc, item) => {
-        ;(acc as any)[item.queryKey] = +(cookies.get(item.queryKey) || item.defaultRegion)
-        return acc
-      }, {})
+      const cookieRegions = prepareRegions()
 
       useUserStore.setState({ isUserLoading: true })
       const { data } = await authWithGoogle({ ...cookieRegions, token: res.credential })
+      handleLogin(data)
 
-      setTokens(data.tokens)
-
-      const accountRegions = data.user.storeRegionPreferences.reduce((acc, item) => {
-        ;(acc as any)[getStoreRegionKey(item.store.name)] = item.regionId
-        return acc
-      }, {})
-
-      useUserStore.setState({ isUserLoading: false, user: data.user })
-      navigate({ query: accountRegions, replace: true })
       CustomToast('success', t('success_message', { username: data.user.username }))
     } catch (err) {
       CustomToast('error', (err as Error).message)

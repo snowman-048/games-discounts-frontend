@@ -63,10 +63,6 @@
   "DiscountInfo": {
     "ends_in": "Se termine dans {date}"
   },
-  "LoginModal": {
-    "login_signup": "Connexion / Inscription",
-    "new_methods": "De nouvelles méthodes d'authentification seront bientôt disponibles"
-  },
   "ProfileControls": {
     "wishlists": "Listes de souhaits",
     "profile": "Profil"
@@ -135,7 +131,22 @@
       "name_required": "Le nom est requis",
       "name_min": "Le nom doit contenir au moins {length} caractères",
       "name_max": "Le nom doit contenir au maximum {length} caractères"
-    }
+    },
+    "user": {
+      "username_required": "Le nom d'utilisateur est requis",
+      "username_min": "Le nom d'utilisateur doit comporter au moins {length} caractères",
+      "username_max": "Le nom d'utilisateur doit comporter au maximum {length} caractères",
+      "email_required": "L'e-mail est obligatoire",
+      "email_invalid": "L'e-mail n'est pas valide",
+      "password_required": "Le mot de passe est requis",
+      "password_min": "Le mot de passe doit comporter au moins {length} caractères",
+      "password_max": "Le mot de passe doit comporter au maximum {length} caractères",
+      "password_match": "Les mots de passe doivent être les mêmes",
+      "username_characters": "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et les caractères spéciaux suivants : @ . _ -",
+      "password_characters": "Le mot de passe ne peut contenir que des lettres, des chiffres et les caractères spéciaux suivants : @ . _ -",
+      "username_taken": "Ce nom d'utilisateur est déjà pris"
+    },
+    "field_required": "Ce champ est obligatoire"
   },
   "toast": {
     "attention": "Attention",
@@ -169,5 +180,34 @@
     "warning": "Êtes-vous sûr de vouloir vous déconnecter ?"
   },
   "no": "Non",
-  "yes": "Oui"
+  "yes": "Oui",
+  "user": {
+    "email": "E-mail",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "repeat_password": "Répéter le mot de passe"
+  },
+  "RegisterForm": {
+    "create_account": "Créer un compte",
+    "have_account": "Vous avez déjà un compte ?",
+    "login": "Se connecter",
+    "success_message": "Vous avez créé votre compte avec succès"
+  },
+  "LoginForm": {
+    "username_or_email": "Nom d'utilisateur ou e-mail",
+    "login": "Se connecter",
+    "no_account": "Vous n'avez pas de compte ?",
+    "register": "Registre",
+    "success_message": "Vous vous êtes connecté avec succès"
+  },
+  "AuthModal": {
+    "login": "Se connecter",
+    "signup": "S'inscrire",
+    "or": "Ou"
+  },
+  "EmailConfirmModal": {
+    "confirm_email": "Confirmez votre email",
+    "confirmation_code": "Code de confirmation"
+  },
+  "confirm": "Confirmer"
 }
