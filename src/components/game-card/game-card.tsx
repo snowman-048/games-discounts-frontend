@@ -28,6 +28,7 @@ type TProps = {
   wishlistButtonType?: 'add' | 'remove'
   removeFromWishlistId?: number
   onRemoveGameFromWishlist?: (gameId: number) => void
+  noBlur?: boolean
 }
 
 const GameCard = ({
@@ -41,6 +42,7 @@ const GameCard = ({
   wishlistButtonType = 'add',
   removeFromWishlistId,
   onRemoveGameFromWishlist,
+  noBlur,
 }: TProps) => {
   const isPendingConnection = 'gameData' in rawGame
   const game = isPendingConnection ? rawGame.gameData : rawGame
@@ -95,6 +97,7 @@ const GameCard = ({
             [styles.noShadow]: noShadow,
             [styles.switchToListOnMobile]: switchToListOnMobile,
           })}
+          noBlur={noBlur}
         >
           <Grid2
             container

@@ -314,7 +314,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                   key={item.game.id}
                   paddingTop={2}
                 >
-                  <GameCard game={item.game} t={t} noShadow />
+                  <GameCard game={item.game} t={t} noShadow noBlur />
                 </Grid2>
               ))}
             />

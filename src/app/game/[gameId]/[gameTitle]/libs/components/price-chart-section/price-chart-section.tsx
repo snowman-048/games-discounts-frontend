@@ -28,6 +28,7 @@ const PriceChartSection = ({ game, height, lines, storeLink, gameStore }: TProps
           storeLink={storeLink}
           variant="inline"
           showStoreLabel={showStoreLabel}
+          noBlur
         />
       )}
       <div style={{ minHeight: height, flex: 1 }}>

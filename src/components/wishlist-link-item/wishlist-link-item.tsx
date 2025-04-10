@@ -20,6 +20,7 @@ type TProps = {
   onClick?: () => void
   isSmall?: boolean
   disabled?: boolean
+  noBlur?: boolean
 }
 
 const WishlistLinkItem = ({
@@ -28,6 +29,7 @@ const WishlistLinkItem = ({
   isSmall = false,
   disabled,
   onClick,
+  noBlur,
 }: TProps) => {
   const t = useTranslations('WishlistLinkItem')
 
@@ -41,7 +43,9 @@ const WishlistLinkItem = ({
         boxShadow: 'none',
         maxWidth: '100%',
         overflow: 'hidden',
+        borderRadius: '8px',
       }}
+      noBlur={noBlur}
     >
       <Button sx={{ width: '100%', padding: 0 }} disabled={disabled}>
         <Grid2

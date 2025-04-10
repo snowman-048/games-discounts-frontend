@@ -25,6 +25,7 @@ type TProps = {
   storeLink?: string
   variant?: 'default' | 'inline'
   showStoreLabel?: boolean
+  noBlur?: boolean
 }
 
 type TAdditionalLowestInfo = {
@@ -41,6 +42,7 @@ const PriceInfoItem = ({
   storeLink,
   variant = 'default',
   showStoreLabel = true,
+  noBlur,
 }: TProps) => {
   const t = useTranslations('PriceInfoItem')
 
@@ -117,7 +119,11 @@ const PriceInfoItem = ({
   )
 
   return (
-    <GlassCard className={cn(styles.item, styles[variant], className)} sx={{ height }}>
+    <GlassCard
+      className={cn(styles.item, styles[variant], className)}
+      sx={{ height }}
+      noBlur={noBlur}
+    >
       <Grid2 container flexDirection={isInline ? 'column' : 'row'} alignItems="center" gap={1}>
         <StoreIcon store={store} link={storeLink} withLabel={showStoreLabel} />
         <TypographyV2 adaptiveFontSize={{ xs: 'text-sm', sm: 'text-l' }} textAlign="center">
