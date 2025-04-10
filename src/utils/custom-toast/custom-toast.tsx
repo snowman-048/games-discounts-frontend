@@ -36,8 +36,9 @@ const CustomToast = (type: TypeOptions, message: string, options?: TOptions) => 
       type,
       icon: noIcon ? false : tostStyles.icon,
       style: {
-        borderRadius: 20,
+        borderRadius: 8,
         paddingBottom: 16,
+        overflow: 'hidden',
       },
       pauseOnHover: true,
     },
