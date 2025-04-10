@@ -204,5 +204,10 @@
     "login": "Login",
     "signup": "Melden Sie sich an",
     "or": "Oder"
-  }
+  },
+  "EmailConfirmModal": {
+    "confirm_email": "Bestätigen Sie Ihre E-Mail",
+    "confirmation_code": "Bestätigungscode"
+  },
+  "confirm": "Bestätigen"
 }

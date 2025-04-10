@@ -204,5 +204,10 @@
     "login": "Log in",
     "signup": "Înscrieți-vă",
     "or": "Sau"
-  }
+  },
+  "EmailConfirmModal": {
+    "confirm_email": "Confirmați-vă adresa de e-mail",
+    "confirmation_code": "Cod de confirmare"
+  },
+  "confirm": "Confirma"
 }

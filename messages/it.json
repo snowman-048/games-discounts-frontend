@@ -204,5 +204,10 @@
     "login": "Login",
     "signup": "Iscrizione",
     "or": "O"
-  }
+  },
+  "EmailConfirmModal": {
+    "confirm_email": "Conferma la tua email",
+    "confirmation_code": "Codice di conferma"
+  },
+  "confirm": "Confermare"
 }

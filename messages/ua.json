@@ -204,5 +204,10 @@
     "login": "Логін",
     "signup": "Реєстрація",
     "or": "Або"
-  }
+  },
+  "EmailConfirmModal": {
+    "confirm_email": "Підтвердьте свою електронну адресу",
+    "confirmation_code": "Код підтвердження"
+  },
+  "confirm": "Підтвердити"
 }

@@ -8,13 +8,15 @@ import { useTranslations } from 'next-intl'
 import * as yup from 'yup'
 
 import { checkUsername } from '@/api/account'
-import { signup } from '@/api/auth'
+import { checkEmail, signup } from '@/api/auth'
 import { Input } from '@/components/ui/input'
 import { TypographyV2 } from '@/components/ui/typography'
 import { useDebounce } from '@/hooks/useDebounce.hook'
 import { useHandleLogin } from '@/hooks/useHandleLogin.hook'
 import { CustomToast } from '@/utils/custom-toast'
 import { emailSchema, passwordSchema, usernameSchema } from '@/validation/user.validation'
+
+import { EmailConfirmModal } from './libs/components/email-confirm-modal'
 
 const defaultValues = {
   username: '',
@@ -34,6 +36,7 @@ const RegisterForm = ({ onLogin }: TProps) => {
   const [isUsernameChecking, setIsUsernameChecking] = useState(false)
   const [isUsernameChecked, setIsUsernameChecked] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [savedData, setSavedData] = useState<typeof defaultValues | null>(null)
 
   const { prepareRegions, handleLogin } = useHandleLogin()
 
@@ -101,16 +104,19 @@ const RegisterForm = ({ onLogin }: TProps) => {
 
   const checkUsernameDebounced = useDebounce({ debounceTimeout: 700, handler: validateUsername })
 
-  const submit: SubmitHandler<typeof defaultValues> = async (payload) => {
-    if (!isUsernameAvailable) {
+  const createAccount = async (verificationCode: string) => {
+    const payload = savedData
+
+    if (!payload) {
       return
     }
+
     try {
       setIsLoading(true)
 
       const cookieRegions = prepareRegions()
 
-      const { data } = await signup({ ...payload, regions: cookieRegions })
+      const { data } = await signup({ ...payload, verificationCode, regions: cookieRegions })
 
       handleLogin(data)
 
@@ -122,84 +128,109 @@ const RegisterForm = ({ onLogin }: TProps) => {
     }
   }
 
+  const submit: SubmitHandler<typeof defaultValues> = async (payload) => {
+    if (!isUsernameAvailable) {
+      return
+    }
+    try {
+      setIsLoading(true)
+
+      await checkEmail(payload.email)
+
+      setSavedData(payload)
+    } catch (err) {
+      CustomToast('error', (err as Error).message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
-    <form style={{ width: '100%' }} onSubmit={handleSubmit(submit)}>
-      <Stack gap={2} width="100%" paddingTop={1}>
-        <Controller
-          name="username"
-          control={control}
-          render={({ field: { ref, onChange, ...rest } }) => (
-            <Input
-              variant="outlined"
-              label={t('user.username')}
-              size="small"
-              error={errors.username?.message || usernameAvailableError}
-              onChange={(value) => {
-                onChange(value)
-                setIsUsernameChecked(false)
-                checkUsernameDebounced(value)
-              }}
-              loading={isUsernameChecking}
-              endAdornment={usernameAddornment}
-              {...rest}
-            />
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          render={({ field: { ref, ...rest } }) => (
-            <Input
-              variant="outlined"
-              label={t('user.email')}
-              size="small"
-              error={errors.email?.message}
-              {...rest}
-            />
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          render={({ field: { ref, ...rest } }) => (
-            <Input
-              variant="outlined"
-              label={t('user.password')}
-              size="small"
-              type="password"
-              error={errors.password?.message}
-              {...rest}
-            />
-          )}
-        />
-        <Controller
-          name="repeatPassword"
-          control={control}
-          render={({ field: { ref, ...rest } }) => (
-            <Input
-              variant="outlined"
-              label={t('user.repeat_password')}
-              size="small"
-              type="password"
-              error={errors.repeatPassword?.message}
-              {...rest}
-            />
-          )}
-        />
+    <>
+      <form style={{ width: '100%' }} onSubmit={handleSubmit(submit)}>
+        <Stack gap={2} width="100%" paddingTop={1}>
+          <Controller
+            name="username"
+            control={control}
+            render={({ field: { ref, onChange, ...rest } }) => (
+              <Input
+                variant="outlined"
+                label={t('user.username')}
+                size="small"
+                error={errors.username?.message || usernameAvailableError}
+                onChange={(value) => {
+                  onChange(value)
+                  setIsUsernameChecked(false)
+                  checkUsernameDebounced(value)
+                }}
+                loading={isUsernameChecking}
+                endAdornment={usernameAddornment}
+                {...rest}
+              />
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { ref, ...rest } }) => (
+              <Input
+                variant="outlined"
+                label={t('user.email')}
+                size="small"
+                error={errors.email?.message}
+                {...rest}
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { ref, ...rest } }) => (
+              <Input
+                variant="outlined"
+                label={t('user.password')}
+                size="small"
+                type="password"
+                error={errors.password?.message}
+                {...rest}
+              />
+            )}
+          />
+          <Controller
+            name="repeatPassword"
+            control={control}
+            render={({ field: { ref, ...rest } }) => (
+              <Input
+                variant="outlined"
+                label={t('user.repeat_password')}
+                size="small"
+                type="password"
+                error={errors.repeatPassword?.message}
+                {...rest}
+              />
+            )}
+          />
 
-        <Button variant="contained" type="submit" loading={isLoading}>
-          {t('RegisterForm.create_account')}
-        </Button>
-
-        <Stack alignItems="center">
-          <TypographyV2 textAlign="center">{t('RegisterForm.have_account')}</TypographyV2>
-
-          <Button sx={{ width: 'fit-content' }} onClick={onLogin} disabled={isLoading}>
-            {t('RegisterForm.login')}
+          <Button variant="contained" type="submit" loading={isLoading}>
+            {t('RegisterForm.create_account')}
           </Button>
+
+          <Stack alignItems="center">
+            <TypographyV2 textAlign="center">{t('RegisterForm.have_account')}</TypographyV2>
+
+            <Button sx={{ width: 'fit-content' }} onClick={onLogin} disabled={isLoading}>
+              {t('RegisterForm.login')}
+            </Button>
+          </Stack>
         </Stack>
-      </Stack>
-    </form>
+      </form>
+
+      <EmailConfirmModal
+        email={savedData?.email}
+        handleClose={() => setSavedData(null)}
+        onConfirm={createAccount}
+      />
+    </>
   )
 }
 
