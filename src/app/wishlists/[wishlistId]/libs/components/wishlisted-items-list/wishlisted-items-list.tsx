@@ -39,6 +39,7 @@ const WishlistedItemsList = ({ wishlist, setWishlist }: TProps) => {
               wishlistedGames: wishlist.wishlistedGames.filter((item) => item.gameId !== gameId),
             })
           }
+          noBlur
         />
       ))}
     </GameCardsList>

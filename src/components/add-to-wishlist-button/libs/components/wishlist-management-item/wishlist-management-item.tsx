@@ -68,6 +68,7 @@ const WishlistManagementItem = ({ game, wishlist }: TProps) => {
         isSmall
         onClick={() => toggleWishlistedGameStore(availableStoreIds)}
         disabled={isLoading}
+        noBlur
       />
       <Grid2 container width="100%" gap={1} alignItems="center">
         {availableStoreIds.map((storeId) => {

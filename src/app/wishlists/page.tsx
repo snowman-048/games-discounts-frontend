@@ -42,7 +42,7 @@ const Wishlists = () => {
           {!!wishlists?.length && (
             <Stack gap={1}>
               {wishlists.map((item) => (
-                <WishlistLinkItem wishlist={item} key={item.id} />
+                <WishlistLinkItem wishlist={item} key={item.id} noBlur />
               ))}
             </Stack>
           )}

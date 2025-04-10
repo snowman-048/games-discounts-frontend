@@ -56,7 +56,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
             buttonsPosition="sides"
             slides={games.map((game) => (
               <Grid2 width="300px" height="100%" paddingTop={2} key={game.id}>
-                <GameCard game={game} t={t} noShadow />
+                <GameCard game={game} t={t} noShadow noBlur />
               </Grid2>
             ))}
           />
