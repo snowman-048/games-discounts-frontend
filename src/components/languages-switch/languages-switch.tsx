@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '@/configs/locales'
 import { ECookieKey } from '@/enums/cookie-key.enum'
 import { setMomentLocale } from '@/helpers/setMomentLocale'
+import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 
 import { Select } from '../ui/select'
 
@@ -15,9 +16,11 @@ const LanguagesSwitch = () => {
 
   const cookies = useCookies()
   const router = useRouter()
+  const navigate = useCustomNavigate()
 
   const onChange = (value: string) => {
     cookies.set(ECookieKey.LOCALE, value)
+    navigate({ query: { lang: value }, replace: true })
     router.refresh()
     setMomentLocale(value)
   }

@@ -9,27 +9,35 @@ import { Loader } from '@/components/ui/loader'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
+import { getLocalesMeta } from '@/helpers/getLocalesMeta'
 import { TGameSearchParams } from '@/types/game-search.types'
 
-export const metadata: Metadata = {
-  title: 'Active Discounts',
-  keywords: [
-    'discounts',
-    'price',
-    'low',
-    'games',
-    'video games',
-    ...Object.values(EStore),
-    ...Object.values(EPlatform),
-  ],
-}
-
-type Tprops = {
+type TProps = {
   params: Promise<{ page: string }>
   searchParams: Promise<TGameSearchParams>
 }
 
-const Discounts = async ({ params, searchParams }: Tprops) => {
+export const generateMetadata = async ({ params }: TProps): Promise<Metadata> => {
+  const { page } = await params
+
+  return {
+    title: 'Active Discounts',
+    keywords: [
+      'discounts',
+      'price',
+      'low',
+      'games',
+      'video games',
+      ...Object.values(EStore),
+      ...Object.values(EPlatform),
+    ],
+    icons: {
+      other: getLocalesMeta(`${EAppRoute.ACTIVE_DISCOUNTS}/${page}`),
+    },
+  }
+}
+
+const Discounts = async ({ params, searchParams }: TProps) => {
   const { page } = await params
   const query = await searchParams
 
