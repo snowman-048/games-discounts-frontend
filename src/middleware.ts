@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getRegions } from './api/regions'
 import { defaultRegions } from './configs/default-regions.config'
-import { DEFAULT_LOCALE } from './configs/locales'
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from './configs/locales'
 import { ECookieKey } from './enums/cookie-key.enum'
 import { extractLocaleFromHeader } from './helpers/extractLocaleFromHeader'
 import { TRegionWithStores } from './types/region.types'
@@ -57,7 +57,11 @@ export async function middleware(req: NextRequest) {
   })
 
   // Detect locale
-  let locale = req.cookies.get(ECookieKey.LOCALE)?.value
+  let locale = url.searchParams.get('lang')?.toLowerCase()
+
+  if (!locale || !SUPPORTED_LOCALES.includes(locale as any)) {
+    locale = req.cookies.get(ECookieKey.LOCALE)?.value
+  }
 
   if (!locale) {
     const localeHeader = req.headers.get('accept-language')
