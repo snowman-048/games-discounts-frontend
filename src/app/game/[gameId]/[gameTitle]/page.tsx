@@ -24,9 +24,12 @@ import { Container } from '@/components/ui/container'
 import { InfoItem } from '@/components/ui/info-item'
 import { TypographyV2 } from '@/components/ui/typography'
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
+import { EAppRoute } from '@/enums/app-route.enum'
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
 import { createGameLinks } from '@/helpers/createGameLinks'
+import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
+import { getLocalesMeta } from '@/helpers/getLocalesMeta'
 import { getStoreColor } from '@/helpers/getStoreColor'
 import { makeFirstLetterUpper } from '@/helpers/makeFirstLetterUpper'
 import { TFamilyKey } from '@/types/family-key.type'
@@ -67,6 +70,9 @@ export const generateMetadata = async ({ params, searchParams }: TProps): Promis
 
   const metadata: Metadata = {
     title: game.title || '',
+    icons: {
+      other: getLocalesMeta(`${EAppRoute.GAME}/${gameId}/${getGameTitleForLink(game.title)}`),
+    },
   }
 
   const keywords = [

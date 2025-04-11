@@ -10,6 +10,8 @@ import { SectionTitle } from '@/components/section-title'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
 import { TypographyV2 } from '@/components/ui/typography'
+import { EAppRoute } from '@/enums/app-route.enum'
+import { getLocalesMeta } from '@/helpers/getLocalesMeta'
 
 import styles from './styles.module.scss'
 
@@ -58,17 +60,22 @@ const heroes: THero[] = [
   },
 ]
 
-export const metadata: Metadata = {
-  title: 'About',
-  keywords: [
-    'about',
-    'company',
-    'people',
-    'goals',
-    'games',
-    'inspiration',
-    ...heroes.map((hero) => hero.title),
-  ],
+export const generateMetadata = async (): Promise<Metadata> => {
+  return {
+    title: 'About',
+    keywords: [
+      'about',
+      'company',
+      'people',
+      'goals',
+      'games',
+      'inspiration',
+      ...heroes.map((hero) => hero.title),
+    ],
+    icons: {
+      other: getLocalesMeta(EAppRoute.ABOUT_US),
+    },
+  }
 }
 
 const AboutUs = async () => {
