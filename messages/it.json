@@ -173,7 +173,8 @@
     "finishing": "In Scadenza",
     "biggest_discounts": "Maggiori Sconti",
     "az": "A-Z",
-    "za": "Z-A"
+    "za": "Z-A",
+    "release_date": "Data di rilascio"
   },
   "Logout": {
     "logout": "Disconnetti",

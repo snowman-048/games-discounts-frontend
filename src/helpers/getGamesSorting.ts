@@ -15,6 +15,10 @@ const MAPPER: Record<EGameSorting, TSorting> = {
     sortField: 'discountPercentage',
     sortDirection: 'desc',
   },
+  [EGameSorting.RELEASE_DATE]: {
+    sortField: 'releaseDate',
+    sortDirection: 'desc',
+  },
   [EGameSorting.AZ]: {
     sortField: 'title',
     sortDirection: 'asc',

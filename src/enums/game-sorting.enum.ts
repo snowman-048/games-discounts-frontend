@@ -4,6 +4,7 @@ enum EGameSorting {
   BIGGEST_DISCOUNTS = 'biggest_discounts',
   AZ = 'az',
   ZA = 'za',
+  RELEASE_DATE = 'release_date',
 }
 
 export { EGameSorting }

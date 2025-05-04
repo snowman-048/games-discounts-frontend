@@ -1,6 +1,6 @@
 import { EGameSorting } from '@/enums/game-sorting.enum'
 
-const allGamesSortingOptions = [EGameSorting.AZ, EGameSorting.ZA]
+const allGamesSortingOptions = [EGameSorting.RELEASE_DATE, EGameSorting.AZ, EGameSorting.ZA]
 
 const gamesSortingOptions = [
   EGameSorting.NEWEST,
