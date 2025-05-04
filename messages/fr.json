@@ -173,7 +173,8 @@
     "finishing": "Se termine bientôt",
     "biggest_discounts": "Meilleures Remises",
     "az": "A-Z",
-    "za": "Z-A"
+    "za": "Z-A",
+    "release_date": "Date de sortie"
   },
   "Logout": {
     "logout": "Déconnexion",
