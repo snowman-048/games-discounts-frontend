@@ -14,7 +14,9 @@ type TProps = {
 }
 
 const DiscountInfo = ({ discount, withStoreLabel, t }: TProps) => {
-  const isDiscountActive = moment(discount.discountEnds).diff(moment(), 'seconds') > 0
+  const isDiscountActive =
+    moment(discount.discountEnds).diff(moment(), 'seconds') > 0 &&
+    discount.discountedPrice !== discount.initialPrice
 
   return (
     <GlassCard
