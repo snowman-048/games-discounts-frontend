@@ -30,6 +30,7 @@ import { useTranslations } from 'use-intl'
 import * as yup from 'yup'
 
 import { updateGame } from '@/api/games'
+import { EDescriptionStatus } from '@/enums/description-status.enum'
 import { EGameType } from '@/enums/game-type.enum'
 import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
@@ -83,7 +84,10 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
       platforms: game.platforms || [],
       type: game.type || '',
       publisher: game.publisher || '',
-      description: game.description || '',
+      description:
+        (game.origin?.descriptionStatus === EDescriptionStatus.PROCESSED
+          ? game.origin?.description
+          : game.description) || '',
       genres: game.genres || [],
       textLanguages: game.textLanguages || [],
       voiceLanguages: game.voiceLanguages || [],
@@ -121,7 +125,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
   }
 
   return (
-    <form style={{ width: '100%' }}>
+    <form style={{ width: '100%' }} onSubmit={handleSubmit(submit)}>
       <Grid2 sx={{ position: 'relative', width: '100%' }} container flexDirection="column" gap={3}>
         <GameImgWithBuy
           game={{ ...game, coverImageUrl: watch('coverImageUrl'), type: watch('type') }}
@@ -414,6 +418,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
                 />
               )}
             />
+
             {!!game.images?.length && (
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -432,7 +437,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
             )}
 
             {!readonly && (
-              <Button variant="contained" onClick={handleSubmit(submit)} disabled={loading}>
+              <Button variant="contained" type="submit" disabled={loading}>
                 Submit
               </Button>
             )}
