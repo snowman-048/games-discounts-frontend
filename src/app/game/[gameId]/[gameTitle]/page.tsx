@@ -146,6 +146,20 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
 
   const storeLinks = createGameLinks(game)
 
+  const gameImages = Object.keys(
+    game.images?.reduce(
+      (acc, item) => {
+        if (!acc[item]) {
+          acc[item] = true
+        }
+        return acc
+      },
+      {} as Record<string, boolean>,
+    ) || {},
+  )
+
+  const dicountsExist = game.priceHistory.some((item) => item.discountedPrice !== item.initialPrice)
+
   return (
     <Container
       gap={{ xs: 3, md: 5 }}
@@ -227,84 +241,88 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
         </GlassCard>
       </Grid2>
 
-      <Grid2
-        width="100%"
-        container
-        alignItems="center"
-        justifyContent="space-between"
-        flexWrap="nowrap"
-      >
-        <GlassCard className={cn(styles.section, styles.priceSection, styles.priceHistorySection)}>
-          <SectionTitle title={t('GameInfo.price_history')} />
-          {game.gameStore?.map((gameStore) => {
-            const storePriceHistory = game.priceHistory.filter(
-              (item) => item.storeId === gameStore.store.id,
-            )
-            if (!storePriceHistory?.length) {
-              return <></>
-            }
-            const lines: TLineConfig[] = []
-            if (gameStore.store.name === EStore.PSN) {
-              const { commonDiscounts, psPlusDiscounts } = storePriceHistory.reduce(
-                (acc, item) => {
-                  if (item.meta?.type === EPriceHistoryMetaType.PS_PLUS) {
-                    acc.psPlusDiscounts.push(item)
-                  } else {
-                    acc.commonDiscounts.push(item)
-                  }
-                  return acc
-                },
-                {
-                  commonDiscounts: [] as TPriceHistory[],
-                  psPlusDiscounts: [] as TPriceHistory[],
-                },
+      {dicountsExist && (
+        <Grid2
+          width="100%"
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          flexWrap="nowrap"
+        >
+          <GlassCard
+            className={cn(styles.section, styles.priceSection, styles.priceHistorySection)}
+          >
+            <SectionTitle title={t('GameInfo.price_history')} />
+            {game.gameStore?.map((gameStore) => {
+              const storePriceHistory = game.priceHistory.filter(
+                (item) => item.storeId === gameStore.store.id,
               )
-              if (psPlusDiscounts.length) {
+              if (!storePriceHistory?.length) {
+                return <></>
+              }
+              const lines: TLineConfig[] = []
+              if (gameStore.store.name === EStore.PSN) {
+                const { commonDiscounts, psPlusDiscounts } = storePriceHistory.reduce(
+                  (acc, item) => {
+                    if (item.meta?.type === EPriceHistoryMetaType.PS_PLUS) {
+                      acc.psPlusDiscounts.push(item)
+                    } else {
+                      acc.commonDiscounts.push(item)
+                    }
+                    return acc
+                  },
+                  {
+                    commonDiscounts: [] as TPriceHistory[],
+                    psPlusDiscounts: [] as TPriceHistory[],
+                  },
+                )
+                if (psPlusDiscounts.length) {
+                  lines.push({
+                    priceHistory: psPlusDiscounts,
+                    lineColor: getStoreColor(EPriceHistoryMetaType.PS_PLUS),
+                  })
+                }
+                lines.push({ priceHistory: commonDiscounts, lineColor: getStoreColor(EStore.PSN) })
+              } else {
                 lines.push({
-                  priceHistory: psPlusDiscounts,
-                  lineColor: getStoreColor(EPriceHistoryMetaType.PS_PLUS),
+                  lineColor: getStoreColor(gameStore.store.name),
+                  priceHistory: storePriceHistory,
                 })
               }
-              lines.push({ priceHistory: commonDiscounts, lineColor: getStoreColor(EStore.PSN) })
-            } else {
-              lines.push({
-                lineColor: getStoreColor(gameStore.store.name),
-                priceHistory: storePriceHistory,
-              })
-            }
 
-            return (
-              <PriceChartSection
-                game={game}
-                key={gameStore.store.id}
-                lines={lines}
-                height={PRICE_ITEM_HEIGHT}
-                storeLink={storeLinks?.[gameStore.store.name]}
-                gameStore={gameStore}
-              />
-            )
-          })}
-        </GlassCard>
+              return (
+                <PriceChartSection
+                  game={game}
+                  key={gameStore.store.id}
+                  lines={lines}
+                  height={PRICE_ITEM_HEIGHT}
+                  storeLink={storeLinks?.[gameStore.store.name]}
+                  gameStore={gameStore}
+                />
+              )
+            })}
+          </GlassCard>
 
-        <Grid2
-          flex={1}
-          paddingRight={0}
-          maxWidth="fit-content"
-          width="fit-content"
-          className={cn(styles.section, styles.priceSection, styles.priceInfoSection)}
-        >
-          {game.gameStore?.map((gameStore) => {
-            return (
-              <PriceInfoItem
-                priceHistory={game.priceHistory}
-                store={gameStore.store.name}
-                height={PRICE_ITEM_HEIGHT}
-                storeLink={storeLinks?.[gameStore.store.name]}
-              />
-            )
-          })}
+          <Grid2
+            flex={1}
+            paddingRight={0}
+            maxWidth="fit-content"
+            width="fit-content"
+            className={cn(styles.section, styles.priceSection, styles.priceInfoSection)}
+          >
+            {game.gameStore?.map((gameStore) => {
+              return (
+                <PriceInfoItem
+                  priceHistory={game.priceHistory}
+                  store={gameStore.store.name}
+                  height={PRICE_ITEM_HEIGHT}
+                  storeLink={storeLinks?.[gameStore.store.name]}
+                />
+              )
+            })}
+          </Grid2>
         </Grid2>
-      </Grid2>
+      )}
 
       {!!gameFamily?.length && (
         <GlassCard className={styles.section}>
@@ -332,9 +350,9 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
         <Stack spacing={3} width="100%">
           <Stack gap={2} width="100%">
             <SectionTitle title={t('GameInfo.screenshots')} />
-            {!!game.images.length ? (
+            {!!gameImages.length ? (
               <Grid2 mx={{ xs: -2, sm: -3 }}>
-                <ImagesCarousel images={game.images} alt={game.title} />
+                <ImagesCarousel images={gameImages} alt={game.title} />
               </Grid2>
             ) : (
               <NoDataLabel />

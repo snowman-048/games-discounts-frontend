@@ -25,9 +25,13 @@ type TProps = {
 const BuyGameButton = async ({ priceHistoryItem, additionalPriceHistoryItem, link }: TProps) => {
   const t = await getTranslations('BuyGameButton')
 
-  const isMainDiscountActive = checkIfDiscountIsActive(priceHistoryItem.discountEnds)
+  const isMainDiscountActive =
+    checkIfDiscountIsActive(priceHistoryItem.discountEnds) &&
+    priceHistoryItem.discountedPrice !== priceHistoryItem.initialPrice
   const isAdditionalDiscountActive =
-    !!additionalPriceHistoryItem && checkIfDiscountIsActive(additionalPriceHistoryItem.discountEnds)
+    !!additionalPriceHistoryItem &&
+    checkIfDiscountIsActive(additionalPriceHistoryItem.discountEnds) &&
+    additionalPriceHistoryItem.discountedPrice !== additionalPriceHistoryItem.initialPrice
   const additionalDiscountLabelColor = isAdditionalDiscountActive
     ? getStoreColor(additionalPriceHistoryItem.meta?.type || additionalPriceHistoryItem.store.name)
     : ''

@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
@@ -46,89 +44,81 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
         <LogoGlitch />
 
         <Stack width="100%" marginTop={3} gap={{ xs: 2, sm: 5 }}>
-          <Suspense>
-            <GamesCarouselWithData
-              title={t('biggest_discounts')}
-              query={{
-                ...query,
-                sort: EGameSorting.BIGGEST_DISCOUNTS,
-              }}
-            />
-          </Suspense>
+          <GamesCarouselWithData
+            title={t('biggest_discounts')}
+            query={{
+              ...query,
+              sort: EGameSorting.BIGGEST_DISCOUNTS,
+            }}
+          />
 
-          <Suspense>
-            <GamesCarouselWithData
-              title={
-                <Grid2
-                  container
-                  alignItems="center"
-                  flexDirection="row"
-                  flexWrap="nowrap"
-                  flex={1}
-                  gap={1}
-                  textTransform="none"
-                >
-                  {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.PSN} /> })}
-                </Grid2>
-              }
-              query={{
-                ...query,
-                sort: EGameSorting.NEWEST,
-                'storeIds[]': ['1'], // Refactor
-                onlySelectedStores: true,
-              }}
-            />
-          </Suspense>
+          <GamesCarouselWithData
+            title={
+              <Grid2
+                container
+                alignItems="center"
+                flexDirection="row"
+                flexWrap="nowrap"
+                flex={1}
+                gap={1}
+                textTransform="none"
+              >
+                {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.PSN} /> })}
+              </Grid2>
+            }
+            query={{
+              ...query,
+              sort: EGameSorting.NEWEST,
+              'storeIds[]': ['1'], // Refactor
+              onlySelectedStores: true,
+            }}
+          />
 
-          <Suspense>
-            <GamesCarouselWithData
-              title={
-                <Grid2
-                  container
-                  alignItems="center"
-                  flexDirection="row"
-                  flexWrap="nowrap"
-                  flex={1}
-                  gap={1}
-                  textTransform="none"
-                >
-                  {t.rich('newest_discounts', {
-                    store: () => <StoreIcon store={EStore.NINTENDO} />,
-                  })}
-                </Grid2>
-              }
-              query={{
-                ...query,
-                sort: EGameSorting.NEWEST,
-                'storeIds[]': ['2'], // Refactor
-                onlySelectedStores: true,
-              }}
-            />
-          </Suspense>
+          <GamesCarouselWithData
+            title={
+              <Grid2
+                container
+                alignItems="center"
+                flexDirection="row"
+                flexWrap="nowrap"
+                flex={1}
+                gap={1}
+                textTransform="none"
+              >
+                {t.rich('newest_discounts', {
+                  store: () => <StoreIcon store={EStore.NINTENDO} />,
+                })}
+              </Grid2>
+            }
+            query={{
+              ...query,
+              sort: EGameSorting.NEWEST,
+              'storeIds[]': ['2'], // Refactor
+              onlySelectedStores: true,
+            }}
+          />
 
-          <Suspense>
-            <GamesCarouselWithData
-              title={
-                <Grid2
-                  container
-                  alignItems="center"
-                  flexDirection="row"
-                  flexWrap="nowrap"
-                  flex={1}
-                  gap={1}
-                  textTransform="none"
-                >
-                  {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.XBOX} /> })}
-                </Grid2>
-              }
-              query={{
-                ...query,
-                sort: EGameSorting.NEWEST,
-                'storeIds[]': ['3'], // Refactor
-                onlySelectedStores: true,
-              }}
-            />
-          </Suspense>
+          <GamesCarouselWithData
+            title={
+              <Grid2
+                container
+                alignItems="center"
+                flexDirection="row"
+                flexWrap="nowrap"
+                flex={1}
+                gap={1}
+                textTransform="none"
+              >
+                {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.XBOX} /> })}
+              </Grid2>
+            }
+            query={{
+              ...query,
+              sort: EGameSorting.NEWEST,
+              'storeIds[]': ['3'], // Refactor
+              onlySelectedStores: true,
+            }}
+          />
         </Stack>
       </Container>
     </>
