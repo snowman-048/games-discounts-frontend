@@ -1,3 +1,4 @@
+import { EDescriptionStatus } from '@/enums/description-status.enum'
 import { EGameType } from '@/enums/game-type.enum'
 import { EPlatform } from '@/enums/platform.enum'
 
@@ -36,6 +37,7 @@ type TGame = {
   gameLinks: TGameLink[]
   priceHistory: TPriceHistory[]
   gameStore?: TGameStore[]
+  descriptionStatus?: EDescriptionStatus
 }
 
 export type { TGame, TGameStore }
