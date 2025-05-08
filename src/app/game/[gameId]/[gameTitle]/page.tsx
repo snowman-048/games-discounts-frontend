@@ -191,7 +191,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 {game.title}
               </TypographyV2>
 
-              <AddToWishlistButton game={game} />
+              <AddToWishlistButton game={game} withText />
             </Stack>
             <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 

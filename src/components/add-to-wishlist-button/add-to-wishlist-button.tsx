@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd'
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded'
-import { Box, BoxProps, FormGroup, Grid2, IconButton, Stack } from '@mui/material'
+import { Box, BoxProps, Button, FormGroup, Grid2, Stack } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 
@@ -24,9 +24,10 @@ import { WishlistManagementItem } from './libs/components/wishlist-management-it
 
 type TProps = BoxProps & {
   game: TGame
+  withText?: boolean
 }
 
-const AddToWishlistButton = ({ game, ...rest }: TProps) => {
+const AddToWishlistButton = ({ game, withText = false, ...rest }: TProps) => {
   const t = useTranslations('AddToWishlistButton')
 
   const stores = useAppStore((state) => state.stores)
@@ -54,21 +55,35 @@ const AddToWishlistButton = ({ game, ...rest }: TProps) => {
           title={isIncludedInAnyWishlist ? t('already_in_wishlist') : t('add_to_wishlist')}
           delay={500}
         >
-          <IconButton
-            sx={{
-              color: isIncludedInAnyWishlist ? 'var(--color-green)' : 'var(--color-primary)',
-            }}
-            onClick={(e) => {
-              e.stopPropagation()
-              if (!user) {
-                setIsLoginModalOpen(true)
-                return
-              }
-              setButtonAnchorEl(e.currentTarget)
-            }}
-          >
-            {isIncludedInAnyWishlist ? <BookmarkAddedIcon /> : <BookmarkAddIcon />}
-          </IconButton>
+          <Box width="fit-content" height="fit-content">
+            <Button
+              sx={{
+                color: isIncludedInAnyWishlist ? 'var(--color-green)' : 'var(--color-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                borderRadius: withText ? '5px' : '50%',
+                minWidth: 0,
+                width: withText ? 'fit-content' : '40px',
+                height: withText ? 'fit-content' : '40px',
+              }}
+              onClick={(e) => {
+                e.stopPropagation()
+                if (!user) {
+                  setIsLoginModalOpen(true)
+                  return
+                }
+                setButtonAnchorEl(e.currentTarget)
+              }}
+            >
+              {isIncludedInAnyWishlist ? <BookmarkAddedIcon /> : <BookmarkAddIcon />}
+              {withText && (
+                <TypographyV2 fontWeight="medium" fontSize="text-xl">
+                  {isIncludedInAnyWishlist ? t('already_in_wishlist') : t('add_to_wishlist')}
+                </TypographyV2>
+              )}
+            </Button>
+          </Box>
         </Tooltip>
       </Box>
 
