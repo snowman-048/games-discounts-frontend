@@ -30,6 +30,7 @@ import { useTranslations } from 'use-intl'
 import * as yup from 'yup'
 
 import { updateGame } from '@/api/games'
+import { EDescriptionStatus } from '@/enums/description-status.enum'
 import { EGameType } from '@/enums/game-type.enum'
 import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
@@ -41,7 +42,6 @@ import { InfoItem } from '../ui/info-item'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
 import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
-import { EDescriptionStatus } from '@/enums/description-status.enum'
 
 type TProps = {
   game: TGame & { origin?: TGame }
@@ -71,13 +71,6 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
 
   const [loading, setLoading] = useState(false)
 
-  console.log(game.origin?.descriptionStatus)
-
-  const description =
-    game.origin?.descriptionStatus === EDescriptionStatus.PROCESSED
-      ? game.origin?.description
-      : game.description
-
   const {
     control,
     handleSubmit,
@@ -91,7 +84,10 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
       platforms: game.platforms || [],
       type: game.type || '',
       publisher: game.publisher || '',
-      description: description || '',
+      description:
+        (game.origin?.descriptionStatus === EDescriptionStatus.PROCESSED
+          ? game.origin?.description
+          : game.description) || '',
       genres: game.genres || [],
       textLanguages: game.textLanguages || [],
       voiceLanguages: game.voiceLanguages || [],
