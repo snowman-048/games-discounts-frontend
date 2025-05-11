@@ -40,4 +40,4 @@ const nextConfig: NextConfig = {
 }
 
 const withNextIntl = createNextIntlPlugin()
-export default withPWA(withNextIntl(nextConfig))
+export default withNextIntl(withPWA(nextConfig as any) as any)
