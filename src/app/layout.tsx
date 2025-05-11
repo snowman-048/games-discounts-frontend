@@ -46,6 +46,7 @@ export const metadata: Metadata = {
     'Discover the best video game discounts from PlayStation, Nintendo, and Xbox. Stay updated on price drops and exclusive deals to save on your favorite games!',
   other: {
     'google-adsense-account': process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT || '',
+    'theme-color': '#111111',
   },
 }
 
@@ -60,6 +61,9 @@ const RootLayout = async ({
 
   return (
     <html lang={locale}>
+      <link rel="manifest" href="/manifest.json" />
+      <link rel="apple-touch-icon" href="/icon512_maskable.png" />
+
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"

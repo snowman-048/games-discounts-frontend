@@ -75,6 +75,7 @@ const AddToWishlistButton = ({ game, withText = false, ...rest }: TProps) => {
                 }
                 setButtonAnchorEl(e.currentTarget)
               }}
+              aria-label={isIncludedInAnyWishlist ? t('already_in_wishlist') : t('add_to_wishlist')}
             >
               {isIncludedInAnyWishlist ? <BookmarkAddedIcon /> : <BookmarkAddIcon />}
               {withText && (
