@@ -96,7 +96,7 @@ const PricesChart = ({ game, lines, height = 300 }: TProps) => {
             lines.forEach((_, lineIndex) => {
               const newLineKey = getLinePriceKey(lineIndex)
               if (!discountItem[newLineKey]) {
-                discountItem[newLineKey] = item.initialPrice
+                discountItem[newLineKey] = discountItem[lineKey]
               }
             })
             mergedDataMap.set(discountItem.date, discountItem)
