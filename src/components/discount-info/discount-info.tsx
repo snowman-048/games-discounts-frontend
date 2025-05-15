@@ -6,6 +6,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 import { StoreIcon } from '../store-icon'
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
+import { Fire } from './libs/components/fire/fire'
 
 type TProps = {
   discount: TPriceHistory
@@ -24,6 +25,7 @@ const DiscountInfo = ({ discount, withStoreLabel, t }: TProps) => {
         borderRadius: 10,
         background: 'rgba(0, 0, 0, 0.3)',
         boxShadow: 'none',
+        overflow: 'visible',
       }}
     >
       <Grid2
@@ -34,15 +36,29 @@ const DiscountInfo = ({ discount, withStoreLabel, t }: TProps) => {
         justifyContent="space-between"
         gap={1}
       >
-        <StoreIcon
-          store={discount.meta?.type || discount.store.name}
-          customLabel={
-            isDiscountActive && !!discount.discountPercentage
-              ? `-${discount.discountPercentage}%`
-              : ''
-          }
-          withLabel={withStoreLabel}
-        />
+        {discount.isLowestPrice ? (
+          <Fire>
+            <StoreIcon
+              store={discount.meta?.type || discount.store.name}
+              customLabel={
+                isDiscountActive && !!discount.discountPercentage
+                  ? `-${discount.discountPercentage}%`
+                  : ''
+              }
+              withLabel={withStoreLabel}
+            />
+          </Fire>
+        ) : (
+          <StoreIcon
+            store={discount.meta?.type || discount.store.name}
+            customLabel={
+              isDiscountActive && !!discount.discountPercentage
+                ? `-${discount.discountPercentage}%`
+                : ''
+            }
+            withLabel={withStoreLabel}
+          />
+        )}
         <Stack alignItems="flex-end">
           <Grid2 container gap={1} alignItems="center">
             <TypographyV2

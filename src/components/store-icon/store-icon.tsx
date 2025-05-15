@@ -1,4 +1,5 @@
-import { Grid2 } from '@mui/material'
+import { Grid2, Icon } from '@mui/material'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { storeColor } from '@/configs/store-color.config'
@@ -6,6 +7,7 @@ import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
 import { getStoreDisplayName } from '@/helpers/getStoreDisplayName'
 
+import PsPlus from '../../../public/assets/svg/PlayStationPlus.png'
 import NintendoIcon from '../../../public/assets/svg/nintendo.svg'
 import PsIcon from '../../../public/assets/svg/ps.svg'
 import XboxIcon from '../../../public/assets/svg/xbox-store.svg'
@@ -20,27 +22,22 @@ type TProps = {
 
 const STORE_TO_ICON_MAP = {
   [EStore.PSN]: {
+    type: 'svg',
     icon: PsIcon,
     color: storeColor[EStore.PSN],
   },
-  // TODO: Set PS PLUS icon
   [EPriceHistoryMetaType.PS_PLUS]: {
-    icon: () => (
-      <TypographyV2
-        fontSize="text-l"
-        customColor={storeColor[EPriceHistoryMetaType.PS_PLUS]}
-        fontWeight="bold"
-      >
-        PS+
-      </TypographyV2>
-    ),
-    color: 'transparent',
+    type: 'img',
+    icon: PsPlus,
+    color: storeColor[EPriceHistoryMetaType.PS_PLUS],
   },
   [EStore.NINTENDO]: {
+    type: 'svg',
     icon: NintendoIcon,
     color: storeColor[EStore.NINTENDO],
   },
   [EStore.XBOX]: {
+    type: 'svg',
     icon: XboxIcon,
     color: storeColor[EStore.XBOX],
   },
@@ -57,7 +54,12 @@ const StoreIcon = ({ store, link, withLabel = true, customLabel }: TProps) => {
       gap={1}
       sx={{ background: config.color, padding: '4px 8px', borderRadius: 1.5 }}
     >
-      <config.icon width={24} height={24} fill="#fff" />
+      {/* <config.icon width={24} height={24} fill="#fff" /> */}
+      {config.type === 'svg' ? (
+        <config.icon width={24} height={24} fill="#fff" />
+      ) : (
+        <Image src={config.icon} alt="" width={24} height={24} />
+      )}
       {withLabel && store !== EPriceHistoryMetaType.PS_PLUS && (
         <TypographyV2
           fontWeight="bold"
