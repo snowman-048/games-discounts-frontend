@@ -4,7 +4,10 @@
     "active_discounts": "Текущие скидки",
     "explore": "Обзор",
     "regions": "Регионы",
-    "contact_us": "Связаться с нами"
+    "contact_us": "Связаться с нами",
+    "all_games": "Все игры",
+    "hottest_deals": "Самые горячие предложения",
+    "newest_releases": "Новейшие релизы"
   },
   "LanguagesSwitch": {
     "language": "Язык"
@@ -210,5 +213,17 @@
     "confirm_email": "Подтвердите свой адрес электронной почты",
     "confirmation_code": "Код подтверждения"
   },
-  "confirm": "Подтверждать"
+  "confirm": "Подтверждать",
+  "ActiveDiscounts": {
+    "title": "Действующие скидки"
+  },
+  "AllGames": {
+    "title": "Все игры"
+  },
+  "HottestDeals": {
+    "title": "Самые горячие предложения"
+  },
+  "NewestReleases": {
+    "title": "Новейшие релизы"
+  }
 }

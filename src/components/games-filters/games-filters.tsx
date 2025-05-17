@@ -24,10 +24,11 @@ import { Select } from '../ui/select'
 import { Tooltip } from '../ui/tooltip'
 
 type TProps = {
-  usedForAllGames?: boolean
+  redirectPath: EAppRoute
+  noDiscountsFilters?: boolean
 }
 
-const GamesFilters = ({ usedForAllGames = false }: TProps) => {
+const GamesFilters = ({ redirectPath, noDiscountsFilters = false }: TProps) => {
   const t = useTranslations()
 
   const stores = useAppStore((state) => state.stores)
@@ -42,13 +43,13 @@ const GamesFilters = ({ usedForAllGames = false }: TProps) => {
   const defaultStores = useMemo(() => stores.map((item) => `${item.id}`), [stores])
   const onlySelectedStores = searchParams.onlySelectedStores === 'true'
 
-  const sortOptions = usedForAllGames ? allGamesSortingOptions : gamesSortingOptions
+  const sortOptions = noDiscountsFilters ? allGamesSortingOptions : gamesSortingOptions
   const sort = searchParams.sort || sortOptions[0]
 
   const handleFilterChange = (newFilter: Record<string, any>) => {
     // TODO: Handle different routes if needed
     navigate({
-      path: `/${usedForAllGames ? EAppRoute.ALL_GAMES : EAppRoute.ACTIVE_DISCOUNTS}/1`,
+      path: `/${redirectPath}/1`,
       query: newFilter,
       replace: true,
     })

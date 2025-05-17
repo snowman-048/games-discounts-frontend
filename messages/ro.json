@@ -4,7 +4,10 @@
     "active_discounts": "Reduceri Active",
     "explore": "Explorează",
     "regions": "Regiuni",
-    "contact_us": "Contactează-ne"
+    "contact_us": "Contactează-ne",
+    "all_games": "Toate jocurile",
+    "hottest_deals": "Cele mai tari oferte",
+    "newest_releases": "Cele mai noi lansări"
   },
   "LanguagesSwitch": {
     "language": "Limbă"
@@ -210,5 +213,17 @@
     "confirm_email": "Confirmați-vă adresa de e-mail",
     "confirmation_code": "Cod de confirmare"
   },
-  "confirm": "Confirma"
+  "confirm": "Confirma",
+  "ActiveDiscounts": {
+    "title": "Reduceri active"
+  },
+  "AllGames": {
+    "title": "Toate jocurile"
+  },
+  "HottestDeals": {
+    "title": "Cele mai tari oferte"
+  },
+  "NewestReleases": {
+    "title": "Cele mai noi lansări"
+  }
 }

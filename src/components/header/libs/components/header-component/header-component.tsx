@@ -5,12 +5,10 @@ import { useMemo, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import MenuIcon from '@mui/icons-material/Menu'
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
 import WindowIcon from '@mui/icons-material/Window'
 import { Box, Button, Divider, Drawer, Grid2, IconButton, Stack } from '@mui/material'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { Logo } from '@/components/logo'
@@ -24,7 +22,9 @@ import { EAppRoute } from '@/enums/app-route.enum'
 import { useAppStore } from '@/store/app.store'
 import { TGameSearchParams } from '@/types/game-search.types'
 
+import { ExploreButton } from './libs/components/explore-button'
 import { GamesSearch } from './libs/components/games-search'
+import { NavButton } from './libs/components/nav-button'
 import { ProfileButton } from './libs/components/profile-button'
 
 type TProps = {
@@ -52,12 +52,6 @@ const HeaderComponent = ({ query }: TProps) => {
         icon: WhatshotIcon,
         customIsActive: (pathname: string) => pathname.includes(EAppRoute.ACTIVE_DISCOUNTS),
       },
-      {
-        label: t('explore'),
-        path: `/${EAppRoute.ALL_GAMES}/1`,
-        icon: SportsEsportsIcon,
-        customIsActive: (pathname: string) => pathname.includes(EAppRoute.ALL_GAMES),
-      },
     ],
     [t],
   )
@@ -83,25 +77,18 @@ const HeaderComponent = ({ query }: TProps) => {
         >
           <GamesSearch query={query} closeDrawer={() => setIsDrawerOpen(false)} />
           {links.map((link) => (
-            <Link href={link.path} key={link.label} onClick={() => setIsDrawerOpen(false)}>
-              <TypographyV2
-                fontWeight="bold"
-                color={
-                  (link.customIsActive ? link.customIsActive(pathname) : isLinkActive(link.path))
-                    ? 'brand'
-                    : 'primary'
-                }
-                alignItems="center"
-                display="flex"
-                gap={0.5}
-                whiteSpace="nowrap"
-                fontSize="text-l"
-              >
-                {link.icon && <link.icon />}
-                {link.label}
-              </TypographyV2>
-            </Link>
+            <NavButton
+              key={link.label}
+              link={link.path}
+              label={link.label}
+              icon={link.icon}
+              isActive={
+                link.customIsActive ? link.customIsActive(pathname) : isLinkActive(link.path)
+              }
+              onClick={() => setIsDrawerOpen(false)}
+            />
           ))}
+          <ExploreButton onNavigate={() => setIsDrawerOpen(false)} />
         </Grid2>
         <Button
           onClick={(e) => setLocationAnchorEl(e.currentTarget)}

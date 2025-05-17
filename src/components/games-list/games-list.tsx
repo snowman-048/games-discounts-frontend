@@ -18,9 +18,10 @@ type TProps = {
   paginationPath: string
   query: TGameSearchParams
   allGames?: boolean
+  bestDiscounts?: boolean
 }
 
-const GamesList = async ({ page, paginationPath, query, allGames }: TProps) => {
+const GamesList = async ({ page, paginationPath, query, allGames, bestDiscounts }: TProps) => {
   const t = await getTranslations()
 
   let games: TGame[] = []
@@ -28,7 +29,7 @@ const GamesList = async ({ page, paginationPath, query, allGames }: TProps) => {
 
   try {
     const { data } = await getGamesList(
-      prepareGamesSearchQuery({ ...query, page, limit: LIST_SIZE, allGames }),
+      prepareGamesSearchQuery({ ...query, page, limit: LIST_SIZE, allGames, bestDiscounts }),
     )
 
     games = data[0]
