@@ -8,7 +8,12 @@ const robots = (): MetadataRoute.Robots => {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [`/${EAppRoute.PROFILE}`, `/${EAppRoute.WISHLISTS}`],
+        disallow: [
+          `/${EAppRoute.PROFILE}`,
+          `/${EAppRoute.WISHLISTS}`,
+          `/${EAppRoute.PENDING_CONNECTIONS}`,
+          `/${EAppRoute.RESOLVE_PENDING_CONNECTION}`,
+        ],
       },
     ],
     sitemap: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/sitemap.xml`,
