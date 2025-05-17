@@ -4,7 +4,10 @@
     "active_discounts": "Aktuelle Rabatte",
     "explore": "Entdecken",
     "regions": "Regionen",
-    "contact_us": "Kontaktieren Sie uns"
+    "contact_us": "Kontaktieren Sie uns",
+    "all_games": "Alle Spiele",
+    "hottest_deals": "Heißeste Angebote",
+    "newest_releases": "Neuste Veröffentlichungen"
   },
   "LanguagesSwitch": {
     "language": "Sprache"
@@ -210,5 +213,17 @@
     "confirm_email": "Bestätigen Sie Ihre E-Mail",
     "confirmation_code": "Bestätigungscode"
   },
-  "confirm": "Bestätigen"
+  "confirm": "Bestätigen",
+  "ActiveDiscounts": {
+    "title": "Aktive Rabatte"
+  },
+  "AllGames": {
+    "title": "Alle Spiele"
+  },
+  "HottestDeals": {
+    "title": "Heißeste Angebote"
+  },
+  "NewestReleases": {
+    "title": "Neuste Veröffentlichungen"
+  }
 }

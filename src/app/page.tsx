@@ -1,11 +1,15 @@
+import FiberNewIcon from '@mui/icons-material/FiberNew'
+import TrendingDownIcon from '@mui/icons-material/TrendingDown'
 import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
 import { GamesCarouselWithData } from '@/components/games-carousel-with-data'
+import { HomePageLink } from '@/components/home-page-link'
 import { LogoGlitch } from '@/components/logo-glitch'
 import { StoreIcon } from '@/components/store-icon'
 import { Container } from '@/components/ui/container'
+import { EAppRoute } from '@/enums/app-route.enum'
 import { EGameSorting } from '@/enums/game-sorting.enum'
 import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
@@ -36,7 +40,7 @@ export const metadata: Metadata = {
 
 const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams> }) => {
   const query = await searchParams
-  const t = await getTranslations('Home')
+  const t = await getTranslations()
 
   return (
     <>
@@ -45,12 +49,34 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
 
         <Stack width="100%" marginTop={3} gap={{ xs: 2, sm: 5 }}>
           <GamesCarouselWithData
-            title={t('biggest_discounts')}
+            title={t('Home.biggest_discounts')}
             query={{
               ...query,
               sort: EGameSorting.BIGGEST_DISCOUNTS,
             }}
           />
+
+          <Grid2
+            container
+            alignItems="center"
+            justifyContent="center"
+            gap={{ xs: 2, md: 5 }}
+            flexDirection={{
+              xs: 'column',
+              md: 'row',
+            }}
+          >
+            <HomePageLink
+              href={`/${EAppRoute.HOTTEST_DEALS}/1`}
+              title={t('HottestDeals.title')}
+              icon={TrendingDownIcon}
+            />
+            <HomePageLink
+              href={`/${EAppRoute.NEWEST_RELEASES}/1`}
+              title={t('NewestReleases.title')}
+              icon={FiberNewIcon}
+            />
+          </Grid2>
 
           <GamesCarouselWithData
             title={
@@ -63,7 +89,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
                 gap={1}
                 textTransform="none"
               >
-                {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.PSN} /> })}
+                {t.rich('Home.newest_discounts', { store: () => <StoreIcon store={EStore.PSN} /> })}
               </Grid2>
             }
             query={{
@@ -85,7 +111,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
                 gap={1}
                 textTransform="none"
               >
-                {t.rich('newest_discounts', {
+                {t.rich('Home.newest_discounts', {
                   store: () => <StoreIcon store={EStore.NINTENDO} />,
                 })}
               </Grid2>
@@ -109,7 +135,9 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
                 gap={1}
                 textTransform="none"
               >
-                {t.rich('newest_discounts', { store: () => <StoreIcon store={EStore.XBOX} /> })}
+                {t.rich('Home.newest_discounts', {
+                  store: () => <StoreIcon store={EStore.XBOX} />,
+                })}
               </Grid2>
             }
             query={{

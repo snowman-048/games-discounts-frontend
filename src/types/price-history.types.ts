@@ -13,6 +13,7 @@ type TPriceHistory = {
   discountStarts: string
   discountedPrice: number
   discountPercentage: number
+  isLowestPrice: boolean
   store: TStore
   region: TRegion
   meta?: {

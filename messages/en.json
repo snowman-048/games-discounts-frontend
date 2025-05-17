@@ -4,7 +4,10 @@
     "active_discounts": "Active Discounts",
     "explore": "Explore",
     "regions": "Regions",
-    "contact_us": "Contact us"
+    "contact_us": "Contact us",
+    "all_games": "All Games",
+    "hottest_deals": "Hottest Deals",
+    "newest_releases": "Newest Releases"
   },
   "LanguagesSwitch": {
     "language": "Language"
@@ -210,5 +213,17 @@
     "confirm_email": "Confirm your email",
     "confirmation_code": "Confirmation code"
   },
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "ActiveDiscounts": {
+    "title": "Active Discounts"
+  },
+  "AllGames": {
+    "title": "All Games"
+  },
+  "HottestDeals": {
+    "title": "Hottest Deals"
+  },
+  "NewestReleases": {
+    "title": "Newest Releases"
+  }
 }

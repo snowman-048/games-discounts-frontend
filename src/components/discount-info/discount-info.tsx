@@ -1,4 +1,5 @@
 import { Grid2, Stack } from '@mui/material'
+import cn from 'classnames'
 import moment from 'moment'
 
 import { TPriceHistory } from '@/types/price-history.types'
@@ -6,6 +7,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 import { StoreIcon } from '../store-icon'
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
+import styles from './styles.module.scss'
 
 type TProps = {
   discount: TPriceHistory
@@ -24,7 +26,9 @@ const DiscountInfo = ({ discount, withStoreLabel, t }: TProps) => {
         borderRadius: 10,
         background: 'rgba(0, 0, 0, 0.3)',
         boxShadow: 'none',
+        overflow: 'visible',
       }}
+      className={cn({ [styles.hottestDeal]: discount.isLowestPrice })}
     >
       <Grid2
         container
