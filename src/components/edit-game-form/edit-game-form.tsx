@@ -17,11 +17,8 @@ import {
   Grid2,
   ImageList,
   ImageListItem,
-  InputLabel,
-  MenuItem,
   Radio,
   RadioGroup,
-  Select,
   Stack,
   TextField,
   Typography,
@@ -39,7 +36,9 @@ import { TGame } from '@/types/game.types'
 import { GameImgWithBuy } from '../game-img-with-buy'
 import { StoreIcon } from '../store-icon'
 import { InfoItem } from '../ui/info-item'
+import { Input } from '../ui/input'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
+import { Select } from '../ui/select'
 import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
@@ -152,14 +151,14 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
                       {value}
                     </TypographyV2>
 
-                    <TextField
+                    <Input
                       variant="outlined"
                       label="Title"
                       fullWidth
                       value={value}
                       onChange={onChange}
                       sx={isChanged('title')}
-                      error={!!errors.title?.message}
+                      error={errors.title?.message}
                       {...rest}
                     />
                   </Stack>
@@ -208,14 +207,14 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
               control={control}
               render={({ field: { value, onChange, ...rest } }) => (
                 <Stack>
-                  <TextField
+                  <Input
                     variant="outlined"
                     label="Caver URL"
                     fullWidth
                     value={value}
                     onChange={onChange}
                     sx={isChanged('coverImageUrl')}
-                    error={!!errors.coverImageUrl?.message}
+                    error={errors.coverImageUrl?.message}
                     {...rest}
                   />
                   {game.origin && (
@@ -258,21 +257,17 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
               render={({ field: { ref, value, onChange, ...rest } }) => (
                 <FormControl fullWidth>
                   <Stack>
-                    <InputLabel>Type</InputLabel>
                     <Select
                       label="Type"
-                      onChange={onChange}
-                      error={!!errors.type?.message}
-                      {...rest}
                       value={value}
+                      options={Object.values(EGameType).map((item) => ({
+                        title: item,
+                        value: item,
+                      }))}
+                      onChange={onChange}
                       sx={isChanged('type')}
-                    >
-                      {Object.values(EGameType).map((item) => (
-                        <MenuItem key={item} value={item}>
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
+                      {...rest}
+                    />
                     {game.origin && (
                       <RadioGroup value={value} onChange={onChange}>
                         <Stack flexDirection="row" alignItems="center">
@@ -294,11 +289,11 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
               name="publisher"
               control={control}
               render={({ field }) => (
-                <TextField
+                <Input
                   variant="outlined"
                   label="Publisher"
                   fullWidth
-                  error={!!errors.publisher?.message}
+                  error={errors.publisher?.message}
                   {...field}
                 />
               )}
@@ -408,12 +403,12 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
               name="description"
               control={control}
               render={({ field }) => (
-                <TextField
+                <Input
                   variant="outlined"
                   label="Description"
                   multiline
                   fullWidth
-                  error={!!errors.description?.message}
+                  error={errors.description?.message}
                   {...field}
                 />
               )}

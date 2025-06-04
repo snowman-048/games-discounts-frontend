@@ -13,6 +13,7 @@ enum EAppRoute {
   // Admin
   PENDING_CONNECTIONS = 'pending-connections',
   RESOLVE_PENDING_CONNECTION = 'resolve-pending-connection',
+  EDIT_GAME = 'game/edit',
 }
 
 export { EAppRoute }
