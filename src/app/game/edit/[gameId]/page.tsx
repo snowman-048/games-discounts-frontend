@@ -11,6 +11,7 @@ import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
 import { Loader } from '@/components/ui/loader'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { ERole } from '@/enums/roles.enum'
 import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { TGame } from '@/types/game.types'
@@ -81,4 +82,4 @@ const EditGamePage = () => {
   )
 }
 
-export default withRouteProtection(EditGamePage)
+export default withRouteProtection(EditGamePage, [ERole.ADMIN])
