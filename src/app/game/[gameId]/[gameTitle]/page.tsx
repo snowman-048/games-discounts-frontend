@@ -8,6 +8,7 @@ import { getTranslations } from 'next-intl/server'
 
 import { getGameById, getGameFamilyByGameId } from '@/api/games'
 import { AddToWishlistButton } from '@/components/add-to-wishlist-button'
+import { EditGameButton } from '@/components/edit-game-button'
 import { GameCard } from '@/components/game-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
 import { GameJsonLd } from '@/components/game-json-ld'
@@ -191,7 +192,10 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
                 {game.title}
               </TypographyV2>
 
-              <AddToWishlistButton game={game} withText />
+              <Grid2 container alignItems="center" gap={1}>
+                <AddToWishlistButton game={game} withText />
+                <EditGameButton gameId={+gameId} />
+              </Grid2>
             </Stack>
             <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
