@@ -2,6 +2,7 @@ import { storeColor } from '@/configs/store-color.config'
 import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
 
+import SwitchIcon2 from '../../../public/assets/svg/nintendo-switch-2.svg'
 import SwitchIcon from '../../../public/assets/svg/nintendo-switch.svg'
 import Ps4Icon from '../../../public/assets/svg/ps4.svg'
 import Ps5Icon from '../../../public/assets/svg/ps5.svg'
@@ -48,6 +49,13 @@ const PLATFORM_TO_ICON_MAP: Record<EPlatform, TMap> = {
   [EPlatform.NINTENDO_SWITCH]: {
     icon: SwitchIcon,
     color: storeColor[EStore.XBOX],
+  },
+  [EPlatform.NINTENDO_SWITCH_2]: {
+    icon: SwitchIcon2,
+    color: storeColor[EStore.XBOX],
+    props: {
+      width: 47,
+    },
   },
 }
 
