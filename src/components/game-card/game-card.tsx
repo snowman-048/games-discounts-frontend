@@ -12,6 +12,7 @@ import { TPriceHistory } from '@/types/price-history.types'
 
 import { AddToWishlistButton } from '../add-to-wishlist-button'
 import { DiscountInfo } from '../discount-info'
+import { PlatformIcon } from '../platform-icon'
 import { RemoveFromWishlistButton } from '../remove-from-wishlist-button'
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
@@ -138,6 +139,14 @@ const GameCard = ({
               >
                 {t(`game_type.${game.type}`).toUpperCase()}
               </TypographyV2>
+              {!!game.platforms?.length && (
+                <Grid2 className={styles.platforms}>
+                  {' '}
+                  {game.platforms.map((item) => (
+                    <PlatformIcon platform={item} key={item} />
+                  ))}
+                </Grid2>
+              )}
             </Grid2>
             <Grid2
               flex={1}
