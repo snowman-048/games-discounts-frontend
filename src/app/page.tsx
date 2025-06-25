@@ -11,6 +11,7 @@ import { StoreIcon } from '@/components/store-icon'
 import { Container } from '@/components/ui/container'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { EGameSorting } from '@/enums/game-sorting.enum'
+import { EGameType } from '@/enums/game-type.enum'
 import { EPlatform } from '@/enums/platform.enum'
 import { EStore } from '@/enums/store.enum'
 import { getLocalesMeta } from '@/helpers/getLocalesMeta'
@@ -38,6 +39,10 @@ export const metadata: Metadata = {
   },
 }
 
+const commonQuery: TGameSearchParams = {
+  types: [EGameType.GAME, EGameType.BUNDLE, EGameType.PREMIUM_EDITION],
+}
+
 const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams> }) => {
   const query = await searchParams
   const t = await getTranslations()
@@ -51,6 +56,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
           <GamesCarouselWithData
             title={t('Home.biggest_discounts')}
             query={{
+              ...commonQuery,
               ...query,
               sort: EGameSorting.BIGGEST_DISCOUNTS,
             }}
@@ -93,6 +99,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
               </Grid2>
             }
             query={{
+              ...commonQuery,
               ...query,
               sort: EGameSorting.NEWEST,
               'storeIds[]': ['1'], // Refactor
@@ -117,6 +124,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
               </Grid2>
             }
             query={{
+              ...commonQuery,
               ...query,
               sort: EGameSorting.NEWEST,
               'storeIds[]': ['2'], // Refactor
@@ -141,6 +149,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
               </Grid2>
             }
             query={{
+              ...commonQuery,
               ...query,
               sort: EGameSorting.NEWEST,
               'storeIds[]': ['3'], // Refactor
