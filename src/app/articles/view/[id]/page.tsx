@@ -150,7 +150,9 @@ const ViewArticle = async ({ params }: TProps) => {
         <Stack width="100%" gap={2}>
           <SectionTitle title="Summary" />
 
-          <TypographyV2>{article.articleDescription}</TypographyV2>
+          <TypographyV2 adaptiveFontSize={{ xs: 'text-base', md: 'text-l' }}>
+            {article.articleDescription}
+          </TypographyV2>
         </Stack>
       </GlassCard>
 
