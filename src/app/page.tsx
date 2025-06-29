@@ -54,21 +54,21 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
         <LogoGlitch />
 
         <Stack width="100%" marginTop={3} gap={{ xs: 2, sm: 5 }}>
-          <HomePageLink
-            href={`/${EAppRoute.ARTICLES}/1`}
-            title={t('ProfileControls.articles')}
-            icon={NewspaperIcon}
-            sx={{
-              width: '100%',
-            }}
-          />
-
           <GamesCarouselWithData
             title={t('Home.biggest_discounts')}
             query={{
               ...commonQuery,
               ...query,
               sort: EGameSorting.BIGGEST_DISCOUNTS,
+            }}
+          />
+
+          <HomePageLink
+            href={`/${EAppRoute.ARTICLES}/1`}
+            title={t('ProfileControls.articles')}
+            icon={NewspaperIcon}
+            sx={{
+              width: '100%',
             }}
           />
 

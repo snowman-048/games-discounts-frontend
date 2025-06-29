@@ -114,8 +114,6 @@ const ViewArticle = async ({ params }: TProps) => {
     return <NoDataLabel />
   }
 
-  console.log('article', article)
-
   return (
     <Container gap={{ xs: 3, md: 5 }} paddingBottom={5}>
       <GlassCard padding={2}>
@@ -146,6 +144,14 @@ const ViewArticle = async ({ params }: TProps) => {
             {article.title}
           </TypographyV2>
         </Grid2>
+      </GlassCard>
+
+      <GlassCard padding={2} width="100%">
+        <Stack width="100%" gap={2}>
+          <SectionTitle title="Summary" />
+
+          <TypographyV2>{article.articleDescription}</TypographyV2>
+        </Stack>
       </GlassCard>
 
       <GlassCard padding={2} width="100%">
