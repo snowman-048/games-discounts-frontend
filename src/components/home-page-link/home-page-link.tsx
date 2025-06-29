@@ -1,20 +1,20 @@
-import { Box } from '@mui/material'
+import { Box, BoxProps } from '@mui/material'
 import Link from 'next/link'
 
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
 
-type TProps = {
+type TProps = BoxProps & {
   href: string
   title: string
   icon?: any
 }
 
-const HomePageLink = ({ href, title, icon: Icon }: TProps) => {
+const HomePageLink = ({ href, title, icon: Icon, ...rest }: TProps) => {
   return (
-    <Box width={{ xs: '100%', sm: 'fit-content' }}>
+    <Box width={{ xs: '100%', sm: 'fit-content' }} {...rest}>
       <Link href={href}>
-        <GlassCard px={3} py={2}>
+        <GlassCard px={3} py={2} width="100%" justifyContent="center">
           <TypographyV2
             fontSize="text-2xl"
             fontWeight="bold"

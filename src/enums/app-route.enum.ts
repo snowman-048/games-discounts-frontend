@@ -14,6 +14,10 @@ enum EAppRoute {
   PENDING_CONNECTIONS = 'pending-connections',
   RESOLVE_PENDING_CONNECTION = 'resolve-pending-connection',
   EDIT_GAME = 'game/edit',
+  ARTICLES = 'articles',
+  VIEW_ARTICLE = 'articles/view',
+  MANAGE_ARTICLES = 'articles/manage',
+  EDIT_ARTICLE = 'articles/manage/edit',
 }
 
 export { EAppRoute }

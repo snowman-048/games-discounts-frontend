@@ -7,7 +7,8 @@
     "contact_us": "Связаться с нами",
     "all_games": "Все игры",
     "hottest_deals": "Самые горячие предложения",
-    "newest_releases": "Новейшие релизы"
+    "newest_releases": "Новейшие релизы",
+    "articles": "Статьи"
   },
   "LanguagesSwitch": {
     "language": "Язык"
@@ -68,7 +69,8 @@
   },
   "ProfileControls": {
     "wishlists": "Список желаний",
-    "profile": "Профиль"
+    "profile": "Профиль",
+    "articles": "Статьи"
   },
   "Wishlists": {
     "my_wishlists": "Мои списки желаний ({total}/{max})",
@@ -225,5 +227,8 @@
   },
   "NewestReleases": {
     "title": "Новейшие релизы"
+  },
+  "articles": {
+    "title": "Статьи"
   }
 }

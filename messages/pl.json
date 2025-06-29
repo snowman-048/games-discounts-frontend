@@ -7,7 +7,8 @@
     "contact_us": "Skontaktuj się z nami",
     "all_games": "Wszystkie gry",
     "hottest_deals": "Najgorętsze okazje",
-    "newest_releases": "Najnowsze wydania"
+    "newest_releases": "Najnowsze wydania",
+    "articles": "Artykuły"
   },
   "LanguagesSwitch": {
     "language": "Język"
@@ -68,7 +69,8 @@
   },
   "ProfileControls": {
     "wishlists": "Listy życzeń",
-    "profile": "Profil"
+    "profile": "Profil",
+    "articles": "Artykuły"
   },
   "Wishlists": {
     "my_wishlists": "Moje Listy Życzeń ({total}/{max})",
@@ -225,5 +227,8 @@
   },
   "NewestReleases": {
     "title": "Najnowsze wydania"
+  },
+  "articles": {
+    "title": "Artykuły"
   }
 }

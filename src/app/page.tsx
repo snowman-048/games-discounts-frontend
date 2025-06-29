@@ -1,4 +1,5 @@
 import FiberNewIcon from '@mui/icons-material/FiberNew'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 import TrendingDownIcon from '@mui/icons-material/TrendingDown'
 import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
@@ -53,6 +54,15 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
         <LogoGlitch />
 
         <Stack width="100%" marginTop={3} gap={{ xs: 2, sm: 5 }}>
+          <HomePageLink
+            href={`/${EAppRoute.ARTICLES}/1`}
+            title={t('ProfileControls.articles')}
+            icon={NewspaperIcon}
+            sx={{
+              width: '100%',
+            }}
+          />
+
           <GamesCarouselWithData
             title={t('Home.biggest_discounts')}
             query={{
