@@ -21,8 +21,9 @@ type TArticle = {
     text: string
     hashtags: string[]
   }
-  published?: boolean
   createdAt: string
+  published?: boolean
+  publishedAt?: string
 }
 
 export type { TArticle }

@@ -61,7 +61,7 @@ const ArticleItem = ({ article, redirectToEdit }: TProps) => {
 
             <Grid2 container alignItems="center" justifyContent="space-between" my={-1}>
               <TypographyV2 color="disabled" fontSize="text-s">
-                {moment(article.createdAt).format(DEFAULT_DATE_FORMATTING)}
+                {moment(article.publishedAt || article.createdAt).format(DEFAULT_DATE_FORMATTING)}
               </TypographyV2>
               <OpenInNewIcon />
             </Grid2>

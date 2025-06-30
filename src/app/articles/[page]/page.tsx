@@ -21,7 +21,7 @@ type TProps = {
   params: Promise<{ page: string }>
 }
 
-const LIST_SIZE = 10
+const LIST_SIZE = 9
 
 export const generateMetadata = async ({ params }: TProps): Promise<Metadata> => {
   const { page } = await params
