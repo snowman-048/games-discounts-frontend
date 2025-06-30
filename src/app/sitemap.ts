@@ -42,6 +42,9 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     {
       url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${EAppRoute.ABOUT_US}`,
     },
+    {
+      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${EAppRoute.ARTICLES}/1`,
+    },
     ...gamesSitemap,
   ]
 }

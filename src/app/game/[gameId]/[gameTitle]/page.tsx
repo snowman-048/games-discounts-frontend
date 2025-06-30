@@ -71,6 +71,9 @@ export const generateMetadata = async ({ params, searchParams }: TProps): Promis
 
   const metadata: Metadata = {
     title: game.title || '',
+    other: {
+      robots: 'index, follow',
+    },
     icons: {
       other: getLocalesMeta(`${EAppRoute.GAME}/${gameId}/${getTitleForLink(game.title)}`),
     },

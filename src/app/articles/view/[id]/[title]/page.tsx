@@ -34,6 +34,9 @@ export const generateMetadata = async ({ params }: TProps): Promise<Metadata> =>
 
   const metadata: Metadata = {
     title: article.title || '',
+    other: {
+      robots: 'index, follow',
+    },
     icons: {
       other: getLocalesMeta(`${EAppRoute.VIEW_ARTICLE}/${article}`),
     },

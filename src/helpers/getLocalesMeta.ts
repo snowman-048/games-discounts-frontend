@@ -25,6 +25,11 @@ const getLocalesMeta = (path: string) => {
       href: url,
       url,
     },
+    {
+      rel: 'canonical',
+      href: url,
+      url,
+    },
   ]
 }
 

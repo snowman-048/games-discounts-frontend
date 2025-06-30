@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     ...Object.values(EStore),
     ...Object.values(EPlatform),
   ],
+  other: {
+    robots: 'index, follow',
+  },
   icons: {
     other: getLocalesMeta(''),
   },
