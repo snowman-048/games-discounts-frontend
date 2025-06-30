@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { DEFAULT_DATE_FORMATTING } from '@/configs/date.config'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { TArticle } from '@/types/articles.type'
 
 import { GlassCard } from '../ui/cards/glass-card'
@@ -17,12 +18,12 @@ type TProps = {
 }
 
 const ArticleItem = ({ article, redirectToEdit }: TProps) => {
+  const href = redirectToEdit
+    ? `/${EAppRoute.EDIT_ARTICLE}/${article.id}`
+    : `/${EAppRoute.VIEW_ARTICLE}/${article.id}/${getTitleForLink(article.title)}`
   return (
     <GlassCard>
-      <Link
-        href={`/${redirectToEdit ? EAppRoute.EDIT_ARTICLE : EAppRoute.VIEW_ARTICLE}/${article.id}`}
-        style={{ maxWidth: '100%', width: '100%' }}
-      >
+      <Link href={href} style={{ maxWidth: '100%', width: '100%' }}>
         <Stack maxWidth="100%" overflow="hidden">
           {!!article.articleDesktopImage && (
             <>

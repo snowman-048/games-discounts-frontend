@@ -3,7 +3,7 @@ import { Box, Grid2, List, ListItem, Stack } from '@mui/material'
 import Link from 'next/link'
 
 import { EAppRoute } from '@/enums/app-route.enum'
-import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
+import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { TArticle } from '@/types/articles.type'
 
 import { ArticleAdminControls } from '../article-admin-controls'
@@ -96,7 +96,7 @@ const BestDealsArticle = ({ article }: TProps) => {
           {article.website.games
             .sort((a, b) => b.persent - a.persent)
             .map((item, index) => {
-              const gameLink = `/${EAppRoute.GAME}/${item.id}/${getGameTitleForLink(item.title)}`
+              const gameLink = `/${EAppRoute.GAME}/${item.id}/${getTitleForLink(item.title)}`
               const normalDirection = index % 2 === 0
               return (
                 <Grid2

@@ -6,6 +6,7 @@ import { Button, Grid2 } from '@mui/material'
 
 import { publishArticle, unpublishArticle } from '@/api/articles'
 import { EAppRoute } from '@/enums/app-route.enum'
+import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useIsAdmin } from '@/hooks/useIsAdmin'
 import { TArticle } from '@/types/articles.type'
@@ -30,8 +31,13 @@ const ArticleAdminControls = ({ article }: TProps) => {
     try {
       setPublishLoading(true)
       const { data } = await (article.published ? unpublishArticle : publishArticle)(article.id)
+
+      const path = article.published
+        ? `/${EAppRoute.EDIT_ARTICLE}/${data.id}`
+        : `/${EAppRoute.VIEW_ARTICLE}/${data.id}/${getTitleForLink(data.title)}`
+
       navigate({
-        path: `/${article.published ? EAppRoute.EDIT_ARTICLE : EAppRoute.VIEW_ARTICLE}/${data.id}`,
+        path,
         replace: true,
       })
     } catch (err) {

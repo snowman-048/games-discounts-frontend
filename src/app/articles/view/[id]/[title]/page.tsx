@@ -15,8 +15,13 @@ type TProps = {
 }
 
 const getArticleCached = cache(async (id: number) => {
-  const { data } = await getArticleById(id)
-  return data
+  try {
+    const { data } = await getArticleById(id)
+    return data
+  } catch (err) {
+    console.log('Article fetch error', (err as any).message)
+    return null
+  }
 })
 
 export const generateMetadata = async ({ params }: TProps): Promise<Metadata> => {
@@ -82,7 +87,7 @@ const ViewArticle = async ({ params }: TProps) => {
   try {
     article = await getArticleCached(+id)
   } catch (err) {
-    console.log('Games fetch error', (err as any).message)
+    console.log('Article fetch error', (err as any).message)
   }
 
   if (!article) {

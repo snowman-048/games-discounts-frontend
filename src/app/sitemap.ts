@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 
 import { getGamesDataForSitemap } from '@/api/games'
 import { EAppRoute } from '@/enums/app-route.enum'
-import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
+import { getTitleForLink } from '@/helpers/getTitleForLink'
 
 const SYNC_ONCE_IN_HOURS = 168
 
@@ -17,7 +17,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     // const lastModified = new Date()
 
     gamesSitemap = data.map(({ id, title, updatedAt }) => ({
-      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${EAppRoute.GAME}/${id}/${getGameTitleForLink(title)}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${EAppRoute.GAME}/${id}/${getTitleForLink(title)}`,
       lastModified: new Date(updatedAt),
     }))
     lastSynced = moment().valueOf()
