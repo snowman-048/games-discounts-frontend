@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 import { TPendingConnection } from '@/api/pending-connections/types'
 import { EAppRoute } from '@/enums/app-route.enum'
-import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
 import { getStoreColor } from '@/helpers/getStoreColor'
+import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { TGame } from '@/types/game.types'
 import { TPriceHistory } from '@/types/price-history.types'
 
@@ -82,8 +82,8 @@ const GameCard = ({
       <Link
         href={
           isPendingConnection
-            ? `/${EAppRoute.RESOLVE_PENDING_CONNECTION}/${rawGame.id}/${getGameTitleForLink(rawGame.gameData.title)}`
-            : `/${EAppRoute.GAME}/${game.id}/${getGameTitleForLink(game.title)}`
+            ? `/${EAppRoute.RESOLVE_PENDING_CONNECTION}/${rawGame.id}/${getTitleForLink(rawGame.gameData.title)}`
+            : `/${EAppRoute.GAME}/${game.id}/${getTitleForLink(game.title)}`
         }
         style={
           {

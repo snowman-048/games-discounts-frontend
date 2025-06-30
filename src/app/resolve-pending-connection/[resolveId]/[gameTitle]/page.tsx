@@ -19,7 +19,7 @@ import { Tabs } from '@/components/tabs/tabs'
 import { Modal } from '@/components/ui/modal'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { ERole } from '@/enums/roles.enum'
-import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
+import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { getUniqueValuesFromArrays } from '@/helpers/getUniqueValues'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useAppStore } from '@/store/app.store'
@@ -158,7 +158,7 @@ const ResolvePendingConnection = () => {
       CustomToast('success', 'The connection was successfully resolved')
 
       navigate({
-        path: `/${EAppRoute.GAME}/${data}/${getGameTitleForLink(mergedGameData.title)}`,
+        path: `/${EAppRoute.GAME}/${data}/${getTitleForLink(mergedGameData.title)}`,
         replace: true,
       })
     } catch (err) {
@@ -194,7 +194,7 @@ const ResolvePendingConnection = () => {
               key={connection.id}
               onClick={() =>
                 navigate({
-                  path: `/${EAppRoute.GAME}/${connection.game.id}/${getGameTitleForLink(connection.game.title)}`,
+                  path: `/${EAppRoute.GAME}/${connection.game.id}/${getTitleForLink(connection.game.title)}`,
                   replace: true,
                 })
               }
@@ -237,7 +237,7 @@ const ResolvePendingConnection = () => {
                   key={connection.id}
                   onClick={() =>
                     navigate({
-                      path: `/${EAppRoute.GAME}/${connection.game.id}/${getGameTitleForLink(connection.game.title)}`,
+                      path: `/${EAppRoute.GAME}/${connection.game.id}/${getTitleForLink(connection.game.title)}`,
                       replace: true,
                     })
                   }

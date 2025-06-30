@@ -7,7 +7,8 @@
     "contact_us": "Contactează-ne",
     "all_games": "Toate jocurile",
     "hottest_deals": "Cele mai tari oferte",
-    "newest_releases": "Cele mai noi lansări"
+    "newest_releases": "Cele mai noi lansări",
+    "articles": "Articole"
   },
   "LanguagesSwitch": {
     "language": "Limbă"
@@ -68,7 +69,8 @@
   },
   "ProfileControls": {
     "wishlists": "Liste de dorințe",
-    "profile": "Profil"
+    "profile": "Profil",
+    "articles": "Articole"
   },
   "Wishlists": {
     "my_wishlists": "Listele mele de dorințe ({total}/{max})",
@@ -225,5 +227,8 @@
   },
   "NewestReleases": {
     "title": "Cele mai noi lansări"
+  },
+  "articles": {
+    "title": "Articole"
   }
 }

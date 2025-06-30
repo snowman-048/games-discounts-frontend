@@ -26,6 +26,9 @@ type TFontColor =
   | 'red'
   | 'red-hover'
   | 'green'
+  | 'green-dark'
+  | 'orange'
+  | 'fire'
   // Brand color (might be customizable by user in the future)
   | 'brand'
   // Dark colors
