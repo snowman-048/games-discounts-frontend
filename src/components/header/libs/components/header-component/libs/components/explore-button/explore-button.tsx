@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 
 import ExploreIcon from '@mui/icons-material/Explore'
 import FiberNewIcon from '@mui/icons-material/FiberNew'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import TrendingDownIcon from '@mui/icons-material/TrendingDown'
 import { Stack } from '@mui/material'
@@ -45,6 +46,12 @@ const ExploreButton = ({ onNavigate }: TProps) => {
         path: `/${EAppRoute.ALL_GAMES}/1`,
         icon: SportsEsportsIcon,
         customIsActive: (pathname: string) => pathname.includes(EAppRoute.ALL_GAMES),
+      },
+      {
+        label: t('articles'),
+        path: `/${EAppRoute.ARTICLES}/1`,
+        icon: NewspaperIcon,
+        customIsActive: (pathname: string) => pathname.includes(EAppRoute.ARTICLES),
       },
     ],
     [t],

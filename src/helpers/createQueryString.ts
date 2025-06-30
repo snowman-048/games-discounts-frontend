@@ -1,6 +1,8 @@
 type TValue = string | number | boolean | undefined | null
 
-const createQueryString = (obj: Record<string, TValue | TValue[]>) => {
+const createQueryString = (obj?: Record<string, TValue | TValue[]>) => {
+  if (!obj) return ''
+
   const keyValuePaires: string[] = []
 
   Object.keys(obj).forEach((key: string) => {

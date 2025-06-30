@@ -35,6 +35,9 @@ export const generateMetadata = async ({ params }: TProps): Promise<Metadata> =>
       ...Object.values(EStore),
       ...Object.values(EPlatform),
     ],
+    other: {
+      robots: 'index, follow',
+    },
     icons: {
       other: getLocalesMeta(`${EAppRoute.ALL_GAMES}/${page}`),
     },

@@ -1,4 +1,5 @@
 import FiberNewIcon from '@mui/icons-material/FiberNew'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 import TrendingDownIcon from '@mui/icons-material/TrendingDown'
 import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
@@ -34,6 +35,9 @@ export const metadata: Metadata = {
     ...Object.values(EStore),
     ...Object.values(EPlatform),
   ],
+  other: {
+    robots: 'index, follow',
+  },
   icons: {
     other: getLocalesMeta(''),
   },
@@ -59,6 +63,15 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
               ...commonQuery,
               ...query,
               sort: EGameSorting.BIGGEST_DISCOUNTS,
+            }}
+          />
+
+          <HomePageLink
+            href={`/${EAppRoute.ARTICLES}/1`}
+            title={t('ProfileControls.articles')}
+            icon={NewspaperIcon}
+            sx={{
+              width: '100%',
             }}
           />
 

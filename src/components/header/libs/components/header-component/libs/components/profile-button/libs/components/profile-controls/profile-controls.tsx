@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import BookmarksIcon from '@mui/icons-material/Bookmarks'
+import NewspaperIcon from '@mui/icons-material/Newspaper'
 import PersonIcon from '@mui/icons-material/Person'
 import { Stack } from '@mui/material'
 import { useTranslations } from 'next-intl'
@@ -43,6 +44,12 @@ const ProfileControls = ({ closePopup }: TProps) => {
         label: 'Pending Connections',
         path: `/${EAppRoute.PENDING_CONNECTIONS}/1`,
         icon: AccessTimeIcon,
+        adminOnly: true,
+      },
+      {
+        label: 'Manage Articles',
+        path: `/${EAppRoute.MANAGE_ARTICLES}/1`,
+        icon: NewspaperIcon,
         adminOnly: true,
       },
     ],

@@ -1,7 +1,7 @@
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { ToastContainer } from 'react-toastify'
 
-import { Box, ThemeProvider } from '@mui/material'
+import { Grid2, ThemeProvider } from '@mui/material'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Analytics } from '@vercel/analytics/next'
@@ -103,9 +103,9 @@ const RootLayout = async ({
 
                   <div id="root">
                     <Header />
-                    <Box flex={1} width="100%" height="100%">
+                    <Grid2 container flex={1} width="100%" height="100%">
                       {children}
-                    </Box>
+                    </Grid2>
                     <Footer />
                   </div>
                 </GoogleOAuthProvider>

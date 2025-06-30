@@ -12,7 +12,7 @@ import { Container } from '@/components/ui/container'
 import { Loader } from '@/components/ui/loader'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { ERole } from '@/enums/roles.enum'
-import { getGameTitleForLink } from '@/helpers/getGameTitleForLink'
+import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { TGame } from '@/types/game.types'
 import { CustomToast } from '@/utils/custom-toast'
@@ -47,7 +47,7 @@ const EditGamePage = () => {
       setIsUpdating(true)
       await updateGame(+gameId, data)
       navigate({
-        path: `/${EAppRoute.GAME}/${gameId}/${getGameTitleForLink(data.title)}`,
+        path: `/${EAppRoute.GAME}/${gameId}/${getTitleForLink(data.title)}`,
         replace: true,
       })
     } catch (err) {
