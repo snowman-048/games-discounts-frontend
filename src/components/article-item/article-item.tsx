@@ -49,14 +49,16 @@ const ArticleItem = ({ article, redirectToEdit }: TProps) => {
               {article.articleDescription}
             </TypographyV2>
 
-            <TypographyV2
-              color="inactive"
-              fontSize="text-s"
-              maxWidth="100%"
-              sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-            >
-              {article.social.hashtags.join(' ')}
-            </TypographyV2>
+            {!!article.social.hashtags && (
+              <TypographyV2
+                color="inactive"
+                fontSize="text-s"
+                maxWidth="100%"
+                sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+              >
+                {article.social.hashtags.join(' ')}
+              </TypographyV2>
+            )}
 
             <ArticleItemDivider />
 
