@@ -1,3 +1,6 @@
+import FacebookIcon from '@mui/icons-material/Facebook'
+import InstagramIcon from '@mui/icons-material/Instagram'
+import TelegramIcon from '@mui/icons-material/Telegram'
 import { Box, Divider, Grid2, Stack } from '@mui/material'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
@@ -11,6 +14,21 @@ import { Logo } from '../logo'
 import { GlassCard } from '../ui/cards/glass-card'
 import { Container } from '../ui/container'
 import { TypographyV2 } from '../ui/typography'
+
+const socials = [
+  {
+    icon: InstagramIcon,
+    href: 'https://www.instagram.com/gamepricepulse',
+  },
+  {
+    icon: FacebookIcon,
+    href: 'https://www.facebook.com/profile.php?id=61575187432640',
+  },
+  {
+    icon: TelegramIcon,
+    href: 'https://t.me/GamePricePulse',
+  },
+]
 
 const Footer = async () => {
   const t = await getTranslations('Footer')
@@ -40,22 +58,34 @@ const Footer = async () => {
 
           <LanguagesSwitch />
 
-          <Stack>
-            <TypographyV2 color="inactive">{t('useful_links')}:</TypographyV2>
+          <Stack gap={1}>
+            <TypographyV2 fontWeight="semibold" color="inactive">
+              {t('useful_links')}:
+            </TypographyV2>
             <Link href={`/${EAppRoute.ABOUT_US}`}>
-              <TypographyV2>{t('about_us')}</TypographyV2>
+              <TypographyV2 fontWeight="semibold">{t('about_us')}</TypographyV2>
             </Link>
           </Stack>
 
           <Stack>
-            <TypographyV2 color="inactive">{t('contacts')}:</TypographyV2>
+            <TypographyV2 fontWeight="semibold" color="inactive">
+              {t('contacts')}:
+            </TypographyV2>
 
-            <Stack direction={'row'} spacing={1} alignItems={'center'}>
+            <Stack gap={1}>
               <address>
                 <a href={`mailto:${OUR_EMAIL}`}>
                   <TypographyV2>{OUR_EMAIL}</TypographyV2>
                 </a>
               </address>
+
+              <Grid2 container alignItems="center" gap={1}>
+                {socials.map((item) => (
+                  <a href={item.href} key={item.href} target="_blank">
+                    <item.icon />
+                  </a>
+                ))}
+              </Grid2>
             </Stack>
           </Stack>
         </Grid2>
