@@ -148,6 +148,12 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
     return <NoDataLabel />
   }
 
+  game.priceHistory = game.priceHistory.map((item) => ({
+    ...item,
+    discountedPrice: item.discountedPrice || item.initialPrice,
+    discountPercentage: item.discountPercentage || 0,
+  }))
+
   const storeLinks = createGameLinks(game)
 
   const gameImages = Object.keys(
