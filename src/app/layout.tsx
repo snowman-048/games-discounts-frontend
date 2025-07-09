@@ -63,6 +63,7 @@ const RootLayout = async ({
     <html lang={locale}>
       <link rel="manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/icon512_maskable.png" />
+      <link rel="icon" href="https://game-price-pulse.com/favicon.ico?v=2" />
 
       <Script
         async
