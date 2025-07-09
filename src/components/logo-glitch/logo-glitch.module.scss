@@ -1,14 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 100%;
+  max-width: 600px;
+  margin: -60px 0 -225px;
+}
+
 .text {
   animation: glitch 5s steps(100) infinite;
   color: white;
-  font-size: 6em;
+  font-size: 7.5rem !important;
   text-align: center;
   text-transform: uppercase;
+  position: relative;
+  line-height: 0.9 !important;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    bottom: -50px;
+    left: -50px;
+    z-index: -1;
+    background: linear-gradient(
+      0deg,
+      rgba(17, 17, 17, 0) 0%,
+      rgba(17, 17, 17, 1) 50%,
+      rgba(17, 17, 17, 0) 100%
+    );
+  }
 }
 
-@media (min-width: 480px) {
+@media screen and (max-width: 1125px) {
   .text {
-    font-size: 9em;
+    font-size: 6rem !important;
+  }
+
+  .logo {
+    margin-top: -50px;
+    margin-bottom: -200px;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .text {
+    font-size: 5rem !important;
+  }
+
+  .logo {
+    margin-bottom: -190px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .text {
+    font-size: 4rem !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .logo {
+    margin-bottom: -175px;
   }
 }
 
