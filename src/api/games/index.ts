@@ -24,10 +24,21 @@ const getGameFamilyByGameId = async ({
 }: TGetGameParams & { id: number; storeIds?: string[] }) =>
   api.get<TFamilyKey[] | null>(`${BASE_URL}/${id}/family${createQueryString(params)}`)
 
-const getGamesDataForSitemap = () =>
-  api.get<{ id: number; title: string; updatedAt: string }[]>(`${BASE_URL}/sitemap`)
+const getGamesCount = () => api.get<number>(`${BASE_URL}/count`)
+
+const getGamesDataForSitemap = (query: TPagination) =>
+  api.get<{ id: number; title: string; updatedAt: string }[]>(
+    `${BASE_URL}/sitemap${createQueryString(query)}`,
+  )
 
 const updateGame = async (id: number, data: TGame) =>
   api.put<TGame | null>(`${BASE_URL}/${id}`, data)
 
-export { getGamesList, getGameById, getGamesDataForSitemap, getGameFamilyByGameId, updateGame }
+export {
+  getGamesList,
+  getGameById,
+  getGamesDataForSitemap,
+  getGamesCount,
+  getGameFamilyByGameId,
+  updateGame,
+}
