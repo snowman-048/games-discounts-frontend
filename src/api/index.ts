@@ -14,6 +14,10 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
+    if (config.url?.includes('sitemap')) {
+      return config
+    }
+
     const tokens = await getTokens()
 
     if (!config.headers.Authorization && tokens?.accessToken) {

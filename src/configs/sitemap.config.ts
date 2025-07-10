@@ -1,0 +1,3 @@
+const SITEMAP_CHUNK_SIZE = 10000
+
+export { SITEMAP_CHUNK_SIZE }
