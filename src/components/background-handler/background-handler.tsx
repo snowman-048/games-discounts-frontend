@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
 
 import { getRandomIntInRange } from '@/helpers/getRandomIntInRange'
-import { onElementHeightChange } from '@/helpers/onElementHeightChange'
 import { takeChance } from '@/helpers/takeChance'
+import { useObserveElementSize } from '@/hooks/useObserveElementSize'
 
 import styles from './styles.module.scss'
 
@@ -23,6 +23,17 @@ const BackgroundHandler = () => {
 
   const container = useRef<HTMLDivElement>(null)
   const patternChunk = useRef('')
+
+  const { height: containerHeight } = useObserveElementSize(container)
+
+  const handlePatternSet = (containerHeight: number) => {
+    if (!container.current) {
+      return
+    }
+
+    const chunksCount = Math.ceil(containerHeight / DEFAULT_CHUNK_HEIGHT)
+    container.current.innerHTML = Array(chunksCount).fill(patternChunk.current).join('')
+  }
 
   useEffect(() => {
     if (!container.current) {
@@ -52,20 +63,13 @@ const BackgroundHandler = () => {
 
     patternChunk.current = text
 
-    const handlePatternSet = (containerHeight: number) => {
-      if (!container.current) {
-        return
-      }
-
-      const chunksCount = Math.ceil(containerHeight / DEFAULT_CHUNK_HEIGHT)
-      container.current.innerHTML = Array(chunksCount).fill(patternChunk.current).join('')
-    }
-
     handlePatternSet(container.current.scrollHeight || 0)
     setIsInit(true)
-
-    onElementHeightChange(container.current, handlePatternSet)
   }, [])
+
+  useEffect(() => {
+    handlePatternSet(containerHeight)
+  }, [containerHeight])
 
   return (
     <div

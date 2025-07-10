@@ -7,7 +7,7 @@ import cn from 'classnames'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
-import { useComponentWidth } from '@/hooks/useComponentWidth'
+import { useObserveElementSize } from '@/hooks/useObserveElementSize'
 
 import { NextButton, PrevButton, usePrevNextButtons } from './libs/utils/arrows'
 import { SelectedSnapDisplay, useSelectedSnapDisplay } from './libs/utils/snap-display'
@@ -30,13 +30,13 @@ const Carousel = ({
   const [loading, setLoading] = useState(true)
 
   const section = useRef<HTMLDivElement>(null)
-  const width = useComponentWidth({ ref: section })
+  const { width } = useObserveElementSize(section)
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 700)
+    setLoading(false)
   }, [section.current])
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(rest)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ dragThreshold: 0, inViewThreshold: 0, ...rest })
 
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
     usePrevNextButtons(emblaApi)

@@ -1,6 +1,6 @@
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 
-import { Box, Grid2, Stack } from '@mui/material'
+import { Grid2, Stack } from '@mui/material'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
@@ -31,9 +31,7 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
         <SectionTitle title={title} />
 
         <Grid2 mx={-2} marginTop={-2}>
-          <Suspense fallback={<Box height="460px" />}>
-            <GamesCarousel query={query} />
-          </Suspense>
+          <GamesCarousel query={query} />
         </Grid2>
 
         <Link

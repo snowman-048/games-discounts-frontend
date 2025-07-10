@@ -160,7 +160,14 @@ const GameCard = ({
               </TypographyV2>
               <Stack gap={1} marginTop={1} width="100%">
                 {game.priceHistory?.map((item) => (
-                  <DiscountInfo discount={item} withStoreLabel={true} key={item.id} t={t} />
+                  <DiscountInfo
+                    discount={item}
+                    withStoreLabel={true}
+                    key={
+                      item.id || `${item.discountStarts}${item.discountEnds}${item.discountedPrice}`
+                    }
+                    t={t}
+                  />
                 ))}
               </Stack>
             </Grid2>
