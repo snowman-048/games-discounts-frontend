@@ -11,7 +11,7 @@ const createXmlUrlFromEntry = (entry: TSitemapEntry) => `
     <loc>${entry.url}</loc>
     <lastmod>${entry.lastModified?.toISOString()}</lastmod>
     <changefreq>${entry.changeFrequency}</changefreq>
-    <priority>>${entry.priority}</priority>
+    <priority>${entry.priority}</priority>
   </url>
 `
 
