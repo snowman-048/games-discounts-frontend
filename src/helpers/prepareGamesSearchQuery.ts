@@ -4,11 +4,11 @@ import { getGamesSorting } from './getGamesSorting'
 
 const prepareGamesSearchQuery = (query: TGameSearchParams & { page?: number; limit?: number }) => {
   const { sort, allGames, ...rest } = query
+  const storeKey = query['storeIds[]'] ? 'storeIds[]' : 'storeIds'
   const storeIds =
-    query['storeIds[]'] &&
-    (Array.isArray(query['storeIds[]']) ? query['storeIds[]'] : [query['storeIds[]']])
+    query[storeKey] && (Array.isArray(query[storeKey]) ? query[storeKey] : [query[storeKey]])
 
-  delete rest['storeIds[]']
+  delete rest[storeKey]
 
   return {
     ...getGamesSorting(sort, allGames),

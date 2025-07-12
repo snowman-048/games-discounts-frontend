@@ -14,8 +14,10 @@ enum EAppRoute {
   PROFILE = 'profile',
   // Admin
   PENDING_CONNECTIONS = 'pending-connections',
-  RESOLVE_PENDING_CONNECTION = 'resolve-pending-connection',
+  RESOLVE_PENDING_CONNECTION = 'pending-connections/resolve',
   EDIT_GAME = 'game/edit',
+  SEARCH_GAME_TO_MERGE = 'game/merge/search',
+  MERGE_GAME = 'game/merge',
   MANAGE_ARTICLES = 'articles/manage',
   EDIT_ARTICLE = 'articles/manage/edit',
 }

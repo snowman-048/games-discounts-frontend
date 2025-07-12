@@ -20,7 +20,7 @@ import { Modal } from '@/components/ui/modal'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { ERole } from '@/enums/roles.enum'
 import { getTitleForLink } from '@/helpers/getTitleForLink'
-import { getUniqueValuesFromArrays } from '@/helpers/getUniqueValues'
+import { prepareGamesDataForMerge } from '@/helpers/prepareGamesDataForMerge'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useAppStore } from '@/store/app.store'
 import { TGame } from '@/types/game.types'
@@ -85,49 +85,10 @@ const ResolvePendingConnection = () => {
       return
     }
 
-    const genres = getUniqueValuesFromArrays([pendingConnection.gameData.genres, game.genres])
-    const platforms = getUniqueValuesFromArrays([
-      pendingConnection.gameData.platforms,
-      game.platforms,
-    ])
-    const textLanguages = getUniqueValuesFromArrays([
-      pendingConnection.gameData.textLanguages,
-      game.textLanguages,
-    ])
-    const voiceLanguages = getUniqueValuesFromArrays([
-      pendingConnection.gameData.voiceLanguages,
-      game.voiceLanguages,
-    ])
-    const images = getUniqueValuesFromArrays([pendingConnection.gameData.images, game.images])
-
-    const mergedPlainData = [
-      'description',
-      'releaseDate',
-      'publisher',
-      'coverImageUrl',
-      'type',
-      'title',
-      'psnId',
-      'nintendoId',
-      'xboxId',
-      'familyKey',
-    ].reduce((acc, key) => {
-      acc[key] = pendingConnection.gameData[key as keyof TGame] || game[key as keyof TGame] || null
-      return acc
-    }, {} as any)
-
-    const newGameData = {
-      ...mergedPlainData,
-      id: game.id,
-      genres,
-      platforms,
-      textLanguages,
-      voiceLanguages,
-      images,
-    }
+    const newGameData = prepareGamesDataForMerge([pendingConnection.gameData, game])
 
     setResolveMode('merge')
-    setMergedGameData({ ...newGameData, origin: game })
+    setMergedGameData({ ...newGameData, id: game.id, origin: game })
     setFormModalOpen(true)
   }
 

@@ -26,6 +26,13 @@
   background-color: rgba(0, 255, 0, 0.1);
 }
 
+.deleteImageBtn {
+  position: absolute !important;
+  width: fit-content !important;
+  top: 0;
+  right: 0;
+}
+
 @media screen and (max-width: 899px) {
   .mainImgWrapper {
     position: relative;

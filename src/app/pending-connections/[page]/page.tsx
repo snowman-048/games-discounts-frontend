@@ -65,7 +65,14 @@ const PendingConnections = () => {
       >
         <GameCardsList>
           {pendingConnections?.map((game) => (
-            <GameCard game={game} key={game.id} switchToListOnMobile t={t} />
+            <GameCard
+              game={game.gameData}
+              key={game.id}
+              switchToListOnMobile
+              t={t}
+              customHref={`/${EAppRoute.RESOLVE_PENDING_CONNECTION}/${game.id}`}
+              hideControls
+            />
           ))}
         </GameCardsList>
 

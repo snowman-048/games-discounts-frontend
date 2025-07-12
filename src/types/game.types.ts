@@ -38,6 +38,10 @@ type TGame = {
   priceHistory: TPriceHistory[]
   gameStore?: TGameStore[]
   descriptionStatus?: EDescriptionStatus
+  releaseDates?: {
+    releaseDate: string
+    storeId: number
+  }[]
 }
 
 export type { TGame, TGameStore }

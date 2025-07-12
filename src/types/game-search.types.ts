@@ -12,6 +12,7 @@ type TGameSearchParams = TGetGameParams & {
   types?: EGameType[]
   sort?: EGameSorting
   'storeIds[]'?: string[]
+  storeIds?: string[]
   onlySelectedStores?: boolean
   dateFrom?: string
   dateTo?: string
