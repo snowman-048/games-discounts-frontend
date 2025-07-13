@@ -1,9 +1,8 @@
-import { Box, Grid2, Stack } from '@mui/material'
+import { Box, BoxProps, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { TPendingConnection } from '@/api/pending-connections/types'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { getStoreColor } from '@/helpers/getStoreColor'
 import { getTitleForLink } from '@/helpers/getTitleForLink'
@@ -18,22 +17,23 @@ import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
-type TProps = {
-  game: TGame | TPendingConnection
+type TProps = BoxProps & {
+  game: TGame
   t: any
   noShadow?: boolean
   variant?: 'card' | 'list-item'
   onClick?: () => void
-  className?: string
   switchToListOnMobile?: boolean
   wishlistButtonType?: 'add' | 'remove'
   removeFromWishlistId?: number
   onRemoveGameFromWishlist?: (gameId: number) => void
   noBlur?: boolean
+  customHref?: string
+  hideControls?: boolean
 }
 
 const GameCard = ({
-  game: rawGame,
+  game,
   t,
   variant = 'card',
   onClick,
@@ -44,9 +44,10 @@ const GameCard = ({
   removeFromWishlistId,
   onRemoveGameFromWishlist,
   noBlur,
+  customHref,
+  hideControls = false,
+  ...rest
 }: TProps) => {
-  const isPendingConnection = 'gameData' in rawGame
-  const game = isPendingConnection ? rawGame.gameData : rawGame
   const getColor = (item: TPriceHistory) => {
     return getStoreColor(item.meta?.type || item.store.name)
   }
@@ -58,8 +59,8 @@ const GameCard = ({
     : 'none'
 
   return (
-    <Box className={cn(styles.wrapper, className)}>
-      {!isPendingConnection && (
+    <Box className={cn(styles.wrapper, className)} {...rest}>
+      {!hideControls && (
         <Box
           sx={{
             position: 'absolute',
@@ -80,11 +81,7 @@ const GameCard = ({
         </Box>
       )}
       <Link
-        href={
-          isPendingConnection
-            ? `/${EAppRoute.RESOLVE_PENDING_CONNECTION}/${rawGame.id}/${getTitleForLink(rawGame.gameData.title)}`
-            : `/${EAppRoute.GAME}/${game.id}/${getTitleForLink(game.title)}`
-        }
+        href={customHref || `/${EAppRoute.GAME}/${game.id}/${getTitleForLink(game.title)}`}
         style={
           {
             '--glow': glow,

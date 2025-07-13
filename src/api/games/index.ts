@@ -34,6 +34,13 @@ const getGamesDataForSitemap = (query: TPagination) =>
 const updateGame = async (id: number, data: TGame) =>
   api.put<TGame | null>(`${BASE_URL}/${id}`, data)
 
+const mergeGames = async (
+  data: Partial<TGame> & {
+    firstGameId: string
+    secondGameId: string
+  },
+) => api.post<number>(`${BASE_URL}/merge`, data)
+
 export {
   getGamesList,
   getGameById,
@@ -41,4 +48,5 @@ export {
   getGamesCount,
   getGameFamilyByGameId,
   updateGame,
+  mergeGames,
 }

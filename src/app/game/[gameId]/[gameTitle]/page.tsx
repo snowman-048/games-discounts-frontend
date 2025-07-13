@@ -13,6 +13,7 @@ import { GameCard } from '@/components/game-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
 import { GameJsonLd } from '@/components/game-json-ld'
 import { ImagesCarousel } from '@/components/images-carousel'
+import { MergeGameButton } from '@/components/merge-game-button'
 import { NoDataLabel } from '@/components/no-data-label'
 import { PlatformIcon } from '@/components/platform-icon'
 import { PriceInfoItem } from '@/components/price-info-item'
@@ -205,7 +206,8 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
 
               <Grid2 container alignItems="center" gap={1}>
                 <AddToWishlistButton game={game} withText />
-                <EditGameButton gameId={+gameId} />
+                <EditGameButton gameId={gameId} />
+                <MergeGameButton gameId={gameId} title={game.title} />
               </Grid2>
             </Stack>
             <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
