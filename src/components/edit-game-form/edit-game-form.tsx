@@ -3,11 +3,8 @@ import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import DeleteIcon from '@mui/icons-material/Delete'
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Autocomplete,
   Button,
   Chip,
@@ -15,13 +12,13 @@ import {
   FormControl,
   FormControlLabel,
   Grid2,
+  IconButton,
   ImageList,
   ImageListItem,
   Radio,
   RadioGroup,
   Stack,
   TextField,
-  Typography,
 } from '@mui/material'
 import { useTranslations } from 'use-intl'
 import * as yup from 'yup'
@@ -35,7 +32,6 @@ import { TGame } from '@/types/game.types'
 
 import { GameImgWithBuy } from '../game-img-with-buy'
 import { StoreIcon } from '../store-icon'
-import { InfoItem } from '../ui/info-item'
 import { Input } from '../ui/input'
 import { MultipleAutocomplete } from '../ui/multiple-autocomplete'
 import { Select } from '../ui/select'
@@ -43,10 +39,16 @@ import { TypographyV2 } from '../ui/typography'
 import styles from './styles.module.scss'
 
 type TProps = {
-  game: TGame & { origin?: TGame }
+  game: TGame & { origin?: TGame; new?: TGame }
   readonly?: boolean
   customSubmit?: (data: TGame) => void
 }
+
+const storeIdConfigs = [
+  { platform: EStore.PSN, name: 'psnId' },
+  { platform: EStore.NINTENDO, name: 'nintendoId' },
+  { platform: EStore.XBOX, name: 'xboxId' },
+] as { platform: EStore; name: 'psnId' | 'nintendoId' | 'xboxId' }[]
 
 const replacedColor = 'rgba(0, 255, 0, 0.1)'
 const originalColor = 'rgba(255, 0, 0, 0.1)'
@@ -63,6 +65,7 @@ const validationSchema = yup.object({
   genres: yup.array(yup.string()),
   textLanguages: yup.array(yup.string()),
   voiceLanguages: yup.array(yup.string()),
+  images: yup.array(yup.string()),
 })
 
 const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
@@ -97,6 +100,9 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
 
   const submit = async (data: TGame & { origin?: TGame }) => {
     const { origin, ...formattedData } = { ...data, title: data.title.trim() }
+    storeIdConfigs.forEach(({ name }) => {
+      ;(formattedData as any)[name] = formattedData[name] || null
+    })
     if (customSubmit) {
       customSubmit(formattedData)
       return
@@ -180,27 +186,58 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
 
             <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
-            <InfoItem
-              label="Stores ID"
-              data={
-                <Grid2 container gap={3}>
-                  {[
-                    { platform: EStore.PSN, id: game.psnId },
-                    { platform: EStore.NINTENDO, id: game.nintendoId },
-                    { platform: EStore.XBOX, id: game.xboxId },
-                  ]
-                    .filter((entry) => entry.id)
-                    .map(({ platform, id }) => {
-                      return (
-                        <Grid2 container alignItems="center" gap={1} key={id}>
+            <Stack gap={2}>
+              {storeIdConfigs.map(({ platform, name }) => {
+                return (
+                  <Controller
+                    name={name as any}
+                    control={control}
+                    render={({ field: { ref, value, onChange, ...rest } }) => (
+                      <Stack>
+                        <Grid2 container alignItems="center" gap={1}>
                           <StoreIcon store={platform} withLabel={false} />
-                          <strong>{id}</strong>
+                          <Input
+                            variant="outlined"
+                            value={value || ''}
+                            onChange={(value) => {
+                              onChange(value || null)
+                            }}
+                            label={name}
+                            fullWidth
+                            sx={isChanged(name)}
+                            error={errors[name]?.message}
+                            {...rest}
+                          />
                         </Grid2>
-                      )
-                    })}
-                </Grid2>
-              }
-            />
+                        {game.origin && (
+                          <RadioGroup
+                            value={value || ''}
+                            onChange={(e) => {
+                              onChange(e.target.value || null)
+                            }}
+                          >
+                            <Stack flexDirection="row" alignItems="center">
+                              <FormControlLabel
+                                value={(game.new ? game.new?.[name] : game[name]) || ''}
+                                control={<Radio />}
+                                label="New"
+                              />
+                              <FormControlLabel
+                                value={game.origin?.[name] || ''}
+                                control={<Radio />}
+                                label="Original"
+                              />
+                            </Stack>
+                          </RadioGroup>
+                        )}
+                      </Stack>
+                    )}
+                  />
+                )
+              })}
+            </Stack>
+
+            <Divider sx={{ margin: '16px 0', background: 'var(--color-brand)' }} />
 
             <Controller
               name="coverImageUrl"
@@ -209,7 +246,7 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
                 <Stack>
                   <Input
                     variant="outlined"
-                    label="Caver URL"
+                    label="Cover URL"
                     fullWidth
                     value={value}
                     onChange={onChange}
@@ -414,22 +451,34 @@ const EditGameForm: FC<TProps> = ({ game, readonly = false, customSubmit }) => {
               )}
             />
 
-            {!!game.images?.length && (
-              <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                  <Typography component="span">Images</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <ImageList cols={3} gap={8}>
-                    {game.images.map((item) => (
-                      <ImageListItem key={item}>
-                        <img srcSet={item} src={item} loading="lazy" />
-                      </ImageListItem>
-                    ))}
-                  </ImageList>
-                </AccordionDetails>
-              </Accordion>
-            )}
+            <Controller
+              name="images"
+              control={control}
+              render={({ field: { value, onChange } }) =>
+                !!value?.length ? (
+                  <Stack gap={1}>
+                    <TypographyV2 fontSize="heading-s" fontWeight="medium">
+                      Images
+                    </TypographyV2>
+                    <ImageList cols={3} gap={8}>
+                      {value.map((item) => (
+                        <ImageListItem key={item} sx={{ position: 'relative' }}>
+                          <img srcSet={item} src={item} loading="lazy" />
+                          <IconButton
+                            className={styles.deleteImageBtn}
+                            onClick={() => onChange(value.filter((i) => i !== item))}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </ImageListItem>
+                      ))}
+                    </ImageList>
+                  </Stack>
+                ) : (
+                  <></>
+                )
+              }
+            />
 
             {!readonly && (
               <Button variant="contained" type="submit" disabled={loading}>

@@ -9,7 +9,6 @@ import { Button, Checkbox, FormControlLabel, Grid2, IconButton, Stack } from '@m
 import { useTranslations } from 'next-intl'
 
 import { allGamesSortingOptions, gamesSortingOptions } from '@/configs/games-sorting-options.config'
-import { EAppRoute } from '@/enums/app-route.enum'
 import { EFilter } from '@/enums/filter.enum'
 import { EGameType } from '@/enums/game-type.enum'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
@@ -24,7 +23,7 @@ import { Select } from '../ui/select'
 import { Tooltip } from '../ui/tooltip'
 
 type TProps = {
-  redirectPath: EAppRoute
+  redirectPath: string
   noDiscountsFilters?: boolean
 }
 

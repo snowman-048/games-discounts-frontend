@@ -5,8 +5,7 @@ import { Button } from '@mui/material'
 import Link from 'next/link'
 
 import { EAppRoute } from '@/enums/app-route.enum'
-import { ERole } from '@/enums/roles.enum'
-import { useUserStore } from '@/store/user.store'
+import { useIsAdmin } from '@/hooks/useIsAdmin'
 
 import { TypographyV2 } from '../ui/typography'
 
@@ -15,9 +14,9 @@ type TProps = {
 }
 
 const EditGameButton = ({ gameId }: TProps) => {
-  const user = useUserStore((state) => state.user)
+  const isAdmin = useIsAdmin()
 
-  if (!user || user.role !== ERole.ADMIN) {
+  if (!isAdmin) {
     return <></>
   }
 

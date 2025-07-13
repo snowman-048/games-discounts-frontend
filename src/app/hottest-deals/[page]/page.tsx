@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
 import { GamesFilters } from '@/components/games-filters'
-import { GamesList } from '@/components/games-list'
+import { GamesListWithServerFetch } from '@/components/games-list-with-server-fetch'
 import { Container } from '@/components/ui/container'
 import { Loader } from '@/components/ui/loader'
 import { TypographyV2 } from '@/components/ui/typography'
@@ -71,7 +71,7 @@ const HottestDeals = async ({ params, searchParams }: TProps) => {
         <GamesFilters redirectPath={EAppRoute.HOTTEST_DEALS} />
       </Stack>
       <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<Loader />}>
-        <GamesList
+        <GamesListWithServerFetch
           query={query}
           page={+page}
           paginationPath={EAppRoute.HOTTEST_DEALS}
