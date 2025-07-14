@@ -23,6 +23,8 @@ const unpublishArticle = (id: number) => api.put<TArticle>(`${BASE_URL}/${id}/un
 
 const generateArticle = (store: EStore) => api.post<TArticle>(`${BASE_URL}/generate`, { store })
 
+const deleteArticle = (id: number) => api.delete(`${BASE_URL}/${id}`)
+
 export {
   getArticles,
   getUnpublishedArticles,
@@ -30,4 +32,5 @@ export {
   publishArticle,
   unpublishArticle,
   generateArticle,
+  deleteArticle,
 }

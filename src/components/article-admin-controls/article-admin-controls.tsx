@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 
-import { Button, Grid2 } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { Button, Grid2, IconButton } from '@mui/material'
 
-import { publishArticle, unpublishArticle } from '@/api/articles'
+import { deleteArticle, publishArticle, unpublishArticle } from '@/api/articles'
 import { EAppRoute } from '@/enums/app-route.enum'
 import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { useCustomNavigate } from '@/hooks/useCustomNavigate'
@@ -20,6 +21,7 @@ const ArticleAdminControls = ({ article }: TProps) => {
   const isAdmin = useIsAdmin()
 
   const [publishLoading, setPublishLoading] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
 
   const navigate = useCustomNavigate()
 
@@ -46,11 +48,39 @@ const ArticleAdminControls = ({ article }: TProps) => {
     }
   }
 
+  const onDeleteArticle = async () => {
+    try {
+      setDeleteLoading(true)
+      await deleteArticle(article.id)
+
+      navigate({
+        path: `/${EAppRoute.ARTICLES}/1`,
+        replace: true,
+      })
+    } catch (err) {
+      CustomToast('error', `Error deletting article: ${(err as any).message}`)
+      setDeleteLoading(false)
+    }
+  }
+
   return (
-    <Grid2 container alignItems="center" justifyContent="flex-end" width="100%">
-      <Button variant="contained" loading={publishLoading} onClick={togglePublishArticle}>
+    <Grid2 container alignItems="center" justifyContent="flex-end" width="100%" gap={2}>
+      <Button
+        variant="contained"
+        loading={publishLoading}
+        onClick={togglePublishArticle}
+        disabled={deleteLoading}
+      >
         {article.published ? 'Hide' : 'Publish'} Article
       </Button>
+      <IconButton
+        loading={deleteLoading}
+        onClick={onDeleteArticle}
+        color="error"
+        disabled={publishLoading}
+      >
+        <DeleteIcon />
+      </IconButton>
     </Grid2>
   )
 }
