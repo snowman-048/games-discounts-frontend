@@ -1,6 +1,6 @@
 import { CSSProperties, useEffect, useRef } from 'react'
 
-type TProps = Record<string, string> & {
+type TProps = Record<string, any> & {
   adSlot: string
   adFormat: string
   style?: CSSProperties
