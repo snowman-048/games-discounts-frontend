@@ -26,7 +26,7 @@ const AdUnit = ({ style, adSlot, adFormat, ...rest }: TProps) => {
       <ins
         ref={ref}
         className="adsbygoogle"
-        style={{ display: 'block', ...style }}
+        style={{ display: 'block' }}
         data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
