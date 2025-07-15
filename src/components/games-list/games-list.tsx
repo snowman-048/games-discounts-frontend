@@ -2,12 +2,11 @@ import { Grid2 } from '@mui/material'
 
 import { TGame } from '@/types/game.types'
 
+import { GameCardAd } from '../ads/game-card-ad'
 import { GameCard } from '../game-card'
 import { GameCardsList } from '../game-cards-list'
 import { NoDataLabel } from '../no-data-label'
 import { Pagination } from '../pagination'
-
-const LIST_SIZE = 25
 
 type TProps = {
   games: TGame[]
@@ -16,9 +15,18 @@ type TProps = {
   paginationPath: string
   t: any
   getGameHref?: (game: TGame) => string
+  listSize?: number
 }
 
-const GamesList = ({ games, totalGames, page, paginationPath, t, getGameHref }: TProps) => {
+const GamesList = ({
+  games,
+  totalGames,
+  page,
+  paginationPath,
+  t,
+  getGameHref,
+  listSize = 25,
+}: TProps) => {
   if (!games.length) {
     return <NoDataLabel />
   }
@@ -42,9 +50,10 @@ const GamesList = ({ games, totalGames, page, paginationPath, t, getGameHref }: 
             customHref={getGameHref?.(game)}
           />
         ))}
+        <GameCardAd />
       </GameCardsList>
 
-      <Pagination count={Math.ceil(totalGames / LIST_SIZE)} page={+page} path={paginationPath} />
+      <Pagination count={Math.ceil(totalGames / listSize)} page={+page} path={paginationPath} />
     </Grid2>
   )
 }
