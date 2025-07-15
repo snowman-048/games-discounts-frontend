@@ -8,7 +8,7 @@ const ResponsiveAd = () => {
       adFormat="auto"
       adSlot="4334030439"
       data-full-width-responsive="true"
-      // style={{ margin: '0 auto' }}
+      withWrapper={false}
     />
   )
 }
