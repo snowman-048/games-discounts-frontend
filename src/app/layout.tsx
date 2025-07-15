@@ -14,6 +14,7 @@ import { getLocale, getMessages } from 'next-intl/server'
 import { Dancing_Script, Roboto } from 'next/font/google'
 import Script from 'next/script'
 
+import { GoogleAdSense } from '@/components/ads/google-ad-sense'
 import { BackgroundHandler } from '@/components/background-handler'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
@@ -65,11 +66,8 @@ const RootLayout = async ({
       <link rel="apple-touch-icon" href="/icon512_maskable.png" />
       <link rel="icon" href="https://game-price-pulse.com/favicon.ico?v=2" />
 
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
-        crossOrigin="anonymous"
-      />
+      <GoogleAdSense />
+
       <Script
         type="text/javascript"
         src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"
