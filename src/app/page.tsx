@@ -5,6 +5,7 @@ import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+import { ResponsiveAd } from '@/components/ads/responsive-ad'
 import { GamesCarouselWithData } from '@/components/games-carousel-with-data'
 import { HomePageLink } from '@/components/home-page-link'
 import { LogoGlitch } from '@/components/logo-glitch'
@@ -66,6 +67,8 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
+          <ResponsiveAd />
+
           <HomePageLink
             href={`/${EAppRoute.ARTICLES}/1`}
             title={t('ProfileControls.articles')}
@@ -120,6 +123,8 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
+          <ResponsiveAd />
+
           <GamesCarouselWithData
             title={
               <Grid2
@@ -145,6 +150,8 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
+          <ResponsiveAd />
+
           <GamesCarouselWithData
             title={
               <Grid2
@@ -169,6 +176,8 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
               onlySelectedStores: true,
             }}
           />
+
+          <ResponsiveAd />
         </Stack>
       </Container>
     </>

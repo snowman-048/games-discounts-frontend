@@ -18,6 +18,8 @@ type TProps = {
   listSize?: number
 }
 
+const AD_CARDS_AMOUNT = 2
+
 const GamesList = ({
   games,
   totalGames,
@@ -31,6 +33,13 @@ const GamesList = ({
     return <NoDataLabel />
   }
 
+  const gamesWithAds: (TGame | string)[] = [...games]
+
+  for (let i = 0; i < AD_CARDS_AMOUNT; i++) {
+    const randomIndex = Math.floor(Math.random() * gamesWithAds.length)
+    gamesWithAds.splice(randomIndex, 0, 'ad')
+  }
+
   return (
     <Grid2
       container
@@ -41,16 +50,19 @@ const GamesList = ({
       paddingBottom={3}
     >
       <GameCardsList>
-        {games.map((game) => (
-          <GameCard
-            game={game}
-            key={game.id}
-            t={t}
-            switchToListOnMobile
-            customHref={getGameHref?.(game)}
-          />
-        ))}
-        <GameCardAd />
+        {gamesWithAds.map((item, index) =>
+          typeof item === 'string' ? (
+            <GameCardAd key={index} />
+          ) : (
+            <GameCard
+              game={item}
+              key={item.id}
+              t={t}
+              switchToListOnMobile
+              customHref={getGameHref?.(item)}
+            />
+          ),
+        )}
       </GameCardsList>
 
       <Pagination count={Math.ceil(totalGames / listSize)} page={+page} path={paginationPath} />

@@ -1,10 +1,9 @@
 import { CSSProperties, useEffect, useRef } from 'react'
 
-type TProps = {
+type TProps = Record<string, string> & {
   adSlot: string
   adFormat: string
   style?: CSSProperties
-  ['data-ad-layout-key']?: string
 }
 
 const AdUnit = ({ style, adSlot, adFormat, ...rest }: TProps) => {
