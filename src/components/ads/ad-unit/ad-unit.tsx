@@ -3,10 +3,11 @@ import { CSSProperties, useEffect, useRef } from 'react'
 type TProps = Record<string, any> & {
   adSlot: string
   adFormat: string
-  style?: CSSProperties
+  containerStyle?: CSSProperties
+  frameStyle?: CSSProperties
 }
 
-const AdUnit = ({ style, adSlot, adFormat, ...rest }: TProps) => {
+const AdUnit = ({ containerStyle, frameStyle, adSlot, adFormat, ...rest }: TProps) => {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -22,11 +23,11 @@ const AdUnit = ({ style, adSlot, adFormat, ...rest }: TProps) => {
   if (process.env.NODE_ENV !== 'production') return null
 
   return (
-    <div style={{ ...style }}>
+    <div style={{ ...containerStyle }}>
       <ins
         ref={ref}
         className="adsbygoogle"
-        style={{ display: 'block' }}
+        style={{ display: 'block', ...frameStyle }}
         data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
