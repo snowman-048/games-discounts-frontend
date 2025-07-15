@@ -1,0 +1,199 @@
+.wrapper {
+  &.error {
+    .editor {
+      > [role='toolbar'] {
+        border-top-color: var(--color-red);
+        border-left-color: var(--color-red);
+        border-right-color: var(--color-red);
+      }
+
+      > div:last-child {
+        border-color: var(--color-red);
+      }
+    }
+
+    > p {
+      color: var(--color-red);
+    }
+  }
+}
+
+.editor {
+  > [role='toolbar'] {
+    border: 1px solid var(--color-disabled);
+    border-radius: 4px 4px 0 0;
+    transition: all 0.2s;
+
+    button {
+      svg {
+        [class*='ql-stroke'] {
+          stroke: var(--color-disabled) !important;
+        }
+
+        [class*='ql-fill'] {
+          fill: var(--color-disabled) !important;
+        }
+      }
+
+      &:hover {
+        svg {
+          [class*='ql-stroke'] {
+            stroke: var(--color-secondary) !important;
+          }
+
+          [class*='ql-fill'] {
+            fill: var(--color-secondary) !important;
+          }
+        }
+      }
+
+      &[class*='ql-active'] {
+        svg {
+          [class*='ql-stroke'] {
+            stroke: var(--color-primary) !important;
+          }
+
+          [class*='ql-fill'] {
+            fill: var(--color-primary) !important;
+          }
+        }
+      }
+    }
+
+    [class*='ql-picker'] {
+      [class*='ql-picker-label'] {
+        color: var(--color-disabled) !important;
+
+        [class*='ql-stroke'] {
+          stroke: var(--color-disabled) !important;
+        }
+
+        &:hover {
+          color: var(--color-secondary) !important;
+
+          [class*='ql-stroke'] {
+            stroke: var(--color-secondary) !important;
+          }
+        }
+      }
+
+      &[class*='ql-expanded'] {
+        [class*='ql-picker-label'] {
+          border: 1px solid var(--color-disabled);
+          border-radius: 4px;
+        }
+
+        [class*='ql-picker-options'] {
+          background: var(--color-l2);
+          border: 0;
+          border-radius: 0 0 4px 4px;
+          padding: 8px;
+
+          [class*='ql-picker-item'] + [class*='ql-picker-item'] {
+            margin-top: 4px;
+          }
+
+          [class*='ql-picker-item'] {
+            color: var(--color-inactive) !important;
+            padding: 0 !important;
+
+            &[class*='ql-selected'] {
+              color: var(--color-primary) !important;
+
+              svg {
+                [class*='ql-stroke'] {
+                  stroke: var(--color-primary) !important;
+                }
+
+                [class*='ql-fill'] {
+                  fill: var(--color-primary) !important;
+                }
+              }
+            }
+
+            &:hover {
+              color: var(--color-secondary) !important;
+
+              svg {
+                [class*='ql-stroke'] {
+                  stroke: var(--color-secondary) !important;
+                }
+
+                [class*='ql-fill'] {
+                  fill: var(--color-secondary) !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  [class*='ql-tooltip'] {
+    background: var(--color-l2);
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
+
+    &::before {
+      color: var(--color-disabled) !important;
+    }
+
+    input {
+      background: transparent;
+      outline: none;
+      border-radius: 4px;
+      border: 1px solid var(--color-disabled);
+      color: var(--color-secondary) !important;
+
+      &:focus {
+        border: 1px solid var(--color-secondary);
+      }
+    }
+
+    [class*='ql-action'],
+    [class*='ql-remove'] {
+      color: var(--color-secondary) !important;
+    }
+  }
+
+  > div:last-child {
+    border: 1px solid var(--color-disabled);
+    border-radius: 0 0 4px 4px;
+    transition: all 0.2s;
+    height: auto;
+  }
+
+  [class*='ql-editor'] {
+    color: var(--color-primary);
+  }
+
+  &:hover {
+    > [role='toolbar'] {
+      border-top-color: var(--color-secondary) !important;
+      border-left-color: var(--color-secondary) !important;
+      border-right-color: var(--color-secondary) !important;
+    }
+
+    > div:last-child {
+      border-color: var(--color-secondary) !important;
+    }
+  }
+}
+
+.wrapper:not(.error) {
+  .editor {
+    &.focused {
+      > [role='toolbar'] {
+        border-top-color: var(--color-brand) !important;
+        border-left-color: var(--color-brand) !important;
+        border-right-color: var(--color-brand) !important;
+      }
+
+      > div:last-child {
+        border-color: var(--color-brand) !important;
+      }
+    }
+  }
+}

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
+import AddIcon from '@mui/icons-material/Add'
+import PolylineIcon from '@mui/icons-material/Polyline'
 import { Box, Button, Grid2, LinearProgress, Stack } from '@mui/material'
 import { useParams } from 'next/navigation'
 
@@ -10,6 +12,7 @@ import { ArticlesList } from '@/components/articles-list'
 import { NoDataLabel } from '@/components/no-data-label'
 import { Pagination } from '@/components/pagination'
 import { StoreIcon } from '@/components/store-icon'
+import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
 import { Loader } from '@/components/ui/loader'
 import { Modal } from '@/components/ui/modal'
@@ -76,11 +79,26 @@ const ManageArticlesPage = () => {
           <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h1">
             Manage Articles
           </TypographyV2>
-
-          <Button variant="contained" onClick={() => setGenerateModalOpen(true)}>
-            Generate Article
-          </Button>
         </Grid2>
+
+        <GlassCard
+          width="100%"
+          padding={2}
+          display="flex"
+          alignItems="center"
+          gap={2}
+          marginBottom={1}
+        >
+          <Button variant="contained" onClick={() => setGenerateModalOpen(true)}>
+            <PolylineIcon /> Generate Article
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => navigate({ path: `/${EAppRoute.CREATE_ARTICLE}` })}
+          >
+            <AddIcon /> Create Article
+          </Button>
+        </GlassCard>
 
         {!articles.length && <NoDataLabel />}
 

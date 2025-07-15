@@ -9,7 +9,7 @@ import * as yup from 'yup'
 import { login } from '@/api/auth'
 import { Input } from '@/components/ui/input'
 import { TypographyV2 } from '@/components/ui/typography'
-import { useHandleLogin } from '@/hooks/useHandleLogin.hook'
+import { useHandleLogin } from '@/hooks/useHandleLogin'
 import { CustomToast } from '@/utils/custom-toast'
 import { passwordSchema } from '@/validation/user.validation'
 
