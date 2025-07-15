@@ -12,7 +12,7 @@ import { TGame } from '@/types/game.types'
 import { GamesList } from '../games-list/games-list'
 import { Loader } from '../ui/loader'
 
-const LIST_SIZE = 24
+const LIST_SIZE = 23
 
 type TProps = {
   page: number
