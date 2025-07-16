@@ -3,13 +3,13 @@ import { CSSProperties, useEffect, useRef } from 'react'
 type TProps = Record<string, any> & {
   adSlot: string
   adFormat: string
-  containerStyle?: CSSProperties
+  wrapperStyle?: CSSProperties
   frameStyle?: CSSProperties
   withWrapper?: boolean
 }
 
 const AdUnit = ({
-  containerStyle,
+  wrapperStyle,
   frameStyle,
   withWrapper = true,
   adSlot,
@@ -19,12 +19,16 @@ const AdUnit = ({
   const ref = useRef(null)
 
   useEffect(() => {
-    if (window.adsbygoogle && ref.current) {
-      try {
-        window.adsbygoogle.push({})
-      } catch (e) {
-        // Ignore duplicate ad errors
+    if (typeof window === 'undefined' || !ref.current) return
+
+    try {
+      if ('adsbygoogle' in window) {
+        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+      } else {
+        console.error('Adsense condition error:', 'adsbygoogle' in window)
       }
+    } catch (e) {
+      console.warn('AdSense error:', e)
     }
   }, [])
 
@@ -43,7 +47,7 @@ const AdUnit = ({
     />
   )
 
-  if (withWrapper) return <div style={{ ...containerStyle }}>{renderFrame()}</div>
+  if (withWrapper) return <div style={{ ...wrapperStyle }}>{renderFrame()}</div>
 
   return renderFrame()
 }
