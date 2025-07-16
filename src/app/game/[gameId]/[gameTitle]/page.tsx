@@ -9,6 +9,7 @@ import { getTranslations } from 'next-intl/server'
 import { getGameById, getGameFamilyByGameId } from '@/api/games'
 import { AddToWishlistButton } from '@/components/add-to-wishlist-button'
 import { MultiplexGridAd } from '@/components/ads/multiplex-grid-ad'
+import { ResponsiveAd } from '@/components/ads/responsive-ad'
 import { EditGameButton } from '@/components/edit-game-button'
 import { GameCard } from '@/components/game-card'
 import { GameImgWithBuy } from '@/components/game-img-with-buy'
@@ -259,7 +260,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
         </GlassCard>
       </Grid2>
 
-      <MultiplexGridAd />
+      <ResponsiveAd />
 
       {dicountsExist && (
         <Grid2
