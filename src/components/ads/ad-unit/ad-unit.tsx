@@ -1,13 +1,15 @@
 'use client'
 
-import { CSSProperties, useEffect, useRef } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
+
+import { useObserveElementSize } from '@/hooks/useObserveElementSize'
 
 type TProps = Record<string, any> & {
   adSlot: string
   adFormat: string
   wrapperStyle?: CSSProperties
   frameStyle?: CSSProperties
-  withWrapper?: boolean
+  observeWidth?: boolean
 }
 
 const MAX_RETRIES = 10
@@ -15,15 +17,20 @@ const MAX_RETRIES = 10
 const AdUnit = ({
   wrapperStyle,
   frameStyle,
-  withWrapper = true,
   adSlot,
   adFormat,
+  observeWidth = false,
   ...rest
 }: TProps) => {
-  const ref = useRef(null)
+  const [adWidth, setAdWidth] = useState<number | undefined>()
+
+  const adRef = useRef(null)
+  const wrapperRef = useRef(null)
+
+  const { width } = useObserveElementSize(wrapperRef)
 
   const tryLoadGoogleAds = (retries = 0) => {
-    if (!ref.current) return
+    if (!adRef.current) return
 
     if (typeof window !== 'undefined' && 'adsbygoogle' in window) {
       try {
@@ -46,24 +53,29 @@ const AdUnit = ({
     tryLoadGoogleAds()
   }, [])
 
-  if (process.env.NODE_ENV !== 'production') return null
+  useEffect(() => {
+    if (!observeWidth || !width) {
+      return
+    }
+    setAdWidth(width * 0.9)
+  }, [width, observeWidth])
 
-  const renderFrame = () => (
-    <ins
-      ref={ref}
-      className="adsbygoogle"
-      style={{ display: 'block', ...frameStyle }}
-      data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
-      data-ad-slot={adSlot}
-      data-ad-format={adFormat}
-      data-full-width-responsive="true"
-      {...rest}
-    />
+  if (process.env.NODE_ENV !== 'production' || (observeWidth && !adWidth)) return null
+
+  return (
+    <div style={{ ...wrapperStyle }} ref={wrapperRef}>
+      <ins
+        ref={adRef}
+        className="adsbygoogle"
+        style={{ display: 'block', width: adWidth, ...frameStyle }}
+        data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
+        data-ad-slot={adSlot}
+        data-ad-format={adFormat}
+        data-full-width-responsive="true"
+        {...rest}
+      />
+    </div>
   )
-
-  if (withWrapper) return <div style={{ ...wrapperStyle }}>{renderFrame()}</div>
-
-  return renderFrame()
 }
 
 export { AdUnit }
