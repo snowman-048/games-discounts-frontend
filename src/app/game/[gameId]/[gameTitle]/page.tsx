@@ -269,6 +269,9 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
           alignItems: 'center',
           width: '100%',
         }}
+        frameStyle={{
+          width: '100%',
+        }}
       />
 
       {dicountsExist && (

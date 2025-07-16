@@ -10,6 +10,8 @@ type TProps = Record<string, any> & {
   withWrapper?: boolean
 }
 
+const MAX_RETRIES = 10
+
 const AdUnit = ({
   wrapperStyle,
   frameStyle,
@@ -20,18 +22,28 @@ const AdUnit = ({
 }: TProps) => {
   const ref = useRef(null)
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || !ref.current) return
+  const tryLoadGoogleAds = (retries = 0) => {
+    if (!ref.current) return
 
-    try {
-      if ('adsbygoogle' in window) {
+    if (typeof window !== 'undefined' && 'adsbygoogle' in window) {
+      try {
         ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-      } else {
-        console.error('Adsense condition error:', 'adsbygoogle' in window)
+        console.log('✅ Google Ad rendered')
+      } catch (e) {
+        console.warn('AdSense push error:', e)
       }
-    } catch (e) {
-      console.warn('AdSense error:', e)
+    } else {
+      retries++
+      if (retries < MAX_RETRIES) {
+        setTimeout(() => tryLoadGoogleAds(retries), 400)
+      } else {
+        console.warn(`❌ AdSense is still not available after ${retries + 1} retries`)
+      }
     }
+  }
+
+  useEffect(() => {
+    tryLoadGoogleAds()
   }, [])
 
   if (process.env.NODE_ENV !== 'production') return null
