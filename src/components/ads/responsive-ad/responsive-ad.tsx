@@ -8,16 +8,16 @@ const ResponsiveAd = () => {
       adFormat="auto"
       adSlot="4334030439"
       data-full-width-responsive="true"
-      wrapperStyle={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-      }}
-      frameStyle={{
-        width: '100%',
-        height: '300px',
-      }}
+      // wrapperStyle={{
+      //   display: 'flex',
+      //   justifyContent: 'center',
+      //   alignItems: 'center',
+      //   width: '100%',
+      // }}
+      // frameStyle={{
+      //   width: '100%',
+      //   height: '300px',
+      // }}
     />
   )
 }

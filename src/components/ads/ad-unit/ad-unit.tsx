@@ -1,8 +1,8 @@
 'use client'
 
-import { CSSProperties, useEffect, useRef, useState } from 'react'
+import { CSSProperties, useEffect, useRef } from 'react'
 
-import { useObserveElementSize } from '@/hooks/useObserveElementSize'
+// import { useObserveElementSize } from '@/hooks/useObserveElementSize'
 
 type TProps = Record<string, any> & {
   adSlot: string
@@ -22,12 +22,12 @@ const AdUnit = ({
   observeWidth = false,
   ...rest
 }: TProps) => {
-  const [adWidth, setAdWidth] = useState<number | undefined>()
+  // const [adWidth, setAdWidth] = useState<number | undefined>()
 
   const adRef = useRef(null)
-  const wrapperRef = useRef(null)
+  // const wrapperRef = useRef(null)
 
-  const { width } = useObserveElementSize(wrapperRef)
+  // const { width } = useObserveElementSize(wrapperRef)
 
   const tryLoadGoogleAds = (retries = 0) => {
     if (!adRef.current) return
@@ -53,21 +53,39 @@ const AdUnit = ({
     tryLoadGoogleAds()
   }, [])
 
-  useEffect(() => {
-    if (!observeWidth || !width) {
-      return
-    }
-    setAdWidth(width * 0.9)
-  }, [width, observeWidth])
+  // useEffect(() => {
+  //   if (!observeWidth || !width) {
+  //     return
+  //   }
+  //   setAdWidth(width * 0.9)
+  // }, [width, observeWidth])
 
-  if (process.env.NODE_ENV !== 'production' || (observeWidth && !adWidth)) return null
+  if (process.env.NODE_ENV !== 'production') return null
+  // if (process.env.NODE_ENV !== 'production' || (observeWidth && !adWidth)) return null
 
   return (
-    <div style={{ ...wrapperStyle }} ref={wrapperRef}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        ...wrapperStyle,
+      }}
+      // ref={wrapperRef}
+    >
       <ins
         ref={adRef}
         className="adsbygoogle"
-        style={{ display: 'block', width: adWidth, ...frameStyle }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          ...frameStyle,
+        }}
         data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
