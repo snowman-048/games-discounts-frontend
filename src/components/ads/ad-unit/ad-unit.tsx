@@ -1,3 +1,5 @@
+'use client'
+
 import { CSSProperties, useEffect, useRef } from 'react'
 
 type TProps = Record<string, any> & {
