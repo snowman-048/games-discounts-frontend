@@ -1,5 +1,7 @@
 import { cache } from 'react'
 
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
+import WindowIcon from '@mui/icons-material/Window'
 import { Divider, Grid2, Stack } from '@mui/material'
 import cn from 'classnames'
 import moment from 'moment'
@@ -22,6 +24,7 @@ import { PriceInfoItem } from '@/components/price-info-item'
 import { TLineConfig } from '@/components/prices-chart/libs/types/line-config.types'
 import { SectionTitle } from '@/components/section-title'
 import { StoreIcon } from '@/components/store-icon'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Carousel } from '@/components/ui/carousel'
 import { Container } from '@/components/ui/container'
@@ -182,6 +185,19 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
       paddingBottom={5}
       className={styles.container}
     >
+      <Breadcrumbs
+        breadcrumbs={[
+          { href: '/', label: 'Home', icon: <WindowIcon /> },
+          { href: `/${EAppRoute.ALL_GAMES}/1`, label: 'Games', icon: <SportsEsportsIcon /> },
+          {
+            href: `/${EAppRoute.GAME}/${game.id}/${getTitleForLink(game.title)}`,
+            label: game.title,
+            highlight: true,
+          },
+        ]}
+        className={styles.breadcrumbs}
+      />
+
       <Grid2 sx={{ position: 'relative', width: '100%' }} container flexDirection="column" gap={3}>
         <GameImgWithBuy
           game={game}

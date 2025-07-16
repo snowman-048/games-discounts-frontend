@@ -50,6 +50,7 @@ export async function middleware(req: NextRequest) {
 
   const searchParams = url.searchParams.toString()
   response.headers.set('searchParams', searchParams)
+  response.headers.set('x-current-path', req.nextUrl.pathname)
 
   requestRegions.forEach(({ key, region }) => {
     response.cookies.set(key, region)
