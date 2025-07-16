@@ -1,8 +1,6 @@
 'use client'
 
-import { CSSProperties, useEffect, useRef } from 'react'
-
-// import { useObserveElementSize } from '@/hooks/useObserveElementSize'
+import { CSSProperties, useEffect } from 'react'
 
 type TProps = Record<string, any> & {
   adSlot: string
@@ -22,15 +20,10 @@ const AdUnit = ({
   observeWidth = false,
   ...rest
 }: TProps) => {
-  // const [adWidth, setAdWidth] = useState<number | undefined>()
-
-  const adRef = useRef(null)
-  // const wrapperRef = useRef(null)
-
-  // const { width } = useObserveElementSize(wrapperRef)
+  const showAd = process.env.NODE_ENV === 'production'
 
   const tryLoadGoogleAds = (retries = 0) => {
-    if (!adRef.current) return
+    if (!showAd) return
 
     if (typeof window !== 'undefined' && 'adsbygoogle' in window) {
       try {
@@ -53,15 +46,7 @@ const AdUnit = ({
     tryLoadGoogleAds()
   }, [])
 
-  // useEffect(() => {
-  //   if (!observeWidth || !width) {
-  //     return
-  //   }
-  //   setAdWidth(width * 0.9)
-  // }, [width, observeWidth])
-
-  if (process.env.NODE_ENV !== 'production') return null
-  // if (process.env.NODE_ENV !== 'production' || (observeWidth && !adWidth)) return null
+  if (!showAd) return null
 
   return (
     <div
@@ -74,10 +59,8 @@ const AdUnit = ({
         margin: '0 auto',
         ...wrapperStyle,
       }}
-      // ref={wrapperRef}
     >
       <ins
-        ref={adRef}
         className="adsbygoogle"
         style={{
           display: 'flex',

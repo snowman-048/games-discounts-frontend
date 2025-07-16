@@ -2,21 +2,18 @@
 
 import { AdUnit } from '../ad-unit'
 
-const MultiplexGridAd = () => {
+type TProps = {
+  small?: boolean
+}
+
+const MultiplexGridAd = ({ small }: TProps) => {
   return (
     <AdUnit
       adFormat="autorelaxed"
       adSlot="6703191485"
-      // wrapperStyle={{
-      //   display: 'flex',
-      //   justifyContent: 'center',
-      //   alignItems: 'center',
-      //   width: '100%',
-      // }}
-      // frameStyle={{
-      //   width: '100%',
-      //   height: '150px',
-      // }}
+      wrapperStyle={{
+        maxHeight: small ? '100px' : '200px',
+      }}
     />
   )
 }

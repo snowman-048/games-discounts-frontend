@@ -5,7 +5,6 @@ import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
-import { AdUnit } from '@/components/ads/ad-unit'
 import { ResponsiveAd } from '@/components/ads/responsive-ad'
 import { GamesCarouselWithData } from '@/components/games-carousel-with-data'
 import { HomePageLink } from '@/components/home-page-link'
@@ -68,19 +67,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
-          <AdUnit
-            adFormat="auto"
-            adSlot="4334030439"
-            data-full-width-responsive="true"
-            wrapperStyle={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '100%',
-            }}
-          />
-
-          {/* <ResponsiveAd /> */}
+          <ResponsiveAd small />
 
           <HomePageLink
             href={`/${EAppRoute.ARTICLES}/1`}
