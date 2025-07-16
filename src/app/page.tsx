@@ -78,7 +78,6 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
               alignItems: 'center',
               width: '100%',
             }}
-            observeWidth
           />
 
           {/* <ResponsiveAd /> */}
