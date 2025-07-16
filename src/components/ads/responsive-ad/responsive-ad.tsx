@@ -2,22 +2,19 @@
 
 import { AdUnit } from '../ad-unit'
 
-const ResponsiveAd = () => {
+type TProps = {
+  small?: boolean
+}
+
+const ResponsiveAd = ({ small }: TProps) => {
   return (
     <AdUnit
       adFormat="auto"
       adSlot="4334030439"
       data-full-width-responsive="true"
-      // wrapperStyle={{
-      //   display: 'flex',
-      //   justifyContent: 'center',
-      //   alignItems: 'center',
-      //   width: '100%',
-      // }}
-      // frameStyle={{
-      //   width: '100%',
-      //   height: '300px',
-      // }}
+      wrapperStyle={{
+        maxHeight: small ? '140px' : '280px',
+      }}
     />
   )
 }
