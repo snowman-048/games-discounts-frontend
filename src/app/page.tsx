@@ -79,7 +79,8 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
               width: '100%',
             }}
             frameStyle={{
-              width: '100%',
+              width: 'fit-content',
+              minWidth: '320px',
             }}
           />
 

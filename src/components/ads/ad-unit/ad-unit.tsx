@@ -28,7 +28,7 @@ const AdUnit = ({
     if (typeof window !== 'undefined' && 'adsbygoogle' in window) {
       try {
         ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-        console.log('✅ Google Ad rendered')
+        console.log('✅ Google Ad rendered', retries)
       } catch (e) {
         console.warn('AdSense push error:', e)
       }
