@@ -66,6 +66,7 @@ const HeaderComponent = ({ query }: TProps) => {
         gap={3}
         height="100%"
         flexWrap="nowrap"
+        component="nav"
       >
         <Grid2
           container
