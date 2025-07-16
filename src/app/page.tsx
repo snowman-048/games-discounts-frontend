@@ -67,7 +67,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
-          <ResponsiveAd small />
+          <ResponsiveAd />
 
           <HomePageLink
             href={`/${EAppRoute.ARTICLES}/1`}

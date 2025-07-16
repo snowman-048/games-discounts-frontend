@@ -259,7 +259,7 @@ const GameInfo = async ({ params, searchParams }: TProps) => {
         </GlassCard>
       </Grid2>
 
-      <MultiplexGridAd small />
+      <MultiplexGridAd />
 
       {dicountsExist && (
         <Grid2
