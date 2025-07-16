@@ -14,7 +14,7 @@ const GameCardAd = () => {
           adFormat="fluid"
           adSlot="4376411042"
           data-ad-layout-key="+29+rl+2w-11-86"
-          containerStyle={{ width: '100%', height: '100%' }}
+          wrapperStyle={{ width: '100%', height: '100%' }}
         />
       </Grid2>
     </GlassCard>
