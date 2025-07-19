@@ -49,33 +49,33 @@ const AdUnit = ({
   if (!showAd) return null
 
   return (
-    <div
+    // <div
+    //   style={{
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     width: '100%',
+    //     maxWidth: '1200px',
+    //     margin: '0 auto',
+    //     ...wrapperStyle,
+    //   }}
+    // >
+    <ins
+      className="adsbygoogle"
       style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
-        ...wrapperStyle,
+        ...frameStyle,
       }}
-    >
-      <ins
-        className="adsbygoogle"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          ...frameStyle,
-        }}
-        data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
-        data-ad-slot={adSlot}
-        data-ad-format={adFormat}
-        data-full-width-responsive="true"
-        {...rest}
-      />
-    </div>
+      data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
+      data-ad-slot={adSlot}
+      data-ad-format={adFormat}
+      data-full-width-responsive="true"
+      {...rest}
+    />
+    // </div>
   )
 }
 
