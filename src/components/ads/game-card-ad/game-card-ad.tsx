@@ -1,14 +1,22 @@
 'use client'
 
-import { Grid2 } from '@mui/material'
+import { Grid2, useMediaQuery } from '@mui/material'
 
 import { GlassCard } from '@/components/ui/cards/glass-card'
 
 import { AdUnit } from '../ad-unit'
 
-const GameCardAd = () => {
+type TProps = {
+  withMobileVariant?: boolean
+}
+
+const GameCardAd = ({ withMobileVariant = true }: TProps) => {
+  const isMobileVariant = useMediaQuery(`(max-width: 600px)`)
+
   return (
-    <GlassCard>
+    <GlassCard
+      sx={{ minWidth: '250px', maxHeight: withMobileVariant && isMobileVariant ? '210px' : 'auto' }}
+    >
       <Grid2
         container
         sx={{
