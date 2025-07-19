@@ -18,7 +18,7 @@ type TProps = {
   listSize?: number
 }
 
-const AD_CARDS_AMOUNT = 2
+const AD_CARDS_AMOUNT = 3
 
 const GamesList = ({
   games,

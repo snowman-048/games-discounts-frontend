@@ -7,7 +7,7 @@ import { TGame } from '@/types/game.types'
 
 import { GamesList } from '../games-list/games-list'
 
-const LIST_SIZE = 23
+const LIST_SIZE = 22
 
 type TProps = {
   page: number
