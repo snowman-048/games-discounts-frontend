@@ -89,7 +89,7 @@ const HeaderComponent = ({ query }: TProps) => {
               onClick={() => setIsDrawerOpen(false)}
             />
           ))}
-          <ExploreButton onNavigate={() => setIsDrawerOpen(false)} />
+          <ExploreButton onNavigate={() => setIsDrawerOpen(false)} renderAsList={inDrawer} />
         </Grid2>
         <Button
           onClick={(e) => setLocationAnchorEl(e.currentTarget)}
