@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
 import { getArticles } from '@/api/articles'
+import { MultiplexGridAd } from '@/components/ads/multiplex-grid-ad'
 import { ArticlesList } from '@/components/articles-list'
 import { NoDataLabel } from '@/components/no-data-label'
 import { Pagination } from '@/components/pagination'
@@ -75,7 +76,7 @@ const ArticlesPage = async ({ params }: TProps) => {
   }
 
   return (
-    <Container gap={2} paddingBottom={3}>
+    <Container gap={2} paddingBottom={2}>
       <TypographyV2 fontSize="heading-m" fontWeight="bold" component="h1" width="100%">
         {t('title')}
       </TypographyV2>
@@ -90,6 +91,8 @@ const ArticlesPage = async ({ params }: TProps) => {
           path={EAppRoute.ARTICLES}
         />
       </Stack>
+
+      <MultiplexGridAd />
     </Container>
   )
 }

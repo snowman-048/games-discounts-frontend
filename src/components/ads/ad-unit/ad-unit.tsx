@@ -5,21 +5,13 @@ import { CSSProperties, useEffect } from 'react'
 type TProps = Record<string, any> & {
   adSlot: string
   adFormat: string
-  wrapperStyle?: CSSProperties
+  // wrapperStyle?: CSSProperties
   frameStyle?: CSSProperties
-  observeWidth?: boolean
 }
 
 const MAX_RETRIES = 10
 
-const AdUnit = ({
-  wrapperStyle,
-  frameStyle,
-  adSlot,
-  adFormat,
-  observeWidth = false,
-  ...rest
-}: TProps) => {
+const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
   const showAd = process.env.NODE_ENV === 'production'
 
   const tryLoadGoogleAds = (retries = 0) => {
@@ -67,12 +59,13 @@ const AdUnit = ({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
+        textAlign: 'center',
         ...frameStyle,
       }}
       data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
       data-ad-slot={adSlot}
       data-ad-format={adFormat}
-      data-full-width-responsive="true"
+      // data-full-width-responsive="true"
       {...rest}
     />
     // </div>
