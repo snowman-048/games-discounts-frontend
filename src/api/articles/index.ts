@@ -1,5 +1,6 @@
 import { EStore } from '@/enums/store.enum'
 import { createQueryString } from '@/helpers/createQueryString'
+import { TPagination } from '@/types/api.types'
 import { TArticle } from '@/types/articles.type'
 
 import { api } from '..'
@@ -9,6 +10,13 @@ const BASE_URL = 'article'
 
 const getArticles = (params?: TArticlesQueryParams) =>
   api.get<{ data: TArticle[]; total: number }>(`${BASE_URL}${createQueryString(params)}`)
+
+const getArticlesCount = () => api.get<number>(`${BASE_URL}/count`)
+
+const getArticlesDataForSitemap = (query: TPagination) =>
+  api.get<{ id: number; title: string; publishedAt: string }[]>(
+    `${BASE_URL}/sitemap${createQueryString(query)}`,
+  )
 
 const getUnpublishedArticles = (params?: TArticlesQueryParams) =>
   api.get<{ data: TArticle[]; total: number }>(
@@ -33,4 +41,6 @@ export {
   unpublishArticle,
   generateArticle,
   deleteArticle,
+  getArticlesCount,
+  getArticlesDataForSitemap,
 }
