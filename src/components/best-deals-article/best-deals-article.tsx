@@ -6,6 +6,8 @@ import { EAppRoute } from '@/enums/app-route.enum'
 import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { TArticle } from '@/types/articles.type'
 
+import { InArticleResponsiveAd } from '../ads/in-article-responsive-ad'
+import { MultiplexGridAd } from '../ads/multiplex-grid-ad'
 import { ArticleAdminControls } from '../article-admin-controls'
 import { SectionTitle } from '../section-title'
 import { GlassCard } from '../ui/cards/glass-card'
@@ -86,6 +88,8 @@ const BestDealsArticle = ({ article }: TProps) => {
           <TypographyV2 adaptiveFontSize={{ xs: 'text-base', md: 'text-l' }}>
             {article.articleDescription}
           </TypographyV2>
+
+          <InArticleResponsiveAd />
         </Stack>
       </GlassCard>
 
@@ -213,6 +217,8 @@ const BestDealsArticle = ({ article }: TProps) => {
       </GlassCard>
 
       <ArticleAdminControls article={article} />
+
+      <MultiplexGridAd />
     </Stack>
   )
 }
