@@ -1,6 +1,6 @@
 'use client'
 
-import { CSSProperties, useEffect, useState } from 'react'
+import { CSSProperties, useEffect } from 'react'
 
 type TProps = Record<string, any> & {
   adSlot: string
@@ -11,8 +11,6 @@ type TProps = Record<string, any> & {
 const MAX_RETRIES = 10
 
 const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
-  const [adScriptLoaded, setAdScriptLoaded] = useState(false)
-
   const isProd = process.env.NODE_ENV === 'production'
 
   const tryLoadGoogleAds = (retries = 0) => {
@@ -22,7 +20,6 @@ const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
       try {
         ;(window.adsbygoogle = window.adsbygoogle || []).push({})
         console.log('✅ Google Ad rendered', retries)
-        setAdScriptLoaded(true)
       } catch (e) {
         console.warn('AdSense push error:', e)
       }
@@ -37,10 +34,10 @@ const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
   }
 
   useEffect(() => {
-    tryLoadGoogleAds()
+    setTimeout(tryLoadGoogleAds, 0)
   }, [])
 
-  if (!isProd || !adScriptLoaded) return null
+  if (!isProd) return null
 
   return (
     <ins
