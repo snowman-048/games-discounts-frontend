@@ -5,7 +5,6 @@ import { CSSProperties, useEffect } from 'react'
 type TProps = Record<string, any> & {
   adSlot: string
   adFormat: string
-  // wrapperStyle?: CSSProperties
   frameStyle?: CSSProperties
 }
 
@@ -41,17 +40,6 @@ const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
   if (!showAd) return null
 
   return (
-    // <div
-    //   style={{
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     width: '100%',
-    //     maxWidth: '1200px',
-    //     margin: '0 auto',
-    //     ...wrapperStyle,
-    //   }}
-    // >
     <ins
       className="adsbygoogle"
       style={{
@@ -65,10 +53,8 @@ const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
       data-ad-client={process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}
       data-ad-slot={adSlot}
       data-ad-format={adFormat}
-      // data-full-width-responsive="true"
       {...rest}
     />
-    // </div>
   )
 }
 

@@ -5,8 +5,8 @@ import { Grid2, Stack } from '@mui/material'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+import { InArticleResponsiveAd } from '@/components/ads/in-article-responsive-ad'
 import { MultiplexGridAd } from '@/components/ads/multiplex-grid-ad'
-import { ResponsiveAd } from '@/components/ads/responsive-ad'
 import { GamesCarouselWithData } from '@/components/games-carousel-with-data'
 import { HomePageLink } from '@/components/home-page-link'
 import { LogoGlitch } from '@/components/logo-glitch'
@@ -68,7 +68,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
-          <MultiplexGridAd />
+          <InArticleResponsiveAd />
 
           <HomePageLink
             href={`/${EAppRoute.ARTICLES}/1`}
@@ -124,7 +124,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
-          <ResponsiveAd />
+          <InArticleResponsiveAd />
 
           <GamesCarouselWithData
             title={
@@ -151,7 +151,7 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
             }}
           />
 
-          <ResponsiveAd />
+          <InArticleResponsiveAd />
 
           <GamesCarouselWithData
             title={
