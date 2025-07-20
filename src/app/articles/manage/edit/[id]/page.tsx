@@ -52,6 +52,8 @@ const EditArticle = () => {
     return <NoDataLabel />
   }
 
+  console.log('article', article)
+
   const isGamesArticle = isCustomGameArticle(article)
 
   const onEdit = async (data: TArticleFormValues) => {
@@ -60,7 +62,13 @@ const EditArticle = () => {
       const newArticle: TArticle<TWebsiteGeneralArticle> = JSON.parse(JSON.stringify(article))
       newArticle.title = data.title
       newArticle.website.html = data.content
+      newArticle.website.focusKeyphrase = data.focusKeyphrase || newArticle.website.focusKeyphrase
+      newArticle.website.keywords = data.keywords
       newArticle.articleDesktopImage = data.image || newArticle.articleDesktopImage
+      newArticle.social.text = data.socialsContent
+      newArticle.social.hashtags = data.hashtags
+      newArticle.articleDescription = data.articleDescription
+      newArticle.metaDescription = data.metaDescription
       const { data: response } = await updateArticle(newArticle.id, newArticle)
       navigate({
         path: `/${EAppRoute.VIEW_ARTICLE}/${response.id}/${getTitleForLink(response.title)}`,
@@ -80,9 +88,16 @@ const EditArticle = () => {
           onSubmit={onEdit}
           submitBtnText="Edit Article"
           defaultValues={{
-            content: (article.website as any).html,
             title: article.title,
+            content: (article.website as any).html,
+            focusKeyphrase: (article.website as any).focusKeyphrase || '',
+            keywords: article.website.keywords || [],
             image: article.articleDesktopImage || '',
+            socialsContent: article.social.text || '',
+            articleDescription: article.articleDescription,
+            metaDescription: article.metaDescription,
+            sourceUrl: (article.website as any).sourceUrl,
+            hashtags: article.social.hashtags || [],
           }}
           disabled={saveLoading}
         />

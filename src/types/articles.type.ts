@@ -12,7 +12,7 @@ type TWebsiteGamesArticle = {
 }
 
 type TWebsiteGeneralArticle = {
-  focusKeyphrases: string[]
+  focusKeyphrase: string
   html: string
   keywords: string[]
   sourceUrl: string
