@@ -29,6 +29,8 @@ const publishArticle = (id: number) => api.put<TArticle>(`${BASE_URL}/${id}/publ
 
 const unpublishArticle = (id: number) => api.put<TArticle>(`${BASE_URL}/${id}/unpublish`)
 
+const updateArticle = (id: number, data: TArticle) => api.put<TArticle>(`${BASE_URL}/${id}`, data)
+
 const generateArticle = (store: EStore) => api.post<TArticle>(`${BASE_URL}/generate`, { store })
 
 const deleteArticle = (id: number) => api.delete(`${BASE_URL}/${id}`)
@@ -43,4 +45,5 @@ export {
   deleteArticle,
   getArticlesCount,
   getArticlesDataForSitemap,
+  updateArticle,
 }

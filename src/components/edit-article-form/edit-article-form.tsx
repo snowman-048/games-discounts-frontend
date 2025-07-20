@@ -38,12 +38,14 @@ type TProps = {
   onSubmit: SubmitHandler<typeof defaultValues>
   defaultValues?: typeof defaultValues
   submitBtnText?: string
+  disabled?: boolean
 }
 
 const EditArticleForm = ({
   defaultValues: parentDefaultValues = defaultValues,
   onSubmit,
   submitBtnText = 'Submit',
+  disabled,
 }: TProps) => {
   const [isPreview, setIsPreview] = useState(false)
   const [previewData, setPreviewData] = useState<typeof defaultValues | null>(null)
@@ -53,7 +55,11 @@ const EditArticleForm = ({
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm({ defaultValues: parentDefaultValues, resolver: yupResolver(validationSchema) })
+  } = useForm({
+    defaultValues: parentDefaultValues,
+    resolver: yupResolver(validationSchema),
+    disabled,
+  })
 
   const submit: SubmitHandler<typeof defaultValues> = async (payload) => {
     console.log('payload', payload)
@@ -76,7 +82,7 @@ const EditArticleForm = ({
   const onGenerateImage = async () => {}
 
   return (
-    <form style={{ width: '100%', minHeight: '100%' }} onSubmit={handleSubmit(submit)}>
+    <form style={{ width: '100%' }} onSubmit={handleSubmit(submit)}>
       <Stack gap={2}>
         {isPreview && previewData && <CustomArticle {...previewData} />}
 
@@ -136,10 +142,10 @@ const EditArticleForm = ({
         )}
 
         <Grid2 container justifyContent="flex-end" gap={2}>
-          <IconButton onClick={togglePreview}>
+          <IconButton onClick={togglePreview} disabled={disabled}>
             {isPreview ? <EditNoteIcon /> : <VisibilityIcon />}
           </IconButton>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" disabled={disabled}>
             {submitBtnText}
           </Button>
         </Grid2>

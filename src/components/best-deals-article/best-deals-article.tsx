@@ -4,17 +4,16 @@ import Link from 'next/link'
 
 import { EAppRoute } from '@/enums/app-route.enum'
 import { getTitleForLink } from '@/helpers/getTitleForLink'
-import { TArticle } from '@/types/articles.type'
+import { TArticle, TWebsiteGamesArticle } from '@/types/articles.type'
 
 import { InArticleResponsiveAd } from '../ads/in-article-responsive-ad'
 import { MultiplexGridAd } from '../ads/multiplex-grid-ad'
-import { ArticleAdminControls } from '../article-admin-controls'
 import { SectionTitle } from '../section-title'
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
 
 type TProps = {
-  article: TArticle
+  article: TArticle<TWebsiteGamesArticle>
 }
 
 const getRatingColor = (rating: number) => {
@@ -39,18 +38,6 @@ const getRatingColor = (rating: number) => {
 const BestDealsArticle = ({ article }: TProps) => {
   return (
     <Stack gap={{ xs: 3, md: 5 }}>
-      {!article.published && (
-        <TypographyV2
-          fontSize="heading-s"
-          fontWeight="bold"
-          textAlign="center"
-          padding={0.5}
-          color="l1"
-          sx={{ background: 'var(--color-brand)', width: '100%', letterSpacing: '10px' }}
-        >
-          UNPUBLISHED
-        </TypographyV2>
-      )}
       <GlassCard padding={2}>
         <Grid2
           container
@@ -215,8 +202,6 @@ const BestDealsArticle = ({ article }: TProps) => {
             })}
         </Stack>
       </GlassCard>
-
-      <ArticleAdminControls article={article} />
 
       <MultiplexGridAd />
     </Stack>
