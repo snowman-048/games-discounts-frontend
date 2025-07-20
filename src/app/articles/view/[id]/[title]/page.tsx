@@ -3,7 +3,7 @@ import { cache } from 'react'
 import { Metadata } from 'next'
 
 import { getArticleById } from '@/api/articles'
-import { BestDealsArticle } from '@/components/best-deals-article'
+import { ArticlePreview } from '@/components/article-preview/article-preview'
 import { NoDataLabel } from '@/components/no-data-label'
 import { Container } from '@/components/ui/container'
 import { EAppRoute } from '@/enums/app-route.enum'
@@ -99,7 +99,7 @@ const ViewArticle = async ({ params }: TProps) => {
 
   return (
     <Container paddingBottom={5}>
-      <BestDealsArticle article={article} />
+      <ArticlePreview article={article} />
     </Container>
   )
 }

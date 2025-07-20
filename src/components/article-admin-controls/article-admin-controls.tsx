@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import DeleteIcon from '@mui/icons-material/Delete'
+import EditNoteIcon from '@mui/icons-material/EditNote'
 import { Button, Grid2, IconButton } from '@mui/material'
 
 import { deleteArticle, publishArticle, unpublishArticle } from '@/api/articles'
@@ -15,9 +16,10 @@ import { CustomToast } from '@/utils/custom-toast'
 
 type TProps = {
   article: TArticle
+  withEdit?: boolean
 }
 
-const ArticleAdminControls = ({ article }: TProps) => {
+const ArticleAdminControls = ({ article, withEdit }: TProps) => {
   const isAdmin = useIsAdmin()
 
   const [publishLoading, setPublishLoading] = useState(false)
@@ -63,21 +65,34 @@ const ArticleAdminControls = ({ article }: TProps) => {
     }
   }
 
+  const onEdit = () => {
+    navigate({
+      path: `/${EAppRoute.EDIT_ARTICLE}/${article.id}`,
+    })
+  }
+
+  const buttonsDisabled = publishLoading || deleteLoading
+
   return (
     <Grid2 container alignItems="center" justifyContent="flex-end" width="100%" gap={2}>
       <Button
         variant="contained"
         loading={publishLoading}
         onClick={togglePublishArticle}
-        disabled={deleteLoading}
+        disabled={buttonsDisabled}
       >
         {article.published ? 'Hide' : 'Publish'} Article
       </Button>
+      {!!withEdit && (
+        <IconButton onClick={onEdit} disabled={buttonsDisabled}>
+          <EditNoteIcon />
+        </IconButton>
+      )}
       <IconButton
         loading={deleteLoading}
         onClick={onDeleteArticle}
         color="error"
-        disabled={publishLoading}
+        disabled={buttonsDisabled}
       >
         <DeleteIcon />
       </IconButton>

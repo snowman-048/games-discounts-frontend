@@ -16,7 +16,7 @@ import { EAppRoute } from '@/enums/app-route.enum'
 import { createQueryString } from '@/helpers/createQueryString'
 import { getStoreRegionsFromQuery } from '@/helpers/getStoreRegionsFromQuery'
 import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
-import { useDebounce } from '@/hooks/useDebounce.hook'
+import { useDebounce } from '@/hooks/useDebounce'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
