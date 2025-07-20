@@ -7,7 +7,7 @@ import { TGame } from '@/types/game.types'
 
 import { GamesList } from '../games-list/games-list'
 
-const LIST_SIZE = 25
+const LIST_SIZE = 22
 
 type TProps = {
   page: number
@@ -47,6 +47,7 @@ const GamesListWithServerFetch = async ({
       page={page}
       paginationPath={paginationPath}
       t={t}
+      listSize={LIST_SIZE}
     />
   )
 }

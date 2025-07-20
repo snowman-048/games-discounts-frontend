@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { EAppRoute } from '@/enums/app-route.enum'
+import { getImageUrl } from '@/helpers/getImageUrl'
 import { getStoreColor } from '@/helpers/getStoreColor'
 import { getTitleForLink } from '@/helpers/getTitleForLink'
 import { TGame } from '@/types/game.types'
@@ -117,11 +118,12 @@ const GameCard = ({
                   }}
                 >
                   <Image
-                    src={game.coverImageUrl}
+                    src={getImageUrl(game.coverImageUrl)}
                     alt={game.title}
                     width={0}
                     height={0}
                     sizes="100vw"
+                    loading="lazy"
                     className={styles.image}
                   />
                 </Box>

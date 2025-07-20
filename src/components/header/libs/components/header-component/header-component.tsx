@@ -66,6 +66,7 @@ const HeaderComponent = ({ query }: TProps) => {
         gap={3}
         height="100%"
         flexWrap="nowrap"
+        component="nav"
       >
         <Grid2
           container
@@ -88,7 +89,7 @@ const HeaderComponent = ({ query }: TProps) => {
               onClick={() => setIsDrawerOpen(false)}
             />
           ))}
-          <ExploreButton onNavigate={() => setIsDrawerOpen(false)} />
+          <ExploreButton onNavigate={() => setIsDrawerOpen(false)} renderAsList={inDrawer} />
         </Grid2>
         <Button
           onClick={(e) => setLocationAnchorEl(e.currentTarget)}

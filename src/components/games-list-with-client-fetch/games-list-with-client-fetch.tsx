@@ -12,7 +12,7 @@ import { TGame } from '@/types/game.types'
 import { GamesList } from '../games-list/games-list'
 import { Loader } from '../ui/loader'
 
-const LIST_SIZE = 25
+const LIST_SIZE = 22
 
 type TProps = {
   page: number
@@ -74,6 +74,7 @@ const GamesListWithClientFetch = ({
       paginationPath={paginationPath}
       t={t}
       getGameHref={getGameHref}
+      listSize={LIST_SIZE}
     />
   )
 }

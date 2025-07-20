@@ -17,10 +17,11 @@ import { EAppRoute } from '@/enums/app-route.enum'
 import { NavButton } from '../nav-button'
 
 type TProps = {
+  renderAsList?: boolean
   onNavigate?: () => void
 }
 
-const ExploreButton = ({ onNavigate }: TProps) => {
+const ExploreButton = ({ onNavigate, renderAsList }: TProps) => {
   const t = useTranslations('Header')
 
   const [buttonAnchorEl, setButtonAnchorEl] = useState<HTMLButtonElement | null>(null)
@@ -57,6 +58,25 @@ const ExploreButton = ({ onNavigate }: TProps) => {
     [t],
   )
 
+  const renderLinks = () =>
+    links.map((link) => (
+      <NavButton
+        key={link.label}
+        link={link.path}
+        label={link.label}
+        icon={link.icon}
+        isActive={link.customIsActive(pathname)}
+        onClick={() => {
+          setButtonAnchorEl(null)
+          onNavigate?.()
+        }}
+      />
+    ))
+
+  if (renderAsList) {
+    return renderLinks()
+  }
+
   return (
     <>
       <NavButton
@@ -80,21 +100,7 @@ const ExploreButton = ({ onNavigate }: TProps) => {
           },
         }}
       >
-        <Stack gap={3}>
-          {links.map((link) => (
-            <NavButton
-              key={link.label}
-              link={link.path}
-              label={link.label}
-              icon={link.icon}
-              isActive={link.customIsActive(pathname)}
-              onClick={() => {
-                setButtonAnchorEl(null)
-                onNavigate?.()
-              }}
-            />
-          ))}
-        </Stack>
+        <Stack gap={3}>{renderLinks()}</Stack>
       </Popover>
     </>
   )

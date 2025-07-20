@@ -1,25 +1,37 @@
 'use client'
 
-import { Box } from '@mui/material'
+import { Grid2, useMediaQuery } from '@mui/material'
 
-const GameCardAd = () => {
+import { GlassCard } from '@/components/ui/cards/glass-card'
+
+import { AdUnit } from '../ad-unit'
+
+type TProps = {
+  withMobileVariant?: boolean
+}
+
+const GameCardAd = ({ withMobileVariant = true }: TProps) => {
+  const isMobileVariant = useMediaQuery(`(max-width: 600px)`)
+
   return (
-    <Box>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7096388850784019"
-        crossOrigin="anonymous"
-      />
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-format="fluid"
-        data-ad-layout-key="+2a+rq+1t-2p-g"
-        data-ad-client="ca-pub-7096388850784019"
-        data-ad-slot="4376411042"
-      />
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </Box>
+    <GlassCard
+      sx={{ minWidth: '252px', maxHeight: withMobileVariant && isMobileVariant ? '215px' : 'auto' }}
+    >
+      <Grid2
+        container
+        sx={{
+          background: 'var(--color-l1)',
+          '> *': {
+            height: '100%',
+            width: '100%',
+          },
+        }}
+        width="100%"
+        height="100%"
+      >
+        <AdUnit adFormat="fluid" adSlot="4376411042" data-ad-layout-key="+29+rl+2w-11-86" />
+      </Grid2>
+    </GlassCard>
   )
 }
 

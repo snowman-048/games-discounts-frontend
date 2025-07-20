@@ -1,6 +1,14 @@
 .container {
   --img-offset: -100px;
   --section-padding: 24px;
+  position: relative;
+}
+
+.breadcrumbs {
+  position: absolute !important;
+  top: 55px;
+  left: 400px;
+  max-width: calc(100% - var(--section-padding) - 390px);
 }
 
 .section {
@@ -59,6 +67,16 @@
     position: relative;
     top: 0;
     left: 0;
+  }
+
+  .breadcrumbs {
+    position: relative !important;
+    top: 0;
+    left: 0;
+    align-self: flex-start;
+    margin-top: 8px;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
