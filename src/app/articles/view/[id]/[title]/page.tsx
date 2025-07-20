@@ -44,8 +44,8 @@ export const generateMetadata = async ({ params }: TProps): Promise<Metadata> =>
 
   const keywords = [
     article.title,
-    article.website.focusKeyphrases,
-    ...article.website.keywords,
+    article.website.focusKeyphrase,
+    ...((article.website as any).keywords || []),
     ...article.social.hashtags.map((item) => item.replace('#', '')),
     'article',
     'post',

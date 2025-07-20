@@ -1,5 +1,5 @@
 type TWebsiteGamesArticle = {
-  focusKeyphrases: string[]
+  focusKeyphrase: string[]
   games: {
     id: number
     title: string
