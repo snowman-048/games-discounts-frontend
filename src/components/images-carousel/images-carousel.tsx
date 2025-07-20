@@ -3,6 +3,7 @@
 import { Grid2, useMediaQuery } from '@mui/material'
 import Image from 'next/image'
 
+import { getImageUrl } from '@/helpers/getImageUrl'
 import { breakpoints } from '@/theme'
 
 import { Carousel } from '../ui/carousel'
@@ -24,11 +25,12 @@ const ImagesCarousel = ({ images, alt }: TProps) => {
         <Grid2 height={{ xs: 'auto', md: '400px' }} width={{ xs: '370px', md: 'auto' }}>
           <Image
             key={index}
-            src={img}
+            src={getImageUrl(img, true)}
             alt={alt}
             width={0}
             height={0}
             sizes="100vw"
+            loading="lazy"
             style={{
               width: isMobile ? '100%' : 'auto',
               height: isMobile ? 'auto' : '100%',

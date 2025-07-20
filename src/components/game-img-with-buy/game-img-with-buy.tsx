@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import { EPriceHistoryMetaType } from '@/enums/price-history-meta-type.enum'
 import { EStore } from '@/enums/store.enum'
+import { getImageUrl } from '@/helpers/getImageUrl'
 import { TGame } from '@/types/game.types'
 import { TPriceHistory } from '@/types/price-history.types'
 
@@ -31,7 +32,14 @@ const GameImgWithBuy = ({ game, storeLinks, className, isFake = false, t }: TPro
       <GlassCard className={styles.imgContainer}>
         {!!game.coverImageUrl && (
           <Box sx={{ overflow: 'hidden', borderRadius: '15px' }}>
-            <Image src={game.coverImageUrl} alt={game.title} width={0} height={0} sizes="100vw" />
+            <Image
+              src={getImageUrl(game.coverImageUrl)}
+              alt={game.title}
+              width={0}
+              height={0}
+              loading="lazy"
+              sizes="100vw"
+            />
           </Box>
         )}
       </GlassCard>

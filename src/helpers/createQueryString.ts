@@ -1,6 +1,6 @@
 type TValue = string | number | boolean | undefined | null
 
-const createQueryString = (obj?: Record<string, TValue | TValue[]>) => {
+const createQueryString = (obj?: Record<string, TValue | TValue[]>, newQuery = true) => {
   if (!obj) return ''
 
   const keyValuePaires: string[] = []
@@ -18,7 +18,7 @@ const createQueryString = (obj?: Record<string, TValue | TValue[]>) => {
 
   if (!keyValuePaires.length) return ''
 
-  return `?${keyValuePaires.join('&')}`
+  return `${newQuery ? '?' : '&'}${keyValuePaires.join('&')}`
 }
 
 export { createQueryString }
