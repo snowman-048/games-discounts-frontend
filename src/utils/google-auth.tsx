@@ -6,7 +6,7 @@ import { Box } from '@mui/material'
 import { useTranslations } from 'next-intl'
 
 import { authWithGoogle } from '@/api/auth'
-import { useHandleLogin } from '@/hooks/useHandleLogin.hook'
+import { useHandleLogin } from '@/hooks/useHandleLogin'
 import { useUserStore } from '@/store/user.store'
 
 import { CustomToast } from './custom-toast'

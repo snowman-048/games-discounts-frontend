@@ -1,4 +1,5 @@
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import 'react-quill-new/dist/quill.snow.css'
 import { ToastContainer } from 'react-toastify'
 
 import { Grid2, ThemeProvider } from '@mui/material'

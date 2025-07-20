@@ -20,6 +20,7 @@ enum EAppRoute {
   MERGE_GAME = 'game/merge',
   MANAGE_ARTICLES = 'articles/manage',
   EDIT_ARTICLE = 'articles/manage/edit',
+  CREATE_ARTICLE = 'articles/manage/create',
 }
 
 export { EAppRoute }

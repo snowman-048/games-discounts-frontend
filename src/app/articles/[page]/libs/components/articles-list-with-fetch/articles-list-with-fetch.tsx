@@ -14,7 +14,7 @@ type TProps = {
 const LIST_SIZE = 9
 
 const ArticlesListWithFetch = async ({ page }: TProps) => {
-  let articles: TArticle[] = []
+  let articles: TArticle<any>[] = []
   let totalCount = 0
 
   try {
