@@ -51,7 +51,7 @@ const MergeGames = ({ firstGameId, secondGameId }: TProps) => {
         setSecondGame(fetchedSecondGame)
 
         if (fetchedFirstGame && fetchedSecondGame) {
-          const mergedData = prepareGamesDataForMerge([fetchedFirstGame, fetchedSecondGame])
+          const mergedData = prepareGamesDataForMerge([fetchedFirstGame, fetchedSecondGame], true)
           setMergedGameData({ ...mergedData, origin: fetchedFirstGame, new: fetchedSecondGame })
         }
       } catch (err) {

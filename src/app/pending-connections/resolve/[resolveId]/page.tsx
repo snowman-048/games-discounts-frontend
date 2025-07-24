@@ -105,6 +105,10 @@ const ResolvePendingConnection = () => {
         throw new Error(`Store ${pendingConnection.gameData.store} not found`)
       }
 
+      if (mergedGameData.releaseDates && !mergedGameData.releaseDates.length) {
+        delete mergedGameData.releaseDates
+      }
+
       const { data } = await (
         resolveMode === 'merge' ? mergeGameWithPendingConnection : createGameFromPendingConnection
       )(

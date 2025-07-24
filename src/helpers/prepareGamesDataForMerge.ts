@@ -2,12 +2,10 @@ import { TGame } from '@/types/game.types'
 
 import { getUniqueValuesFromArrays } from './getUniqueValues'
 
-const prepareGamesDataForMerge = (games: TGame[]) => {
+const prepareGamesDataForMerge = (games: TGame[], reverseForPlainData = false) => {
   if (games.length < 2) {
     return null
   }
-
-  console.log('games', games)
 
   const genres = getUniqueValuesFromArrays(games.map((game) => game.genres))
   const platforms = getUniqueValuesFromArrays(games.map((game) => game.platforms))
@@ -29,7 +27,9 @@ const prepareGamesDataForMerge = (games: TGame[]) => {
     'familyKey', // For pending connections
   ].reduce((acc, key) => {
     acc[key] =
-      games.toReversed().find((game) => game[key as keyof TGame])?.[key as keyof TGame] || null
+      (reverseForPlainData ? games.toReversed() : games).find((game) => game[key as keyof TGame])?.[
+        key as keyof TGame
+      ] || null
     return acc
   }, {} as any)
 

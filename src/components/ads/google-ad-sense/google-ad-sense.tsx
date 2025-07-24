@@ -2,8 +2,10 @@
 
 import Script from 'next/script'
 
+import { isAdEnabled } from '@/helpers/isAdEnabled'
+
 const GoogleAdSense = () => {
-  if (process.env.NODE_ENV !== 'production') return null
+  if (!isAdEnabled()) return null
 
   return (
     <Script
