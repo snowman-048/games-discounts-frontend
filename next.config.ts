@@ -11,6 +11,7 @@ const withPWA = pwa({
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
+  compress: true,
   images: {
     remotePatterns: [
       {

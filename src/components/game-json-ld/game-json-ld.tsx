@@ -1,4 +1,5 @@
 import moment from 'moment'
+import Script from 'next/script'
 import { Offer, VideoGame, WithContext } from 'schema-dts'
 
 import { EStore } from '@/enums/store.enum'
@@ -72,9 +73,10 @@ const GameJsonLd = ({ game, storeLinks }: TProps) => {
   }
 
   return (
-    <script
+    <Script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      strategy="lazyOnload"
     />
   )
 }
