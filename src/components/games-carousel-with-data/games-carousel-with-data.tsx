@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 
 import { Grid2, Stack } from '@mui/material'
 import { getTranslations } from 'next-intl/server'
@@ -8,6 +8,7 @@ import { EAppRoute } from '@/enums/app-route.enum'
 import { createQueryString } from '@/helpers/createQueryString'
 import { TGameSearchParams } from '@/types/game-search.types'
 
+import { GamesCarouselLoader } from '../games-carousel-loader'
 import { SectionTitle } from '../section-title'
 import { GlassCard } from '../ui/cards/glass-card'
 import { TypographyV2 } from '../ui/typography'
@@ -31,7 +32,9 @@ const GamesCarouselWithData = async ({ title, query }: TProps) => {
         <SectionTitle title={title} />
 
         <Grid2 mx={-2} marginTop={-2}>
-          <GamesCarousel query={query} />
+          <Suspense key={`${title}${JSON.stringify(query)}`} fallback={<GamesCarouselLoader />}>
+            <GamesCarousel query={query} />
+          </Suspense>
         </Grid2>
 
         <Link

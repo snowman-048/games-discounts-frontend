@@ -18,6 +18,7 @@ type TProps = Omit<EmblaOptionsType, 'slides'> & {
   controlsContainerProps?: Grid2Props
   showCounter?: boolean
   buttonsPosition?: 'bottom' | 'sides'
+  withLoading?: boolean
 }
 
 const Carousel = ({
@@ -25,16 +26,17 @@ const Carousel = ({
   controlsContainerProps,
   showCounter = true,
   buttonsPosition = 'bottom',
+  withLoading = true,
   ...rest
 }: TProps) => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(withLoading)
 
   const section = useRef<HTMLDivElement>(null)
   const { width } = useObserveElementSize(section)
 
   useEffect(() => {
-    setLoading(false)
-  }, [section.current])
+    if (withLoading) setLoading(false)
+  }, [])
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ dragThreshold: 0, inViewThreshold: 0, ...rest })
 
@@ -45,7 +47,7 @@ const Carousel = ({
 
   return (
     <section className={cn(styles.section, { [styles.loading]: loading })} ref={section}>
-      <div className={styles.wrapper} style={{ width }}>
+      <div className={styles.wrapper} style={{ width: width || '100%' }}>
         <div className={styles.viewport} ref={emblaRef}>
           <div className={styles.container}>
             {slides.map((item, index) => (

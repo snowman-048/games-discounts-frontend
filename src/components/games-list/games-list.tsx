@@ -1,5 +1,6 @@
 import { Grid2 } from '@mui/material'
 
+import { GAMES_AD_CARDS_AMOUNT } from '@/configs/games-list.config'
 import { TGame } from '@/types/game.types'
 
 import { GameCardAd } from '../ads/game-card-ad'
@@ -18,8 +19,6 @@ type TProps = {
   listSize?: number
 }
 
-const AD_CARDS_AMOUNT = 3
-
 const GamesList = ({
   games,
   totalGames,
@@ -35,7 +34,7 @@ const GamesList = ({
 
   const gamesWithAds: (TGame | string)[] = [...games]
 
-  for (let i = 0; i < AD_CARDS_AMOUNT; i++) {
+  for (let i = 0; i < GAMES_AD_CARDS_AMOUNT; i++) {
     const randomIndex = Math.floor(Math.random() * gamesWithAds.length)
     gamesWithAds.splice(randomIndex, 0, 'ad')
   }
