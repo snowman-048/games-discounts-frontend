@@ -67,5 +67,11 @@
     "prettier": "^3.x",
     "sass": "^1.83.4",
     "typescript": "^5"
-  }
+  },
+  "browserslist": [
+    "defaults and not IE 11",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions"
+  ]
 }
