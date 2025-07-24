@@ -2,6 +2,8 @@
 
 import { CSSProperties, useEffect } from 'react'
 
+import { isAdEnabled } from '@/helpers/isAdEnabled'
+
 type TProps = Record<string, any> & {
   adSlot: string
   adFormat: string
@@ -11,10 +13,10 @@ type TProps = Record<string, any> & {
 const MAX_RETRIES = 10
 
 const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
-  const isProd = process.env.NODE_ENV === 'production'
+  const showAd = isAdEnabled()
 
   const tryLoadGoogleAds = (retries = 0) => {
-    if (!isProd) return
+    if (!showAd) return
 
     if (typeof window !== 'undefined' && 'adsbygoogle' in window) {
       try {
@@ -37,7 +39,7 @@ const AdUnit = ({ frameStyle, adSlot, adFormat, ...rest }: TProps) => {
     setTimeout(tryLoadGoogleAds, 0)
   }, [])
 
-  if (!isProd) return null
+  if (!showAd) return null
 
   return (
     <ins

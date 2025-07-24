@@ -3,6 +3,7 @@
 import { Grid2, useMediaQuery } from '@mui/material'
 
 import { GlassCard } from '@/components/ui/cards/glass-card'
+import { isAdEnabled } from '@/helpers/isAdEnabled'
 
 import { AdUnit } from '../ad-unit'
 
@@ -12,6 +13,10 @@ type TProps = {
 
 const GameCardAd = ({ withMobileVariant = true }: TProps) => {
   const isMobileVariant = useMediaQuery(`(max-width: 600px)`)
+
+  const showAd = isAdEnabled()
+
+  if (!showAd) return null
 
   return (
     <GlassCard
