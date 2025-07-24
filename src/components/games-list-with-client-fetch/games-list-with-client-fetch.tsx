@@ -5,14 +5,13 @@ import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 
 import { getGamesList } from '@/api/games'
+import { GAMES_LIST_SIZE } from '@/configs/games-list.config'
 import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
 
 import { GamesList } from '../games-list/games-list'
 import { Loader } from '../ui/loader'
-
-const LIST_SIZE = 22
 
 type TProps = {
   page: number
@@ -41,14 +40,14 @@ const GamesListWithClientFetch = ({
     try {
       setLoading(true)
       const { data } = await getGamesList(
-        prepareGamesSearchQuery({ ...query, page, limit: LIST_SIZE, allGames, bestDiscounts }),
+        prepareGamesSearchQuery({
+          ...query,
+          page,
+          limit: GAMES_LIST_SIZE,
+          allGames,
+          bestDiscounts,
+        }),
       )
-
-      console.log(
-        'search',
-        prepareGamesSearchQuery({ ...query, page, limit: LIST_SIZE, allGames, bestDiscounts }),
-      )
-
       setGames(data[0])
       setTotalGames(data[1])
     } catch (err) {
@@ -74,7 +73,7 @@ const GamesListWithClientFetch = ({
       paginationPath={paginationPath}
       t={t}
       getGameHref={getGameHref}
-      listSize={LIST_SIZE}
+      listSize={GAMES_LIST_SIZE}
     />
   )
 }

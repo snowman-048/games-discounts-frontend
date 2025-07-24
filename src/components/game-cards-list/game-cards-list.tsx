@@ -1,12 +1,14 @@
 import { PropsWithChildren } from 'react'
 
-import { Grid2 } from '@mui/material'
+import { Grid2, Grid2Props } from '@mui/material'
 
 import styles from './styles.module.scss'
 
-const GameCardsList = ({ children }: PropsWithChildren) => {
+type TProps = Grid2Props & PropsWithChildren
+
+const GameCardsList = ({ children, ...rest }: TProps) => {
   return (
-    <Grid2 display="grid" width="100%" className={styles.list} gap={{ xs: 2, md: 2.5 }}>
+    <Grid2 display="grid" width="100%" className={styles.list} gap={{ xs: 2, md: 2.5 }} {...rest}>
       {children}
     </Grid2>
   )

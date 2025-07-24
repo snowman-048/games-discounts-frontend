@@ -5,6 +5,7 @@ import { getGamesList } from '@/api/games'
 import { GameCard } from '@/components/game-card'
 import { NoDataLabel } from '@/components/no-data-label'
 import { Carousel } from '@/components/ui/carousel'
+import { GAMES_CAROUSEL_SIZE } from '@/configs/games-list.config'
 import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
@@ -13,8 +14,6 @@ type TProps = {
   query: TGameSearchParams
 }
 
-const ITEMS_COUNT = 10
-
 const GamesCarousel = async ({ query }: TProps) => {
   const t = await getTranslations()
 
@@ -22,7 +21,7 @@ const GamesCarousel = async ({ query }: TProps) => {
 
   try {
     const { data } = await getGamesList(
-      prepareGamesSearchQuery({ ...query, page: 1, limit: ITEMS_COUNT }),
+      prepareGamesSearchQuery({ ...query, page: 1, limit: GAMES_CAROUSEL_SIZE }),
     )
     games = data[0]
   } catch (err) {
@@ -40,6 +39,7 @@ const GamesCarousel = async ({ query }: TProps) => {
       controlsContainerProps={{ px: 2 }}
       showCounter={false}
       buttonsPosition="sides"
+      // withLoading={false}
       slides={games.map((game) => (
         <Grid2 width="300px" height="100%" paddingTop={2} key={game.id}>
           <GameCard game={game} t={t} noShadow noBlur />
