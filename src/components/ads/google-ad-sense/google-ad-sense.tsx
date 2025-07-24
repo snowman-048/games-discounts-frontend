@@ -13,7 +13,7 @@ const GoogleAdSense = () => {
       async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_AD_SENSE_ACCOUNT}`}
       crossOrigin="anonymous"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       onLoad={() => {
         console.log('✅ AdSense script loaded')
       }}
