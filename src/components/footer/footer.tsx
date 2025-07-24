@@ -99,7 +99,7 @@ const Footer = async () => {
           gap={2}
           flexDirection={{ xs: 'column', sm: 'row' }}
         >
-          <Box sx={{ marginLeft: '-58px' }}>
+          {/* <Box sx={{ marginLeft: '-58px' }}>
             <div
               className="trustpilot-widget"
               data-locale="en-US"
@@ -116,7 +116,7 @@ const Footer = async () => {
                 Trustpilot
               </a>
             </div>
-          </Box>
+          </Box> */}
           <TypographyV2 fontWeight="bold" color="disabled">
             {t('version')}: {packageJson.version}
           </TypographyV2>
