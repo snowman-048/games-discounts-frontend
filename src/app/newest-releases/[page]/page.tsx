@@ -1,12 +1,9 @@
-import { Suspense } from 'react'
-
 import { Stack } from '@mui/material'
 import moment from 'moment'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
 import { GamesFilters } from '@/components/games-filters'
-import { GamesListLoader } from '@/components/games-list-loader'
 import { GamesListWithServerFetch } from '@/components/games-list-with-server-fetch'
 import { Container } from '@/components/ui/container'
 import { TypographyV2 } from '@/components/ui/typography'
@@ -75,14 +72,14 @@ const NewestReleases = async ({ params, searchParams }: TProps) => {
         </TypographyV2>
         <GamesFilters redirectPath={EAppRoute.NEWEST_RELEASES} noDiscountsFilters />
       </Stack>
-      <Suspense key={`${page}${JSON.stringify(queryWithDate)}`} fallback={<GamesListLoader />}>
-        <GamesListWithServerFetch
-          query={queryWithDate}
-          page={+page}
-          paginationPath={EAppRoute.NEWEST_RELEASES}
-          allGames
-        />
-      </Suspense>
+      {/* <Suspense key={`${page}${JSON.stringify(queryWithDate)}`} fallback={<GamesListLoader />}> */}
+      <GamesListWithServerFetch
+        query={queryWithDate}
+        page={+page}
+        paginationPath={EAppRoute.NEWEST_RELEASES}
+        allGames
+      />
+      {/* </Suspense> */}
     </Container>
   )
 }
