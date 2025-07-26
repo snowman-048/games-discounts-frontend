@@ -14,19 +14,15 @@ import { useCustomNavigate } from '@/hooks/useCustomNavigate'
 import { useAppStore } from '@/store/app.store'
 import { useUserStore } from '@/store/user.store'
 import { TOption } from '@/types/option.types'
-import { TRegionWithStores } from '@/types/region.types'
 import { CustomToast } from '@/utils/custom-toast'
 
 import { Loader } from '../ui/loader'
 import { Select } from '../ui/select'
 
-type TProps = {
-  regions: TRegionWithStores[]
-}
-
-const RegionSettings = ({ regions }: TProps) => {
+const RegionSettings = () => {
   const t = useTranslations('RegionSettings')
 
+  const regions = useAppStore((state) => state.regions)
   const isUserLoading = useUserStore((state) => state.isUserLoading)
   const user = useUserStore((state) => state.user)
   const setUser = useUserStore((state) => state.setUser)
