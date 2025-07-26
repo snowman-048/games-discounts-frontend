@@ -31,6 +31,15 @@ type TProps = BoxProps & {
   noBlur?: boolean
   customHref?: string
   hideControls?: boolean
+  onlyBiggestDiscount?: boolean
+  oneLineTitle?: boolean
+}
+
+const getBiggestDiscount = (priceHistory?: TPriceHistory[]) => {
+  if (!priceHistory?.length) {
+    return []
+  }
+  return [priceHistory.sort((a, b) => b.discountPercentage - a.discountPercentage)[0]]
 }
 
 const GameCard = ({
@@ -47,6 +56,8 @@ const GameCard = ({
   noBlur,
   customHref,
   hideControls = false,
+  onlyBiggestDiscount = false,
+  oneLineTitle = false,
   ...rest
 }: TProps) => {
   const getColor = (item: TPriceHistory) => {
@@ -90,6 +101,7 @@ const GameCard = ({
           } as any
         }
         onClick={onClick}
+        className={styles.link}
       >
         <GlassCard
           className={cn(styles.card, styles[variant], {
@@ -140,7 +152,6 @@ const GameCard = ({
               </TypographyV2>
               {!!game.platforms?.length && (
                 <Grid2 className={styles.platforms}>
-                  {' '}
                   {game.platforms.map((item) => (
                     <PlatformIcon platform={item} key={item} />
                   ))}
@@ -153,12 +164,29 @@ const GameCard = ({
               flexDirection="column"
               alignItems="center"
               justifyContent="space-between"
+              overflow={oneLineTitle ? 'hidden' : 'visible'}
             >
-              <TypographyV2 fontWeight="medium" textAlign="center">
+              <TypographyV2
+                fontWeight="medium"
+                textAlign="center"
+                sx={
+                  oneLineTitle
+                    ? {
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        maxWidth: '100%',
+                      }
+                    : undefined
+                }
+              >
                 {game.title}
               </TypographyV2>
               <Stack gap={1} marginTop={1} width="100%">
-                {game.priceHistory?.map((item) => (
+                {(onlyBiggestDiscount
+                  ? getBiggestDiscount(game.priceHistory)
+                  : game.priceHistory
+                )?.map((item) => (
                   <DiscountInfo
                     discount={item}
                     withStoreLabel={true}

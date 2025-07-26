@@ -30,6 +30,12 @@
   display: flex;
   flex: 1;
   height: 100%;
+  max-width: 100%;
+
+  .link {
+    max-width: 100%;
+    overflow: hidden;
+  }
 
   .card {
     transition: all 0.3s ease-out;
