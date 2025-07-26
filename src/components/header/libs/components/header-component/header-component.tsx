@@ -3,29 +3,26 @@
 import { useMemo, useState } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
 import MenuIcon from '@mui/icons-material/Menu'
 import WhatshotIcon from '@mui/icons-material/Whatshot'
 import WindowIcon from '@mui/icons-material/Window'
-import { Box, Button, Divider, Drawer, Grid2, IconButton, Stack } from '@mui/material'
+import { Box, Divider, Drawer, Grid2, IconButton, Stack } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 
 import { Logo } from '@/components/logo'
-import { RegionSettings } from '@/components/region-settings'
 import { GlassCard } from '@/components/ui/cards/glass-card'
 import { Container } from '@/components/ui/container'
-import { Popover } from '@/components/ui/popover'
 import { TypographyV2 } from '@/components/ui/typography'
 import { OUR_EMAIL } from '@/configs/contacts.config'
 import { EAppRoute } from '@/enums/app-route.enum'
-import { useAppStore } from '@/store/app.store'
 import { TGameSearchParams } from '@/types/game-search.types'
 
 import { ExploreButton } from './libs/components/explore-button'
 import { GamesSearch } from './libs/components/games-search'
 import { NavButton } from './libs/components/nav-button'
 import { ProfileButton } from './libs/components/profile-button'
+import { RegionsButton } from './libs/components/regions-button'
 
 type TProps = {
   query: TGameSearchParams
@@ -34,9 +31,6 @@ type TProps = {
 const HeaderComponent = ({ query }: TProps) => {
   const t = useTranslations('Header')
 
-  const regions = useAppStore((state) => state.regions)
-
-  const [locationAnchorEl, setLocationAnchorEl] = useState<HTMLButtonElement | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const pathname = usePathname()
@@ -66,7 +60,6 @@ const HeaderComponent = ({ query }: TProps) => {
         gap={3}
         height="100%"
         flexWrap="nowrap"
-        component="nav"
       >
         <Grid2
           container
@@ -91,19 +84,7 @@ const HeaderComponent = ({ query }: TProps) => {
           ))}
           <ExploreButton onNavigate={() => setIsDrawerOpen(false)} renderAsList={inDrawer} />
         </Grid2>
-        <Button
-          onClick={(e) => setLocationAnchorEl(e.currentTarget)}
-          sx={{
-            color: 'var(--color-primary)',
-            gap: 1,
-            textTransform: 'none',
-            width: inDrawer ? '100%' : 'fit-content',
-          }}
-          variant="outlined"
-        >
-          {t('regions')}
-          <LocationOnIcon />
-        </Button>
+        <RegionsButton inDrawer={inDrawer} />
         {!inDrawer && <ProfileButton />}
       </Grid2>
     )
@@ -111,13 +92,7 @@ const HeaderComponent = ({ query }: TProps) => {
 
   return (
     <>
-      <Grid2
-        container
-        width="100vw"
-        marginBottom={3}
-        position="fixed"
-        sx={{ top: 0, left: 0, right: 0, zIndex: 5, height: 64 }}
-      >
+      <Grid2 container width="100%" height="100%" marginBottom={3}>
         <GlassCard
           style={{
             width: '100%',
@@ -210,10 +185,6 @@ const HeaderComponent = ({ query }: TProps) => {
           </GlassCard>
         </Box>
       </Drawer>
-
-      <Popover anchorEl={locationAnchorEl} onClose={() => setLocationAnchorEl(null)} maxWidth={400}>
-        <RegionSettings regions={regions} />
-      </Popover>
     </>
   )
 }

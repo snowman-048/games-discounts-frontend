@@ -30,7 +30,7 @@ const SectionTitle = ({ title, sx, ...rest }: TProps) => {
         fontWeight="bold"
         isUpperCase
         adaptiveFontSize={{ xs: 'text-xl', sm: 'text-2xl', md: 'heading-s' }}
-        component="span"
+        component="h2"
         sx={{
           display: 'block',
           overflow: 'hidden',
