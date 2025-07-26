@@ -1,11 +1,10 @@
-import { Suspense } from 'react'
-
+// import { Suspense } from 'react'
 import { Stack } from '@mui/material'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
 import { GamesFilters } from '@/components/games-filters'
-import { GamesListLoader } from '@/components/games-list-loader'
+// import { GamesListLoader } from '@/components/games-list-loader'
 import { GamesListWithServerFetch } from '@/components/games-list-with-server-fetch'
 import { Container } from '@/components/ui/container'
 import { TypographyV2 } from '@/components/ui/typography'
@@ -67,13 +66,13 @@ const ActiveDiscounts = async ({ params, searchParams }: TProps) => {
         </TypographyV2>
         <GamesFilters redirectPath={EAppRoute.ACTIVE_DISCOUNTS} />
       </Stack>
-      <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<GamesListLoader />}>
-        <GamesListWithServerFetch
-          query={query}
-          page={+page}
-          paginationPath={EAppRoute.ACTIVE_DISCOUNTS}
-        />
-      </Suspense>
+      {/* <Suspense key={`${page}${JSON.stringify(query)}`} fallback={<GamesListLoader />}> */}
+      <GamesListWithServerFetch
+        query={query}
+        page={+page}
+        paginationPath={EAppRoute.ACTIVE_DISCOUNTS}
+      />
+      {/* </Suspense> */}
     </Container>
   )
 }
