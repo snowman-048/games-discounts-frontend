@@ -20,7 +20,12 @@ const GameCardAd = ({ withMobileVariant = true }: TProps) => {
 
   return (
     <GlassCard
-      sx={{ minWidth: '252px', maxHeight: withMobileVariant && isMobileVariant ? '215px' : 'auto' }}
+      sx={{
+        minWidth: '252px',
+        maxHeight: withMobileVariant && isMobileVariant ? '215px' : 'auto',
+        height: '100%',
+        width: '100%',
+      }}
     >
       <Grid2
         container
