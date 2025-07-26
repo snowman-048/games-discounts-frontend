@@ -16,7 +16,6 @@ import { Dancing_Script, Roboto } from 'next/font/google'
 import Script from 'next/script'
 
 import { GoogleAdSense } from '@/components/ads/google-ad-sense'
-import { BackgroundHandler } from '@/components/background-handler'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { setMomentLocale } from '@/helpers/setMomentLocale'
@@ -99,7 +98,7 @@ const RootLayout = async ({
             <CookiesProvider>
               <ThemeProvider theme={theme} defaultMode="dark">
                 <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!}>
-                  <BackgroundHandler />
+                  {/* <BackgroundHandler /> */}
                   <InitHandler locale={locale} />
                   <ToastContainer theme="dark" />
 
