@@ -11,7 +11,6 @@ import { GameCard } from '@/components/game-card'
 import { GamesCarouselLoader } from '@/components/games-carousel-loader'
 import { NoDataLabel } from '@/components/no-data-label'
 import { GAMES_CAROUSEL_SIZE } from '@/configs/games-list.config'
-import { EGameSorting } from '@/enums/game-sorting.enum'
 import { prepareGamesSearchQuery } from '@/helpers/prepareGamesSearchQuery'
 import { TGameSearchParams } from '@/types/game-search.types'
 import { TGame } from '@/types/game.types'
@@ -78,42 +77,12 @@ const GamesCarousel = ({ query }: TProps) => {
           withLoading={false}
           slides={games.map((game) => (
             <Grid2 width="300px" height="100%" paddingTop={2} key={game.id}>
-              <GameCard
-                game={game}
-                t={t}
-                noShadow
-                noBlur
-                oneLineTitle
-                onlyBiggestDiscount={query.sort === EGameSorting.BIGGEST_DISCOUNTS}
-              />
+              <GameCard game={game} t={t} noShadow noBlur oneLineTitle onlyBiggestDiscount />
             </Grid2>
           ))}
         />
       </Box>
     </Grid2>
-  )
-
-  return (
-    <Carousel
-      loop
-      align="center"
-      controlsContainerProps={{ px: 2 }}
-      showCounter={false}
-      buttonsPosition="sides"
-      withLoading={false}
-      slides={games.map((game) => (
-        <Grid2 width="300px" height="100%" paddingTop={2} key={game.id}>
-          <GameCard
-            game={game}
-            t={t}
-            noShadow
-            noBlur
-            oneLineTitle
-            onlyBiggestDiscount={query.sort === EGameSorting.BIGGEST_DISCOUNTS}
-          />
-        </Grid2>
-      ))}
-    />
   )
 }
 
