@@ -27,7 +27,9 @@
   },
   "Home": {
     "biggest_discounts": "Cele mai mari reduceri",
-    "newest_discounts": "Cele mai noi reduceri <store></store>"
+    "newest_discounts": "Cele mai noi reduceri <store></store>",
+    "hottest_deals": "Cele mai tari oferte",
+    "newest_releases": "Cele mai noi lansări"
   },
   "GamesCarouselWithData": {
     "view_more": "Vezi mai mult"

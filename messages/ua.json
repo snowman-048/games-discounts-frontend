@@ -27,7 +27,9 @@
   },
   "Home": {
     "biggest_discounts": "Найбільші знижки",
-    "newest_discounts": "Нові знижки <store></store>"
+    "newest_discounts": "Нові знижки <store></store>",
+    "hottest_deals": "Найгарячіші пропозиції",
+    "newest_releases": "Найновіші релізи"
   },
   "GamesCarouselWithData": {
     "view_more": "Більше"
