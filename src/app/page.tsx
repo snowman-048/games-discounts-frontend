@@ -90,12 +90,12 @@ const Home = async ({ searchParams }: { searchParams: Promise<TGameSearchParams>
           >
             <HomePageLink
               href={`/${EAppRoute.HOTTEST_DEALS}/1`}
-              title={t('HottestDeals.title')}
+              title={t('Home.hottest_deals')}
               icon={TrendingDownIcon}
             />
             <HomePageLink
               href={`/${EAppRoute.NEWEST_RELEASES}/1`}
-              title={t('NewestReleases.title')}
+              title={t('Home.newest_releases')}
               icon={FiberNewIcon}
             />
           </Grid2>

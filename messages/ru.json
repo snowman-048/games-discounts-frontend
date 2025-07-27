@@ -27,7 +27,9 @@
   },
   "Home": {
     "biggest_discounts": "Самые большие скидки",
-    "newest_discounts": "Новые Скидки <store></store>"
+    "newest_discounts": "Новые Скидки <store></store>",
+    "hottest_deals": "Самые выгодные предложения",
+    "newest_releases": "Новейшие релизы"
   },
   "GamesCarouselWithData": {
     "view_more": "Ещё"

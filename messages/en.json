@@ -27,7 +27,9 @@
   },
   "Home": {
     "biggest_discounts": "Biggest Discounts",
-    "newest_discounts": "Newest <store></store> Discounts"
+    "newest_discounts": "Newest <store></store> Discounts",
+    "hottest_deals": "Hottest Deals",
+    "newest_releases": "Newest Releases"
   },
   "GamesCarouselWithData": {
     "view_more": "View More"

@@ -27,7 +27,9 @@
   },
   "Home": {
     "biggest_discounts": "Größte Rabatte",
-    "newest_discounts": "Neueste <store></store> Rabatte"
+    "newest_discounts": "Neueste <store></store> Rabatte",
+    "hottest_deals": "Heißeste Angebote",
+    "newest_releases": "Neuste Veröffentlichungen"
   },
   "GamesCarouselWithData": {
     "view_more": "Mehr anzeigen"
