@@ -8,7 +8,8 @@
     "all_games": "Tutti i giochi",
     "hottest_deals": "Le migliori offerte",
     "newest_releases": "Ultime uscite",
-    "articles": "Articoli"
+    "articles": "Articoli",
+    "how_it_works": "Come funziona Game Price Pulse"
   },
   "LanguagesSwitch": {
     "language": "Lingua"
@@ -232,5 +233,13 @@
   },
   "articles": {
     "title": "Articoli"
+  },
+  "HowItWorksModal": {
+    "title": "Come funziona <logo></logo>",
+    "p1": "Game Price Pulse è il tuo compagno ideale per trovare le migliori offerte sui videogiochi su un'ampia gamma di piattaforme e negozi digitali. Che tu sia un giocatore occasionale o un appassionato, questo potente strumento ti aiuta a monitorare e confrontare i prezzi dei giochi con facilità, permettendoti di prendere decisioni di acquisto intelligenti e consapevoli.",
+    "p2": "Con Game Price Pulse, puoi monitorare facilmente lo <highlight>storico</highlight> dei tuoi titoli preferiti nel tempo, ottenendo preziose informazioni sull'andamento dei prezzi. Questo ti permette di sapere esattamente quando acquistare, assicurandoti di non pagare mai troppo per i giochi che ami.",
+    "p3": "Creando un <highlight>account gratuito</highlight>, sbloccherai funzionalità aggiuntive come <highlight>liste dei desideri</highlight> personalizzate e <highlight>notifiche di calo dei prezzi</highlight>. Aggiungi semplicemente i tuoi giochi preferiti alla tua <highlight>lista dei desideri</highlight> e verrai automaticamente avvisato quando i prezzi scendono o quando viene lanciata una promozione speciale, così non perderai mai un'offerta.",
+    "p4": "Un'altra caratteristica eccezionale è il <highlight>confronto prezzi regionale</highlight>. Puoi scegliere diverse regioni per le tue piattaforme preferite (come PlayStation, Xbox o Nintendo) e Game Price Pulse adeguerà di conseguenza i prezzi visualizzati. In questo modo, puoi individuare facilmente le migliori offerte regionali ed evitare inutili spese eccessive.",
+    "p5": "Che tu sia a caccia di saldi stagionali, offerte giornaliere o sconti sui pacchetti, Game Price Pulse ti aiuta a rimanere sempre aggiornato, rendendo la tua esperienza di gioco divertente e conveniente."
   }
 }

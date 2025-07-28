@@ -8,7 +8,8 @@
     "all_games": "Wszystkie gry",
     "hottest_deals": "Najgorętsze okazje",
     "newest_releases": "Najnowsze wydania",
-    "articles": "Artykuły"
+    "articles": "Artykuły",
+    "how_it_works": "Jak działa Game Price Pulse"
   },
   "LanguagesSwitch": {
     "language": "Język"
@@ -232,5 +233,13 @@
   },
   "articles": {
     "title": "Artykuły"
+  },
+  "HowItWorksModal": {
+    "title": "Jak działa <logo></logo>",
+    "p1": "Game Price Pulse to Twój niezawodny pomocnik w znajdowaniu najlepszych ofert gier wideo na szerokiej gamie platform i w sklepach cyfrowych. Niezależnie od tego, czy jesteś graczem okazjonalnym, czy zapalonym entuzjastą, to potężne narzędzie pomoże Ci z łatwością monitorować i porównywać ceny gier, umożliwiając podejmowanie mądrych i świadomych decyzji zakupowych.",
+    "p2": "Dzięki Game Price Pulse możesz łatwo śledzić <highlight>historię cen</highlight> swoich ulubionych tytułów na przestrzeni czasu, co daje Ci cenny wgląd w trendy cenowe. Dzięki temu wiesz dokładnie, kiedy kupić, i nigdy nie przepłacasz za swoje ulubione gry.",
+    "p3": "Tworząc <highlight>bezpłatne konto</highlight>, odblokujesz dodatkowe funkcje, takie jak spersonalizowane <highlight>listy życzeń</highlight> i <highlight>powiadomienia o obniżkach cen</highlight>. Wystarczy dodać ulubione gry do <highlight>listy życzeń</highlight>, a otrzymasz automatyczne powiadomienia o obniżkach cen lub o rozpoczęciu specjalnej promocji – dzięki czemu nigdy nie przegapisz okazji.",
+    "p4": "Kolejną wyróżniającą się funkcją jest <highlight>porównywanie cen regionalnych</highlight>. Możesz wybrać różne regiony dla swoich preferowanych platform (takich jak PlayStation, Xbox czy Nintendo), a Game Price Pulse odpowiednio dostosuje wyświetlane ceny. Ułatwia to znalezienie najlepszych ofert regionalnych i uniknięcie niepotrzebnych wydatków.",
+    "p5": "Niezależnie od tego, czy polujesz na sezonowe wyprzedaże, codzienne okazje czy zniżki na pakiety, Game Price Pulse pomaga Ci być na bieżąco ze wszystkim, dzięki czemu Twoje wrażenia z gry będą przyjemne i przystępne cenowo."
   }
 }

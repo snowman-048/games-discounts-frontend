@@ -8,7 +8,8 @@
     "all_games": "Alle Spiele",
     "hottest_deals": "Heißeste Angebote",
     "newest_releases": "Neuste Veröffentlichungen",
-    "articles": "Artikel"
+    "articles": "Artikel",
+    "how_it_works": "So funktioniert Game Price Pulse"
   },
   "LanguagesSwitch": {
     "language": "Sprache"
@@ -232,5 +233,13 @@
   },
   "articles": {
     "title": "Artikel"
+  },
+  "HowItWorksModal": {
+    "title": "So funktioniert <logo></logo>",
+    "p1": "Game Price Pulse ist Ihr ultimativer Begleiter, um die besten Angebote für Videospiele auf einer Vielzahl von Plattformen und in digitalen Stores zu finden. Egal, ob Sie Gelegenheitsspieler oder begeisterter Enthusiast sind, dieses leistungsstarke Tool hilft Ihnen, Spielepreise mühelos zu überwachen und zu vergleichen und so kluge, fundierte Kaufentscheidungen zu treffen.",
+    "p2": "Mit Game Price Pulse können Sie den <highlight>Preisverlauf</highlight> Ihrer Lieblingstitel im Laufe der Zeit ganz einfach verfolgen und erhalten so wertvolle Einblicke in Preistrends. So wissen Sie genau, wann Sie kaufen sollten, und stellen sicher, dass Sie für Ihre Lieblingsspiele nie zu viel bezahlen.",
+    "p3": "Mit einem <highlight>kostenlosen Konto</highlight> schaltest du zusätzliche Funktionen wie personalisierte <highlight>Wunschlisten</highlight> und <highlight>Preissenkungsbenachrichtigungen</highlight> frei. Füge deine Lieblingsspiele einfach deiner <highlight>Wunschliste</highlight> hinzu und du wirst automatisch benachrichtigt, wenn deren Preise sinken oder eine Sonderaktion startet – so verpasst du kein Angebot mehr.",
+    "p4": "Ein weiteres herausragendes Feature ist der <highlight>regionale Preisvergleich</highlight>. Sie können verschiedene Regionen für Ihre bevorzugten Plattformen (wie PlayStation, Xbox oder Nintendo) auswählen, und Game Price Pulse passt die angezeigten Preise entsprechend an. So finden Sie ganz einfach die besten regionalen Angebote und vermeiden unnötige Mehrausgaben.",
+    "p5": "Egal, ob Sie auf der Suche nach saisonalen Angeboten, Tagesdeals oder Paketrabatten sind, mit Game Price Pulse behalten Sie den Überblick und sorgen dafür, dass Ihr Spielerlebnis sowohl Spaß macht als auch Ihr Budget schont."
   }
 }

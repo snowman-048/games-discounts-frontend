@@ -8,7 +8,8 @@
     "all_games": "All Games",
     "hottest_deals": "Hottest Deals",
     "newest_releases": "Newest Releases",
-    "articles": "Articles"
+    "articles": "Articles",
+    "how_it_works": "How Game Price Pulse works"
   },
   "LanguagesSwitch": {
     "language": "Language"
@@ -232,5 +233,13 @@
   },
   "articles": {
     "title": "Articles"
+  },
+  "HowItWorksModal": {
+    "title": "How <logo></logo> works",
+    "p1": "Game Price Pulse is your ultimate companion for finding the best deals on video games across a wide range of platforms and digital stores. Whether you’re a casual gamer or a dedicated enthusiast, this powerful tool helps you monitor and compare game prices with ease, enabling you to make smart, informed purchasing decisions.",
+    "p2": " With Game Price Pulse, you can easily track the <highlight>price history</highlight> of your favorite titles over time, giving you valuable insight into pricing trends. This allows you to know exactly when to buy, ensuring you never overpay for the games you love.",
+    "p3": "By creating a <highlight>free account</highlight>, you unlock additional features such as personalized <highlight>wishlists</highlight> and <highlight>price drop notifications</highlight>. Simply add your favorite games to your <highlight>wishlist</highlight>, and you’ll be automatically alerted when their prices drop or when a special promotion goes live—so you never miss a deal.",
+    "p4": "Another standout feature is the <highlight>regional price comparison</highlight>. You can choose different regions for your preferred platforms (such as PlayStation, Xbox, or Nintendo), and Game Price Pulse will adjust the displayed prices accordingly. This makes it easy to spot the best regional offers and avoid unnecessary overspending.",
+    "p5": "Whether you’re hunting for seasonal sales, daily deals, or bundle discounts, Game Price Pulse helps you stay on top of it all—keeping your gaming experience both fun and budget-friendly."
   }
 }

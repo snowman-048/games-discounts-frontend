@@ -1,5 +1,3 @@
-'use client'
-
 import { PropsWithChildren } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
@@ -12,7 +10,7 @@ import { TypographyV2 } from '../typography'
 type TProps = PropsWithChildren &
   ModalProps & {
     open: boolean
-    onClose: () => void
+    onClose?: () => void
     title?: string
     withClose?: boolean
   }

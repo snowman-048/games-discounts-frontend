@@ -1,0 +1,17 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  background: var(--backdrop);
+  transition: all 0.2s;
+  overflow: hidden;
+  z-index: -1;
+  opacity: 0;
+
+  &:global(.open) {
+    opacity: 1;
+    z-index: 100;
+  }
+}
