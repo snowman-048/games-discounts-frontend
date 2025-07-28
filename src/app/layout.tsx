@@ -19,6 +19,7 @@ import { GoogleAdSense } from '@/components/ads/google-ad-sense'
 import { BackgroundHandler } from '@/components/background-handler'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
+import { HowItWorksModal } from '@/components/how-it-works-modal'
 import { setMomentLocale } from '@/helpers/setMomentLocale'
 import { theme } from '@/theme'
 import { InitHandler } from '@/utils/init-handler'
@@ -109,6 +110,8 @@ const RootLayout = async ({
                       {children}
                     </Grid2>
                     <Footer />
+
+                    <HowItWorksModal />
                   </div>
                 </GoogleOAuthProvider>
               </ThemeProvider>

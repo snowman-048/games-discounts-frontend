@@ -8,7 +8,8 @@
     "all_games": "Todos los juegos",
     "hottest_deals": "Las mejores ofertas",
     "newest_releases": "Últimos lanzamientos",
-    "articles": "Artículos"
+    "articles": "Artículos",
+    "how_it_works": "Cómo funciona Game Price Pulse"
   },
   "LanguagesSwitch": {
     "language": "Idioma"
@@ -232,5 +233,13 @@
   },
   "articles": {
     "title": "Artículos"
+  },
+  "HowItWorksModal": {
+    "title": "Cómo funciona <logo></logo>",
+    "p1": "Game Price Pulse es tu aliado ideal para encontrar las mejores ofertas en videojuegos en una amplia gama de plataformas y tiendas digitales. Tanto si eres un jugador ocasional como un entusiasta, esta potente herramienta te ayuda a monitorizar y comparar precios de juegos fácilmente, permitiéndote tomar decisiones de compra inteligentes e informadas.",
+    "p2": "Con Game Price Pulse, puedes seguir fácilmente el historial de precios de tus títulos favoritos a lo largo del tiempo, lo que te proporciona información valiosa sobre las tendencias de precios. Esto te permite saber exactamente cuándo comprar, asegurándote de no pagar de más por los juegos que te encantan.",
+    "p3": "Al crear una cuenta gratuita, desbloquearás funciones adicionales como listas de deseos personalizadas y notificaciones de bajadas de precio. Simplemente añade tus juegos favoritos a tu lista de deseos y recibirás alertas automáticas cuando bajen de precio o se active una promoción especial, para que nunca te pierdas una oferta.",
+    "p4": "Otra función destacada es la <highlight>comparación de precios regionales</highlight>. Puedes elegir diferentes regiones para tus plataformas preferidas (como PlayStation, Xbox o Nintendo) y Game Price Pulse ajustará los precios mostrados según corresponda. Esto facilita encontrar las mejores ofertas regionales y evitar gastos innecesarios.",
+    "p5": "Ya sea que estés buscando ofertas de temporada, ofertas diarias o descuentos en paquetes, Game Price Pulse te ayuda a estar al tanto de todo, manteniendo tu experiencia de juego divertida y económica."
   }
 }

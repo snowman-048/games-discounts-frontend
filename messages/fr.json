@@ -8,7 +8,8 @@
     "all_games": "Tous les jeux",
     "hottest_deals": "Offres les plus intéressantes",
     "newest_releases": "Dernières sorties",
-    "articles": "Articles"
+    "articles": "Articles",
+    "how_it_works": "Comment fonctionne Game Price Pulse"
   },
   "LanguagesSwitch": {
     "language": "Langue"
@@ -232,5 +233,13 @@
   },
   "articles": {
     "title": "Articles"
+  },
+  "HowItWorksModal": {
+    "title": "Comment fonctionne <logo></logo>",
+    "p1": "Game Price Pulse est votre compagnon idéal pour trouver les meilleures offres de jeux vidéo sur une large gamme de plateformes et de boutiques en ligne. Que vous soyez un joueur occasionnel ou un passionné, cet outil performant vous permet de surveiller et de comparer facilement les prix des jeux, vous permettant ainsi de prendre des décisions d'achat éclairées.",
+    "p2": "Avec Game Price Pulse, suivez facilement l'historique des prix de vos titres préférés au fil du temps, ce qui vous donne un aperçu précieux des tendances tarifaires. Vous savez ainsi précisément quand acheter et ne payez jamais trop cher pour vos jeux préférés.",
+    "p3": "En créant un compte gratuit, vous accédez à des fonctionnalités supplémentaires, telles que des listes de souhaits personnalisées et des notifications de baisse de prix. Ajoutez simplement vos jeux préférés à votre liste de souhaits et recevez automatiquement une alerte dès que leur prix baisse ou qu'une promotion est lancée. Ne manquez ainsi aucune bonne affaire.",
+    "p4": "Une autre fonctionnalité remarquable est la <highlight>comparaison des prix régionaux</highlight>. Vous pouvez choisir différentes régions pour vos plateformes préférées (comme PlayStation, Xbox ou Nintendo), et Game Price Pulse ajustera les prix affichés en conséquence. Cela vous permet de repérer facilement les meilleures offres régionales et d'éviter les dépenses excessives.",
+    "p5": "Que vous recherchiez des ventes saisonnières, des offres quotidiennes ou des remises groupées, Game Price Pulse vous aide à rester au courant de tout, gardant votre expérience de jeu à la fois amusante et économique."
   }
 }

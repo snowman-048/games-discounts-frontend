@@ -8,7 +8,8 @@
     "all_games": "Toate jocurile",
     "hottest_deals": "Cele mai tari oferte",
     "newest_releases": "Cele mai noi lansări",
-    "articles": "Articole"
+    "articles": "Articole",
+    "how_it_works": "Cum funcționează Game Price Pulse"
   },
   "LanguagesSwitch": {
     "language": "Limbă"
@@ -232,5 +233,13 @@
   },
   "articles": {
     "title": "Articole"
+  },
+  "HowItWorksModal": {
+    "title": "Cum funcționează <logo></logo>",
+    "p1": "Game Price Pulse este partenerul tău suprem pentru a găsi cele mai bune oferte la jocuri video pe o gamă largă de platforme și magazine digitale. Indiferent dacă ești un jucător ocazional sau un pasionat dedicat, acest instrument puternic te ajută să monitorizezi și să compari prețurile jocurilor cu ușurință, permițându-ți să iei decizii de cumpărare inteligente și informate.",
+    "p2": "Cu Game Price Pulse, poți urmări cu ușurință <highlight>istoricul prețurilor</highlight> titlurilor tale preferate de-a lungul timpului, oferindu-ți informații valoroase despre tendințele prețurilor. Acest lucru îți permite să știi exact când să cumperi, asigurându-te că nu plătești niciodată prea mult pentru jocurile pe care le iubești.",
+    "p3": "Prin crearea unui <highlight>cont gratuit</highlight>, deblochezi funcții suplimentare, cum ar fi <highlight>liste de dorințe</highlight> personalizate și <highlight>notificări privind scăderile de preț</highlight>. Pur și simplu adaugă jocurile tale preferate în <highlight>lista de dorințe</highlight> și vei fi notificat automat când prețurile lor scad sau când o promoție specială este lansată - astfel încât să nu ratezi niciodată nicio ofertă.",
+    "p4": "O altă funcție remarcabilă este <highlight>compararea prețurilor regionale</highlight>. Puteți alege diferite regiuni pentru platformele preferate (cum ar fi PlayStation, Xbox sau Nintendo), iar Game Price Pulse va ajusta prețurile afișate în consecință. Acest lucru facilitează identificarea celor mai bune oferte regionale și evitarea cheltuielilor excesive inutile.",
+    "p5": "Indiferent dacă ești în căutare de reduceri sezoniere, oferte zilnice sau reduceri la pachet, Game Price Pulse te ajută să fii la curent cu toate - menținând experiența ta de joc distractivă și accesibilă."
   }
 }
